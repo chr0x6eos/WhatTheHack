@@ -6,9 +6,21 @@ To run the application, first clone the repository to your local machine:
 
 
 ```bash
-git clone https://github.com/whatthehack-at/whatthehack.git
+git clone https://gitlab.htl-villach.at/whatthehack/whatthehack.git
 ```
 
+If freshly cloned, a few extra steps are needed:
+1. Install the project dependencies: ``` composer install ```
+This is what actually installs Laravel itself, among other necessary packages to get started.
+2. Install NPM dependencies: ``` npm install ``` or ``` yarn install ```, whatever you prefer.
+This will install necessary Javascript (or Node) packages - Vue.js, Bootstrap.css, Lodash and Laravel Mix.
+3. Create/Copy the .env file: ``` cp .env.example .env ```
+The repository contains a _.env.example_ file which is a template of the _.env_ file the project needs.
+4. Generate an app encryption key: ``` php artisan key:generate ```
+Laravel requires you to have an app encryption key which is stored in your _.env_ file to encrypt cookies, password hashes and more.
+5. Create/Copy a database file.
+SQLite databases are valid just by creating a new file called _database.sqlite_ (preferred in the folder _database_). The absolute path then must be added to the _.env_ file to make Laravel use this as the database:
+``` DB_DATABASE="C:/Users/Simon/Documents/git/whatthehack/database/database.sqlite" ```
 
 If you have PHP installed locally and you would like to use PHP's built-in development server to serve your application, you may use the serve Artisan command. This command will start a development server at
 [localhost:8000](http://localhost:8000):
@@ -21,9 +33,23 @@ More robust local development options are available via [Homestead](https://lara
 
 The laravel version of this project is `6.0.3`, which is the most recent version of laravel at the moment of installation (09/23/2019). Laravel `6.0` was released on September 3, 2019. Laravel was installed with laravel installer version `v2.1.0`.
 
+The Laravel framework has a few system requirements. All of these requirements are satisfied by the Laravel Homestead virtual machine, so it's highly recommended that you use Homestead as your local Laravel development environment.
+
+However, if you are not using Homestead, you will need to make sure your server meets the following requirements:
+- PHP >= 7.1.3
+- BCMath PHP Extension
+- Ctype PHP Extension
+- JSON PHP Extension
+- Mbstring PHP Extension
+- OpenSSL PHP Extension
+- PDO PHP Extension
+- Tokenizer PHP Extension
+- XML PHP Extension
+
+
 ## Contributing
 
-When contributing ot this repository, please take in mind that you have to follow our guidelines for contributing.
+When contributing ot this repository, please take in mind that you have to follow our guidelines for contributing. The project language is english, therefore variables, comments, issues and merge request must be written in english langauge only.
 
 **Reference:** Simon Prast <<contact@simonprast.com>>  
 Github: [dermrsimon](https://github.com/dermrsimon)  
@@ -41,7 +67,7 @@ Through this, it will also be possible to provide every developer a fixed, reada
 #### Issues
 
 For every change carried out, an Issue must exist. Internal developers must always be able to state on which written-down Issue they are currently working.  
-[Github: Creating an Issue](https://help.github.com/en/articles/creating-an-issue)
+[GitLab: Managing Issues](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html)
 
 Issues can be of three types:
 - Feature request (New features are expanding the current functionality)
@@ -52,19 +78,19 @@ Issues can be of three types:
 
 Once in production, the project is deployed on branch origin master. **Strictly nobody is allowed to directly push on the master branch under no circumstances.**
 
-Each internal developer owns a development branch suited for his requirements. The development branch must be up to date with the master branch to always guarantee compatibility.
+Each internal developer owns a development branch suited for his requirements (development-[lastname]) in case this is needed. The development branch must be up to date with the master branch to always guarantee compatibility.
 
 For feature development, an own temporary branch is created to completely retrace the development hereafter.
 
 Preferably, a graphical Git client can be used. This helps to ease and speed up the workflow by directly providing an overview over branches, which also helps to avoid mistakes.  
 Personally I can recommend [GitKraken](https://www.gitkraken.com/invite/fHs7cbZ9). :)
 
-#### Pull requests
+#### Merge requests
 
-GIT itself provides the possibility for pull requests and code reviews.  
-[GitHub: About pull requests](https://help.github.com/en/articles/about-pull-requests)
+GIT itself provides the possibility for merge requests and code reviews.  
+[GitLab: Merge requests](https://docs.gitlab.com/ee/user/project/merge_requests/)
 
-Once one or more features are implemented and tested, a pull request can be created. **A pull request must not be merged into `master` before all implemented features are on production quality and tested.** A pull request must state all changes done since starting of this development branch.
+Once one or more features are implemented and tested, a merge request can be created. **A merge request must not be merged into `master` before all implemented features are on production quality and tested.** A merge request must state all changes done since starting of this development branch.
 
 Breaking changes which could affect compatibility for other developers must be clearly stated and communicated throughout the internal developers.
 
