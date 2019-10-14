@@ -49,7 +49,7 @@ However, if you are not using Homestead, you will need to make sure your server 
 
 ## Contributing
 
-When contributing ot this repository, please take in mind that you have to follow our guidelines for contributing. The project language is english, therefore variables, comments, issues and merge request must be written in english langauge only.
+When contributing to this repository, please take in mind that you have to follow our guidelines for contributing. The project language is english, therefore variables, comments, issues and merge request must be written in english langauge only.
 
 **Reference:** Simon Prast <<contact@simonprast.com>>  
 Github: [dermrsimon](https://github.com/dermrsimon)  
@@ -101,10 +101,10 @@ Through a commit message, every future developer reading the development history
 A commit message must contain **a short, meaningful title line** and **a detailed paragraph**. The paragraph should answer following, if not obvious:
 - What exactly is changed?
 - Why did you change it?
-- How did you implement the change? Where there any complications?
+- How did you implement the change? Were there any complications?
 
 Please try to keep your commits like this:  
-![alt text](https://puu.sh/EkoDe/e0e6ceeeaf.png)  
+![example commit](https://puu.sh/EkoDe/e0e6ceeeaf.png)  
 Taken out of [pharmaziegasse/charm-backend](https://github.com/pharmaziegasse/charm-backend/commits/master)
 
 #### Gitignore/Dockerignore files
