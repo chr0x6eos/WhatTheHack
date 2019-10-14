@@ -1,11 +1,4 @@
----
-name: Feature request
-about: Suggest an idea for this project
-title: ''
-labels: ''
-assignees: ''
-
----
+# Feature request
 
 **Describe your idea**
 A clear and concise description of what you would like to have implemented.
