@@ -81,7 +81,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel GitLab Test Commit
+                    Laravel
                 </div>
 
                 <div class="links">
