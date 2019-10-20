@@ -64,13 +64,18 @@
                         <div class="form-group row">
                             <label for="userrole" class="col-md-4 col-form-label text-md-right">{{ __('Userrole') }}</label>
 
-                            <div class="col-md-6">
-                                <select id="userrole">
-                                    <option value = "student" selected>Student</option>
-                                    <option value = "teacher">Teacher</option>
-                                    <option value = "admin">Admin</option>
-                                </select>
+                            <!-- Laravel Docs Drop-Down Lists! -->
+
+                            <div>
+                                <input id="userrole" type="text" class="form-control @error('userrole') is-invalid @enderror" name="userrole" value="{{ old('userrole') }}" required autocomplete="name" placeholder="student, teacher or admin" autofocus>
+
+                                @error('userrole')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
+
                         </div><br>
 
                         <div class="form-group row mb-0">
