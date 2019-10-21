@@ -21,17 +21,7 @@ Route::get('/contact', function () {
     return view('subpages/contact');
 });
 
-Route::get('/agb', function (){
-    return view('agb');
-});
-
-Route::get('/contact', function (){
-    return view('contact');
-});
-
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
-
