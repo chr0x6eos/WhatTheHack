@@ -14,9 +14,6 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/globalScoring', function () {
-    return view('globalScoring');
-});
 
 Auth::routes();
 
