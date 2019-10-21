@@ -1,4 +1,6 @@
 @extends ('layouts.app')
+
+@section('content')
 <div class="card">
     <div class="card-header">{{ __('Information') }}</div>
 
@@ -6,3 +8,4 @@
         This is a Demotext!
     </div>
 </div>
+@endsection
