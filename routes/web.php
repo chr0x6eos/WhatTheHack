@@ -14,6 +14,12 @@
 Route::get('/', function () {
     return view('welcome_new');
 });
+Route::get('/agb', function () {
+    return view('subpages/agb');
+});
+Route::get('/contact', function () {
+    return view('subpages/contact');
+});
 
 Route::get('/agb', function (){
     return view('agb');
