@@ -4,65 +4,84 @@ namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 
+
+/**
+ * Class BadCharacters
+ * @package App\Rules
+ */
 class BadCharacters implements Rule
 {
+
     /**
-     * Create a new rule instance.
-     *
-     * @return void
+     * BadCharacters constructor.
      */
     public function __construct()
     {
         //
     }
 
+
     /**
-     * Determine if the validation rule passes.
-     *
-     * @param  string  $attribute
-     * @param  mixed  $value
+     * @param string $attribute
+     * @param mixed $value
      * @return bool
+     * Checks if string contains bad characters
      */
+
     public function passes($attribute, $value)
     {
-        strpos($value,",")==1;
-        return false;
-        strpos($value,";")==1;
-        return false;
-        strpos($value,"\"")==1;
-        return false;
-        strpos($value,"\'")==1;
-        return false;
-        strpos($value,"(")==1;
-        return false;
-        strpos($value,")")==1;
-        return false;
-        strpos($value,"[")==1;
-        return false;
-        strpos($value,"]")==1;
-        return false;
-        strpos($value,"{")==1;
-        return false;
-        strpos($value,"}")==1;
-        return false;
-        strpos($value,"\0")==1;
-        return false;
-        strpos($value,"\n")==1;
-        return false;
-        strpos($value,"\b")==1;
-        return false;
-        strpos($value,"\r")==1;
-        return false;
-        strpos($value,"\t")==1;
-        return false;
-        strpos($value,"\z")==1;
-        return false;
-        strpos($value,"\\")==1;
-        return false;
-        strpos($value,"\_")==1;
-        return false;
-        strpos($value,"\%")==1;
-        return false;
+         if(strpos($value,"\'")===true)
+            return false;
+
+         if(strpos($value,",")===true)
+             return false;
+
+        if(strpos($value,";")===true)
+            return false;
+
+        if(strpos($value,"\"")===true)
+            return false;
+
+        if(strpos($value,"\(")===true)
+            return false;
+
+        if(strpos($value,"\)")===true)
+            return false;
+
+        if(strpos($value,"\[")===true)
+            return false;
+
+        if(strpos($value,"\]")===true)
+            return false;
+
+        if(strpos($value,"\{")===true)
+            return false;
+
+        if(strpos($value,"\}")===true)
+            return false;
+
+        if(strpos($value,"\0")===true)
+            return false;
+
+        if(strpos($value,"\n")===true)
+            return false;
+
+        if(strpos($value,"\r")===true)
+            return false;
+
+        if(strpos($value,"\t")===true)
+            return false;
+
+        if(strpos($value,"\\")===true)
+            return false;
+
+        if(strpos($value,"_")===true)
+            return false;
+
+        if(strpos($value,"%")===true)
+            return false;
+
+        return true;
     }
 
     /**
