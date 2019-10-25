@@ -30,57 +30,58 @@ class BadCharacters implements Rule
 
     public function passes($attribute, $value)
     {
-         if(strpos($value,"\'")===true)
+         if(strpos($value,"'")>=0)
             return false;
 
-         if(strpos($value,",")===true)
+         if(strpos($value,"\,")>=0)
              return false;
 
-        if(strpos($value,";")===true)
+        if(strpos($value,"\;")>=0)
             return false;
 
-        if(strpos($value,"\"")===true)
+        if(strpos($value,"\"")>=0)
             return false;
 
-        if(strpos($value,"\(")===true)
+        if(strpos($value,"\(")>=0)
             return false;
 
-        if(strpos($value,"\)")===true)
+        if(strpos($value,")")>=0)
             return false;
 
-        if(strpos($value,"\[")===true)
+        if(strpos($value,"[")>=0)
             return false;
 
-        if(strpos($value,"\]")===true)
+        if(strpos($value,"]")>=0)
             return false;
 
-        if(strpos($value,"\{")===true)
+        if(strpos($value,"{")>=0)
             return false;
 
-        if(strpos($value,"\}")===true)
+        if(strpos($value,"}")>=0)
             return false;
 
-        if(strpos($value,"\0")===true)
+        if(strpos($value,"\0")>=0)
             return false;
 
-        if(strpos($value,"\n")===true)
+        if(strpos($value,"\n")>=0)
             return false;
 
-        if(strpos($value,"\r")===true)
+        if(strpos($value,"\r")>=0)
             return false;
 
-        if(strpos($value,"\t")===true)
+        if(strpos($value,"\t")>=0)
             return false;
 
-        if(strpos($value,"\\")===true)
+        if(strpos($value,"\\")>=0)
             return false;
 
-        if(strpos($value,"_")===true)
+        if(strpos($value,"_")>=0)
             return false;
 
-        if(strpos($value,"%")===true)
+        if(strpos($value,"%")>=0)
             return false;
-
+        if(strpos($value,"/")>=0)
+            return false;
         return true;
     }
 

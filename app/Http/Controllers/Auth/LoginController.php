@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Rules\BadCharacters;
+
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Support\Facades\Validator;
+
 
 class LoginController extends Controller
 {
@@ -19,14 +19,6 @@ class LoginController extends Controller
     | to conveniently provide its functionality to your applications.
     |
     */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'email' => [new BadCharacters],
-            'password' => [new BadCharacters],
-        ]);
-
-    }
     use AuthenticatesUsers;
     /**
      * Where to redirect users after login.
