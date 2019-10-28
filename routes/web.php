@@ -18,3 +18,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/challenges','ChallengeController@index')->name('challenges.index');
+
+Route::get('challenges/create', 'ChallengeController@create')->name('challenges.create');
+Route::post('challenges', 'ChallengeController@store')->name('challenges.store');
+Route::get('challenges/{challenge}','ChallengeController@show')->name('challenges.show');
