@@ -13,13 +13,13 @@
  - [ ] Breaking change (fix or feature that would cause existing functionality to change)
 
 
-** If this is a feature change: What is the current behavior? (link to any open issues here)**
+**If this is a feature change: What is the current behavior? (link to any open issues here)**  
 - 
 
 
-**What is the new behavior?**
+**What is the new behavior?**  
 - 
 
 
-**Other information**:
+**Other information**  
 - 
