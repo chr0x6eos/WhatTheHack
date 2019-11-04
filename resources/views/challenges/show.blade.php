@@ -31,6 +31,12 @@
         <br>
         {{ $challenge->attachments }}
     </p>
+    <a href="{{ route('challenges.edit', $challenge->id) }}">Edit</a><br>
+    <form method="POST" action="{{ route('challenges.delete',$challenge->id) }}">
+    @csrf
+        @method('delete')
+        <button type="submit">Delete</button>
+    </form>
     <a href="{{ route('challenges.index') }}">Go back</a>
 </body>
 </html>

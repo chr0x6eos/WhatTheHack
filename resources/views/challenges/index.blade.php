@@ -23,6 +23,7 @@
     @endforeach
 </tbody>
 </table>
+<br>
 <a href="{{route('challenges.create')}}">Add new challenge</a>
 </body>
 </html>

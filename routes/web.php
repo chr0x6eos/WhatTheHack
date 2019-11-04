@@ -23,3 +23,7 @@ Route::get('/challenges','ChallengeController@index')->name('challenges.index');
 Route::get('challenges/create', 'ChallengeController@create')->name('challenges.create');
 Route::post('challenges', 'ChallengeController@store')->name('challenges.store');
 Route::get('challenges/{challenge}','ChallengeController@show')->name('challenges.show');
+
+Route::get('challenges/edit/{challenge}','ChallengeController@edit')->name('challenges.edit');
+Route::patch('challenges/update/{challenge}','ChallengeController@update')->name('challenges.update');
+Route::delete('challenges/delete/{challenge}','ChallengeController@destroy')->name('challenges.destroy');

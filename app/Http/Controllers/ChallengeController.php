@@ -38,12 +38,37 @@ class ChallengeController extends Controller
     {
         $challenge = new Challenge();
         $challenge->id = $request->id;
-        $challenge->name = $request->name;
-        $challenge->description = $request->description;
-        $challenge->difficulty = $request->difficulty;
-        $challenge->author = $request->author;
-        $challenge->imageID = $request->imageID;
-        $challenge->attachments = $request->attachments;
+
+        if ($challenge->name)
+            $challenge->name = $request->name;
+        else
+            return redirect()->route('challenges.create')->withErrors('Missing Challenge Name!');
+
+        if ($challenge->description)
+            $challenge->description = $request->description;
+        else
+            return redirect()->route('challenges.create')->withErrors('Missing Challenge description!');
+
+        if ($challenge->difficulty)
+            $challenge->difficulty = $request->difficulty;
+        else
+            return redirect()->route('challenges.create')->withErrors('Missing Challenge difficulty!');
+
+        if ($challenge->author)
+            $challenge->author = $request->author;
+        else
+            return redirect()->route('challenges.create')->withErrors('Missing Challenge author!');
+
+        if ($challenge->imageID)
+            $challenge->imageID = $request->imageID;
+        else
+            $challenge->imageID = "";
+
+        if ($challenge->attachments)
+            $challenge->attachments = $request->attachments;
+        else
+            $challenge->attachments = "";
+
         $challenge->save();
 
         //Redirect back to all challenges after creation of new challenge
@@ -71,7 +96,9 @@ class ChallengeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $challenge = Challenge::find($id);
+
+        return view('challenges.edit')->with('challenge',$challenge);
     }
 
     /**
@@ -83,7 +110,17 @@ class ChallengeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $challenge = Challenge::find($id);
+
+        $challenge->name = $request->name;
+        $challenge->description = $request->description;
+        $challenge->difficulty = $request->difficulty;
+        $challenge->author = $request->author;
+        $challenge->imageID = $request->imageID;
+        $challenge->attachments = $request->attachments;
+        $challenge->save();
+
+        return redirect()->route('challenges.index');
     }
 
     /**
@@ -94,6 +131,10 @@ class ChallengeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //TODO: Only allow deletion of the user is either admin or author of the challenge
+        $challenge = Challenge::find($id);
+        $challenge->delete();
+
+        return redirect()->route('challenges.index');
     }
 }

@@ -25,11 +25,11 @@
             <input type="text" name="author">
         </p>
         <p>
-            <strong>Docker Image ID: (optional)</strong>
+            <strong>Docker Image ID (optional)</strong>
             <input type="text" name="imageID">
         </p>
         <p>
-            <strong>Attachments</strong>
+            <strong>Attachments (optional)</strong>
             <input type="text" name="attachments">
         </p>
         <p>
