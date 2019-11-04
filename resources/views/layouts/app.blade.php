@@ -22,8 +22,10 @@
     <!-- Styles
     <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ URL::asset('resources/css/stylesheet.css') }}">
 </head>
 <body>
+
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
@@ -77,9 +79,53 @@
         </nav>
 
         <main class="py-4">
-            @yield('content')
+
         </main>
     </div>
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <nav id="sidebar">
 
+            <ul class="list-unstyled components">
+
+                <li>
+                    <a href="#">Demopage 1</a>
+                </li>
+                <li>
+                    <a href="#">Demopage 2</a>
+                </li>
+                <li>
+                    <a href="#">Demopage 3</a>
+                </li>
+                <li>
+                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">About</a>
+                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                        <li>
+                            <a href="/contact">Contact</a>
+                        </li>
+                        <li>
+                            <a href="/agb">Terms of use</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+        </nav>
+        <!-- Page Content -->
+        <div id="content">
+
+            <!--<nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+
+                    <button type="button" id="sidebarCollapse" class="btn btn-info">
+                        <i class="fas fa-align-left"></i>
+                        <span>Toggle Sidebar</span>
+                    </button>
+                </div>
+            </nav>
+            -->
+        </div>
+    </div>
+ @yield('content')
 </body>
 </html>
