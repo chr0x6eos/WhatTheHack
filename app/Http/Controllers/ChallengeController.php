@@ -42,7 +42,6 @@ class ChallengeController extends Controller
             $challenge->id = $request->id;
 
             $this->validate($request,[
-                'id' => 'required',
                 'name' => 'required',
                 'description' => 'required',
                 'difficulty' => 'required',
