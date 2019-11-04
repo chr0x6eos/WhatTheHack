@@ -1,5 +1,5 @@
-<html>
-<body>
+@extends('layouts.app')
+@section('content')
 <h2>Edit {{ $challenge->name }}</h2>
 <form method="post" action="{{ route('challenges.update', $challenge)}}" id="challengeform">
     @csrf
@@ -34,7 +34,8 @@
         <input type="text" name="attachments" value="{{ $challenge->attachments }}">
     </p>
     <p>
-        <button type="submit">Update</button>
+        <button type="submit" class="btn btn-success">Update</button>
+        <a href="{{ route('challenges.index') }} " class="btn btn-danger">Cancel</a>
     </p>
     <p>
     @if($errors)
@@ -44,5 +45,4 @@
             @endif
     </p>
 </form>
-</body>
-</html>
+@endsection

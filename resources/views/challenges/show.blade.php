@@ -1,5 +1,5 @@
-<html>
-<body>
+@extends('layouts.app')
+@section('content')
     <h2>Challenge details</h2>
     <p>
         <strong>ID:</strong>
@@ -31,15 +31,14 @@
         <br>
         {{ $challenge->attachments }}
     </p>
-    <!-- //TODO:Only allow below to admin user
-    if(Auth::user()->hasRole(Auth::user()->userrole)==true) -->
-    <a href="{{ route('challenges.edit', $challenge->id) }}">Edit</a><br>
+    <!-- //TODO:Only allow below to admin user-->
+    @if(Auth::user()->isAdmin(Auth::user()->userrole)==true)
+    <a href="{{ route('challenges.edit', $challenge->id) }}" class="btn btn-info">Edit</a><br>
     <form method="POST" action="{{ route('challenges.destroy',$challenge->id) }}">
     @csrf
         @method('delete')
-        <button type="submit">Delete</button>
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a href="{{ route('challenges.index') }}" class="btn">Go back</a>
     </form>
-    <!--endif-->
-    <a href="{{ route('challenges.index') }}">Go back</a>
-</body>
-</html>
+    @endif
+@endsection

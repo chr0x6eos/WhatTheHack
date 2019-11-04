@@ -14,7 +14,15 @@ class ChallengeController extends Controller
      */
     public function index()
     {
-        $challenges = Challenge::all();
+        try
+        {
+            $challenges = Challenge::all();
+        }
+        catch (Exception $ex)
+        {
+            return redirect('challenges.index')->withErrors("No db");
+        }
+
         return view('challenges.index')->with('challenges',$challenges);
     }
 

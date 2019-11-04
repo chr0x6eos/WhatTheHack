@@ -1,7 +1,7 @@
-<html>
-<body>
+@extends('layouts.app')
+@section('content')
 <h2>Challenges</h2>
-@if($challenges)
+@if(sizeof($challenges) > 0)
 <table border="1">
 <thead>
 <th>Id</th>
@@ -18,16 +18,17 @@
         <td>{{ $challenge->difficulty }}</td>
         <td>{{ $challenge->author }}</td>
         <td>
-            <a href="{{ route('challenges.show', $challenge->id) }}">More info</a>
+            <a href="{{ route('challenges.show', $challenge->id) }}" class="btn btn-info">More info</a>
         </td>
     </tr>
     @endforeach
 </tbody>
 </table>
     @else
-    <h2>No challenges yet!</h2>
+    <h3>No challenges yet!</h3>
 @endif
 <br>
-<a href="{{route('challenges.create')}}">Add new challenge</a>
-</body>
-</html>
+@if(Auth::user()->isAdmin(Auth::user()->userrole)==true)
+<a href="{{route('challenges.create')}}" class="btn btn-success">Add new challenge</a>
+@endif
+@endsection
