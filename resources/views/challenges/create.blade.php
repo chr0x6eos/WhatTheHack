@@ -35,6 +35,13 @@
         <p>
             <button type="submit">Submit</button>
         </p>
+        <p>
+            @if($errors)
+                @foreach($errors->all() as $error)
+                <div>{{ $error }}</div>
+                @endforeach
+            @endif
+        </p>
     </form>
 </body>
 </html>

@@ -1,6 +1,7 @@
 <html>
 <body>
 <h2>Challenges</h2>
+@if($challenges)
 <table border="1">
 <thead>
 <th>Id</th>
@@ -23,6 +24,9 @@
     @endforeach
 </tbody>
 </table>
+    @else
+    <h2>No challenges yet!</h2>
+@endif
 <br>
 <a href="{{route('challenges.create')}}">Add new challenge</a>
 </body>

@@ -31,12 +31,15 @@
         <br>
         {{ $challenge->attachments }}
     </p>
+    <!-- //TODO:Only allow below to admin user
+    if(Auth::user()->hasRole(Auth::user()->userrole)==true) -->
     <a href="{{ route('challenges.edit', $challenge->id) }}">Edit</a><br>
     <form method="POST" action="{{ route('challenges.destroy',$challenge->id) }}">
     @csrf
         @method('delete')
         <button type="submit">Delete</button>
     </form>
+    <!--endif-->
     <a href="{{ route('challenges.index') }}">Go back</a>
 </body>
 </html>

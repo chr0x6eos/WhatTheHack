@@ -10,8 +10,8 @@
     </p>
     <p>
         <strong>Challenge description:</strong>
-        <textarea form="challengeform" name="description" value="{{ $challenge->description }}">
-            </textarea>
+        <br>
+        <textarea form="challengeform" name="description">{{ $challenge->description }}</textarea>
     </p>
     <p>
         <strong>Difficulty</strong>
@@ -35,6 +35,13 @@
     </p>
     <p>
         <button type="submit">Update</button>
+    </p>
+    <p>
+    @if($errors)
+        @foreach($errors->all() as $error)
+            <div>{{ $error }}</div>
+            @endforeach
+            @endif
     </p>
 </form>
 </body>
