@@ -24,3 +24,7 @@ Route::get('/contact', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+//user-profile routes
+Route::get('/profile', 'ProfileController@show')->name('profile.show');
+Route::get('/profile/changePassword', 'ProfileController@showChangePWForm')->name('profile.changePW');

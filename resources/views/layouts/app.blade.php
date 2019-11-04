@@ -57,7 +57,7 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                    {{ Auth::user()->username }} <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -89,7 +89,7 @@
             <ul class="list-unstyled components">
 
                 <li>
-                    <a href="#">Demopage 1</a>
+                    <a href="{{ route('profile.show') }}">Profile</a>
                 </li>
                 <li>
                     <a href="#">Demopage 2</a>
