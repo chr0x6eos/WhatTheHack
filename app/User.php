@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -37,22 +38,5 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-
     
-    public function isTeacher($userrole){
-        if($userrole=='teacher'){
-            return true;
-        }
-        else
-            return false;
-    }
-    
-    
-    public function isAdmin($userrole){
-        if($userrole=='admin'){
-            return true;
-        }
-        else
-            return false;
-    }
 }
