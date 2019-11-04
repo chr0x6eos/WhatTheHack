@@ -13,8 +13,16 @@
                             {{ session('status') }}
                         </div>
                     @endif
+                    This is my userrole {{Auth::user()->userrole}}
 
-                    You are logged in!
+                        @if (Auth::user()->isTeacher(Auth::user()->userrole)==true || Auth::user()->isAdmin(Auth::user()->userrole)==true)
+
+                            <form method="post">
+                                <button type="submit" class="btn success"> Create Classroom</button>
+                            </form>
+
+                        @endif
+                    {{Auth::user()->username}} is logged in!
                 </div>
             </div>
         </div>
