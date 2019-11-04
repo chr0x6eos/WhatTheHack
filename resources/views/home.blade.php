@@ -13,8 +13,11 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
-                    You are logged in!
+                    <p>
+                        You are logged in!
+                        <br>
+                        Go here to view the <a href="{{ route('challenges.index') }}">Challenges</a>.
+                    </p>
                 </div>
             </div>
         </div>
