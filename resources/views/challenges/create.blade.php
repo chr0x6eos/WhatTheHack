@@ -9,8 +9,8 @@
         </p>
         <p>
             <strong>Challenge description:</strong>
-            <textarea form="challengeform" name="description">
-            </textarea>
+            <br>
+            <textarea form="challengeform" name="description"></textarea>
         </p>
         <p>
             <strong>Difficulty</strong>
@@ -22,7 +22,7 @@
         </p>
         <p>
             <strong>Author</strong>
-            <input type="text" name="author">
+            <input type="text" name="author" value="{{ Auth::user()->username }}">
         </p>
         <p>
             <strong>Docker Image ID (optional)</strong>
