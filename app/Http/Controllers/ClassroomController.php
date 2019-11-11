@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Classroom;
 use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\Auth;
 
 class ClassroomController extends Controller
 {
@@ -23,7 +26,7 @@ class ClassroomController extends Controller
      */
     public function create()
     {
-        //
+        return view('classroom.create');
     }
 
     /**
@@ -34,7 +37,27 @@ class ClassroomController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $classroom = new Classroom();
+
+            $classroom->id = $request->id;
+
+            $this->validate($request,[
+                'name' => 'required',
+            ]);
+
+            $classroom->classroom_name = $request->name;
+            $classroom->classroom_owner='Hans';
+
+            $classroom->save();
+
+
+            return redirect()->route('home');
+        }
+        catch (Exception $ex)
+        {
+            return redirect()->route('challenges.create')->withErrors("Cannot create because of error: " . $ex. "!");
+        }
     }
 
     /**

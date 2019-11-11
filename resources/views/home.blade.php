@@ -17,12 +17,15 @@
 
                         @if (Auth::user()->isTeacher(Auth::user()->userrole)==true || Auth::user()->isAdmin(Auth::user()->userrole)==true)
 
-                            <form method="post">
-                                <button type="submit" class="btn success"> Create Classroom</button>
-                            </form>
+                            <a href="{{route('classroom.create')}} " class="btn btn-success" >Create classroom</a>
 
                         @endif
                     {{Auth::user()->username}} is logged in!
+                    <p>
+                        You are logged in!
+                        <br>
+                        Go here to view the <a href="{{ route('challenges.index') }}" class="btn">Challenges</a>.
+                    </p>
                 </div>
             </div>
         </div>

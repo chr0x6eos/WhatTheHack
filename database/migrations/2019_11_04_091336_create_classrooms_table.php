@@ -15,6 +15,12 @@ class CreateClassroomsTable extends Migration
     {
         Schema::create('classrooms', function (Blueprint $table) {
             $table->bigIncrements('id');
+
+            $table->string('classroom_name');
+            $table->string('classroom_owner');
+
+           // $table->string('members');
+
             $table->timestamps();
         });
     }
