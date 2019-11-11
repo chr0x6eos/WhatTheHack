@@ -14,35 +14,55 @@
         <textarea form="challengeform" name="description">{{ $challenge->description }}</textarea>
     </p>
     <p>
-        <strong>Difficulty</strong>
+        <strong>Difficulty:</strong>
         <select name="difficulty">
-            <option value="easy">Easy</option>
-            <option value="medium">Medium</option>
-            <option value="hard">Hard</option>
+            <option value="easy" @if($challenge->difficulty=="easy") selected="selected" @endif>Easy</option>
+            <option value="medium" @if($challenge->difficulty=="medium") selected="selected" @endif>Medium</option>
+            <option value="hard" @if($challenge->difficulty=="hard") selected="selected" @endif>Hard</option>
         </select>
     </p>
     <p>
-        <strong>Author</strong>
-        <input type="text" name="author" value="{{ $challenge->author }}">
+        <strong>Author:</strong>
+        {{-- Only allow admins to edit authors --}}
+        @if(Auth::user()->hasRole("admin"))<input type="text" name="author" value="{{ $challenge->author }}">
+        @else {{$challenge->author}}
+        @endif
     </p>
     <p>
-        <strong>Docker Image ID (optional)</strong>
+        <strong>Feasible solution (optional)</strong>
+        <br>
+        <textarea form="challengeform" name="targetSolution">{{ $challenge->targetSolution }}</textarea>
+    </p>
+    <p>
+        <strong>Docker Image ID (optional):</strong>
         <input type="text" name="imageID" value="{{ $challenge->imageID }}">
     </p>
     <p>
-        <strong>Attachments (optional)</strong>
+        <strong>Attachments (optional):</strong>
         <input type="text" name="attachments" value="{{ $challenge->attachments }}">
+    </p>
+    <p>
+        <strong>Status:</strong>
+        <select name="active">
+        <option value="1" @if($challenge->active) selected="selected"@endif>Enabled</option>
+        <option value="0" @if(!$challenge->active) selected="selected"@endif>Disabled</option>
+        </select>
     </p>
     <p>
         <button type="submit" class="btn btn-success">Update</button>
         <a href="{{ route('challenges.index') }} " class="btn btn-danger">Cancel</a>
     </p>
-    <p>
-    @if($errors)
-        @foreach($errors->all() as $error)
-            <div>{{ $error }}</div>
-            @endforeach
-            @endif
-    </p>
 </form>
+@if(isset($errors) && sizeof($errors) != 0)
+    @if(sizeof($errors) > 1)
+        <h4>Errors occurred:</h4>
+    @else
+        <h4>Error occurred:</h4>
+    @endif
+    <p>
+    @foreach($errors->all() as $error)
+        <div>{{ $error }}</div>
+        @endforeach
+        </p>
+        @endif
 @endsection

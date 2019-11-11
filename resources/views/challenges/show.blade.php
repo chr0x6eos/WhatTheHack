@@ -1,44 +1,72 @@
 @extends('layouts.app')
 @section('content')
-    <h2>Challenge details</h2>
-    <p>
-        <strong>ID:</strong>
-        {{ $challenge->id }}
-    </p>
-    <p>
-        <strong>Name:</strong>
-        {{ $challenge->name }}
-    </p>
-    <p>
-        <strong>Description:</strong>
-        <br>
-        {{ $challenge->description }}
-    </p>
-    <p>
-        <strong>Difficulty:</strong>
-        {{ $challenge->difficulty }}
-    </p>
-    <p>
-        <strong>Author:</strong>
-        {{ $challenge->author }}
-    </p>
-    <p>
-        <strong>Docker-Image-ID:</strong>
-        {{ $challenge->imageID }}
-    </p>
-    <p>
-        <strong>Attachments:</strong>
-        <br>
-        {{ $challenge->attachments }}
-    </p>
-    <!-- //TODO:Only allow below to admin user-->
-    @if(Auth::user()->isAdmin(Auth::user()->userrole)==true)
-    <a href="{{ route('challenges.edit', $challenge->id) }}" class="btn btn-info">Edit</a><br>
+<h2>Challenge details</h2>
+<p>
+    <strong>ID:</strong>
+    {{ $challenge->id }}
+</p>
+<p>
+    <strong>Name:</strong>
+    {{ $challenge->name }}
+</p>
+<p>
+    <strong>Description:</strong>
+    <br>
+    {{ $challenge->description }}
+</p>
+<p>
+    <strong>Difficulty:</strong>
+    {{ $challenge->difficulty }}
+</p>
+<p>
+    <strong>Author:</strong>
+    {{ $challenge->author }}
+</p>
+<p>
+    <strong>Active:</strong>
+    @if($challenge->active)
+        Enabled
+    @else
+        Disabled
+    @endif
+</p>
+@if($challenge->imageID)
+<p>
+    <strong>Docker-Image-ID:</strong>
+    {{ $challenge->imageID }}
+</p>
+@endif
+@if($challenge->attachments)
+<p>
+    <strong>Attachments:</strong>
+    <br>
+    {{ $challenge->attachments }}
+</p>
+@endif
+
+@if(Auth::user()->hasRole("admin") || Auth::user()->isAuthor($challenge->author))
+    <a href="{{ route('challenges.edit', $challenge->id) }}" class="btn btn-info">Edit</a>
+
+    @if(!$challenge->active)
     <form method="POST" action="{{ route('challenges.destroy',$challenge->id) }}">
     @csrf
         @method('delete')
         <button type="submit" class="btn btn-danger">Delete</button>
-        <a href="{{ route('challenges.index') }}" class="btn">Go back</a>
     </form>
     @endif
+@endif
+    <a href="{{ route('challenges.index') }}" class="btn btn-outline-dark">Go back</a>
+    <br>
+@if(isset($errors) && sizeof($errors) != 0)
+    @if(sizeof($errors) > 1)
+        <h4>Errors occurred:</h4>
+    @else
+        <h4>Error occurred:</h4>
+    @endif
+    <p>
+    @foreach($errors->all() as $error)
+        <div>{{ $error }}</div>
+        @endforeach
+        </p>
+        @endif
 @endsection

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Challenge;
+use Illuminate\Support\Facades\Auth;
 
 class ChallengeController extends Controller
 {
@@ -20,7 +21,7 @@ class ChallengeController extends Controller
         }
         catch (Exception $ex)
         {
-            return redirect('challenges.index')->withErrors("No db");
+            return redirect('challenges.index')->withErrors("No DB connection!");
         }
 
         return view('challenges.index')->with('challenges',$challenges);
@@ -53,16 +54,24 @@ class ChallengeController extends Controller
                 'name' => 'required',
                 'description' => 'required',
                 'difficulty' => 'required',
-                'author' => 'required'
             ]);
 
             $challenge->name = $request->name;
             $challenge->description = $request->description;
             $challenge->difficulty = $request->difficulty;
-            $challenge->author = $request->author;
+
+            //Only admin is allowed to change author
+            if(isset($request->author) && Auth::user()->hasRole("admin"))
+            {
+                $challenge->author = $request->author;
+            }
+            else //Otherwise author is the current user
+            {
+                $challenge->author = Auth::user()->username;
+            }
+            $challenge->targetSolution = $request->targetSolution;
             $challenge->imageID = $request->imageID;
             $challenge->attachments = $request->attachments;
-            $challenge->attachments = "";
 
             $challenge->save();
 
@@ -98,7 +107,15 @@ class ChallengeController extends Controller
     {
         $challenge = Challenge::find($id);
 
-        return view('challenges.edit')->with('challenge',$challenge);
+        //Only allow editing if the user is admin or author of the challenge
+        if(Auth::user()->hasRole("admin") || $challenge->author == Auth::user()->username)
+        {
+            return view('challenges.edit')->with('challenge', $challenge);
+        }
+        else
+        {
+            return view('challenges.index')->withErrors('Unauthorized to edit!');
+        }
     }
 
     /**
@@ -118,13 +135,22 @@ class ChallengeController extends Controller
                 'name' => 'required',
                 'description' => 'required',
                 'difficulty' => 'required',
-                'author' => 'required'
             ]);
 
             $challenge->name = $request->name;
             $challenge->description = $request->description;
             $challenge->difficulty = $request->difficulty;
-            $challenge->author = $request->author;
+
+            //Only admin is allowed to change author
+            if(isset($request->author) && Auth::user()->hasRole("admin"))
+            {
+                $challenge->author = $request->author;
+            }
+            else //Otherwise author is the current user
+            {
+                $challenge->author = Auth::user()->username;
+            }
+            $challenge->active = $request->active;
             $challenge->imageID = $request->imageID;
             $challenge->attachments = $request->attachments;
 
