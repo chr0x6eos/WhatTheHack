@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use http\Client\Curl\User;
+use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -57,6 +57,18 @@ class ProfileController extends Controller
                     ->withErrors('Cannot change password!');
             }
             return redirect()->route('home');
+        }
+    }
+
+    public function deleteAccount($id){
+        $user = User::find($id);
+        if ($user != null) {
+            $user->delete();
+            return redirect()->route('home');
+        }
+        else {
+            redirect()->route('profile.show')
+                ->withErrors('Not able to delete account!');
         }
     }
 }

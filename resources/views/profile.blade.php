@@ -37,19 +37,13 @@
                                     <a href="{{ route('profile.showChangePWForm') }}" class="btn bg-light btn-outline-dark">Change Password</a>
                                 </div>
                                 <div class="col-sm text-md-center">
-                                    <form method="POST" action="#">
-                                        @csrf
-                                        @method('delete')
-                                        <button type="submit" class="btn bg-light btn-outline-dark">Change Email</button>
-                                    </form>
+                                    <a href="#" class="btn bg-light btn-outline-dark">Change Email</a>
                                 </div>
-                                <div class="col-sm text-md-center">
-                                    <form method="POST" action="#">
-                                        @csrf
-                                        @method('delete')
-                                        <button type="submit" class="btn bg-light btn-outline-dark">Delete Account</button>
-                                    </form>
-                                </div>
+                                <form method="POST" action="{{ route('profile.delete', $user->id) }}">
+                                    @csrf
+                                    @method('delete')
+                                    <button type="submit" class="btn bg-danger btn-outline-dark" onclick="return confirm('Do you really want to delete your user account?')">Delete Account</button>
+                                </form>
                             </div>
                         </div>
 

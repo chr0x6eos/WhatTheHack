@@ -28,5 +28,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/profile', 'ProfileController@show')->name('profile.show');
 Route::get('/profile/changePassword', 'ProfileController@showChangePWForm')->name('profile.showChangePWForm');
 Route::post('/password/change', 'ProfileController@changePW')->name('password.change');
+Route::delete('/profile/delete/{user}', 'ProfileController@deleteAccount')->name('profile.delete');
 
 
