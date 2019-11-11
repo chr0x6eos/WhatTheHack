@@ -21,6 +21,7 @@ Route::get('/contact', function () {
     return view('subpages/contact');
 });
 
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
