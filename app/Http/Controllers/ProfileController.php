@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use http\Client\Curl\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -25,6 +26,37 @@ class ProfileController extends Controller
     }
 
     public function showChangePWForm(){
-        return view('auth.passwords.reset');
+
+        $user = Auth::user();
+        return view('auth.passwords.change')->with('user', $user);
+    }
+
+    public function changePW(Request $request){
+
+        $this->validate($request,
+            [
+                'current-password' => 'required|max:50',
+                'password' => 'required|max:50',
+                'confirm-password' => 'required|max:50'
+            ]
+        );
+
+        $user = Auth::user();
+
+        if($user == null){
+            return redirect()->route('home')
+                ->withErrors('User not found! Please log in!');
+        }
+        else{
+            try{
+                $user->password = $request->password;
+                $user->save();
+            }
+            catch (Exception $ex){
+                return redirect()->route('profile.show')
+                    ->withErrors('Cannot change password!');
+            }
+            return redirect()->route('home');
+        }
     }
 }

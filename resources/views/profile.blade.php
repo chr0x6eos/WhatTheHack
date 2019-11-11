@@ -34,10 +34,7 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-sm text-md-center">
-                                    <form method="POST" action="{{ route('profile.changePW') }}">
-                                        @csrf
-                                        <button type="submit" class="btn bg-light btn-outline-dark">Change Password</button>
-                                    </form>
+                                    <a href="{{ route('profile.showChangePWForm') }}" class="btn bg-light btn-outline-dark">Change Password</a>
                                 </div>
                                 <div class="col-sm text-md-center">
                                     <form method="POST" action="#">
