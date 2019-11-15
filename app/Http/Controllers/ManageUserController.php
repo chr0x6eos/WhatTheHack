@@ -20,7 +20,8 @@ class ManageUserController extends Controller
         }
         catch (Exception $ex)
         {
-            return redirect('manageuser.index')->withErrors('Could not list all users');
+            return redirect()->route('manageuser.index')
+                ->withErrors(['mu_c_list_user_error' => 'Invalid request. (MU_C_LIST_USER_ERROR)']);
         }
 
         return view('manageuser.index')->with('users', $users);
@@ -99,7 +100,8 @@ class ManageUserController extends Controller
             $user->save(); 
         }
 
-        return redirect()->route('manageuser.index');
+        return redirect()->route('manageuser.index')
+            ->withErrors(['mu_c_invalid_update_request' => 'Invalid request. (MU_C_INVALID_UPDATE_REQUEST)']);
     }
 
     /**
