@@ -26,7 +26,7 @@
     <script type="text/javascript" src="{{ URL::asset('js/mdb.min.js') }}"></script>    
     <!-- DataTables addon -->
     <script type="text/javascript" src="{{ URL::asset('js/addons/datatables.min.js') }}"></script>    
-    <script type="text/javascript" src="{{ URL::asset('js/addons/datatables-select.min.js') }}"></script>    
+    <!-- <script type="text/javascript" src="{{ URL::asset('js/addons/datatables-select.min.js') }}"></script> -->
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -37,7 +37,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ URL::asset('resources/css/stylesheet.css') }}">
     <link rel="stylesheet" href="{{ URL::asset('css/addons/datatables.min.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('css/addons/datatables-select.min.css') }}">
+    <!-- <link rel="stylesheet" href="{{ URL::asset('css/addons/datatables-select.min.css') }}"> -->
     
     
 </head>
