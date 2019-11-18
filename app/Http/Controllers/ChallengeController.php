@@ -69,6 +69,7 @@ class ChallengeController extends Controller
             {
                 $challenge->author = Auth::user()->username;
             }
+
             $challenge->targetSolution = $request->targetSolution;
             $challenge->imageID = $request->imageID;
             $challenge->attachments = $request->attachments;

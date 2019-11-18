@@ -7,7 +7,7 @@
 <th>Name</th>
 <th>Difficulty</th>
 <th>Author</th>
-<th>Active</th>
+<th>Status</th>
 <th colspan="1">Edit</th>
 </thead>
 <tbody>

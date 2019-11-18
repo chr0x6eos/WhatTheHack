@@ -23,13 +23,20 @@
     {{ $challenge->author }}
 </p>
 <p>
-    <strong>Active:</strong>
+    <strong>Status:</strong>
     @if($challenge->active)
         Enabled
     @else
         Disabled
     @endif
 </p>
+@if($challenge->targetSolution)
+<p>
+    <strong>Feasible solution:</strong>
+    <br>
+    {{ $challenge->targetSolution }}
+</p>
+@endif
 @if($challenge->imageID)
 <p>
     <strong>Docker-Image-ID:</strong>

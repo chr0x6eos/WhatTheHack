@@ -23,6 +23,7 @@ class ChallengesTableSeeder extends Seeder
             if($i % 2 == 0)
             {
                 $challenge->difficulty = "easy";
+                $challenge->targetSolution = $faker->text;
             }
             else if($i % 3 == 0)
             {
@@ -31,11 +32,12 @@ class ChallengesTableSeeder extends Seeder
             else
             {
                 $challenge->difficulty = "hard";
+                $challenge->targetSolution = $faker->text;
                 $challenge->active=false;
             }
             $challenge->author = $faker->name;
             $challenge->imageID = $faker->bankAccountNumber;
-            $challenge->attachments = "/var/data/somedata.txt";
+            $challenge->attachments = "/var/data/" . $faker->word . '.' . $faker->fileExtension;
             $challenge->save();
         }
     }
