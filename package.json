@@ -24,6 +24,8 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
-        "npm": "^6.12.0"
+        "font-awesome": "^4.7.0",
+        "mdbootstrap": "^4.9.0",
+        "npm": "^6.13.0"
     }
 }

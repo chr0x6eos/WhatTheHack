@@ -18,12 +18,13 @@
 
                             <div class="col-md-6">
                                 <input id="login" type="text"
-                                       class="form-control{{ $errors->has('username') || $errors->has('email') ? ' is-invalid' : '' }}"
+                                       class="form-control{{ $errors->has('username') || $errors->has('active') || $errors->has('email') ? ' is-invalid' : '' }}"
                                        name="login" value="{{ old('username') ?: old('email') }}" required autofocus>
 
-                                @if ($errors->has('username') || $errors->has('email'))
+                                @if ($errors->has('username') || $errors->has('email') || $errors->has('active'))
                                     <span class="invalid-feedback">
                                         <strong>{{ $errors->first('username') ?: $errors->first('email') }}</strong>
+                                        <strong>{{ $errors->first('active') }}</strong>
                                     </span>
                                 @endif
                             </div>

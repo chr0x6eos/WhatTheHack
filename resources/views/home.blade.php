@@ -9,9 +9,9 @@
 
                 <div class="card-body">
                     @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
+                    <div class="alert alert-success" role="alert">
+                        {{ session('status') }}
+                    </div>
                     @endif
                         @if (Auth::user()->isTeacher(Auth::user()->userrole)==true || Auth::user()->isAdmin(Auth::user()->userrole)==true)
 
@@ -25,6 +25,11 @@
                         <br>
                         Go here to view the <a href="{{ route('classroom.index') }}" class="btn">Classrooms</a>.
                     </p>
+                    <p>You are logged in!</p>
+                    <p>Go here to view the <a href="{{ route('challenges.index') }}">Challenges</a>.</p>
+                    @if (Auth::user()->userrole == 'admin')
+                    <p>Go here to access the <a href="{{ route('manageuser.index') }}">User Management</a>.</p>
+                    @endif
                 </div>
             </div>
         </div>
