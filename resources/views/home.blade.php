@@ -13,18 +13,17 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    This is my userrole {{Auth::user()->userrole}}
-
                         @if (Auth::user()->isTeacher(Auth::user()->userrole)==true || Auth::user()->isAdmin(Auth::user()->userrole)==true)
 
                             <a href="{{route('classroom.create')}} " class="btn btn-success" >Create classroom</a>
-
                         @endif
                     {{Auth::user()->username}} is logged in!
                     <p>
                         You are logged in!
                         <br>
                         Go here to view the <a href="{{ route('challenges.index') }}" class="btn">Challenges</a>.
+                        <br>
+                        Go here to view the <a href="{{ route('classroom.index') }}" class="btn">Classrooms</a>.
                     </p>
                 </div>
             </div>

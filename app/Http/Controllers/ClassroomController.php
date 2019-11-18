@@ -6,6 +6,8 @@ use App\Classroom;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
+use Mockery\Exception;
+use function Sodium\add;
 
 class ClassroomController extends Controller
 {
@@ -17,6 +19,13 @@ class ClassroomController extends Controller
     public function index()
     {
         //
+        try {
+            $classrooms = Classroom::all();
+        }
+        catch (Exception $ex){
+            return redirect('classroom.index')->withErrors("No db");
+        }
+        return view('classroom.index')->with('classrooms',$classrooms);
     }
 
     /**
@@ -37,26 +46,34 @@ class ClassroomController extends Controller
      */
     public function store(Request $request)
     {
+        $students="";
         try {
             $classroom = new Classroom();
-
             $classroom->id = $request->id;
-
+            $user = Auth::user();
             $this->validate($request,[
                 'name' => 'required',
+                'add_Students'=>'required',
             ]);
-
             $classroom->classroom_name = $request->name;
-            $classroom->classroom_owner='Hans';
+            $classroom->classroom_owner=$user->getAuthIdentifier();
 
+            $addStudents = $request->input('add_Students');
+            $lenght=sizeOf($addStudents)-1;
+            foreach ($addStudents as $student){
+                if($lenght>0)
+                    $students=$students.$student.",";
+                else
+                    $students=$students.$student;
+                $lenght--;
+            }
+            $classroom->member = $students;
             $classroom->save();
-
-
             return redirect()->route('home');
         }
         catch (Exception $ex)
         {
-            return redirect()->route('challenges.create')->withErrors("Cannot create because of error: " . $ex. "!");
+            return redirect()->route('classroom.create')->withErrors("Cannot create because of error: " . $ex. "!");
         }
     }
 
@@ -77,6 +94,13 @@ class ClassroomController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function myClassrooms(){
+        foreach (Classroom::all() as $classroom){
+            if ($classroom->members.containsString(Auth::id())){
+                echo $classroom->name;
+            }
+        }
+    }
     public function edit($id)
     {
         //

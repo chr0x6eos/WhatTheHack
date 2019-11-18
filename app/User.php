@@ -38,7 +38,7 @@ class User extends Authenticatable
     ];
 
 
-    
+
     public function isTeacher($userrole){
         if($userrole=='teacher'){
             return true;
@@ -46,10 +46,18 @@ class User extends Authenticatable
         else
             return false;
     }
-    
-    
+
+
     public function isAdmin($userrole){
         if($userrole=='admin'){
+            return true;
+        }
+        else
+            return false;
+    }
+
+    public function isStudent($userrole){
+        if($userrole=='student'){
             return true;
         }
         else
