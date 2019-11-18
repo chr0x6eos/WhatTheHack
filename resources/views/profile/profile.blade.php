@@ -19,7 +19,7 @@
 
                         <div class="form-group row">
                             <label class="col-md-4 col-form-label text-md-right font-weight-bold">
-                                {{ __('Email:') }}
+                                {{ __('E-Mail:') }}
                             </label>
                             <label class="col-md-4 col-form-label text-md-center">{{ $user->email }}</label>
                         </div>
@@ -31,13 +31,20 @@
                             <label class="col-md-4 col-form-label text-md-center">{{ $user->userrole }}</label>
                         </div>
 
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label text-md-right font-weight-bold">
+                                {{ __('Points:') }}
+                            </label>
+                            <label class="col-md-4 col-form-label text-md-center">0</label>
+                        </div>
+
                         <div class="container">
                             <div class="row">
                                 <div class="col-sm text-md-center">
                                     <a href="{{ route('profile.showChangePWForm') }}" class="btn bg-light btn-outline-dark">Change Password</a>
                                 </div>
                                 <div class="col-sm text-md-center">
-                                    <a href="#" class="btn bg-light btn-outline-dark">Change Email</a>
+                                    <a href="{{ route('profile.showChangeEMForm') }}" class="btn bg-light btn-outline-dark">Change E-Mail</a>
                                 </div>
                                 <form method="POST" action="{{ route('profile.delete', $user->id) }}">
                                     @csrf

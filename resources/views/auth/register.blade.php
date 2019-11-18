@@ -65,6 +65,8 @@
                             </div>
                         </div>
 
+                        @php
+                        /*
                         <div class="form-group row">
                             <label for="userrole" class="col-md-4 col-form-label text-md-right">{{ __('Userrole') }}</label>
                             <div class="col-md-6">
@@ -75,7 +77,8 @@
                                 </select>
                             </div>
                         </div><br>
-
+                        */
+                        @endphp
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">

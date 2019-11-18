@@ -24,10 +24,12 @@ Route::get('/contact', function () {
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
-//user-profile routes
+//User-Profile Routes
 Route::get('/profile', 'ProfileController@show')->name('profile.show');
 Route::get('/profile/changePassword', 'ProfileController@showChangePWForm')->name('profile.showChangePWForm');
-Route::post('/password/change', 'ProfileController@changePW')->name('password.change');
+Route::post('/profile/password/change', 'ProfileController@changePW')->name('password.change');
+Route::get('/profile/changeEmail', 'ProfileController@showChangeEMForm')->name('profile.showChangeEMForm');
+Route::post('/profile/email/change', 'ProfileController@changeEM')->name('email.change');
 Route::delete('/profile/delete/{user}', 'ProfileController@deleteAccount')->name('profile.delete');
 
 
