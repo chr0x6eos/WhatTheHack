@@ -22,12 +22,19 @@ Route::get('/contact', function () {
 });
 
 Auth::routes();
-
-
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/challenges','ChallengeController@index')->name('challenges.index');
 Route::get('/classroom', 'ClassroomController@index')->name('classroom.index');
 
+// User Profile Routes
+Route::get('/profile', 'ProfileController@show')->name('profile.show');
+Route::get('/profile/changePassword', 'ProfileController@showChangePWForm')->name('profile.showChangePWForm');
+Route::post('/profile/password/change', 'ProfileController@changePW')->name('password.change');
+Route::get('/profile/changeEmail', 'ProfileController@showChangeEMForm')->name('profile.showChangeEMForm');
+Route::post('/profile/email/change', 'ProfileController@changeEM')->name('email.change');
+Route::delete('/profile/delete/{user}', 'ProfileController@deleteAccount')->name('profile.delete');
+
+// Challenge Routes
 Route::get('challenges/create', 'ChallengeController@create')->name('challenges.create');
 Route::post('challenges', 'ChallengeController@store')->name('challenges.store');
 Route::get('challenges/{challenge}','ChallengeController@show')->name('challenges.show');
@@ -40,5 +47,7 @@ Route::get('challenges/deactivate/{challenge}','ChallengeController@deactivate')
 // User Management Routes
 Route::get('/manage/users', 'ManageUserController@index')->name('manageuser.index');
 Route::patch('/manage/users/update/{user}', 'ManageUserController@update')->name('manageuser.update');
+
+// Classroom Management Routes
 Route::get('classroom/create', 'ClassroomController@create')->name('classroom.create');
 Route::post('classroom', 'ClassroomController@store')->name('classroom.store');

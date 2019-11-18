@@ -112,7 +112,7 @@
             <ul class="list-unstyled components">
 
                 <li>
-                    <a href="#">Demopage 1</a>
+                    <a href="{{ route('profile.show') }}">Profile</a>
                 </li>
                 <li>
                     <a href="#">Demopage 2</a>
@@ -150,5 +150,16 @@
         </div>
     </div>
  @yield('content')
+
+    @if($errors)
+        @foreach ($errors->all() as $error)
+            <div class="alert alert-danger">{{ $error }}</div>
+        @endforeach
+    @endif
+
+    @if (session()->has('success'))
+        <div class="alert alert-success">{{ session()->get('success') }}</div>
+    @endif
+
 </body>
 </html>
