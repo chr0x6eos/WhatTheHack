@@ -23,8 +23,10 @@ Route::get('/contact', function () {
 
 Auth::routes();
 
+
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/challenges','ChallengeController@index')->name('challenges.index');
+Route::get('/classroom', 'ClassroomController@index')->name('classroom.index');
 
 Route::get('challenges/create', 'ChallengeController@create')->name('challenges.create');
 Route::post('challenges', 'ChallengeController@store')->name('challenges.store');
@@ -38,3 +40,5 @@ Route::get('challenges/deactivate/{challenge}','ChallengeController@deactivate')
 // User Management Routes
 Route::get('/manage/users', 'ManageUserController@index')->name('manageuser.index');
 Route::patch('/manage/users/update/{user}', 'ManageUserController@update')->name('manageuser.update');
+Route::get('classroom/create', 'ClassroomController@create')->name('classroom.create');
+Route::post('classroom', 'ClassroomController@store')->name('classroom.store');
