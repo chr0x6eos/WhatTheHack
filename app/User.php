@@ -40,8 +40,19 @@ class User extends Authenticatable
 
 
 
-    public function isTeacher($userrole){
-        if($userrole=='teacher'){
+    public function isTeacher($userrole)
+    {
+        if ($userrole == 'teacher') {
+            return true;
+        }
+        return false;
+    }
+    
+    //Check if current user has inputted role
+    public function hasRole($role)
+    {
+        if($this->userrole == $role)
+        {
             return true;
         }
         else
@@ -63,5 +74,15 @@ class User extends Authenticatable
         }
         else
             return false;
+    }
+
+    //Check if current user is author of challenge
+    public function isAuthor($author)
+    {
+        if($this->username == $author)
+        {
+            return true;
+        }
+        return false;
     }
 }

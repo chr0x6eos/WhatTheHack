@@ -19,7 +19,8 @@ class UsersTableSeeder extends Seeder
                 'username' => 'Admin',
                 'email' => 'admin@whatthehack.htl',
                 'password' => Hash::make('admin'),
-                'userrole' => 'admin'
+                'userrole' => 'admin',
+                'active' => true
             ]
         );
         $admin->save();
@@ -30,7 +31,8 @@ class UsersTableSeeder extends Seeder
                 'username' => 'Student',
                 'email' => 'student@whatthehack.htl',
                 'password' => Hash::make('student'),
-                'userrole' => 'student'
+                'userrole' => 'student',
+                'active' => true
             ]
         );
         $student->save();
@@ -41,7 +43,8 @@ class UsersTableSeeder extends Seeder
                 'username' => 'Teacher',
                 'email' => 'teacher@whatthehack.htl',
                 'password' => Hash::make('teacher'),
-                'userrole' => 'teacher'
+                'userrole' => 'teacher',
+                'active' => true
             ]
         );
         $teacher->save();
