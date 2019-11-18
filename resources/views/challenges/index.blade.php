@@ -36,16 +36,4 @@
 <a href="{{ route('challenges.create') }}" class="btn btn-success">Add new challenge</a>
 @endif
     <br>
-@if(isset($errors) && sizeof($errors) != 0)
-    @if(sizeof($errors) > 1)
-        <h4>Errors occurred:</h4>
-    @else
-        <h4>Error occurred:</h4>
-    @endif
-    <p>
-    @foreach($errors->all() as $error)
-        <div>{{ $error }}</div>
-        @endforeach
-        </p>
-        @endif
 @endsection

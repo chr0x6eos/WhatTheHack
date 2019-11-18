@@ -21,7 +21,7 @@ class ChallengeController extends Controller
         }
         catch (Exception $ex)
         {
-            return redirect('challenges.index')->withErrors("No DB connection!");
+            return redirect('challenges.index')->withErrors("No DB connection could be established!");
         }
 
         return view('challenges.index')->with('challenges',$challenges);
@@ -54,22 +54,47 @@ class ChallengeController extends Controller
                 'name' => 'required',
                 'description' => 'required',
                 'difficulty' => 'required',
+                'active' => 'required'
             ]);
 
             $challenge->name = $request->name;
             $challenge->description = $request->description;
-            $challenge->difficulty = $request->difficulty;
+
+            //Check if difficulty is valid value
+            if($challenge->validDifficulty($request->difficulty))
+            {
+                $challenge->difficulty = $request->difficulty;
+            }
+            else
+            {
+                return redirect()->route('challenges.create')->withErrors('Invalid difficulty value!');
+            }
 
             //Only admin is allowed to change author
-            if(isset($request->author) && Auth::user()->hasRole("admin"))
+            if(isset($request->author))
             {
-                $challenge->author = $request->author;
+                if(Auth::user()->hasRole("admin"))
+                {
+                    $challenge->author = $request->author;
+                }
+                else
+                {
+                    return redirect()->route('challenges.create')->withErrors('You are not authorized to change the author!');
+                }
             }
             else //Otherwise author is the current user
             {
                 $challenge->author = Auth::user()->username;
             }
 
+            if($request->active == 0 || $request->active == 1)
+            {
+                $challenge->active = $request->active;
+            }
+            else
+            {
+                return redirect()->route('challenges.create')->withErrors('Invalid status value selected!');
+            }
             $challenge->targetSolution = $request->targetSolution;
             $challenge->imageID = $request->imageID;
             $challenge->attachments = $request->attachments;
@@ -77,7 +102,7 @@ class ChallengeController extends Controller
             $challenge->save();
 
             //Redirect back to all challenges after creation of new challenge
-            return redirect()->route('challenges.index')->with('challenges', Challenge::all());
+            return redirect()->route('challenges.index')->with('success','Challenge created!','challenges', Challenge::all());
         }
         catch (Exception $ex)
         {
@@ -115,7 +140,7 @@ class ChallengeController extends Controller
         }
         else
         {
-            return view('challenges.index')->withErrors('Unauthorized to edit!');
+            return view('challenges.index')->withErrors('You are not authorized to edit!');
         }
     }
 
@@ -140,24 +165,51 @@ class ChallengeController extends Controller
 
             $challenge->name = $request->name;
             $challenge->description = $request->description;
-            $challenge->difficulty = $request->difficulty;
+
+            //Check if difficulty is valid value
+            if($challenge->validDifficulty($request->difficulty))
+            {
+                $challenge->difficulty = $request->difficulty;
+            }
+            else
+            {
+                return redirect()->route('challenges.create')->withErrors('Invalid difficulty value!');
+            }
 
             //Only admin is allowed to change author
-            if(isset($request->author) && Auth::user()->hasRole("admin"))
+            if(isset($request->author))
             {
-                $challenge->author = $request->author;
+                if(Auth::user()->hasRole("admin"))
+                {
+                    $challenge->author = $request->author;
+                }
+                else
+                {
+                    return redirect()->route('challenges.create')->withErrors('You are not authorized to change the author!');
+                }
             }
             else //Otherwise author is the current user
             {
                 $challenge->author = Auth::user()->username;
             }
-            $challenge->active = $request->active;
+
+            //Check if active value is a bool
+            if($request->active == 0 || $request->active == 1)
+            {
+                $challenge->active = $request->active;
+            }
+            else
+            {
+                return redirect()->route('challenges.create')->withErrors('Invalid status value selected!');
+            }
+
             $challenge->imageID = $request->imageID;
+            $challenge->targetSolution = $request->targetSolution;
             $challenge->attachments = $request->attachments;
 
             $challenge->save();
 
-            return redirect()->route('challenges.index');
+            return redirect()->route('challenges.index')->with('success','Challenge successfully edited!');
         }
         catch (Exception $ex)
         {
@@ -173,10 +225,18 @@ class ChallengeController extends Controller
      */
     public function destroy($id)
     {
-        //TODO: Only allow deletion of the user is either admin or author of the challenge
         $challenge = Challenge::find($id);
-        $challenge->delete();
 
-        return redirect()->route('challenges.index');
+        //Only allow deletion of the challenge if user is admin // or author of the challenge
+        if(Auth::user()->hasRole("admin")) //|| Auth::user()->isAuthor($challenge->author))
+        {
+            $challenge->delete();
+        }
+        else
+        {
+            return redirect()->route('challenges.index')->withErrors('You are not authorized to delete this challenge!');
+        }
+
+        return redirect()->route('challenges.index')->with('success','Successfully deleted challenge!');
     }
 }

@@ -30,8 +30,8 @@
     <p>
         <strong>Status:</strong>
         <select name="active">
-            <option value="true" selected="selected">Enabled</option>
-            <option value="false">Disabled</option>
+            <option value="1" selected="selected">Enabled</option>
+            <option value="0">Disabled</option>
         </select>
     </p>
     <p>
@@ -53,16 +53,5 @@
         <a href="{{ route('challenges.index') }} " class="btn btn-danger">Cancel</a>
     </p>
 </form>
-@if(isset($errors) && sizeof($errors) != 0)
-    @if(sizeof($errors) > 1)
-        <h4>Errors occurred:</h4>
-    @else
-        <h4>Error occurred:</h4>
-    @endif
-    <p>
-    @foreach($errors->all() as $error)
-        <div>{{ $error }}</div>
-        @endforeach
-        </p>
-        @endif
+<br>
 @endsection
