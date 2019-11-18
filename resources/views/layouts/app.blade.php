@@ -23,9 +23,11 @@
     <!-- Bootstrap core JavaScript -->
     <script type="text/javascript" src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
     <!-- MDB core JavaScript -->
-    <script type="text/javascript" src="{{ URL::asset('js/mdb.min.js') }}"></script>    
+    <script type="text/javascript" src="{{ URL::asset('js/mdb.min.js') }}"></script>
+    <!-- Template JavaScript-->
+    <script type="text/javascript" src ="{{ URL::asset('js/freelancer.min.js') }}"></script>
     <!-- DataTables addon -->
-    <script type="text/javascript" src="{{ URL::asset('js/addons/datatables.min.js') }}"></script>    
+    <script type="text/javascript" src="{{ URL::asset('js/addons/datatables.min.js') }}"></script>
     <!-- <script type="text/javascript" src="{{ URL::asset('js/addons/datatables-select.min.js') }}"></script> -->
 
     <!-- Fonts -->
@@ -34,12 +36,15 @@
 
     <!-- Styles
     <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ URL::asset('resources/css/stylesheet.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css') }}">
+    <!-- Template CSS file -->
+    <link rel="stylesheet" href="{{ URL::asset('css/freelancer.min.css') }}">
     <link rel="stylesheet" href="{{ URL::asset('css/addons/datatables.min.css') }}">
+    <!-- CSS file for customization -->
+    <link rel="stylesheet" href="{{ URL::asset('css/custom-styles.css') }}">
     <!-- <link rel="stylesheet" href="{{ URL::asset('css/addons/datatables-select.min.css') }}"> -->
-    
-    
+
+
 </head>
 <body>
 

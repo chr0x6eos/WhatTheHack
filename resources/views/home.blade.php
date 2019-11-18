@@ -13,8 +13,21 @@
                         {{ session('status') }}
                     </div>
                     @endif
-                    <p>You are logged in!</p>
-                    <p>Go here to view the <a href="{{ route('challenges.index') }}">Challenges</a>.</p>
+
+                    {{Auth::user()->username}} is logged in!
+                    <p>
+                        You are logged in!
+                        <br>
+                        Go here to view the <a href="{{ route('challenges.index') }}">Challenges</a>.
+                        <br>
+                        @if (Auth::user()->isTeacher(Auth::user()->userrole)==true || Auth::user()->isAdmin(Auth::user()->userrole)==true)
+
+                            <a href="{{route('classroom.create')}} " class="btn btn-success" >Create classroom</a>
+                        @endif
+                        <br>
+                        Go here to view the <a href="{{ route('classroom.index') }}">Classrooms</a>.
+                    </p>
+
                     @if (Auth::user()->userrole == 'admin')
                     <p>Go here to access the <a href="{{ route('manageuser.index') }}">User Management</a>.</p>
                     @endif
