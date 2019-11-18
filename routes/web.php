@@ -23,6 +23,7 @@ Route::get('/contact', function () {
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/challenges','ChallengeController@index')->name('challenges.index');
 
 //User-Profile Routes
 Route::get('/profile', 'ProfileController@show')->name('profile.show');
@@ -33,3 +34,16 @@ Route::post('/profile/email/change', 'ProfileController@changeEM')->name('email.
 Route::delete('/profile/delete/{user}', 'ProfileController@deleteAccount')->name('profile.delete');
 
 
+
+Route::get('challenges/create', 'ChallengeController@create')->name('challenges.create');
+Route::post('challenges', 'ChallengeController@store')->name('challenges.store');
+Route::get('challenges/{challenge}','ChallengeController@show')->name('challenges.show');
+
+Route::get('challenges/edit/{challenge}','ChallengeController@edit')->name('challenges.edit');
+Route::patch('challenges/update/{challenge}','ChallengeController@update')->name('challenges.update');
+Route::delete('challenges/delete/{challenge}','ChallengeController@destroy')->name('challenges.destroy');
+Route::get('challenges/deactivate/{challenge}','ChallengeController@deactivate')->name('challenges.deactivate');
+
+// User Management Routes
+Route::get('/manage/users', 'ManageUserController@index')->name('manageuser.index');
+Route::patch('/manage/users/update/{user}', 'ManageUserController@update')->name('manageuser.update');
