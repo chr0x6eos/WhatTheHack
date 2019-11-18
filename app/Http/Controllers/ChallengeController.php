@@ -230,7 +230,13 @@ class ChallengeController extends Controller
         //Only allow deletion of the challenge if user is admin // or author of the challenge
         if(Auth::user()->hasRole("admin")) //|| Auth::user()->isAuthor($challenge->author))
         {
-            $challenge->delete();
+            if($challenge->active == false) {
+                $challenge->delete();
+            }
+            else
+            {
+                return redirect()->route('challenges.index')->withErrors('An active challenge cannot be deleted!');
+            }
         }
         else
         {
