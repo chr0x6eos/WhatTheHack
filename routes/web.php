@@ -26,6 +26,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/challenges','ChallengeController@index')->name('challenges.index');
+Route::get('/classroom', 'ClassroomController@index')->name('classroom.index');
 
 Route::get('challenges/create', 'ChallengeController@create')->name('challenges.create');
 Route::post('challenges', 'ChallengeController@store')->name('challenges.store');
