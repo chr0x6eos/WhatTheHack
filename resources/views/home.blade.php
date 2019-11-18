@@ -13,20 +13,21 @@
                         {{ session('status') }}
                     </div>
                     @endif
-                        @if (Auth::user()->isTeacher(Auth::user()->userrole)==true || Auth::user()->isAdmin(Auth::user()->userrole)==true)
 
-                            <a href="{{route('classroom.create')}} " class="btn btn-success" >Create classroom</a>
-                        @endif
                     {{Auth::user()->username}} is logged in!
                     <p>
                         You are logged in!
                         <br>
-                        Go here to view the <a href="{{ route('challenges.index') }}" class="btn">Challenges</a>.
+                        Go here to view the <a href="{{ route('challenges.index') }}">Challenges</a>.
                         <br>
-                        Go here to view the <a href="{{ route('classroom.index') }}" class="btn">Classrooms</a>.
+                        @if (Auth::user()->isTeacher(Auth::user()->userrole)==true || Auth::user()->isAdmin(Auth::user()->userrole)==true)
+
+                            <a href="{{route('classroom.create')}} " class="btn btn-success" >Create classroom</a>
+                        @endif
+                        <br>
+                        Go here to view the <a href="{{ route('classroom.index') }}">Classrooms</a>.
                     </p>
-                    <p>You are logged in!</p>
-                    <p>Go here to view the <a href="{{ route('challenges.index') }}">Challenges</a>.</p>
+
                     @if (Auth::user()->userrole == 'admin')
                     <p>Go here to access the <a href="{{ route('manageuser.index') }}">User Management</a>.</p>
                     @endif
