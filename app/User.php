@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -37,14 +38,50 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function isAdmin($userrole)
+
+
+    public function isTeacher($userrole)
     {
-        if($userrole != null)
+        if ($userrole == 'teacher') {
+            return true;
+        }
+        return false;
+    }
+    
+    //Check if current user has inputted role
+    public function hasRole($role)
+    {
+        if($this->userrole == $role)
         {
-            if ($userrole == 'admin')
-            {
-                return true;
-            }
+            return true;
+        }
+        else
+            return false;
+    }
+
+
+    public function isAdmin($userrole){
+        if($userrole=='admin'){
+            return true;
+        }
+        else
+            return false;
+    }
+
+    public function isStudent($userrole){
+        if($userrole=='student'){
+            return true;
+        }
+        else
+            return false;
+    }
+
+    //Check if current user is author of challenge
+    public function isAuthor($author)
+    {
+        if($this->username == $author)
+        {
+            return true;
         }
         return false;
     }

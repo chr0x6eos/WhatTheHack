@@ -17,12 +17,14 @@ class CreateChallengesTable extends Migration
         {
             $table->increments('id');
 
-            $table->string('name',255);
-            $table->text('description');
-            $table->string('difficulty',255);
-            $table->string('author',255);
-            $table->string('imageID',32)->nullable();
-            $table->string('attachments',255)->nullable();
+            $table->string('name',255); //Name of the challenge
+            $table->text('description'); //Challenge description
+            $table->string('difficulty',255); //Difficulty of the challenge
+            $table->string('author',255); //Author of the challenge
+            $table->boolean('active')->default(true); //If the challenge is active
+            $table->text('targetSolution')->nullable(); //Feasible solution for the challenge
+            $table->string('imageID',32)->nullable(); //Docker-Image ID
+            $table->string('attachments',255)->nullable(); //Attachments
 
             $table->timestamps();
         });

@@ -6,7 +6,7 @@
         <div class="card-header">{{ __('Information') }}</div>
 
         <div class="card-body">
-            This is a Demotext!
+            <p>Go to <a href="{{ route('home') }}">Home</a></p>
         </div>
     </div>
     <div class="row mt-5">
