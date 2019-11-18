@@ -34,3 +34,7 @@ Route::get('challenges/edit/{challenge}','ChallengeController@edit')->name('chal
 Route::patch('challenges/update/{challenge}','ChallengeController@update')->name('challenges.update');
 Route::delete('challenges/delete/{challenge}','ChallengeController@destroy')->name('challenges.destroy');
 Route::get('challenges/deactivate/{challenge}','ChallengeController@deactivate')->name('challenges.deactivate');
+
+// User Management Routes
+Route::get('/manage/users', 'ManageUserController@index')->name('manageuser.index');
+Route::patch('/manage/users/update/{user}', 'ManageUserController@update')->name('manageuser.update');
