@@ -20,6 +20,7 @@ class CreateChallengesTable extends Migration
             $table->string('name',255); //Name of the challenge
             $table->text('description'); //Challenge description
             $table->string('difficulty',255); //Difficulty of the challenge
+            $table->string('category',255); //Category of the challenge
             $table->string('author',255); //Author of the challenge
             $table->boolean('active')->default(true); //If the challenge is active
             $table->text('targetSolution')->nullable(); //Feasible solution for the challenge

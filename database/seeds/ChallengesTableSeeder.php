@@ -24,16 +24,19 @@ class ChallengesTableSeeder extends Seeder
             {
                 $challenge->difficulty = "easy";
                 $challenge->targetSolution = $faker->text;
+                $challenge->category = "misc";
             }
             else if($i % 3 == 0)
             {
                 $challenge->difficulty = "medium";
+                $challenge->category = "web";
             }
             else
             {
                 $challenge->difficulty = "hard";
                 $challenge->targetSolution = $faker->text;
                 $challenge->active=false;
+                $challenge->category = "pwn";
             }
             $challenge->author = $faker->name;
             $challenge->imageID = $faker->bankAccountNumber;
