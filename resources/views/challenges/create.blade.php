@@ -19,7 +19,7 @@
     <p>
         <strong>Difficulty:</strong>
         <select name="difficulty">
-            <option value="tatü" selected="selected">TaTü</option>
+            <option value="tatu" selected="selected">TaTü</option>
             <option value="easy">Easy</option>
             <option value="medium">Medium</option>
             <option value="hard">Hard</option>
