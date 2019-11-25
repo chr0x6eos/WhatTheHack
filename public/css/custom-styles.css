@@ -72,16 +72,10 @@ a, a:hover, a:focus {
 #dismiss {
     width: 35px;
     height: 35px;
-    line-height: 35px;
-    text-align: center;
-    background: #7386D5;
     position: absolute;
+    /* top right corner of the sidebar */
     top: 10px;
     right: 10px;
-    cursor: pointer;
-    -webkit-transition: all 0.3s;
-    -o-transition: all 0.3s;
-    transition: all 0.3s;
 }
 
 #sidebar {
@@ -95,6 +89,7 @@ a, a:hover, a:focus {
     top: 0;
     left: 0;
     height: 100vh;
+    z-index: 9999;
 }
 
 #sidebar.active {
