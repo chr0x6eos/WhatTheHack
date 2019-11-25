@@ -69,14 +69,6 @@ a, a:hover, a:focus {
     opacity: 1;
 }
 
-#dismiss {
-    width: 35px;
-    height: 35px;
-    position: absolute;
-    /* top right corner of the sidebar */
-    top: 10px;
-    right: 10px;
-}
 
 #sidebar {
     min-width: 250px;

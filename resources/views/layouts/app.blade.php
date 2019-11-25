@@ -75,7 +75,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <button type="button" id="sidebarCollapse" class="btn btn-info">
+                <button type="button" id="dismiss" class="btn btn-info">
                     <i class="fas fa-align-left"></i>
                     <span class="navbar-toggler-icon"></span>
                 </button>
