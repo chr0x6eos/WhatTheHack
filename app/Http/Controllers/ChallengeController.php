@@ -53,12 +53,15 @@ class ChallengeController extends Controller
             $this->validate($request,[
                 'name' => 'required',
                 'description' => 'required',
+                'flag' => 'required',
                 'difficulty' => 'required',
+                'category' => 'required',
                 'active' => 'required'
             ]);
 
             $challenge->name = $request->name;
             $challenge->description = $request->description;
+            $challenge->flag = $request->flag;
 
             //Check if difficulty is valid value
             if($challenge->validDifficulty($request->difficulty))
@@ -68,6 +71,16 @@ class ChallengeController extends Controller
             else
             {
                 return redirect()->route('challenges.create')->withErrors('Invalid difficulty value!');
+            }
+
+            //Check if category is valid value
+            if($challenge->validCategory($request->category))
+            {
+                $challenge->category = $request->category;
+            }
+            else
+            {
+                return redirect()->route('challenges.create')->withErrors('Invalid category value!');
             }
 
             //Only admin is allowed to change author
@@ -95,8 +108,10 @@ class ChallengeController extends Controller
             {
                 return redirect()->route('challenges.create')->withErrors('Invalid status value selected!');
             }
-            $challenge->targetSolution = $request->targetSolution;
+
             $challenge->imageID = $request->imageID;
+            $challenge->targetSolution = $request->targetSolution;
+            $challenge->hint = $request->hint;
             $challenge->attachments = $request->attachments;
 
             $challenge->save();
@@ -160,11 +175,14 @@ class ChallengeController extends Controller
             $this->validate($request,[
                 'name' => 'required',
                 'description' => 'required',
+                'flag' => 'required',
                 'difficulty' => 'required',
+                'category' => 'required',
             ]);
 
             $challenge->name = $request->name;
             $challenge->description = $request->description;
+            $challenge->flag = $request->flag;
 
             //Check if difficulty is valid value
             if($challenge->validDifficulty($request->difficulty))
@@ -173,7 +191,16 @@ class ChallengeController extends Controller
             }
             else
             {
-                return redirect()->route('challenges.create')->withErrors('Invalid difficulty value!');
+                return redirect()->route('challenges.edit',$challenge)->withErrors('Invalid difficulty value!');
+            }
+
+            if($challenge->validCategory($request->category))
+            {
+                $challenge->category = $request->category;
+            }
+            else
+            {
+                return redirect()->route('challenges.edit',$challenge)->withErrors('Invalid category value!');
             }
 
             //Only admin is allowed to change author
@@ -185,7 +212,7 @@ class ChallengeController extends Controller
                 }
                 else
                 {
-                    return redirect()->route('challenges.create')->withErrors('You are not authorized to change the author!');
+                    return redirect()->route('challenges.edit',$challenge)->withErrors('You are not authorized to change the author!');
                 }
             }
             else //Otherwise author is the current user
@@ -200,11 +227,12 @@ class ChallengeController extends Controller
             }
             else
             {
-                return redirect()->route('challenges.create')->withErrors('Invalid status value selected!');
+                return redirect()->route('challenges.edit',$challenge)->withErrors('Invalid status value selected!');
             }
 
             $challenge->imageID = $request->imageID;
             $challenge->targetSolution = $request->targetSolution;
+            $challenge->hint = $request->hint;
             $challenge->attachments = $request->attachments;
 
             $challenge->save();
@@ -213,7 +241,7 @@ class ChallengeController extends Controller
         }
         catch (Exception $ex)
         {
-            return redirect()->route('challenges.edit')->withErrors("Cannot edit because of error: " . $ex. "!");
+            return redirect()->route('challenges.edit',$challenge)->withErrors("Cannot edit because of error: " . $ex. "!");
         }
     }
 

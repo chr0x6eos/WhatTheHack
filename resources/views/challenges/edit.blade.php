@@ -14,11 +14,28 @@
         <textarea form="challengeform" name="description">{{ $challenge->description }}</textarea>
     </p>
     <p>
+        <strong>Flag:</strong>
+        <input type="text" name="flag" value="{{ $challenge->flag }}">
+    </p>
+    <p>
         <strong>Difficulty:</strong>
         <select name="difficulty">
+            <option value="tatu" @if($challenge->difficulty=="tatu") selected="selected" @endif>TaTü</option>
             <option value="easy" @if($challenge->difficulty=="easy") selected="selected" @endif>Easy</option>
             <option value="medium" @if($challenge->difficulty=="medium") selected="selected" @endif>Medium</option>
             <option value="hard" @if($challenge->difficulty=="hard") selected="selected" @endif>Hard</option>
+            <option value="insane" @if($challenge->difficulty=="insane") selected="selected" @endif>Insane</option>
+        </select>
+    </p>
+    <p>
+        <strong>Category:</strong>
+        <select name="category">
+            <option value="misc" @if($challenge->category=="misc")selected="selected"@endif>misc</option>
+            <option value="web" @if($challenge->category=="web")selected="selected"@endif>web</option>
+            <option value="forensic" @if($challenge->category=="forensic")selected="selected"@endif>forensic</option>
+            <option value="reversing" @if($challenge->category=="reversing")selected="selected"@endif>reversing</option>
+            <option value="crypto" @if($challenge->category=="crypto")selected="selected"@endif>crypto</option>
+            <option value="pwn" @if($challenge->category=="pwn")selected="selected"@endif>pwn</option>
         </select>
     </p>
     <p>
@@ -32,6 +49,11 @@
         <strong>Feasible solution (optional)</strong>
         <br>
         <textarea form="challengeform" name="targetSolution">{{ $challenge->targetSolution }}</textarea>
+    </p>
+    <p>
+        <strong>Hint:</strong>
+        <br>
+        <textarea form="challengeform" name="hint">{{ $challenge->hint }}</textarea>
     </p>
     <p>
         <strong>Docker Image ID (optional):</strong>
