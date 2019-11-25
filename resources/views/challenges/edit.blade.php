@@ -14,11 +14,17 @@
         <textarea form="challengeform" name="description">{{ $challenge->description }}</textarea>
     </p>
     <p>
+        <strong>Flag:</strong>
+        <input type="text" name="flag" value="{{ $challenge->flag }}">
+    </p>
+    <p>
         <strong>Difficulty:</strong>
         <select name="difficulty">
+            <option value="tatü" @if($challenge->difficulty=="tatu") selected="selected" @endif>TaTü</option>
             <option value="easy" @if($challenge->difficulty=="easy") selected="selected" @endif>Easy</option>
             <option value="medium" @if($challenge->difficulty=="medium") selected="selected" @endif>Medium</option>
             <option value="hard" @if($challenge->difficulty=="hard") selected="selected" @endif>Hard</option>
+            <option value="insane" @if($challenge->difficulty=="insane") selected="selected" @endif>Insane</option>
         </select>
     </p>
     <p>

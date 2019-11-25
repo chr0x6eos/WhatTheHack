@@ -13,11 +13,17 @@
         <textarea form="challengeform" name="description"></textarea>
     </p>
     <p>
+        <strong>Flag:</strong>
+        <input type="text" name="flag">
+    </p>
+    <p>
         <strong>Difficulty:</strong>
         <select name="difficulty">
-            <option value="easy" selected="selected">Easy</option>
+            <option value="tatü" selected="selected">TaTü</option>
+            <option value="easy">Easy</option>
             <option value="medium">Medium</option>
             <option value="hard">Hard</option>
+            <option value="insane">Insane</option>
         </select>
     </p>
     <p>

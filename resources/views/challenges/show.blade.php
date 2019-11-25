@@ -15,6 +15,12 @@
         <br>
         {{ $challenge->description }}
     </p>
+    @if(Auth::user()->hasRole("admin") || Auth::user()->isAuthor($challenge->author))
+    <p>
+        <strong>Flag:</strong>
+        {{ $challenge->flag }}
+    </p>
+    @endif
     <p>
         <strong>Difficulty:</strong>
         {{ $challenge->difficulty }}
@@ -35,12 +41,15 @@
             Disabled
         @endif
     </p>
-    @if($challenge->targetSolution)
-    <p>
-        <strong>Feasible solution:</strong>
-        <br>
-        {{ $challenge->targetSolution }}
-    </p>
+
+    @if(Auth::user()->hasRole("admin") || Auth::user()->isAuthor($challenge->author))
+        @if($challenge->targetSolution)
+        <p>
+            <strong>Feasible solution:</strong>
+            <br>
+            {{ $challenge->targetSolution }}
+        </p>
+        @endif
     @endif
     @if($challenge->hint)
     <p>
@@ -65,7 +74,6 @@
 
     @if(Auth::user()->hasRole("admin") || Auth::user()->isAuthor($challenge->author))
         <a href="{{ route('challenges.edit', $challenge->id) }}" class="btn btn-info">Edit</a>
-
         @if(!$challenge->active)
         <form method="POST" action="{{ route('challenges.destroy',$challenge->id) }}">
         @csrf

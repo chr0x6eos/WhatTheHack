@@ -40,6 +40,8 @@ class ChallengesTableSeeder extends Seeder
                 $challenge->hint = "You have to haxx0r the binary.";
                 $challenge->category = "pwn";
             }
+
+            $challenge->flag = "WTH{" . $faker->bankAccountNumber . "}";
             $challenge->author = $faker->name;
             $challenge->imageID = $faker->bankAccountNumber;
             $challenge->attachments = "/var/data/" . $faker->word . '.' . $faker->fileExtension;

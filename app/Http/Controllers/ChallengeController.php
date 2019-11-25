@@ -53,6 +53,7 @@ class ChallengeController extends Controller
             $this->validate($request,[
                 'name' => 'required',
                 'description' => 'required',
+                'flag' => 'required',
                 'difficulty' => 'required',
                 'category' => 'required',
                 'active' => 'required'
@@ -60,6 +61,7 @@ class ChallengeController extends Controller
 
             $challenge->name = $request->name;
             $challenge->description = $request->description;
+            $challenge->flag = $request->flag;
 
             //Check if difficulty is valid value
             if($challenge->validDifficulty($request->difficulty))
@@ -173,12 +175,14 @@ class ChallengeController extends Controller
             $this->validate($request,[
                 'name' => 'required',
                 'description' => 'required',
+                'flag' => 'required',
                 'difficulty' => 'required',
-                'category' => 'required'
+                'category' => 'required',
             ]);
 
             $challenge->name = $request->name;
             $challenge->description = $request->description;
+            $challenge->flag = $request->flag;
 
             //Check if difficulty is valid value
             if($challenge->validDifficulty($request->difficulty))
