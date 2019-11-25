@@ -10,7 +10,7 @@ class Challenge extends Model
     //Check if inputted difficulty is valid
     public function validDifficulty($difficulty)
     {
-        $validDiffs = ['easy','medium','hard'];
+        $validDiffs = ['tatu','easy','medium','hard','insane'];
         if(in_array($difficulty,$validDiffs))
         {
             return true;

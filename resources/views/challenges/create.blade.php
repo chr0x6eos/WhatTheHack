@@ -13,11 +13,17 @@
         <textarea form="challengeform" name="description"></textarea>
     </p>
     <p>
+        <strong>Flag:</strong>
+        <input type="text" name="flag">
+    </p>
+    <p>
         <strong>Difficulty:</strong>
         <select name="difficulty">
-            <option value="easy" selected="selected">Easy</option>
+            <option value="tatu" selected="selected">TaTü</option>
+            <option value="easy">Easy</option>
             <option value="medium">Medium</option>
             <option value="hard">Hard</option>
+            <option value="insane">Insane</option>
         </select>
     </p>
     <p>
@@ -49,6 +55,11 @@
         <strong>Feasible solution (optional):</strong>
         <br>
         <textarea form="challengeform" name="targetSolution"></textarea>
+    </p>
+    <p>
+        <strong>Hint:</strong>
+        <br>
+        <textarea form="challengeform" name="hint"></textarea>
     </p>
     <p>
         <strong>Docker Image ID (optional):</strong>
