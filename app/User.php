@@ -7,7 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
 
@@ -47,7 +47,7 @@ class User extends Authenticatable
         }
         return false;
     }
-    
+
     //Check if current user has inputted role
     public function hasRole($role)
     {

@@ -21,7 +21,7 @@ Route::get('/contact', function () {
     return view('subpages/contact');
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/challenges','ChallengeController@index')->name('challenges.index');
 Route::get('/classroom', 'ClassroomController@index')->name('classroom.index');
