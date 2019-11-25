@@ -22,6 +22,17 @@
         </select>
     </p>
     <p>
+        <strong>Category:</strong>
+        <select name="category">
+            <option value="misc" @if($challenge->category=="misc")selected="selected"@endif>misc</option>
+            <option value="web" @if($challenge->category=="web")selected="selected"@endif>web</option>
+            <option value="forensic" @if($challenge->category=="forensic")selected="selected"@endif>forensic</option>
+            <option value="reversing" @if($challenge->category=="reversing")selected="selected"@endif>reversing</option>
+            <option value="crypto" @if($challenge->category=="crypto")selected="selected"@endif>crypto</option>
+            <option value="pwn" @if($challenge->category=="pwn")selected="selected"@endif>pwn</option>
+        </select>
+    </p>
+    <p>
         <strong>Author:</strong>
         {{-- Only allow admins to edit authors --}}
         @if(Auth::user()->hasRole("admin"))<input type="text" name="author" value="{{ $challenge->author }}">

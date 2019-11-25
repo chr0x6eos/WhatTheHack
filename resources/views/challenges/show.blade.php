@@ -20,6 +20,10 @@
         {{ $challenge->difficulty }}
     </p>
     <p>
+        <strong>Category:</strong>
+        {{ $challenge->category }}
+    </p>
+    <p>
         <strong>Author:</strong>
         {{ $challenge->author }}
     </p>

@@ -21,6 +21,17 @@
         </select>
     </p>
     <p>
+        <strong>Category:</strong>
+        <select name="category">
+            <option value="misc" selected="selected">misc</option>
+            <option value="web">web</option>
+            <option value="forensic">forensic</option>
+            <option value="reversing">reversing</option>
+            <option value="crypto">crypto</option>
+            <option value="pwn">pwn</option>
+        </select>
+    </p>
+    <p>
         <strong>Author:</strong>
         @if(Auth::user()->hasRole("admin"))<input type="text" name="author" value="{{ Auth::user()->username }}">
         @else
