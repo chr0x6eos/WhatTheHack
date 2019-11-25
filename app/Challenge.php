@@ -17,4 +17,6 @@ class Challenge extends Model
         }
         return false;
     }
+
+
 }

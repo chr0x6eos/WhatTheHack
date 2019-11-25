@@ -103,7 +103,15 @@ class ClassroomController extends Controller
     }
     public function edit($id)
     {
-        //
+        $classroom = Classroom::find($id);
+
+        if ($classroom != null) {
+            return view('classroom.edit')->with('classroom', $classroom);
+        }
+        else {
+            return redirect()->route('classroom.index')
+                ->withErrors('Classroom with id=' . $id . ' not found!');
+        }
     }
 
     /**

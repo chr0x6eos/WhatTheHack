@@ -51,3 +51,4 @@ Route::patch('/manage/users/update/{user}', 'ManageUserController@update')->name
 // Classroom Management Routes
 Route::get('classroom/create', 'ClassroomController@create')->name('classroom.create');
 Route::post('classroom', 'ClassroomController@store')->name('classroom.store');
+Route::get('classroom/edit/{classroom}','ClassroomController@edit')->name('classroom.edit');
