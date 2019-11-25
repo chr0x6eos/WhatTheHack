@@ -51,6 +51,11 @@
         <textarea form="challengeform" name="targetSolution"></textarea>
     </p>
     <p>
+        <strong>Hint:</strong>
+        <br>
+        <textarea form="challengeform" name="hint"></textarea>
+    </p>
+    <p>
         <strong>Docker Image ID (optional):</strong>
         <input type="text" name="imageID">
     </p>

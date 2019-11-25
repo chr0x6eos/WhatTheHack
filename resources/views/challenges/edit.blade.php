@@ -45,6 +45,11 @@
         <textarea form="challengeform" name="targetSolution">{{ $challenge->targetSolution }}</textarea>
     </p>
     <p>
+        <strong>Hint:</strong>
+        <br>
+        <textarea form="challengeform" name="hint">{{ $challenge->hint }}</textarea>
+    </p>
+    <p>
         <strong>Docker Image ID (optional):</strong>
         <input type="text" name="imageID" value="{{ $challenge->imageID }}">
     </p>

@@ -106,8 +106,10 @@ class ChallengeController extends Controller
             {
                 return redirect()->route('challenges.create')->withErrors('Invalid status value selected!');
             }
-            $challenge->targetSolution = $request->targetSolution;
+
             $challenge->imageID = $request->imageID;
+            $challenge->targetSolution = $request->targetSolution;
+            $challenge->hint = $request->hint;
             $challenge->attachments = $request->attachments;
 
             $challenge->save();
@@ -226,6 +228,7 @@ class ChallengeController extends Controller
 
             $challenge->imageID = $request->imageID;
             $challenge->targetSolution = $request->targetSolution;
+            $challenge->hint = $request->hint;
             $challenge->attachments = $request->attachments;
 
             $challenge->save();

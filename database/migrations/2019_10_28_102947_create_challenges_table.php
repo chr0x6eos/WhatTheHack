@@ -24,6 +24,7 @@ class CreateChallengesTable extends Migration
             $table->string('author',255); //Author of the challenge
             $table->boolean('active')->default(true); //If the challenge is active
             $table->text('targetSolution')->nullable(); //Feasible solution for the challenge
+            $table->text('hint')->nullable(); //Hint for the challenge
             $table->string('imageID',32)->nullable(); //Docker-Image ID
             $table->string('attachments',255)->nullable(); //Attachments
 

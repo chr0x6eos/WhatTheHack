@@ -42,6 +42,13 @@
         {{ $challenge->targetSolution }}
     </p>
     @endif
+    @if($challenge->hint)
+    <p>
+        <strong>Hint:</strong>
+        <br>
+        {{ $challenge->hint }}
+    </p>
+    @endif
     @if($challenge->imageID)
     <p>
         <strong>Docker-Image-ID:</strong>
