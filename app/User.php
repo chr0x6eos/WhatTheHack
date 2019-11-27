@@ -92,4 +92,11 @@ class User extends Authenticatable
             ->belongsToMany('App\Challenges')
             ->withTimestamps();
     }
+
+    public function classrooms()
+    {
+        return $this
+            ->belongsToMany('App\Classroom')
+            ->withTimestamps();
+    }
 }

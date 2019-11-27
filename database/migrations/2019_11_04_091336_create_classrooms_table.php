@@ -18,8 +18,7 @@ class CreateClassroomsTable extends Migration
 
             $table->string('classroom_name');
             $table->string('classroom_owner');
-            $table->string('member');
-           // $table->string('members');
+
 
             $table->timestamps();
         });

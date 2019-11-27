@@ -9,7 +9,14 @@ class Classroom extends Model
     public function users()
     {
         return $this
-            ->belongsToMany('App\Users')
+            ->belongsToMany('App\User')
+            ->withTimestamps();
+    }
+
+    public function challenges()
+    {
+        return $this
+            ->belongsToMany('App\Challenge')
             ->withTimestamps();
     }
 }
