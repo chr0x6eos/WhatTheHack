@@ -14,12 +14,11 @@ class CreateClassroomsTable extends Migration
     public function up()
     {
         Schema::create('classrooms', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('classroom_name');
-            $table->string('classroom_owner');
-            $table->string('member');
-            $table->timestamps();
-        });
+        $table->bigIncrements('id');
+        $table->string('classroom_name');
+        $table->string('classroom_owner');
+        $table->timestamps();
+    });
     }
 
     /**

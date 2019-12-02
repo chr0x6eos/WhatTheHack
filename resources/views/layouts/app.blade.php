@@ -115,7 +115,7 @@
                     <a href="{{ route('profile.show') }}">Profile</a>
                 </li>
                 <li>
-                    <a href="#">Demopage 2</a>
+                    <a href=" {{ route('classroom.myclassrooms') }}">My classrooms</a>
                 </li>
                 <li>
                     <a href="#">Demopage 3</a>

@@ -3,11 +3,21 @@
 @section('content')
     <div class="container">
         <h1>You are in this classroom: {{$classroom->classroom_name}}</h1>
-        <h2>Add Challenges</h2>
         <div class="col-2">
-            <form method="post" >
+            <form method="post" action="{{ route('classroom.update', $classroom) }}">
                 @csrf
+                @method('patch')
+                <h3>Edit classroom information</h3>
+                <p>
+                    <strong>ID</strong>
+                    <input type="text" disabled="disabled" name="id" value="{{ $classroom->id }}"/>
+                </p>
+                <p>
+                    <strong>Name</strong>
+                    <input type="text" name="name" value="{{ $classroom->classroom_name }}"/>
+                </p>
 
+                <!-- <h3>Add challenges</h3>
                 <table border="1">
                     <thead>
                     <th>Challenge id</th>
@@ -29,7 +39,7 @@
                             </tr>
                     @endforeach
                     </tbody>
-                </table>
+                </table> -->
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul class="list-unstyled"   >
@@ -39,11 +49,15 @@
                         </ul>
                     </div>
                 @endif
+                <br>
+                <br>
                 <p>
                     <button type="submit"  class="btn btn-success">
-                        Add Challenges
+                        Submit
                     </button>
-                    <a href="{{ route('classroom.index') }}" class="btn btn-danger">
+                </p>
+                <p>
+                    <a href="{{ route('classroom.myclassrooms') }}" class="btn btn-danger">
                         Cancel
                     </a>
                 </p>

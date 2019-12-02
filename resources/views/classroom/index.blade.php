@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <h2>My classrooms</h2>
+    <h2>All classrooms</h2>
     <body>
 
         @if(sizeof($classrooms) > 0)
@@ -9,6 +9,9 @@
                 <th>Id</th>
                 <th>Name</th>
                 <th>Owner</th>
+                <th>Edit general information</th>
+                <th>Add/delete members</th>
+                <th>Add/delete challenges</th>
                 </thead>
                 <tbody>
                 @foreach($classrooms as $classroom)
@@ -19,6 +22,12 @@
                         <td>
                             <a href="{{ route('classroom.edit', $classroom->id) }}" class="btn bg-light btn-outline-dark">Edit</a>
                              </td>
+                        <td>
+                            <a href="{{ route('', $classroom->id) }}" class="btn bg-light btn-outline-dark">Edit</a>
+                        </td>
+                        <td>
+                            <a href="{{ route('', $classroom->id) }}" class="btn bg-light btn-outline-dark">Edit</a>
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>
