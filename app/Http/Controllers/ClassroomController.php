@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Mockery\Exception;
 use function Sodium\add;
+use Symfony\Component\Routing\Matcher\RedirectableUrlMatcher;
 
 class ClassroomController extends Controller
 {
@@ -88,6 +89,11 @@ class ClassroomController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function myClassrooms(){
+        $classrooms = Auth::user()->classrooms;
+        return view('classroom.myclassrooms')->with('classrooms', $classrooms);
+    }
+
     public function edit($id)
     {
         $classroom = Classroom::find($id);
@@ -101,6 +107,14 @@ class ClassroomController extends Controller
         }
     }
 
+    public function editMembers($id){
+
+    }
+
+    public function editChallenges($id){
+
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -110,8 +124,20 @@ class ClassroomController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $classroom = Classroom::find($id);
+        $classroom->classroom_name = $request->name;
+        $classroom->save();
+        return redirect()->route('classroom.myclassrooms');
     }
+
+    public function updateMembers(Request $request, $id){
+
+    }
+
+    public function updateChallenges(Request $request, $id){
+
+    }
+
 
     /**
      * Remove the specified resource from storage.

@@ -87,9 +87,8 @@ class ManageUserController extends Controller
             }
 
             $user->save();
-        }
 
-        if ($request->type == 'userrole_change') {
+        } elseif ($request->type == 'userrole_change') {
             if ($request->userrole == 'student' || $request->userrole == 'teacher' || $request->userrole == 'admin') {
                 $user->userrole = $request->userrole;
             } else {
@@ -98,10 +97,12 @@ class ManageUserController extends Controller
             }
             
             $user->save(); 
+        } else {
+            return redirect()->route('manageuser.index')
+                ->withErrors(['mu_c_invalid_update_request' => 'Invalid request. (MU_C_INVALID_UPDATE_REQUEST)']);
         }
 
-        return redirect()->route('manageuser.index')
-            ->withErrors(['mu_c_invalid_update_request' => 'Invalid request. (MU_C_INVALID_UPDATE_REQUEST)']);
+        return redirect()->route('manageuser.index');
     }
 
     /**
