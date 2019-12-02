@@ -71,7 +71,6 @@ class ClassroomController extends Controller
         }
     }
 
-
     /**
      * Display the specified resource.
      *
@@ -89,13 +88,6 @@ class ClassroomController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function myClassrooms(){
-        foreach (Classroom::all() as $classroom){
-            if ($classroom->members.containsString(Auth::id())){
-                echo $classroom->name;
-            }
-        }
-    }
     public function edit($id)
     {
         $classroom = Classroom::find($id);
@@ -130,5 +122,19 @@ class ClassroomController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function attach(Request $request, $id)
+    {
+        $classroom = Classroom::find($id);
+        $this->validate($request,[
+            'add_Challenges'=>'required',
+        ]);
+        $challenges=$request->input('add_Challenges');
+        foreach ($challenges as $c)
+        {
+            $classroom->challenges()->attach($c);
+        }
+
+        return view('classroom.edit', ['classroom' => $classroom]);
     }
 }

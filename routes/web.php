@@ -52,3 +52,7 @@ Route::patch('/manage/users/update/{user}', 'ManageUserController@update')->name
 Route::get('classroom/create', 'ClassroomController@create')->name('classroom.create');
 Route::post('classroom', 'ClassroomController@store')->name('classroom.store');
 Route::get('classroom/edit/{classroom}','ClassroomController@edit')->name('classroom.edit');
+
+//add and remove challenges from a classroom 
+Route::post('classroom/{classroom}/attach','ClassroomController@attach')->name('classroom.attach');
+Route::delete('teachers/{teacher}/detach/{subject}','TeacherController@detach')->name('teachers.detach');

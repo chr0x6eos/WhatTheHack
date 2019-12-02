@@ -5,7 +5,7 @@
         <h1>You are in this classroom: {{$classroom->classroom_name}}</h1>
         <h2>Add Challenges</h2>
         <div class="col-2">
-            <form method="post" >
+            <form method="post" action="{{ route('classroom.attach', $classroom->id)}}" >
                 @csrf
 
                 <table border="1">
@@ -24,7 +24,7 @@
                                     {{$c->name}}
                                 </td>
                                 <td>
-                                    <input type="checkbox" name="add_Challenges" value="{{$c->id}}">
+                                    <input type="checkbox" name="add_Challenges[]" value="{{$c->id}}">
                                 </td>
                             </tr>
                     @endforeach
@@ -43,6 +43,7 @@
                     <button type="submit"  class="btn btn-success">
                         Add Challenges
                     </button>
+
                     <a href="{{ route('classroom.index') }}" class="btn btn-danger">
                         Cancel
                     </a>
