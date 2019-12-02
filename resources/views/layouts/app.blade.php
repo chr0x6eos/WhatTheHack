@@ -83,12 +83,6 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <!--
-                <button type="button" id="dismiss" class="btn btn-info">
-                    <i class="fas fa-align-left"></i>
-                    <span class="navbar-toggler-icon"></span>
-                </button>
--->
 
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -100,6 +94,7 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
+                        <!--
                         @guest
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -112,7 +107,9 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    @if(Auth::user())
                                     {{ Auth::user()->username }} <span class="caret"></span>
+                                    @endif
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -128,6 +125,7 @@
                                 </div>
                             </li>
                         @endguest
+                        -->
                     </ul>
                 </div>
             </div>
@@ -150,23 +148,75 @@
             </div>
 
             <ul class="list-unstyled components">
-                <li class="active">
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Home</a>
-                    <ul class="collapse list-unstyled" id="homeSubmenu">
+                <!-- ACCOUNT -->
+                <li>
+                    <a href="#accountSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        @if (Auth::user())
+                            {{ Auth::user()->username }} <span class="caret"></span>
+                        @else
+                            Account
+                        @endif
+                    </a>
+                    <ul class="collapse list-unstyled" id="accountSubmenu">
                         <li>
-                            <a href="#">Home 1</a>
-                        </li>
+                            @if (Auth::user())
+                                <a href="{{ route('profile.show') }}">Profile</a>
                         <li>
-                            <a href="#">Home 2</a>
+                            <a  href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
                         </li>
-                        <li>
-                            <a href="#">Home 3</a>
-                        </li>
+                            @else
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            </li>
+                            @endif
                     </ul>
                 </li>
+
+                <!-- ADMIN VIEW -->
+                @if (Auth::user())
+                    @if(Auth::user()->hasRole("admin"))
+                        <li>
+                            <a href="#challengeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Challenges</a>
+                            <ul class="collapse list-unstyled" id="challengeSubmenu">
+                                <li>
+                                    <a href="/challenges">Show Challenges</a>
+                                </li>
+                                <li>
+                                    <a href="challenges/create">Create Challenge</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#classroomSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Classroom</a>
+                            <ul class="collapse list-unstyled" id="classroomSubmenu">
+                                <li>
+                                    <a href="/classroom">Show Classroom</a>
+                                </li>
+                                <li>
+                                    <a href="classroom/create">Create Classroom</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="/manage/users">User Management</a>
+                        </li>
+                        @else
+                        <li>
+                            <a href="/challenges">Challenges</a>
+                        </li>
+                    @endif
+                @endif
+
                 <li>
-                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">About</a>
-                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                    <a href="#aboutSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">About</a>
+                    <ul class="collapse list-unstyled" id="aboutSubmenu">
                         <li>
                             <a href="/contact">Contact</a>
                         </li>
