@@ -57,12 +57,13 @@ class ClassroomController extends Controller
             ]);
             $classroom->classroom_name = $request->name;
             $classroom->classroom_owner=$user->getAuthIdentifier();
+
             $addStudents = $request->input('add_Students');
             $classroom->save();
             foreach ($addStudents as $student){
                 $classroom->users()->attach($student);
             }
-
+            $classroom->users()->attach($user->getAuthIdentifier());
 
             return redirect()->route('home');
         }

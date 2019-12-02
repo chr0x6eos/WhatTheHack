@@ -59,6 +59,6 @@ Route::get('classroom/editChallenges/{classroom}', 'ClassroomController@editChal
 Route::patch('classroom/updateMembers/{classroom}', 'ClassroomController@updateMembers')->name('classroom.updatemembers');
 Route::patch('classroom/updateChallenges/{classroom}', 'ClassroomController@updateChallenges')->name('classroom.updatechallenges');
 
-//add and remove challenges from a classroom 
+//add and remove challenges from a classroom
 Route::post('classroom/{classroom}/attach','ClassroomController@attach')->name('classroom.attach');
 Route::delete('teachers/{teacher}/detach/{subject}','TeacherController@detach')->name('teachers.detach');
