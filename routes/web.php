@@ -57,4 +57,4 @@ Route::patch('classroom/update/{classroom}', 'ClassroomController@update')->name
 Route::get('classroom/editMembers/{classroom}', 'ClassroomController@editMembers')->name('classroom.editmembers');
 Route::get('classroom/editChallenges/{classroom}', 'ClassroomController@editChallenges')->name('classroom.editchallenges');
 Route::patch('classroom/updateMembers/{classroom}', 'ClassroomController@updateMembers')->name('classroom.updatemembers');
-Route::patch('classroom/updateChallenges/{classroom}', 'ClassroomController@updateChallenges')->name('classroom.updatechallenges')
+Route::patch('classroom/updateChallenges/{classroom}', 'ClassroomController@updateChallenges')->name('classroom.updatechallenges');
