@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Notifications\ChangeEmail;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+
 
 class ProfileController extends Controller
 {
@@ -105,9 +108,14 @@ class ProfileController extends Controller
                         ->withErrors('Wrong current E-Mail!');
                 }
                 else{
+                    /*
                     $request->user()->fill([
                         'email' => $newEmail
                     ])->save();
+                    */
+
+                    $user->email = $newEmail;
+                    $user->notify(new ChangeEmail());
                 }
                 return redirect()->route('profile.show')->with('success','E-Mail changed!');
             }
@@ -126,8 +134,12 @@ class ProfileController extends Controller
                 ->withErrors('Account deleted!');
         }
         else {
-            redirect()->route('profile.show')
+            return redirect()->route('profile.show')
                 ->withErrors('Not able to delete account!');
         }
+    }
+
+    public function changeEmail(){
+        return redirect()->route('profile.show')->with('success','E-Mail changed!');
     }
 }

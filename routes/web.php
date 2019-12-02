@@ -33,6 +33,7 @@ Route::post('/profile/password/change', 'ProfileController@changePW')->name('pas
 Route::get('/profile/changeEmail', 'ProfileController@showChangeEMForm')->name('profile.showChangeEMForm');
 Route::post('/profile/email/change', 'ProfileController@changeEM')->name('email.change');
 Route::delete('/profile/delete/{user}', 'ProfileController@deleteAccount')->name('profile.delete');
+Route::get('/profile/email/change/{id}/{token}', 'ProfileController@changeEmail')->name('change.email');
 
 // Challenge Routes
 Route::get('challenges/create', 'ChallengeController@create')->name('challenges.create');
@@ -43,6 +44,7 @@ Route::get('challenges/edit/{challenge}','ChallengeController@edit')->name('chal
 Route::patch('challenges/update/{challenge}','ChallengeController@update')->name('challenges.update');
 Route::delete('challenges/delete/{challenge}','ChallengeController@destroy')->name('challenges.destroy');
 Route::get('challenges/deactivate/{challenge}','ChallengeController@deactivate')->name('challenges.deactivate');
+
 
 // User Management Routes
 Route::get('/manage/users', 'ManageUserController@index')->name('manageuser.index');
