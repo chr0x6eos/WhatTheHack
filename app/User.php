@@ -47,7 +47,7 @@ class User extends Authenticatable
         }
         return false;
     }
-    
+
     //Check if current user has inputted role
     public function hasRole($role)
     {
@@ -84,5 +84,19 @@ class User extends Authenticatable
             return true;
         }
         return false;
+    }
+
+    public function challenges()
+    {
+        return $this
+            ->belongsToMany('App\Challenges')
+            ->withTimestamps();
+    }
+
+    public function classrooms()
+    {
+        return $this
+            ->belongsToMany('App\Classroom')
+            ->withTimestamps();
     }
 }

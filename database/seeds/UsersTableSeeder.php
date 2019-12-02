@@ -37,6 +37,16 @@ class UsersTableSeeder extends Seeder
         );
         $student->save();
 
+        $student2 = User::create(
+            [
+                'username' => 'Heins',
+                'email' => 'heins@whatthehack.htl',
+                'password' => Hash::make('student'),
+                'userrole' => 'student',
+                'active' => true
+            ]
+        );
+        $student2->save();
         //Create teacher user
         $teacher = User::create(
             [

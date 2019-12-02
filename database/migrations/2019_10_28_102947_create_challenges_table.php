@@ -15,7 +15,7 @@ class CreateChallengesTable extends Migration
     {
         Schema::create('challenges', function (Blueprint $table)
         {
-            $table->increments('id');
+            $table->bigIncrements('id');
 
             $table->string('name',255); //Name of the challenge
             $table->text('description'); //Challenge description

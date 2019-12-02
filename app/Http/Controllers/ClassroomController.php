@@ -46,7 +46,6 @@ class ClassroomController extends Controller
      */
     public function store(Request $request)
     {
-        $students="";
         try {
             $classroom = new Classroom();
             $classroom->id = $request->id;
@@ -57,18 +56,13 @@ class ClassroomController extends Controller
             ]);
             $classroom->classroom_name = $request->name;
             $classroom->classroom_owner=$user->getAuthIdentifier();
-
             $addStudents = $request->input('add_Students');
-            $lenght=sizeOf($addStudents)-1;
-            foreach ($addStudents as $student){
-                if($lenght>0)
-                    $students=$students.$student.",";
-                else
-                    $students=$students.$student;
-                $lenght--;
-            }
-            $classroom->member = $students;
             $classroom->save();
+            foreach ($addStudents as $student){
+                $classroom->users()->attach($student);
+            }
+
+
             return redirect()->route('home');
         }
         catch (Exception $ex)
@@ -76,6 +70,7 @@ class ClassroomController extends Controller
             return redirect()->route('classroom.create')->withErrors("Cannot create because of error: " . $ex. "!");
         }
     }
+
 
     /**
      * Display the specified resource.
@@ -103,7 +98,15 @@ class ClassroomController extends Controller
     }
     public function edit($id)
     {
-        //
+        $classroom = Classroom::find($id);
+
+        if ($classroom != null) {
+            return view('classroom.edit')->with('classroom', $classroom);
+        }
+        else {
+            return redirect()->route('classroom.index')
+                ->withErrors('Classroom with id=' . $id . ' not found!');
+        }
     }
 
     /**
