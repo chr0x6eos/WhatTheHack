@@ -20,7 +20,7 @@
                     </thead>
                     <tbody>
                     @foreach (\App\Challenge::all() as $c)
-                        @if(!$classroom->getClassroomChallenges($c->id) )
+                        @if(!$classroom->getClassroomChallenges($c->id) && $c->active==true)
                         <tr>
                             <td>
                                 {{$c->id}}
