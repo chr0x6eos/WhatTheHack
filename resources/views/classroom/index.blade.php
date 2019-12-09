@@ -4,7 +4,7 @@
     <body>
 
         @if(sizeof($classrooms) > 0)
-            <table border="1">
+            <table class="table table-striped table-bordered">
                 <thead>
                 <th>Id</th>
                 <th>Name</th>
@@ -23,10 +23,10 @@
                             <a href="{{ route('classroom.edit', $classroom->id) }}" class="btn bg-light btn-outline-dark">Edit</a>
                              </td>
                         <td>
-                            <a href="{{ route('', $classroom->id) }}" class="btn bg-light btn-outline-dark">Edit</a>
+                            <a href="{{ route('classroom.editmembers', $classroom->id) }}" class="btn bg-light btn-outline-dark">Edit</a>
                         </td>
                         <td>
-                            <a href="{{ route('', $classroom->id) }}" class="btn bg-light btn-outline-dark">Edit</a>
+                            <a href="{{ route('classroom.editchallenges', $classroom->id) }}" class="btn bg-light btn-outline-dark">Edit</a>
                         </td>
                     </tr>
                 @endforeach
