@@ -85,4 +85,8 @@ class User extends Authenticatable
         }
         return false;
     }
+
+    public function supportrequest(){
+        return $this-> hasMany('App\SupportRequest');
+    }
 }

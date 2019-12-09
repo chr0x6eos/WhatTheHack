@@ -18,14 +18,7 @@ class Challenge extends Model
         return false;
     }
 
-    //Check if inputted category is valid
-    public function validCategory($category)
-    {
-        $validCat = ['pwn','web','forensic','reversing','crypto','misc'];
-        if(in_array($category, $validCat))
-        {
-            return true;
-        }
-        return false;
+    public function supportrequest(){
+        return $this-> hasMany('App\SupportRequest');
     }
 }
