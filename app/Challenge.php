@@ -17,4 +17,8 @@ class Challenge extends Model
         }
         return false;
     }
+
+    public function supportrequest(){
+        return $this-> hasMany('App\SupportRequest');
+    }
 }
