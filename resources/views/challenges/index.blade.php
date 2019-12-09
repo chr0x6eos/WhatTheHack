@@ -33,7 +33,7 @@
 <br>
 {{-- Only administrators or teachers are allowed to edit challenges --}}
 @if(Auth::user() && ( Auth::user()->hasRole("admin") || Auth::user()->hasRole("teacher")))
-<a href="{{ route('challenges.create') }}" class="btn btn-success">Add new challenge</a>
+<a href="{{ route('challenges.create') }}" class="btn btn-info">Add new challenge</a>
 @endif
     <br>
 @endsection

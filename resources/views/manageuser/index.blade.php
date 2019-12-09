@@ -65,7 +65,7 @@
                     </select>
 
                     <input type="hidden" name="type" value="userrole_change">
-                    
+
                     </form>
                 </td>
                 <td>{{ $user->email }}</td>
@@ -75,9 +75,9 @@
                         @method('patch')
                         @if($user->active)
                         @if($user == Auth::user())
-                        <button class="btn btn-success" data-toggle="tooltip" data-placement="right" title="Deactivate Account" disabled>&#10005;</a>
+                        <button class="btn btn-info" data-toggle="tooltip" data-placement="right" title="Deactivate Account" disabled>&#10005;</a>
                         @else
-                        <button type="submit" class="btn btn-success" data-toggle="tooltip" data-placement="right" title="Deactivate Account">&#10005;</a>
+                        <button type="submit" class="btn btn-info" data-toggle="tooltip" data-placement="right" title="Deactivate Account">&#10005;</a>
                         @endif
                         @else
                         <button type="submit" class="btn btn-danger" data-toggle="tooltip" data-placement="right" title="Activate Account">&#10005;</a>

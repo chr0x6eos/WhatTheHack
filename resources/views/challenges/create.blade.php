@@ -49,7 +49,7 @@
             <input type="text" name="attachments">
     </p>
     <p>
-        <button type="submit" class="btn btn-success">Submit</button>
+        <button type="submit" class="btn btn-info">Submit</button>
         <a href="{{ route('challenges.index') }} " class="btn btn-danger">Cancel</a>
     </p>
 </form>

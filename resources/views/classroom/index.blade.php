@@ -27,6 +27,6 @@
     @endif
     <br>
     @if(Auth::user()->isAdmin(Auth::user()->userrole)==true)
-        <a href="{{route('classroom.create')}}" class="btn btn-success">Add new challenge</a>
+        <a href="{{route('classroom.create')}}" class="btn btn-info">Add new challenge</a>
     @endif
 @endsection

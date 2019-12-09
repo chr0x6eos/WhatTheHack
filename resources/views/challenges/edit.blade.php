@@ -49,7 +49,7 @@
         </select>
     </p>
     <p>
-        <button type="submit" class="btn btn-success">Update</button>
+        <button type="submit" class="btn btn-info">Update</button>
         <a href="{{ route('challenges.index') }} " class="btn btn-danger">Cancel</a>
     </p>
 </form>

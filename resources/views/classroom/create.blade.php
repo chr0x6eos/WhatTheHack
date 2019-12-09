@@ -46,7 +46,7 @@
                     </div>
                 @endif
                 <p>
-                    <button type="submit"  class="btn btn-success">
+                    <button type="submit"  class="btn btn-info">
                         Create
                     </button>
                     <a href="{{ route('home') }}" class="btn btn-danger">

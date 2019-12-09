@@ -63,7 +63,7 @@
         </form>
         @endif
     @endif
-        <a href="{{ route('challenges.index') }}" class="btn btn-outline-dark">Go back</a>
+        <a href="{{ route('challenges.index') }}" class="btn btn-light">Go back</a>
         <br>
 </div>
 @endsection

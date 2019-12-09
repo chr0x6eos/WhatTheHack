@@ -154,20 +154,9 @@ ul.CTAs a {
     margin-bottom: 5px;
 }
 
-a.download {
-    background: #fff;
-    color: #7386D5;
-}
-
-a.article,
-a.article:hover {
-    background: #6d7fcc !important;
-    color: #fff !important;
-}
-
-/*-----------------------------------------------------------------*/
-
-/*-----------------------------------------------------------------*/
+/*-----------------------------------------------------------------
+    BUTTON STYLE
+-----------------------------------------------------------------*/
 
 
 /* ---------------------------------------------------
@@ -179,6 +168,46 @@ a.article:hover {
     min-height: 100vh;
     transition: all 0.3s;
 }
+.btn-primary{
+    background-color: #17a2b8;
+
+}
+.btn-primary:hover{
+    background-color: #17a2b8;
+
+}
+#sidebarCollapse.btn.btn-info.waves-effect.waves-light{
+
+}
+a.dropdown-item.waves-effect.waves-light:focus, a.dropdown-item.waves-effect.waves-light:hover{
+    background-color: #f8f9fa;
+}
+a.btn.btn-link.waves-effect.waves-light{
+    color: #17a2b8;
+}
+a.btn.btn-link.waves-effect.waves-light:hover{
+    color: #117a8b;
+
+}
+
+.btn-info:focus, .btn-info.focus {
+    box-shadow: none;
+}
+.form-control{
+    background-color: #fff;
+}
+.form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #17a2b8;
+    outline: 0;
+    box-shadow: none;
+}
+.form-control:disabled, .form-control[readonly] {
+    background-color: rgba(23, 164, 186, 0.31);
+    opacity: 1;
+}
+
 /* ---------------------------------------------------
     MEDIAQUERIES
 ----------------------------------------------------- */
