@@ -41,6 +41,12 @@ class Kernel extends HttpKernel
             'throttle:60,1',
             'bindings',
         ],
+
+        /* This is not working due to the paramter given to HasRole
+        'role' => [
+            \App\Http\Middleware\Authenticate::class,
+            \App\Http\Middleware\HasRole::class,
+        ], */
     ];
 
     /**
@@ -60,6 +66,7 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'role' => \App\Http\Middleware\HasRole::class,
     ];
 
     /**
