@@ -44,7 +44,6 @@ class ChallengesTableSeeder extends Seeder
             $challenge->flag = "WTH{" . $faker->bankAccountNumber . "}";
             $challenge->author = $faker->name;
             $challenge->imageID = $faker->bankAccountNumber;
-            $challenge->attachments = "/var/data/" . $faker->word . '.' . $faker->fileExtension;
             $challenge->save();
         }
     }

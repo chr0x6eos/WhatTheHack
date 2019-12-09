@@ -22,7 +22,7 @@ class Challenge extends Model
     public function validCategory($category)
     {
         $validCat = ['pwn','web','forensic','reversing','crypto','misc'];
-        if(in_array($category,$validCat))
+        if(in_array($category, $validCat))
         {
             return true;
         }
