@@ -64,16 +64,17 @@
         {{ $challenge->imageID }}
     </p>
     @endif
-    @if($challenge->attachments)
+    @if($challenge->files)
     <p>
-        <strong>Attachments:</strong>
+        <strong>Resource:</strong>
         <br>
-        {{ $challenge->attachments }}
+        <a href="{{route('challenges.download', $challenge->id)}}">Download</a>
     </p>
     @endif
 
     @if(Auth::user()->hasRole("admin") || Auth::user()->isAuthor($challenge->author))
         <a href="{{ route('challenges.edit', $challenge->id) }}" class="btn btn-info">Edit</a>
+        <a href="{{ route('challenges.files', $challenge->id) }}" class="btn btn-secondary">Files</a>
         @if(!$challenge->active)
         <form method="POST" action="{{ route('challenges.destroy',$challenge->id) }}">
         @csrf
@@ -82,6 +83,8 @@
         </form>
         @endif
     @endif
+    <br>
+    <br>
         <a href="{{ route('challenges.index') }}" class="btn btn-outline-dark">Go back</a>
         <br>
 </div>

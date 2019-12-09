@@ -66,9 +66,8 @@
         <input type="text" name="imageID">
     </p>
     <p>
-        <?php //TODO:Implement file upload ?>
-        <strong>Attachments (optional):</strong>
-            <input type="text" name="attachments">
+        <strong>Files (optional):</strong>
+        Please upload the files after creating the challenge.
     </p>
     <p>
         <button type="submit" class="btn btn-success">Submit</button>

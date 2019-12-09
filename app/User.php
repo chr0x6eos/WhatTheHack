@@ -47,8 +47,8 @@ class User extends Authenticatable
         }
         return false;
     }
-
-    //Check if current user has inputted role
+    
+    // Check if the user object is assigned the requested role
     public function hasRole($role)
     {
         if($this->userrole == $role)

@@ -60,10 +60,6 @@
         <input type="text" name="imageID" value="{{ $challenge->imageID }}">
     </p>
     <p>
-        <strong>Attachments (optional):</strong>
-        <input type="text" name="attachments" value="{{ $challenge->attachments }}">
-    </p>
-    <p>
         <strong>Status:</strong>
         <select name="active">
         <option value="1" @if($challenge->active) selected="selected"@endif>Enabled</option>
