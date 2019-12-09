@@ -12,15 +12,18 @@ use Illuminate\Support\Str;
 class ChangeEmail extends Notification implements ShouldQueue
 {
     use Queueable;
+    private $user_id;
+    private $token;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($id, $token)
     {
-        //
+        $this->user_id = $id;
+        $this->token = $token;
     }
 
     /**
@@ -42,9 +45,7 @@ class ChangeEmail extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
-        $token = Str::random(32);
-        $user = Auth::user();
-        $url = url('/profile/email/change/' . $user->id . '/' . $token);
+        $url = url('/profile/email/change/' . $this->user_id . '/' . $this->token);
 
         return (new MailMessage)
                     ->line('You are receiving this email because we received an email change request for your account.')

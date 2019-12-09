@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\EMCTokens;
 use App\Notifications\ChangeEmail;
 use App\User;
 use Illuminate\Support\Facades\Auth;
@@ -108,20 +109,54 @@ class ProfileController extends Controller
                         ->withErrors('Wrong current E-Mail!');
                 }
                 else{
-                    /*
-                    $request->user()->fill([
-                        'email' => $newEmail
-                    ])->save();
-                    */
 
+                    //generate token
+                    $token = Str::random(32);
                     $user->email = $newEmail;
-                    $user->notify(new ChangeEmail());
+
+                    //save token for email change in database
+                    $emctoken = new EMCTokens();
+                    $emctoken->user_id = $user->id;
+                    $emctoken->token = $token;
+                    $emctoken->email = $user->email;
+                    $emctoken->valid_until = now()->addMinutes(2);
+                    $emctoken->save();
+
+                    //send notification with the token to the user
+                    $user->notify(new ChangeEmail($user->id, $token));
                 }
-                return redirect()->route('profile.show')->with('success','E-Mail changed!');
+                return redirect()->route('profile.show')
+                    ->with('success','An e-mail change request was sent to your new e-mail!');
             }
             catch (Exception $ex){
                 return redirect()->route('profile.show')
                     ->withErrors('Cannot change E-Mail!');
+            }
+        }
+    }
+
+    public function changeEmail(Request $request){
+
+        //get user_id and token from the request
+        $user_id = $request->route('id');
+        $token = $request->route('token');
+        //get all tokens and the user who wants to change the email from database
+        $emctokens = EMCTokens::all();
+        $user = User::find($user_id);
+
+        foreach ($emctokens as $emctoken){
+            if($emctoken->user_id == $user_id && $emctoken->token == $token){
+
+                //change the email
+                $user->email = $emctoken->email;
+                $user->save();
+                //delete the token
+                $emctoken->delete();
+                return redirect()->route('profile.show')->with('success', 'E-Mail changed!');
+            }
+            else{
+                return redirect()->route('profile.show')
+                    ->withErrors('Could not change E-Mail!');
             }
         }
     }
@@ -137,9 +172,5 @@ class ProfileController extends Controller
             return redirect()->route('profile.show')
                 ->withErrors('Not able to delete account!');
         }
-    }
-
-    public function changeEmail(){
-        return redirect()->route('profile.show')->with('success','E-Mail changed!');
     }
 }
