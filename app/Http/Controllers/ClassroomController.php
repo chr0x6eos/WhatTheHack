@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Classroom;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Mockery\Exception;
 use function Sodium\add;
@@ -109,7 +110,14 @@ class ClassroomController extends Controller
     }
 
     public function editMembers($id){
-
+        $classroom = Classroom::find($id);
+        if ($classroom != null) {
+            return view('classroom.editmembers')->with('classroom', $classroom);
+        }
+        else {
+            return redirect()->route('classroom.myclassrooms')
+                ->withErrors('Classroom with id=' . $id . ' not found!');
+        }
     }
 
     public function editChallenges($id){
@@ -132,13 +140,34 @@ class ClassroomController extends Controller
     }
 
     public function updateMembers(Request $request, $id){
+        $classroom = Classroom::find($id);
+        $this->validate($request,[
+            'addmember'=>'required',
+        ]);
+        $addStudents = $request->input('addmember');
+        $classroom->save();
+        foreach($addStudents as $student){
+            $classroom->users()->attach($student);
+        }
+        return redirect()->route('classroom.myclassrooms');
+    }
 
+    public function deleteMembers(Request $request, $id){
+        $classroom = Classroom::find($id);
+        $this->validate($request,[
+            'deletemembers'=>'required',
+        ]);
+        $deletestudents = $request->input('deletemembers');
+        $classroom->save();
+        foreach($deletestudents as $student){
+            $classroom->users()->detach($student);
+        }
+        return redirect()->route('classroom.myclassrooms');
     }
 
     public function updateChallenges(Request $request, $id){
 
     }
-
 
     /**
      * Remove the specified resource from storage.

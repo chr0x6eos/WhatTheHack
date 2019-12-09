@@ -17,29 +17,6 @@
                     <input type="text" name="name" value="{{ $classroom->classroom_name }}"/>
                 </p>
 
-                <!-- <h3>Add challenges</h3>
-                <table border="1">
-                    <thead>
-                    <th>Challenge id</th>
-                    <th>Challenge name</th>
-                    <th>Add</th>
-                    </thead>
-                    <tbody>
-                    @foreach (\App\Challenge::all() as $c)
-                            <tr>
-                                <td>
-                                    {{$c->id}}
-                                </td>
-                                <td>
-                                    {{$c->name}}
-                                </td>
-                                <td>
-                                    <input type="checkbox" name="add_Challenges" value="{{$c->id}}">
-                                </td>
-                            </tr>
-                    @endforeach
-                    </tbody>
-                </table> -->
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul class="list-unstyled"   >

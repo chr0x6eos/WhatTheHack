@@ -19,4 +19,12 @@ class Classroom extends Model
             ->belongsToMany('App\Challenge')
             ->withTimestamps();
     }
+
+    public function getMembers($id){
+       foreach ($this->users as $u){
+           if($u->id == $id)
+               return true;
+       }
+        return false;
+    }
 }
