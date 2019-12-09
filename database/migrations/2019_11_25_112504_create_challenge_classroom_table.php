@@ -17,10 +17,13 @@ class CreateChallengeClassroomTable extends Migration
             $table->bigIncrements('id');
             $table->timestamps();
             $table->bigInteger('challenge_id')->unsigned();
-            $table->bigInteger('user_id')->unsigned();
+
+            $table->bigInteger('classroom_id')->unsigned();
+            $table->foreign('classroom_id')
+                ->references('id')
+                ->on('classrooms');
 
             $table->foreign('challenge_id')->references('id')->on('challenges');
-            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

@@ -4,7 +4,7 @@
     <div class="container">
         <h1>You are in this classroom: {{$classroom->classroom_name}}</h1>
         <div class="col-2">
-            <form method="post" action="{{ route('classroom.update', $classroom) }}">
+            <form method="post" action="{{ route('classroom.attach', $classroom->id)}}" >
                 @csrf
                 @method('patch')
                 <h3>Edit classroom information</h3>

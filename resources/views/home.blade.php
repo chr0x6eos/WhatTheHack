@@ -14,18 +14,18 @@
                     </div>
                     @endif
 
-                    {{Auth::user()->username}} is logged in!
+                    Welcome {{Auth::user()->username}}!
                     <p>
-                        You are logged in!
                         <br>
                         Go here to view the <a href="{{ route('challenges.index') }}">Challenges</a>.
+                        <br>
                         <br>
                         @if (Auth::user()->isTeacher(Auth::user()->userrole)==true || Auth::user()->isAdmin(Auth::user()->userrole)==true)
 
                             <a href="{{route('classroom.create')}} " class="btn btn-success" >Create classroom</a>
                         @endif
                         <br>
-                        Go here to view the <a href="{{ route('classroom.index') }}">Classrooms</a>.
+                        Go here to view the <a href="{{ route('classroom.myclassrooms') }}">Classrooms</a>.
                     </p>
 
                     @if (Auth::user()->userrole == 'admin')

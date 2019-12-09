@@ -99,4 +99,5 @@ class User extends Authenticatable
             ->belongsToMany('App\Classroom')
             ->withTimestamps();
     }
+
 }
