@@ -6,6 +6,7 @@
 <thead>
 <th>Name</th>
 <th>Difficulty</th>
+<th>Category</th>
 <th>Author</th>
 <th>Status</th>
 <th colspan="1">Edit</th>
@@ -15,6 +16,7 @@
     <tr>
         <td>{{ $challenge->name }}</td>
         <td>{{ $challenge->difficulty }}</td>
+        <td>{{ $challenge->category }}</td>
         <td>{{ $challenge->author }}</td>
         <td>@if($challenge->active)
                 Enabled

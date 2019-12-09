@@ -9,12 +9,13 @@
                 @csrf
 
 
-                <table id="challenges"border="1" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                <table id="challenges" border="1" class="table table-striped table-bordered" cellspacing="0" width="100%">
                     <thead>
                     <th class="th-sm">Challenge id</th>
                     <th class="th-sm">Challenge name</th>
                     <th class="th-sm">Challenge difficulty</th>
                     <th class="th-sm">Challenge description</th>
+                    <th class="th-sm">Challenge category</th>
                     <th>Add</th>
                     </thead>
                     <tbody>
@@ -32,6 +33,9 @@
                             </td>
                             <td>
                                 {{$c->description}}
+                            </td>
+                            <td>
+                                {{$c->category}}
                             </td>
                             <td>
                                 <input type="checkbox" name="add_Challenges[]" value="{{$c->id}}">
@@ -68,13 +72,14 @@
             <form method="post" action="{{route('classroom.detach',$classroom->id)}}" >
                 @csrf
                 {{ method_field("delete") }}
-                <h3>Allready in classroom</h3>
-                <table border="1" class=" table table-striped table-bordered">
+                <h3>Already in classroom</h3>
+                <table id="challenges2" border="1" class=" table table-striped table-bordered">
                     <thead>
                     <th>Challenge id</th>
                     <th>Challenge name</th>
                     <th>Challenge difficulty</th>
                     <th>Challenge description</th>
+                    <th>Challenge category</th>
                     <th>Remove</th>
                     </thead>
                     <tbody>
@@ -91,6 +96,9 @@
                             </td>
                             <td>
                                 {{$c->description}}
+                            </td>
+                            <td>
+                                {{$c->category}}
                             </td>
                             <td>
                                 <input type="checkbox" name="remove_Challenges[]" value="{{$c->id}}">
@@ -123,6 +131,7 @@
             </form>
         </div>
     </div>
+
     <script>
         $(document).ready(
             function () {
@@ -132,13 +141,31 @@
                 "aoColumns": [
                     null,
                     null,
-                    null,
+                    { "bSearchable": true, "orderable": false },
                     { "bSearchable": false, "orderable": false },
+                    null,
                     { "bSearchable": false, "orderable": false },
                     // { "bSearchable": false, "orderable": false }
                 ]
             });
         });
+
+        $(document).ready(
+            function () {
+                $('#challenges2').DataTable( {
+                    "paging": true,
+                    "info":false,
+                    "aoColumns": [
+                        null,
+                        null,
+                        { "bSearchable": true, "orderable": false },
+                        { "bSearchable": false, "orderable": false },
+                        null,
+                        { "bSearchable": false, "orderable": false },
+                        // { "bSearchable": false, "orderable": false }
+                    ]
+                });
+            });
     </script>
 @endsection
 

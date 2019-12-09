@@ -24,17 +24,24 @@ class ChallengesTableSeeder extends Seeder
             {
                 $challenge->difficulty = "easy";
                 $challenge->targetSolution = $faker->text;
+                $challenge->category = "misc";
+                $challenge->hint = $faker->text;
             }
             else if($i % 3 == 0)
             {
                 $challenge->difficulty = "medium";
+                $challenge->category = "web";
             }
             else
             {
                 $challenge->difficulty = "hard";
                 $challenge->targetSolution = $faker->text;
                 $challenge->active=false;
+                $challenge->hint = "You have to haxx0r the binary.";
+                $challenge->category = "pwn";
             }
+
+            $challenge->flag = "WTH{" . $faker->bankAccountNumber . "}";
             $challenge->author = $faker->name;
             $challenge->imageID = $faker->bankAccountNumber;
             $challenge->attachments = "/var/data/" . $faker->word . '.' . $faker->fileExtension;
