@@ -22,7 +22,7 @@
                         <br>
                         @if (Auth::user()->isTeacher(Auth::user()->userrole)==true || Auth::user()->isAdmin(Auth::user()->userrole)==true)
 
-                            <a href="{{route('classroom.create')}} " class="btn btn-success" >Create classroom</a>
+                            <a href="{{route('classroom.create')}} " class="btn btn-info" >Create classroom</a>
                         @endif
                         <br>
                         Go here to view the <a href="{{ route('classroom.index') }}">Classrooms</a>.

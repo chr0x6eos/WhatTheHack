@@ -64,7 +64,6 @@
                     <div class="container-fluid">
 
                         <button type="button" id="sidebarCollapse" class="btn btn-info">
-                            <i class="fas fa-align-left"></i>
                             <span class="navbar-toggler-icon"></span>
                         </button>
                     </div>
@@ -173,10 +172,39 @@
                             <a href="/manage/users">User Management</a>
                         </li>
                         @else
-                        <li>
-                            <a href="/challenges">Challenges</a>
-                        </li>
                     @endif
+                        @if(Auth::user()->hasRole("teacher"))
+                            <li>
+                                <a href="#challengeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Challenges</a>
+                                <ul class="collapse list-unstyled" id="challengeSubmenu">
+                                    <li>
+                                        <a href="/challenges">Show Challenges</a>
+                                    </li>
+                                    <li>
+                                        <a href="challenges/create">Create Challenge</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#classroomSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Classroom</a>
+                                <ul class="collapse list-unstyled" id="classroomSubmenu">
+                                    <li>
+                                        <a href="/classroom">Show Classroom</a>
+                                    </li>
+                                    <li>
+                                        <a href="classroom/create">Create Classroom</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endif
+                        @if(Auth::user()->hasRole("student"))
+                            <li>
+                                <a href="/classroom">Classrooms</a>
+                            </li>
+                            <li>
+                                <a href="/challenges">Challenges</a>
+                            </li>
+                        @endif
                 @endif
 
                 <li>
