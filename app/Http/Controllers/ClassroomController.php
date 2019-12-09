@@ -113,7 +113,15 @@ class ClassroomController extends Controller
     }
 
     public function editChallenges($id){
+        $classroom = Classroom::find($id);
 
+        if ($classroom != null) {
+            return view('classroom.editChallenges')->with('classroom', $classroom);
+        }
+        else {
+            return redirect()->route('classroom.myClassrooms')
+                ->withErrors('Classroom with id=' . $id . ' not found!');
+        }
     }
 
     /**
@@ -150,18 +158,31 @@ class ClassroomController extends Controller
     {
         //
     }
+    //Associate a multitude of challenges with a classroom
     public function attach(Request $request, $id)
     {
         $classroom = Classroom::find($id);
         $this->validate($request,[
             'add_Challenges'=>'required',
         ]);
-        $challenges=$request->input('add_Challenges');
+        $challenges = $request->input('add_Challenges');
+
         foreach ($challenges as $c)
         {
-            $classroom->challenges()->attach($c);
+           $classroom->challenges()->attach($c);
         }
-
-        return view('classroom.edit', ['classroom' => $classroom]);
+        return redirect()->route('classroom.myclassrooms');
     }
+
+    public function detach(Request $request,$id){
+        $classroom = Classroom::find($id);
+
+        $challenges = $request->input('remove_Challenges');
+
+        foreach ($challenges as $c){
+            $classroom->challenges()->detach($c);
+        }
+        return redirect()->route('classroom.myclassrooms');
+    }
+
 }

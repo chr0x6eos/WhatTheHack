@@ -55,10 +55,11 @@ Route::get('classroom/edit/{classroom}','ClassroomController@edit')->name('class
 Route::get('classrooms/myClassrooms', 'ClassroomController@myClassrooms')->name('classroom.myclassrooms');
 Route::patch('classroom/update/{classroom}', 'ClassroomController@update')->name('classroom.update');
 Route::get('classroom/editMembers/{classroom}', 'ClassroomController@editMembers')->name('classroom.editmembers');
+
 Route::get('classroom/editChallenges/{classroom}', 'ClassroomController@editChallenges')->name('classroom.editchallenges');
 Route::patch('classroom/updateMembers/{classroom}', 'ClassroomController@updateMembers')->name('classroom.updatemembers');
 Route::patch('classroom/updateChallenges/{classroom}', 'ClassroomController@updateChallenges')->name('classroom.updatechallenges');
 
-//add and remove challenges from a classroom
+//add and remove challenges from  and to a classroom
 Route::post('classroom/{classroom}/attach','ClassroomController@attach')->name('classroom.attach');
-Route::delete('teachers/{teacher}/detach/{subject}','TeacherController@detach')->name('teachers.detach');
+Route::delete('classroom/{classroom}/detach','ClassroomController@detach')->name('classroom.detach');

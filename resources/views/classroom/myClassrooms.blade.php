@@ -26,7 +26,7 @@
                         <a href="{{ route('classroom.edit', $classroom->id) }}" class="btn bg-light btn-outline-dark">Edit</a>
                     </td>
                     <td>
-                        <a href="{{ route('classroom.edit', $classroom->id) }}" class="btn bg-light btn-outline-dark">Edit</a>
+                        <a href="{{ route('classroom.editchallenges', $classroom->id) }}" class="btn bg-light btn-outline-dark">Edit</a>
                     </td>
                 </tr>
             @endforeach
