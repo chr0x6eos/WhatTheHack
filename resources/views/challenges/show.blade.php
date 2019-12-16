@@ -15,6 +15,7 @@
         <br>
         {{ $challenge->description }}
     </p>
+    <br>
     @if(Auth::user()->hasRole("admin") || Auth::user()->isAuthor($challenge->author))
     <p>
         <strong>Flag:</strong>
@@ -84,6 +85,13 @@
         @endif
     @endif
     <br>
+    <form method="POST" action="{{ route('challenges.flag',$challenge->id) }}">
+        @csrf
+        <strong>Flag:</strong>
+        <br>
+        <input type="text" name="flag">
+    <button type="submit" class="btn btn-success">Submit flag</button>
+    </form>
     <br>
         <a href="{{ route('challenges.index') }}" class="btn btn-outline-dark">Go back</a>
         <br>

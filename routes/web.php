@@ -46,6 +46,7 @@ Route::get('challenges/deactivate/{challenge}','ChallengeController@deactivate')
 Route::get('challenges/files/{challenge}','ChallengeController@files')->name('challenges.files');
 Route::post('challenges/upload/{challenge}','ChallengeController@upload')->name('challenges.upload');
 Route::get('challenges/download/{challenge}','ChallengeController@download')->name('challenges.download');
+Route::post('challenges/flag/{challenge}','ChallengeController@flag')->name('challenges.flag');
 
 // User Management Routes
 Route::get('/manage/users', 'ManageUserController@index')->name('manageuser.index');
