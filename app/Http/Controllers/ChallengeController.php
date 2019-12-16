@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use http\Exception\InvalidArgumentException;
 use Illuminate\Http\Request;
 use App\Challenge;
 use Illuminate\Support\Facades\Auth;
@@ -292,7 +291,7 @@ class ChallengeController extends Controller
             return redirect('challenges.index')->withErrors("Could not find challenge!");
         }
     }
-    
+
     public function download($id)
     {
         try
@@ -326,7 +325,7 @@ class ChallengeController extends Controller
             if ($challenge)
             {
                 //Upload path
-                $path =  'files/' . $challenge->name;
+                $path =  'files/' . $challenge->id;
 
                 // Get file extension
                 $extension = $request->file('file')->clientExtension();
@@ -365,6 +364,41 @@ class ChallengeController extends Controller
         catch (\Exception $ex)
         {
             return redirect()->route('challenges.index')->withErrors('Could not upload because of error: ' . $ex->getMessage());
+        }
+    }
+
+    public function flag(Request $request, $id)
+    {
+        $this->validate($request, [
+            'flag' => 'required'
+        ]);
+
+        $challenge = null;
+
+        try
+        {
+            $challenge = Challenge::find($id);
+
+            if ($challenge->flag == $request->flag)
+            {
+                //TODO: Add linking between user and flag (solved)
+                return redirect()->route('challenges.show',$challenge->id)->with('success','Congratulation! You solved the challenge!');
+            }
+            else
+            {
+                return view('challenges.show')->with('challenge', $challenge)->withErrors('Sorry this is not the right flag! Please try again!');
+            }
+        }
+        catch (\Exception $ex)
+        {
+            if($challenge == null)
+            {
+                return redirect()->route('challenges.index')->withErrors('Could not submit because of error: ' . $ex->getMessage());
+            }
+            else
+            {
+                return redirect()->route('challenges.show')->with('challenge',$challenge)->withErrors('Could not submit because of error: ' . $ex->getMessage());
+            }
         }
     }
 }
