@@ -25,8 +25,7 @@
                             <a href="{{route('classroom.create')}} " class="btn btn-success" >Create classroom</a>
                         @endif
                         <br>
-                        <br>
-                        Go here to view the <a href="{{ route('classroom.index') }}">Classrooms</a>.
+                        Go here to view the <a href="{{ route('classroom.myclassrooms') }}">Classrooms</a>.
                     </p>
 
                     @if (Auth::user()->userrole == 'admin')
