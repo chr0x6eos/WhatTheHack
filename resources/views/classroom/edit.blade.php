@@ -4,9 +4,9 @@
     <div class="container">
         <h1>You are in this classroom: {{$classroom->classroom_name}}</h1>
         <div class="col-2">
-            <form method="post" action="{{ route('classroom.attach', $classroom->id)}}" >
+            <form method="post" action="{{ route('classroom.update', $classroom->id)}}" >
                 @csrf
-                @method('patch')
+
                 <h3>Edit classroom information</h3>
                 <p>
                     <strong>ID</strong>
@@ -17,10 +17,19 @@
                     <input type="text" name="name" value="{{ $classroom->classroom_name }}"/>
                 </p>
 
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul class="list-unstyled"   >
-                            @foreach ($errors->all() as $error)
+                <h1>Disable this classroom</h1>
+                <strong>Status:</strong>
+                <select name="active">
+                    <option value="1" @if($classroom->active == "1") selected="selected" @endif>Enabled</option>
+                    <option value="0" @if($classroom->active == "0") selected="selected" @endif>Disabled</option>
+                </select>
+
+           <ul class="list-unstyled">
+
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+
+                                @foreach ($errors->all() as $error)
                                 <li>{{ $error }}</li>
                             @endforeach
                         </ul>
