@@ -48,7 +48,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return false;
     }
 
-    //Check if current user has inputted role
+    // Check if the user object is assigned the requested role
     public function hasRole($role)
     {
         if($this->userrole == $role)
@@ -86,11 +86,18 @@ class User extends Authenticatable implements MustVerifyEmail
         return false;
     }
 
-    public function supportrequest(){
-        return $this-> hasMany('App\SupportRequest');
+    public function challenges()
+    {
+        return $this
+            ->belongsToMany('App\Challenges')
+            ->withTimestamps();
     }
 
-    public function getAdmin(){
-        return User::where('userrole', 'admin')->first();
+    public function classrooms()
+    {
+        return $this
+            ->belongsToMany('App\Classroom')
+            ->withTimestamps();
     }
+
 }
