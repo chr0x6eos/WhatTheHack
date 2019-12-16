@@ -24,7 +24,7 @@
                                 <td>{{ $u->email }}</td>
                                 <td>{{ $u->userrole }}</td>
                                 <td>
-                                    <input type="checkbox" name="deletemembers[]" value="{{ $u->id }}">
+                                    <input type="checkbox" name="deletemembers[]" value="{{ $u->id }}" @if($u->userrole=="admin" || $u->userrole=="teacher") disabled="disabled" @endif>
                                 </td>
                             </tr>
                                 @endforeach

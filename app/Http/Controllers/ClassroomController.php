@@ -58,6 +58,7 @@ class ClassroomController extends Controller
             ]);
             $classroom->classroom_name = $request->name;
             $classroom->classroom_owner=$user->getAuthIdentifier();
+            $classroom->active = $request->active;
 
             $addStudents = $request->input('add_Students');
             $classroom->save();
@@ -143,6 +144,7 @@ class ClassroomController extends Controller
     {
         $classroom = Classroom::find($id);
         $classroom->classroom_name = $request->name;
+        $classroom->active = $request->active;
         $classroom->save();
         return redirect()->route('classroom.myclassrooms');
     }
@@ -185,7 +187,32 @@ class ClassroomController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $classroom = Classroom::find($id);
+        if(Auth::user()->hasRole("admin"))
+        {
+            if($classroom->active == "0") {
+                $challenges = $classroom->challenges;
+                $members = $classroom->users;
+                foreach ($challenges as $c){
+                    $classroom->challenges()->detach($c);
+                }
+                foreach ($members as $m){
+                    $classroom->users()->detach($m);
+                }
+                $classroom->delete();
+                return redirect()->route('classroom.disabled');
+            }
+            else
+            {
+                return redirect()->route('classroom.index')->withErrors('An active classroom cannot be deleted!');
+            }
+        }
+        else
+        {
+            return redirect()->route('classroom.index')->withErrors('You are not authorized to delete this classroom!');
+        }
+
+        return redirect()->route('classroom.index')->with('success','Successfully deleted classroom!');
     }
     //Associate a multitude of challenges with a classroom
     public function attach(Request $request, $id)
@@ -212,6 +239,25 @@ class ClassroomController extends Controller
             $classroom->challenges()->detach($c);
         }
         return redirect()->route('classroom.myclassrooms');
+    }
+
+
+    public function disabled(){
+        try {
+            $classrooms = Classroom::all();
+        }
+        catch (Exception $ex){
+            return redirect('classroom.disabled')->withErrors("No db");
+        }
+        return view('classroom.disabled')->with('classrooms',$classrooms);
+    }
+
+    public function restore($id){
+        $classroom = Classroom::find($id);
+        $classroom->active = "1";
+        $classroom->save();
+        $classrooms = Classroom::all();
+        return view('classroom.disabled')->with('classrooms',$classrooms);
     }
 
 }
