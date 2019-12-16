@@ -21,7 +21,7 @@ Route::get('/contact', function () {
     return view('subpages/contact');
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/challenges','ChallengeController@index')->name('challenges.index');
 Route::get('/classroom', 'ClassroomController@index')->name('classroom.index');
@@ -33,6 +33,7 @@ Route::post('/profile/password/change', 'ProfileController@changePW')->name('pas
 Route::get('/profile/changeEmail', 'ProfileController@showChangeEMForm')->name('profile.showChangeEMForm');
 Route::post('/profile/email/change', 'ProfileController@changeEM')->name('email.change');
 Route::delete('/profile/delete/{user}', 'ProfileController@deleteAccount')->name('profile.delete');
+Route::get('/profile/email/change/{id}/{token}', 'ProfileController@changeEmail')->name('change.email');
 
 // Challenge Routes
 Route::get('challenges/create', 'ChallengeController@create')->name('challenges.create')->middleware('role:teacher');
@@ -48,24 +49,21 @@ Route::get('challenges/{challenge}','ChallengeController@show')->name('challenge
 Route::get('challenges/download/{challenge}','ChallengeController@download')->name('challenges.download');
 Route::post('challenges/flag/{challenge}','ChallengeController@flag')->name('challenges.flag');
 
+
 // User Management Routes
 Route::get('/manage/users', 'ManageUserController@index')->name('manageuser.index');
 Route::patch('/manage/users/update/{user}', 'ManageUserController@update')->name('manageuser.update');
 
 // Classroom Management Routes
 Route::get('classrooms/myClassrooms', 'ClassroomController@myClassrooms')->name('classroom.myclassrooms');
-
-Route::get('classroom/create', 'ClassroomController@create')->name('classroom.create')->middleware('role:teacher');
-Route::post('classroom', 'ClassroomController@store')->name('classroom.store')->middleware('role:teacher');
-Route::get('classroom/edit/{classroom}','ClassroomController@edit')->name('classroom.edit')->middleware('role:teacher');
-Route::patch('classroom/update/{classroom}', 'ClassroomController@update')->name('classroom.update')->middleware('role:teacher');
-Route::get('classroom/editMembers/{classroom}', 'ClassroomController@editMembers')->name('classroom.editmembers')->middleware('role:teacher');
-
-Route::get('classroom/editChallenges/{classroom}', 'ClassroomController@editChallenges')->name('classroom.editchallenges')->middleware('role:teacher');
-Route::post('classroom/updateMembers/{classroom}', 'ClassroomController@updateMembers')->name('classroom.updatemembers')->middleware('role:teacher');
-Route::patch('classroom/updateChallenges/{classroom}', 'ClassroomController@updateChallenges')->name('classroom.updatechallenges')->middleware('role:teacher');
-Route::patch('classroom/deleteMembers/{classroom}', 'ClassroomController@deleteMembers')->name('classroom.deleteMembers')->middleware('role:teacher');
-
-//add and remove challenges from  and to a classroom
-Route::post('classroom/{classroom}/attach','ClassroomController@attach')->name('classroom.attach')->middleware('role:teacher');
-Route::delete('classroom/{classroom}/detach','ClassroomController@detach')->name('classroom.detach')->middleware('role:teacher');
+Route::post('classroom/update/{classroom}', 'ClassroomController@update')->name('classroom.update');
+Route::get('classroom/editMembers/{classroom}', 'ClassroomController@editMembers')->name('classroom.editmembers');
+Route::get('classroom/editChallenges/{classroom}', 'ClassroomController@editChallenges')->name('classroom.editchallenges');
+Route::post('classroom/updateMembers/{classroom}', 'ClassroomController@updateMembers')->name('classroom.updatemembers');
+Route::patch('classroom/updateChallenges/{classroom}', 'ClassroomController@updateChallenges')->name('classroom.updatechallenges');
+Route::patch('classroom/deleteMembers/{classroom}', 'ClassroomController@deleteMembers')->name('classroom.deleteMembers');
+Route::post('classroom/{classroom}/attach','ClassroomController@attach')->name('classroom.attach');
+Route::delete('classroom/{classroom}/detach','ClassroomController@detach')->name('classroom.detach');
+Route::delete('classroom/{classroom}', 'ClassroomController@destroy')->name('classroom.destroy');
+Route::get('classroom/disabledClassrooms', 'ClassroomController@disabled')->name('classroom.disabled');
+Route::patch('classroom/restore/{classroom}', 'ClassroomController@restore')->name('classroom.restore');
