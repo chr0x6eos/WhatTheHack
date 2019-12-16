@@ -92,6 +92,11 @@ $this->middleware('role:admin');
 ```
 The role middleware initially also checks if a user session is active in general, therefore you do not have to use both the `auth` and the `role:[role]` middleware within one authorization check.
 
+A middleware can also be applied directly to the web route:
+```
+Route::get('[...]', '[...]')->name('[...]')->middleware('role:admin');
+```
+
 In case an `auth` authorization check fails, the login page is displayed. In case of the `role` authorization check, the page is aborted with the app's 404 page.
 
 ### GIT Workflow
