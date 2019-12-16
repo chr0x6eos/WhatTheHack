@@ -41,9 +41,9 @@ class SupportRequestController extends Controller
             $supportRequest->message = $request->get('message');
             $supportRequest->solved = false;
 
-            $this->sendMail($supportRequest);
-
             $supportRequest->save();
+
+            $this->sendMail($supportRequest);
 
             return redirect()->route('challenges.show', $request->challenge)->with('success', 'Support request has been sent! Check your mail inbox for a confirmation message.');
             #return redirect()->route('challenges.show')->with('success', 'Support request has been sent! Check your mail inbox for a confirmation message.');
