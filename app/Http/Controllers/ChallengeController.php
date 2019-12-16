@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use http\Exception\InvalidArgumentException;
 use Illuminate\Http\Request;
 use App\Challenge;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ChallengeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -53,12 +60,15 @@ class ChallengeController extends Controller
             $this->validate($request,[
                 'name' => 'required',
                 'description' => 'required',
+                'flag' => 'required',
                 'difficulty' => 'required',
+                'category' => 'required',
                 'active' => 'required'
             ]);
 
             $challenge->name = $request->name;
             $challenge->description = $request->description;
+            $challenge->flag = $request->flag;
 
             //Check if difficulty is valid value
             if($challenge->validDifficulty($request->difficulty))
@@ -68,6 +78,16 @@ class ChallengeController extends Controller
             else
             {
                 return redirect()->route('challenges.create')->withErrors('Invalid difficulty value!');
+            }
+
+            //Check if category is valid value
+            if($challenge->validCategory($request->category))
+            {
+                $challenge->category = $request->category;
+            }
+            else
+            {
+                return redirect()->route('challenges.create')->withErrors('Invalid category value!');
             }
 
             //Only admin is allowed to change author
@@ -95,9 +115,10 @@ class ChallengeController extends Controller
             {
                 return redirect()->route('challenges.create')->withErrors('Invalid status value selected!');
             }
-            $challenge->targetSolution = $request->targetSolution;
+
             $challenge->imageID = $request->imageID;
-            $challenge->attachments = $request->attachments;
+            $challenge->targetSolution = $request->targetSolution;
+            $challenge->hint = $request->hint;
 
             $challenge->save();
 
@@ -160,11 +181,14 @@ class ChallengeController extends Controller
             $this->validate($request,[
                 'name' => 'required',
                 'description' => 'required',
+                'flag' => 'required',
                 'difficulty' => 'required',
+                'category' => 'required',
             ]);
 
             $challenge->name = $request->name;
             $challenge->description = $request->description;
+            $challenge->flag = $request->flag;
 
             //Check if difficulty is valid value
             if($challenge->validDifficulty($request->difficulty))
@@ -173,7 +197,16 @@ class ChallengeController extends Controller
             }
             else
             {
-                return redirect()->route('challenges.create')->withErrors('Invalid difficulty value!');
+                return redirect()->route('challenges.edit',$challenge)->withErrors('Invalid difficulty value!');
+            }
+
+            if($challenge->validCategory($request->category))
+            {
+                $challenge->category = $request->category;
+            }
+            else
+            {
+                return redirect()->route('challenges.edit',$challenge)->withErrors('Invalid category value!');
             }
 
             //Only admin is allowed to change author
@@ -185,7 +218,7 @@ class ChallengeController extends Controller
                 }
                 else
                 {
-                    return redirect()->route('challenges.create')->withErrors('You are not authorized to change the author!');
+                    return redirect()->route('challenges.edit',$challenge)->withErrors('You are not authorized to change the author!');
                 }
             }
             else //Otherwise author is the current user
@@ -200,12 +233,12 @@ class ChallengeController extends Controller
             }
             else
             {
-                return redirect()->route('challenges.create')->withErrors('Invalid status value selected!');
+                return redirect()->route('challenges.edit',$challenge)->withErrors('Invalid status value selected!');
             }
 
             $challenge->imageID = $request->imageID;
             $challenge->targetSolution = $request->targetSolution;
-            $challenge->attachments = $request->attachments;
+            $challenge->hint = $request->hint;
 
             $challenge->save();
 
@@ -213,7 +246,7 @@ class ChallengeController extends Controller
         }
         catch (Exception $ex)
         {
-            return redirect()->route('challenges.edit')->withErrors("Cannot edit because of error: " . $ex. "!");
+            return redirect()->route('challenges.edit',$challenge)->withErrors("Cannot edit because of error: " . $ex. "!");
         }
     }
 
@@ -244,5 +277,94 @@ class ChallengeController extends Controller
         }
 
         return redirect()->route('challenges.index')->with('success','Successfully deleted challenge!');
+    }
+
+    public function files($id)
+    {
+        try
+        {
+            $challenge = Challenge::find($id);
+
+            return view('challenges.files')->with('challenge',$challenge);
+        }
+        catch (\Exception $ex)
+        {
+            return redirect('challenges.index')->withErrors("Could not find challenge!");
+        }
+    }
+    
+    public function download($id)
+    {
+        try
+        {
+            $challenge = Challenge::find($id);
+            if(Storage::disk('local')->exists($challenge->files))
+            {
+                return Storage::download($challenge->files);
+            }
+            else
+            {
+                return redirect()->route('challenges.show')->with('challenge',$challenge)->withErrors('This challenge has no files!');
+            }
+        }
+        catch (\Exception $ex)
+        {
+            return redirect()->route('challenges.index')->withErrors("Could not prepare download!");
+        }
+    }
+
+    public function upload(Request $request, $id)
+    {
+        //Only allow zip files with max of 100 MB
+        $this->validate($request, [
+            'file' => 'required|file|mimes:zip|max:100000',
+        ]);
+
+        try
+        {
+            $challenge = Challenge::find($id);
+            if ($challenge)
+            {
+                //Upload path
+                $path =  'files/' . $challenge->name;
+
+                // Get file extension
+                $extension = $request->file('file')->clientExtension();
+
+                // Check valid extensions
+                $valid = array("zip");
+
+                // Check extension
+                if (in_array(strtolower($extension), $valid))
+                {
+                    // Rename file
+                    $fileName = time() . rand(11111, 99999) . '.' . $extension;
+
+                    // Uploading file to given path
+                    $request->file('file')->storeAs($path, $fileName);
+
+                    //Delete old file if challenge had one
+                    if($challenge->files != "")
+                        Storage::delete($challenge->files);
+
+                    $challenge->files = $path . '/' . $fileName;
+                    $challenge->save();
+
+                    return view('challenges.show')->with('challenge',$challenge)->with('success','File successfully uploaded!');
+                }
+                else
+                {
+                    throw new \Exception("Invalid file type!");
+                }
+            }
+            else
+            {
+                throw new \Exception("Challenge does not exist!");
+            }
+        }
+        catch (\Exception $ex)
+        {
+            return redirect()->route('challenges.index')->withErrors('Could not upload because of error: ' . $ex->getMessage());
+        }
     }
 }

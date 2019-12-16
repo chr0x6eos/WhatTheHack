@@ -43,6 +43,9 @@ Route::get('challenges/edit/{challenge}','ChallengeController@edit')->name('chal
 Route::patch('challenges/update/{challenge}','ChallengeController@update')->name('challenges.update');
 Route::delete('challenges/delete/{challenge}','ChallengeController@destroy')->name('challenges.destroy');
 Route::get('challenges/deactivate/{challenge}','ChallengeController@deactivate')->name('challenges.deactivate');
+Route::get('challenges/files/{challenge}','ChallengeController@files')->name('challenges.files');
+Route::post('challenges/upload/{challenge}','ChallengeController@upload')->name('challenges.upload');
+Route::get('challenges/download/{challenge}','ChallengeController@download')->name('challenges.download');
 
 // User Management Routes
 Route::get('/manage/users', 'ManageUserController@index')->name('manageuser.index');
@@ -51,3 +54,4 @@ Route::patch('/manage/users/update/{user}', 'ManageUserController@update')->name
 // Classroom Management Routes
 Route::get('classroom/create', 'ClassroomController@create')->name('classroom.create');
 Route::post('classroom', 'ClassroomController@store')->name('classroom.store');
+
