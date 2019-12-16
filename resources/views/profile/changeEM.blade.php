@@ -15,7 +15,7 @@
                                 <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Current E-Mail Address:') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
+                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $user->email ?? old('email') }}" required autocomplete="email" autofocus>
 
                                     @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -44,6 +44,7 @@
                                     <button type="submit" class="btn btn-info">
                                         {{ __('Change E-Mail') }}
                                     </button>
+                                    <a href="{{ route('profile.show') }}" class="btn bg-light btn-outline-dark">Cancel</a>
                                 </div>
                             </div>
                         </form>

@@ -26,6 +26,13 @@
 
                         <div class="form-group row">
                             <label class="col-md-4 col-form-label text-md-right font-weight-bold">
+                                {{ __('E-Mail verified at:') }}
+                            </label>
+                            <label class="col-md-4 col-form-label text-md-center">@if($user->email_verified_at){{ $user->email_verified_at }}@else Not yet verified!@endif</label>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label text-md-right font-weight-bold">
                                 {{ __('Userrole:') }}
                             </label>
                             <label class="col-md-4 col-form-label text-md-center">{{ $user->userrole }}</label>

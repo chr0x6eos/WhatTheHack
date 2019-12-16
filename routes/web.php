@@ -21,7 +21,7 @@ Route::get('/contact', function () {
     return view('subpages/contact');
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/challenges','ChallengeController@index')->name('challenges.index');
 Route::get('/classroom', 'ClassroomController@index')->name('classroom.index');
@@ -33,6 +33,7 @@ Route::post('/profile/password/change', 'ProfileController@changePW')->name('pas
 Route::get('/profile/changeEmail', 'ProfileController@showChangeEMForm')->name('profile.showChangeEMForm');
 Route::post('/profile/email/change', 'ProfileController@changeEM')->name('email.change');
 Route::delete('/profile/delete/{user}', 'ProfileController@deleteAccount')->name('profile.delete');
+Route::get('/profile/email/change/{id}/{token}', 'ProfileController@changeEmail')->name('change.email');
 
 // Challenge Routes
 Route::get('challenges/create', 'ChallengeController@create')->name('challenges.create');
@@ -47,6 +48,7 @@ Route::get('challenges/files/{challenge}','ChallengeController@files')->name('ch
 Route::post('challenges/upload/{challenge}','ChallengeController@upload')->name('challenges.upload');
 Route::get('challenges/download/{challenge}','ChallengeController@download')->name('challenges.download');
 Route::post('challenges/flag/{challenge}','ChallengeController@flag')->name('challenges.flag');
+
 
 // User Management Routes
 Route::get('/manage/users', 'ManageUserController@index')->name('manageuser.index');
