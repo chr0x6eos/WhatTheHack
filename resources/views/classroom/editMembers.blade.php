@@ -8,7 +8,7 @@
                 @method('patch')
                 <h3>Delete members</h3>
                 <p>
-                    <table class="table table-striped table-bordered">
+                    <table class="table table-striped table-bordered" id="deletemembers">
                         <thead>
                             <th>ID</th>
                             <th>Name</th>
@@ -40,7 +40,7 @@
                 </p>
                 <h3>Add members</h3>
                 <p>
-                    <table class="table table-striped table-bordered">
+                    <table class="table table-striped table-bordered" id="addmembers">
                         <thead>
                         <th>ID</th>
                         <th>Name</th>
@@ -84,6 +84,40 @@
                     </a>
                 </p>
             </form>
+            <script>
+                $(document).ready(
+                    function () {
+                        $('#deletemembers').DataTable( {
+                            "paging": true,
+                            "info":false,
+                            "aoColumns": [
+                                null,
+                                null,
+                                null,
+                                { "bSearchable": true, "orderable": false },
+                                { "bSearchable": false, "orderable": false },
+                                //null,
+                                //{ "bSearchable": false, "orderable": false },
+                                // { "bSearchable": false, "orderable": false }
+                            ]
+                        });
+                    });
+
+                $(document).ready(
+                    function () {
+                        $('#addmembers').DataTable( {
+                            "paging": true,
+                            "info":false,
+                            "aoColumns": [
+                                null,
+                                null,
+                                null,
+                                { "bSearchable": false, "orderable": false },
+                                // { "bSearchable": false, "orderable": false }
+                            ]
+                        });
+                    });
+            </script>
         </div>
     </div>
 @endsection

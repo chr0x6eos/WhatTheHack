@@ -29,7 +29,7 @@
                     </p>
                         <p>
                         @if (Auth::user()->userrole == 'admin')
-                            <p>Go here to access the <a href="{{ route('classroom.index') }}">all classrooms</a>.</p>
+                            <p>Go here to access the <a href="{{ route('classroom.index') }}">management classroom</a> page.</p>
                             @endif
                         </p>
 

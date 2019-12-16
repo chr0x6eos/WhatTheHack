@@ -9,8 +9,10 @@
             <th>Id</th>
             <th>Name</th>
             <th>Owner</th>
+            @if(Auth::user()->hasRole("admin") || Auth::user()->hasRole("teacher"))
             <th>Info</th>
             <th>Members</th>
+            @endif
             <th>Challenges</th>
             </thead>
             <tbody>
@@ -20,14 +22,16 @@
                     <td>{{ $classroom->id }}</td>
                     <td>{{ $classroom->classroom_name }}</td>
                     <td>{{ $classroom->classroom_owner }}</td>
+                    @if(Auth::user()->hasRole("admin") || $classroom->isOwner(Auth::user()->id))
                     <td>
                         <a href="{{ route('classroom.edit', $classroom->id) }}" class="btn bg-light btn-outline-dark">Edit</a>
                     </td>
                     <td>
                         <a href="{{ route('classroom.editmembers', $classroom->id) }}" class="btn bg-light btn-outline-dark">Edit</a>
                     </td>
+                    @endif
                     <td>
-                        <a href="{{ route('classroom.editchallenges', $classroom->id) }}" class="btn bg-light btn-outline-dark">Edit</a>
+                        <a href="{{ route('classroom.editchallenges', $classroom->id) }}" class="btn bg-light btn-outline-dark">Show challenges</a>
                     </td>
                 </tr>
                 @endif
