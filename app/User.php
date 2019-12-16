@@ -47,7 +47,7 @@ class User extends Authenticatable
         }
         return false;
     }
-    
+
     // Check if the user object is assigned the requested role
     public function hasRole($role)
     {

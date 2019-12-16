@@ -36,4 +36,9 @@ class Classroom extends Model
         return false;
     }
 
+    public function isOwner($id){
+        if($this->classroom_owner==$id)
+            return true;
+        return false;
+    }
 }
