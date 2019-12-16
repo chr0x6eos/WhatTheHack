@@ -22,6 +22,9 @@ Laravel requires you to have an app encryption key which is stored in your _.env
 SQLite databases are valid just by creating a new file called _database.sqlite_ (preferred in the folder _database_). The absolute path then must be added to the _.env_ file to make Laravel use this as the database:
 ``` DB_DATABASE="C:/Users/Simon/Documents/git/whatthehack/database/database.sqlite" ```
 
+If you are getting an error message when trying to migrate, try refreshing the composer cache with ``` composer dump-autoload ```.
+
+
 If you have PHP installed locally and you would like to use PHP's built-in development server to serve your application, you may use the serve Artisan command. This command will start a development server at
 [localhost:8000](http://localhost:8000):
 
@@ -62,6 +65,40 @@ A goal of code standards is to facilitate monitoring during development of a sof
 
 Through this, it will also be possible to provide every developer a fixed, readable code basis with as-low-as-possible overhead. Contributing and merging is only possible in case universal code standards are strictly followed.
 
+### Project-specific contribution info
+
+**Authentication**
+Before adding a new functionality to the project's `master` branch, ensure that only allowed users are able to access your new routes (Keep the General Data Protection Regulation in mind, better known as DSGVO).
+
+No sensible data must be accessible for unauthorized users.
+
+You can easily add an authorization check to your app by calling the `auth` Middleware in your Controller's constructor:
+
+```
+public function __construct()
+{
+	$this->middleware('auth');
+}
+```
+
+A user can be of three different role types:
+- Student (`student`)
+- Teacher (`teacher`)
+- Administrator (`admin`)
+
+Additionally, a `role:[role]` Middleware is available for each of the three roles:
+```
+$this->middleware('role:admin');
+```
+The role middleware initially also checks if a user session is active in general, therefore you do not have to use both the `auth` and the `role:[role]` middleware within one authorization check.
+
+A middleware can also be applied directly to the web route:
+```
+Route::get('[...]', '[...]')->name('[...]')->middleware('role:admin');
+```
+
+In case an `auth` authorization check fails, the login page is displayed. In case of the `role` authorization check, the page is aborted with the app's 404 page.
+
 ### GIT Workflow
 
 #### Issues
@@ -76,7 +113,7 @@ Issues can be of three types:
 
 #### Working with branches
 
-Once in production, the project is deployed on branch origin master. **Strictly nobody is allowed to directly push on the master branch under no circumstances.**
+Once in production, the project is deployed on branch `origin master`. **Strictly nobody is allowed to directly push on the `master` branch under no circumstances.**
 
 Each internal developer owns a development branch suited for his requirements (development-[lastname]) in case this is needed. The development branch must be up to date with the master branch to always guarantee compatibility.
 
