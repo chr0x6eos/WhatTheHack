@@ -3,10 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Challenge;
+use App\Notifications\AckEmail;
+use App\Notifications\SupportEmail;
 use App\SupportRequest;
-use http\Client\Curl\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use Mockery\Exception;
+use App\User;
 
 class SupportRequestController extends Controller
 {
@@ -37,7 +41,7 @@ class SupportRequestController extends Controller
             $supportRequest->message = $request->get('message');
             $supportRequest->solved = false;
 
-
+            $this->sendMail($supportRequest);
 
             $supportRequest->save();
 
@@ -47,6 +51,15 @@ class SupportRequestController extends Controller
         catch (Exception $ex){
             return redirect()->route('support.create')->withErrors("Cannot send support request because of error: " . $ex. "!");
         }
+    }
 
+    public function sendMail (SupportRequest $supportRequest){
+
+
+        $admin = new User();
+        $admin = $admin->getAdmin();
+
+        $admin->notify(new SupportEmail($supportRequest));
+        Auth::user()->notify(new AckEmail($supportRequest));
     }
 }

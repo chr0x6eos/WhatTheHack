@@ -89,4 +89,8 @@ class User extends Authenticatable implements MustVerifyEmail
     public function supportrequest(){
         return $this-> hasMany('App\SupportRequest');
     }
+
+    public function getAdmin(){
+        return User::where('userrole', 'admin')->first();
+    }
 }
