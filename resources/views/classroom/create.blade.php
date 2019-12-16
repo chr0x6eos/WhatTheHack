@@ -10,7 +10,6 @@
                     <strong>Name:</strong>
                     <input type="text" class="form-control" name="name" placeholder="Name">
                 </p>
-
                     <table>
                         <thead>
                         <th>Username</th>
@@ -36,6 +35,13 @@
                         @endforeach
                         </tbody>
                     </table>
+                <p>
+                    <strong>Status:</strong>
+                    <select name="active">
+                        <option value="1" selected="selected">Enabled</option>
+                        <option value="0">Disabled</option>
+                    </select>
+                </p>
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul class="list-unstyled"   >
