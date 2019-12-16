@@ -151,14 +151,14 @@
     </div>
  @yield('content')
 
+    @if (session()->has('success'))
+        <div class="alert alert-success">{{ session()->get('success') }}</div>
+    @endif
+
     @if($errors)
         @foreach ($errors->all() as $error)
             <div class="alert alert-danger">{{ $error }}</div>
         @endforeach
-    @endif
-
-    @if (session()->has('success'))
-        <div class="alert alert-success">{{ session()->get('success') }}</div>
     @endif
 
 </body>
