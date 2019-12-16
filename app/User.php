@@ -47,7 +47,7 @@ class User extends Authenticatable
         }
         return false;
     }
-    
+
     // Check if the user object is assigned the requested role
     public function hasRole($role)
     {
@@ -85,4 +85,19 @@ class User extends Authenticatable
         }
         return false;
     }
+
+    public function challenges()
+    {
+        return $this
+            ->belongsToMany('App\Challenges')
+            ->withTimestamps();
+    }
+
+    public function classrooms()
+    {
+        return $this
+            ->belongsToMany('App\Classroom')
+            ->withTimestamps();
+    }
+
 }
