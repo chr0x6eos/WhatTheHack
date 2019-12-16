@@ -56,14 +56,14 @@ Route::patch('/manage/users/update/{user}', 'ManageUserController@update')->name
 
 // Classroom Management Routes
 Route::get('classrooms/myClassrooms', 'ClassroomController@myClassrooms')->name('classroom.myclassrooms');
-Route::post('classroom/update/{classroom}', 'ClassroomController@update')->name('classroom.update');
-Route::get('classroom/editMembers/{classroom}', 'ClassroomController@editMembers')->name('classroom.editmembers');
-Route::get('classroom/editChallenges/{classroom}', 'ClassroomController@editChallenges')->name('classroom.editchallenges');
-Route::post('classroom/updateMembers/{classroom}', 'ClassroomController@updateMembers')->name('classroom.updatemembers');
-Route::patch('classroom/updateChallenges/{classroom}', 'ClassroomController@updateChallenges')->name('classroom.updatechallenges');
-Route::patch('classroom/deleteMembers/{classroom}', 'ClassroomController@deleteMembers')->name('classroom.deleteMembers');
-Route::post('classroom/{classroom}/attach','ClassroomController@attach')->name('classroom.attach');
-Route::delete('classroom/{classroom}/detach','ClassroomController@detach')->name('classroom.detach');
-Route::delete('classroom/{classroom}', 'ClassroomController@destroy')->name('classroom.destroy');
-Route::get('classroom/disabledClassrooms', 'ClassroomController@disabled')->name('classroom.disabled');
-Route::patch('classroom/restore/{classroom}', 'ClassroomController@restore')->name('classroom.restore');
+Route::post('classroom/update/{classroom}', 'ClassroomController@update')->name('classroom.update')->middleware('role:teacher');
+Route::get('classroom/editMembers/{classroom}', 'ClassroomController@editMembers')->name('classroom.editmembers')->middleware('role:teacher');
+Route::get('classroom/editChallenges/{classroom}', 'ClassroomController@editChallenges')->name('classroom.editchallenges')->middleware('role:teacher');
+Route::post('classroom/updateMembers/{classroom}', 'ClassroomController@updateMembers')->name('classroom.updatemembers')->middleware('role:teacher');
+Route::patch('classroom/updateChallenges/{classroom}', 'ClassroomController@updateChallenges')->name('classroom.updatechallenges')->middleware('role:teacher');
+Route::patch('classroom/deleteMembers/{classroom}', 'ClassroomController@deleteMembers')->name('classroom.deleteMembers')->middleware('role:teacher');
+Route::post('classroom/{classroom}/attach','ClassroomController@attach')->name('classroom.attach')->middleware('role:teacher');
+Route::delete('classroom/{classroom}/detach','ClassroomController@detach')->name('classroom.detach')->middleware('role:teacher');
+Route::delete('classroom/{classroom}', 'ClassroomController@destroy')->name('classroom.destroy')->middleware('role:teacher');
+Route::get('classroom/disabledClassrooms', 'ClassroomController@disabled')->name('classroom.disabled')->middleware('role:teacher');
+Route::patch('classroom/restore/{classroom}', 'ClassroomController@restore')->name('classroom.restore')->middleware('role:teacher');
