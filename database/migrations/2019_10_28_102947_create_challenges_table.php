@@ -27,7 +27,7 @@ class CreateChallengesTable extends Migration
             $table->text('targetSolution')->nullable(); //Feasible solution for the challenge
             $table->text('hint')->nullable(); //Hint for the challenge
             $table->string('imageID',32)->nullable(); //Docker-Image ID
-            $table->string('attachments',255)->nullable(); //Attachments
+            $table->string('files',255)->nullable(); //files
 
             $table->timestamps();
         });

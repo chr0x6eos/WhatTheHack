@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Challenge;
 use App\Classroom;
 use Illuminate\Http\Request;
 
@@ -214,6 +215,7 @@ class ClassroomController extends Controller
 
         return redirect()->route('classroom.index')->with('success','Successfully deleted classroom!');
     }
+
     //Associate a multitude of challenges with a classroom
     public function attach(Request $request, $id)
     {
@@ -225,7 +227,9 @@ class ClassroomController extends Controller
 
         foreach ($challenges as $c)
         {
-           $classroom->challenges()->attach($c);
+            $challenge=Challenge::find($c);
+            if($challenge->active== true)
+                $classroom->challenges()->attach($c);
         }
         return redirect()->route('classroom.myclassrooms');
     }

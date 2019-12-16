@@ -5,6 +5,7 @@
         <h1>You are in this classroom: {{$classroom->classroom_name}}</h1>
         <h3>Add challenges</h3>
         <div>
+            @if($classroom->isOwner(Auth::user()->id)||Auth::user()->hasRole('admin'))
             <form method="post" action="{{ route('classroom.attach', $classroom->id)}}" >
                 @csrf
 
@@ -20,7 +21,7 @@
                     </thead>
                     <tbody>
                     @foreach (\App\Challenge::all() as $c)
-                        @if(!$classroom->getClassroomChallenges($c->id) )
+                        @if(!$classroom->getClassroomChallenges($c->id) && $c->active==true)
                         <tr>
                             <td>
                                 {{$c->id}}
@@ -45,6 +46,7 @@
                     @endforeach
                     </tbody>
                 </table>
+
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul class="list-unstyled"   >
@@ -54,6 +56,7 @@
                         </ul>
                     </div>
                 @endif
+
                 <br>
                 <p>
                     <button type="submit"  class="btn btn-success">
@@ -66,6 +69,7 @@
                     </a>
                 </p>
             </form>
+            @endif
         </div>
 
         <div>
@@ -80,7 +84,10 @@
                     <th>Challenge difficulty</th>
                     <th>Challenge description</th>
                     <th>Challenge category</th>
-                    <th>Remove</th>
+                    <th class="th-sm">Challenge Details</th>
+                    @if($classroom->isOwner(Auth::user()->id) ||Auth::user()->hasRole('admin'))
+                        <th>Remove</th>
+                    @endif
                     </thead>
                     <tbody>
                     @foreach ($classroom->challenges as $c)
@@ -101,8 +108,13 @@
                                 {{$c->category}}
                             </td>
                             <td>
-                                <input type="checkbox" name="remove_Challenges[]" value="{{$c->id}}">
+                                <a href="{{route('challenges.show',$c->id)}}" class="button badge-info">Details</a>
                             </td>
+                            @if($classroom->isOwner(Auth::user()->id)||Auth::user()->hasRole('admin'))
+                                <td>
+                                    <input type="checkbox" name="remove_Challenges[]" value="{{$c->id}}">
+                                </td>
+                            @endif
                         </tr>
                     @endforeach
                     </tbody>
@@ -122,8 +134,6 @@
                     <button type="submit"  class="btn btn-success">
                         Submit
                     </button>
-                </p>
-                <p>
                     <a href="{{ route('classroom.myclassrooms') }}" class="btn btn-danger">
                         Cancel
                     </a>

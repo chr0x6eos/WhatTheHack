@@ -21,7 +21,6 @@ class CreateClassroomsTable extends Migration
         $table->timestamps();
     });
     }
-
     /**
      * Reverse the migrations.
      *
