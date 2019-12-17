@@ -15,8 +15,8 @@ class CreateSupportRequestsTable extends Migration
     {
         Schema::create('support_requests', function (Blueprint $table) {
             $table->increments('id')->autoIncrement();
-            $table->integer('challenge_id')->unsigned();
-            $table->integer('user_id')->unsigned();
+            $table->bigInteger('challenge_id')->unsigned();
+            $table->bigInteger('user_id')->unsigned();
             $table->text('subject');
             $table->longText('message');
             $table->boolean('solved')->default(false);
