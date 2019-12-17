@@ -133,6 +133,7 @@
                             <a href="{{ route('challenges.edit', $challenge->id) }}" class="btn btn-info">Edit</a>
                             <a href="{{ route('challenges.files', $challenge->id) }}" class="btn btn-secondary">Files</a>
                             <a href="{{ route('challenges.index') }}" class="btn btn-outline-secondary">Go back</a>
+                            <a href="{{ route('support.create', $challenge->id) }}" class="btn btn-outline-dark">Report a problem</a>
                             @if(!$challenge->active)
                                 <form method="POST" action="{{ route('challenges.destroy',$challenge->id) }}">
                                     @csrf
