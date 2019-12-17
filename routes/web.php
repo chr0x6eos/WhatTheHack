@@ -49,7 +49,6 @@ Route::get('challenges/{challenge}','ChallengeController@show')->name('challenge
 Route::get('challenges/download/{challenge}','ChallengeController@download')->name('challenges.download');
 Route::post('challenges/flag/{challenge}','ChallengeController@flag')->name('challenges.flag');
 
-
 // User Management Routes
 Route::get('/manage/users', 'ManageUserController@index')->name('manageuser.index');
 Route::patch('/manage/users/update/{user}', 'ManageUserController@update')->name('manageuser.update');
@@ -71,3 +70,7 @@ Route::delete('classroom/{classroom}/detach','ClassroomController@detach')->name
 Route::delete('classroom/{classroom}', 'ClassroomController@destroy')->name('classroom.destroy')->middleware('role:teacher');
 Route::get('classroom/disabledClassrooms', 'ClassroomController@disabled')->name('classroom.disabled')->middleware('role:teacher');
 Route::patch('classroom/restore/{classroom}', 'ClassroomController@restore')->name('classroom.restore')->middleware('role:teacher');
+
+// Support/Report Routes
+Route::get('support/{challenge}', 'SupportRequestController@create')->name('support.create');
+Route::post('submit/{challenge}', 'SupportRequestController@submit')->name('support.submit');
