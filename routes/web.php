@@ -56,6 +56,10 @@ Route::patch('/manage/users/update/{user}', 'ManageUserController@update')->name
 
 // Classroom Management Routes
 Route::get('classrooms/myClassrooms', 'ClassroomController@myClassrooms')->name('classroom.myclassrooms');
+
+Route::get('classroom/create', 'ClassroomController@create')->name('classroom.create')->middleware('role:teacher');
+Route::post('classroom', 'ClassroomController@store')->name('classroom.store')->middleware('role:teacher');
+Route::get('classroom/edit/{classroom}','ClassroomController@edit')->name('classroom.edit')->middleware('role:teacher');
 Route::post('classroom/update/{classroom}', 'ClassroomController@update')->name('classroom.update')->middleware('role:teacher');
 Route::get('classroom/editMembers/{classroom}', 'ClassroomController@editMembers')->name('classroom.editmembers')->middleware('role:teacher');
 Route::get('classroom/editChallenges/{classroom}', 'ClassroomController@editChallenges')->name('classroom.editchallenges')->middleware('role:teacher');
