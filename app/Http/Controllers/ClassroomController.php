@@ -59,7 +59,7 @@ class ClassroomController extends Controller
             ]);
             $classroom->classroom_name = $request->name;
             $classroom->classroom_owner=$user->getAuthIdentifier();
-            $classroom->active = $request->active;
+            // $classroom->active = $request->active;
 
             $addStudents = $request->input('add_Students');
             $classroom->save();
