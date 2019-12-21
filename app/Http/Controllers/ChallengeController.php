@@ -296,6 +296,7 @@ class ChallengeController extends Controller
     {
         try
         {
+            //TODO: ADD PERMISSION CHECK IF USER IS ALLOWED TO DOWNLOAD FILES
             $challenge = Challenge::find($id);
             if(Storage::disk('local')->exists($challenge->files))
             {
@@ -322,6 +323,7 @@ class ChallengeController extends Controller
         try
         {
             $challenge = Challenge::find($id);
+
             if ($challenge)
             {
                 //Upload path
