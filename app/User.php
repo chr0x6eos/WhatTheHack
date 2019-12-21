@@ -7,7 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
 
@@ -100,4 +100,7 @@ class User extends Authenticatable
             ->withTimestamps();
     }
 
+    public function getAdmin(){
+        return User::where('userrole', 'admin')->first();
+    }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateClassroomsTable extends Migration
+class CreateEMCTokensTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,16 @@ class CreateClassroomsTable extends Migration
      */
     public function up()
     {
-        Schema::create('classrooms', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('classroom_name');
-            $table->string('classroom_owner');
-            $table->boolean('active')->default(true);
+        Schema::create('e_m_c_tokens', function (Blueprint $table) {
+            $table->bigIncrements('id')->unique();
+            $table->integer('user_id');
+            $table->string('token')->unique();
+            $table->string('email');
+            $table->timestamp('valid_until');
             $table->timestamps();
         });
     }
+
     /**
      * Reverse the migrations.
      *
@@ -28,6 +30,6 @@ class CreateClassroomsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('classrooms');
+        Schema::dropIfExists('e_m_c_tokens');
     }
 }

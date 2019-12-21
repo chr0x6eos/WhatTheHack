@@ -29,6 +29,9 @@
     <!-- DataTables addon -->
     <script type="text/javascript" src="{{ URL::asset('js/addons/datatables.min.js') }}"></script>
     <!-- <script type="text/javascript" src="{{ URL::asset('js/addons/datatables-select.min.js') }}"></script> -->
+    <script src="{{ asset('js/actions.js') }}"></script>
+    <!-- jQuery Custom Scroller CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -48,55 +51,39 @@
 </head>
 <body>
 
-    <div id="app">
+    <div id="content">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+            <div class="navbar-toggle">
+                    <div class="container-fluid">
+
+                        <button type="button" id="sidebarCollapse" class="btn btn-info">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                    </div>
+            </div>
             <div class="container">
+
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'What the hack') }}
                 </a>
 
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
-                    </ul>
-
+                <div class="login nav" id="navbarSupportedContent">
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
+                        @if(Auth::user())
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                                onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                 @csrf
+                            </form>
                         @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->username }} <span class="caret"></span>
-                                </a>
+                            <a class="dropdown-item" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        @endif
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
                     </ul>
+
                 </div>
             </div>
         </nav>
@@ -109,20 +96,113 @@
         <!-- Sidebar -->
         <nav id="sidebar">
 
+            <div id="dismiss">
+                <i class="fas fa-arrow-left"></i>
+            </div>
+
+            <div class="sidebar-header">
+                <h4>WhatTheHack</h4>
+            </div>
+
             <ul class="list-unstyled components">
+                <!-- ACCOUNT -->
+                <li>
+                    <a href="#accountSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        @if (Auth::user())
+                            {{ Auth::user()->username }} <span class="caret"></span>
+                        @else
+                            Account
+                        @endif
+                    </a>
+                    <ul class="collapse list-unstyled" id="accountSubmenu">
+                        <li>
+                            @if (Auth::user())
+                                <a href="{{ route('profile.show') }}">Profile</a>
+                        <li>
+                            <a  href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
+                        </li>
+                            @else
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            </li>
+                            @endif
+                    </ul>
+                </li>
+
+                <!-- ADMIN VIEW -->
+                @if (Auth::user())
+                    @if(Auth::user()->hasRole("admin"))
+                        <li>
+                            <a href="#challengeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Challenges</a>
+                            <ul class="collapse list-unstyled" id="challengeSubmenu">
+                                <li>
+                                    <a href="/challenges">Show Challenges</a>
+                                </li>
+                                <li>
+                                    <a href="challenges/create">Create Challenge</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#classroomSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Classroom</a>
+                            <ul class="collapse list-unstyled" id="classroomSubmenu">
+                                <li>
+                                    <a href="/classroom">Show Classroom</a>
+                                </li>
+                                <li>
+                                    <a href="classroom/create">Create Classroom</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="/manage/users">User Management</a>
+                        </li>
+                        @else
+                    @endif
+                        @if(Auth::user()->hasRole("teacher"))
+                            <li>
+                                <a href="#challengeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Challenges</a>
+                                <ul class="collapse list-unstyled" id="challengeSubmenu">
+                                    <li>
+                                        <a href="/challenges">Show Challenges</a>
+                                    </li>
+                                    <li>
+                                        <a href="challenges/create">Create Challenge</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#classroomSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Classroom</a>
+                                <ul class="collapse list-unstyled" id="classroomSubmenu">
+                                    <li>
+                                        <a href="/classroom">Show Classroom</a>
+                                    </li>
+                                    <li>
+                                        <a href="classroom/create">Create Classroom</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endif
+                        @if(Auth::user()->hasRole("student"))
+                            <li>
+                                <a href="/classroom">Classrooms</a>
+                            </li>
+                            <li>
+                                <a href="/challenges">Challenges</a>
+                            </li>
+                        @endif
+                @endif
 
                 <li>
-                    <a href="{{ route('profile.show') }}">Profile</a>
-                </li>
-                <li>
-                    <a href=" {{ route('classroom.myclassrooms') }}">My classrooms</a>
-                </li>
-                <li>
-                    <a href="#">Demopage 3</a>
-                </li>
-                <li>
-                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">About</a>
-                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                    <a href="#aboutSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">About</a>
+                    <ul class="collapse list-unstyled" id="aboutSubmenu">
                         <li>
                             <a href="/contact">Contact</a>
                         </li>
@@ -134,20 +214,8 @@
             </ul>
 
         </nav>
-        <!-- Page Content -->
-        <div id="content">
 
-            <!--<nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="container-fluid">
 
-                    <button type="button" id="sidebarCollapse" class="btn btn-info">
-                        <i class="fas fa-align-left"></i>
-                        <span>Toggle Sidebar</span>
-                    </button>
-                </div>
-            </nav>
-            -->
-        </div>
     </div>
  @yield('content')
 

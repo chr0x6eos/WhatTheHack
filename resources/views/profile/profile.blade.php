@@ -26,6 +26,13 @@
 
                         <div class="form-group row">
                             <label class="col-md-4 col-form-label text-md-right font-weight-bold">
+                                {{ __('E-Mail verified at:') }}
+                            </label>
+                            <label class="col-md-4 col-form-label text-md-center">@if($user->email_verified_at){{ $user->email_verified_at }}@else Not yet verified!@endif</label>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label text-md-right font-weight-bold">
                                 {{ __('Userrole:') }}
                             </label>
                             <label class="col-md-4 col-form-label text-md-center">{{ $user->userrole }}</label>
@@ -41,15 +48,15 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-sm text-md-center">
-                                    <a href="{{ route('profile.showChangePWForm') }}" class="btn bg-light btn-outline-dark">Change Password</a>
+                                    <a href="{{ route('profile.showChangePWForm') }}" class="btn btn-info">Change Password</a>
                                 </div>
                                 <div class="col-sm text-md-center">
-                                    <a href="{{ route('profile.showChangeEMForm') }}" class="btn bg-light btn-outline-dark">Change E-Mail</a>
+                                    <a href="{{ route('profile.showChangeEMForm') }}" class="btn btn-info">Change E-Mail</a>
                                 </div>
                                 <form method="POST" action="{{ route('profile.delete', $user->id) }}">
                                     @csrf
                                     @method('delete')
-                                    <button type="submit" class="btn bg-danger btn-outline-dark" onclick="return confirm('Do you really want to delete your user account?')">Delete Account</button>
+                                    <button type="submit" class="btn bg-danger" onclick="return confirm('Do you really want to delete your user account?')">Delete Account</button>
                                 </form>
                             </div>
                         </div>

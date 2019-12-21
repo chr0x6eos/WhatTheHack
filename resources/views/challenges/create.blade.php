@@ -1,78 +1,125 @@
 @extends('layouts.app')
 @section('content')
-<h2>Add a new challenge</h2>
-<form method="post" action="{{ route('challenges.store') }}" id="challengeform">
-@csrf
-    <p>
-        <strong>Challenge name:</strong>
-        <input type="text" name="name">
-    </p>
-    <p>
-        <strong>Challenge description:</strong>
+    <div class="container">
+        <div class="card">
+            <div class="card-header font-weight-bold">{{ __('Add a new challenge') }}</div>
+            <div class="card-body">
+                <div class="form-grop row">
+                    <form method="post" action="{{ route('challenges.store') }}" id="challengeform">
+                        @csrf
+                        <div class="form-group row">
+                            <label for="name" class="col-sm-4 col-form-label text-md-right">
+                                {{ __('Challenge name:') }}
+                            </label>
+                            <div class="col-md-6">
+                                <input id="challenge_name" type="text" class="form-control" name="name" required autofocus>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="description" class="col-sm-4 col-form-label text-md-right">
+                                {{ __('Challenge description:') }}
+                            </label>
+                            <div class="col-md-6">
+                                <textarea id="description "form="challengeform" name="description" class="form-control"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="flag" class="col-sm-4 col-form-label text-md-right">
+                                {{ __('Flag:') }}
+                            </label>
+                            <div class="col-md-6">
+                                <input id="flag" type="text" class="form-control" name="flag" required autofocus>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="difficulty" class="col-sm-4 col-form-label text-md-right">
+                                {{ __('Difficulty:') }}
+                            </label>
+                            <div class="col-md-6">
+                                <select id="difficulty "name="difficulty" class="form-control">
+                                    <option value="easy" selected="selected">Easy</option>
+                                    <option value="medium">Medium</option>
+                                    <option value="hard">Hard</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="category" class="col-sm-4 col-form-label text-md-right">
+                                {{ __('Category:') }}
+                            </label>
+                            <div class="col-md-6">
+                                <select id="category "name="category" class="form-control">
+                                    <option value="misc" selected="selected">misc</option>
+                                    <option value="web">web</option>
+                                    <option value="forensic">forensic</option>
+                                    <option value="reversing">reversing</option>
+                                    <option value="crypto">crypto</option>
+                                    <option value="pwn">pwn</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="author" class="col-sm-4 col-form-label text-md-right">
+                                {{ __('Author:') }}
+                            </label>
+                            <div class="col-md-6">
+                                @if(Auth::user()->hasRole("admin"))<input id="author" type="text" name="author" class="form-control" value="{{ Auth::user()->username }}">
+                                @else
+                                    <input id="author" type="text" name="author" disabled class="form-control" value="{{ Auth::user()->username }}">
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="status" class="col-sm-4 col-form-label text-md-right">
+                                {{ __('Status:') }}
+                            </label>
+                            <div class="col-md-6">
+                                <select id="status" name="active" class="form-control">
+                                    <option value="1" selected="selected">Enabled</option>
+                                    <option value="0">Disabled</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="targetSolution" class="col-sm-4 col-form-label text-md-right">
+                                {{ __('Feasible Solution (optional:)') }}
+                            </label>
+                            <div class="col-md-6">
+                                <textarea id="targetSolution "form="challengeform" name="targetSolution" class="form-control"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="hint" class="col-sm-4 col-form-label text-md-right">
+                                {{ __('Hint:') }}
+                            </label>
+                            <div class="col-md-6">
+                                <textarea id="hint "form="challengeform" name="hint" class="form-control"></textarea>
+                            </div>
+                        </div>
+                        <p>
+                        <div class="form-group row">
+                            <label for="imageID" class="col-sm-4 col-form-label text-md-right">
+                                {{ __('Docker Image ID (optional):') }}
+                            </label>
+                            <div class="col-md-6">
+                                <input id="imageID" type="text" class="form-control" name="imageID" required autofocus>
+                            </div>
+                        </div>
+                        <p>
+                            <strong>Files (optional):</strong>
+                            Please upload the files after creating the challenge.
+                        </p>
+                        <div class="form-group row">
+                            <div class="col-md-8 offset-md-4">
+                                <button type="submit" class="btn btn-info">Submit</button>
+                                <a href="{{ route('challenges.index') }} " class="btn btn-danger">Cancel</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
         <br>
-        <textarea form="challengeform" name="description"></textarea>
-    </p>
-    <p>
-        <strong>Flag:</strong>
-        <input type="text" name="flag">
-    </p>
-    <p>
-        <strong>Difficulty:</strong>
-        <select name="difficulty">
-            <option value="tatu" selected="selected">TaTü</option>
-            <option value="easy">Easy</option>
-            <option value="medium">Medium</option>
-            <option value="hard">Hard</option>
-            <option value="insane">Insane</option>
-        </select>
-    </p>
-    <p>
-        <strong>Category:</strong>
-        <select name="category">
-            <option value="misc" selected="selected">misc</option>
-            <option value="web">web</option>
-            <option value="forensic">forensic</option>
-            <option value="reversing">reversing</option>
-            <option value="crypto">crypto</option>
-            <option value="pwn">pwn</option>
-        </select>
-    </p>
-    <p>
-        <strong>Author:</strong>
-        @if(Auth::user()->hasRole("admin"))<input type="text" name="author" value="{{ Auth::user()->username }}">
-        @else
-            {{ Auth::user()->username }}
-        @endif
-    </p>
-    <p>
-        <strong>Status:</strong>
-        <select name="active">
-            <option value="1" selected="selected">Enabled</option>
-            <option value="0">Disabled</option>
-        </select>
-    </p>
-    <p>
-        <strong>Feasible solution (optional):</strong>
-        <br>
-        <textarea form="challengeform" name="targetSolution"></textarea>
-    </p>
-    <p>
-        <strong>Hint:</strong>
-        <br>
-        <textarea form="challengeform" name="hint"></textarea>
-    </p>
-    <p>
-        <strong>Docker Image ID (optional):</strong>
-        <input type="text" name="imageID">
-    </p>
-    <p>
-        <strong>Files (optional):</strong>
-        Please upload the files after creating the challenge.
-    </p>
-    <p>
-        <button type="submit" class="btn btn-success">Submit</button>
-        <a href="{{ route('challenges.index') }} " class="btn btn-danger">Cancel</a>
-    </p>
-</form>
-<br>
+    </div>
 @endsection
