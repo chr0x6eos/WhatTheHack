@@ -3,12 +3,13 @@
 @section('content')
     <div class="container">
         <h1>You are in this classroom: {{$classroom->classroom_name}}</h1>
-        <h3>Add challenges</h3>
+        @if($classroom->isOwner(Auth::user()->id)||Auth::user()->hasRole('admin'))
+          <h3>Add challenges</h3>
+        @endif
         <div>
             @if($classroom->isOwner(Auth::user()->id)||Auth::user()->hasRole('admin'))
-            <form method="post" action="{{ route('classroom.attach', $classroom->id)}}" >
+               <form method="post" action="{{ route('classroom.attach', $classroom->id)}}" >
                 @csrf
-
 
                 <table id="challenges" border="1" class="table table-striped table-bordered" cellspacing="0" width="100%">
                     <thead>
@@ -62,13 +63,11 @@
                     <button type="submit"  class="btn btn-success">
                         Submit
                     </button>
-                </p>
-                <p>
                     <a href="{{ route('classroom.myclassrooms')}}" class="btn btn-danger">
                         Cancel
                     </a>
                 </p>
-            </form>
+               </form>
             @endif
         </div>
 
@@ -76,7 +75,7 @@
             <form method="post" action="{{route('classroom.detach',$classroom->id)}}" >
                 @csrf
                 {{ method_field("delete") }}
-                <h3>Already in classroom</h3>
+                <h3>This challenges are available</h3>
                 <table id="challenges2" border="1" class=" table table-striped table-bordered">
                     <thead>
                     <th>Challenge id</th>
@@ -130,7 +129,9 @@
                 @endif
                 <br>
                 <br>
+                @if($classroom->isOwner(Auth::user()->id)||Auth::user()->hasRole('admin'))
                 <p>
+
                     <button type="submit"  class="btn btn-success">
                         Submit
                     </button>
@@ -138,6 +139,7 @@
                         Cancel
                     </a>
                 </p>
+                    @endif
             </form>
         </div>
     </div>

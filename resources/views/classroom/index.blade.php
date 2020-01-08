@@ -15,10 +15,11 @@
                 </thead>
                 <tbody>
                 @foreach($classrooms as $classroom)
+                    @if($classroom->active == "1")
                     <tr>
                         <td>{{ $classroom->id }}</td>
                         <td>{{ $classroom->classroom_name }}</td>
-                        <td>{{ $classroom->classroom_owner }}</td>
+                        <td>{{ \App\User::find($classroom->classroom_owner)->username }}</td>
                         <td>
                             <a href="{{ route('classroom.edit', $classroom->id) }}" class="btn bg-light btn-outline-dark">Edit</a>
                              </td>
@@ -29,6 +30,7 @@
                             <a href="{{ route('classroom.editchallenges', $classroom->id) }}" class="btn bg-light btn-outline-dark">Edit</a>
                         </td>
                     </tr>
+                    @endif
                 @endforeach
                 </tbody>
             </table>
