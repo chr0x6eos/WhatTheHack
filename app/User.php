@@ -86,6 +86,18 @@ class User extends Authenticatable implements MustVerifyEmail
         return false;
     }
 
+    public function hasChallenge($id){
+        foreach (Auth::user()->classrooms as $c){
+            foreach ($c->challenges as $challenge)
+            if($challenge=$id){
+                return true;
+            }
+        }
+
+
+        return false;
+    }
+
     public function challenges()
     {
         return $this
