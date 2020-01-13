@@ -7,7 +7,7 @@ use Illuminate\Database\Schema\Blueprint;
 
 class Challenge extends Model
 {
-    //Check if inputted difficulty is valid
+    // Check if inputted difficulty is valid
     public function validDifficulty($difficulty)
     {
         $validDiffs = ['tatu','easy','medium','hard','insane'];
@@ -18,7 +18,7 @@ class Challenge extends Model
         return false;
     }
 
-    //Check if inputted category is valid
+    // Check if inputted category is valid
     public function validCategory($category)
     {
         $validCat = ['pwn','web','forensic','reversing','crypto','misc'];
@@ -27,5 +27,9 @@ class Challenge extends Model
             return true;
         }
         return false;
+    }
+
+    public function supportrequest(){
+        return $this-> hasMany('App\SupportRequest');
     }
 }
