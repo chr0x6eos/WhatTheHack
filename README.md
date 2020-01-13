@@ -10,16 +10,16 @@ git clone https://gitlab.htl-villach.at/whatthehack/whatthehack.git
 ```
 
 If freshly cloned, a few extra steps are needed:
-1. Install the project dependencies: ``` composer install ```
+1. Install the project dependencies: ``` composer install ```  
 This is what actually installs Laravel itself, among other necessary packages to get started.
-2. Install NPM dependencies: ``` npm install ``` or ``` yarn install ```, whatever you prefer.
+2. Install NPM dependencies: ``` npm install ``` or ``` yarn install ```, whatever you prefer.  
 This will install necessary Javascript (or Node) packages - Vue.js, Bootstrap.css, Lodash and Laravel Mix.
-3. Create/Copy the .env file: ``` cp .env.example .env ```
+3. Create/Copy the .env file: ``` cp .env.example .env ```  
 The repository contains a _.env.example_ file which is a template of the _.env_ file the project needs.
-4. Generate an app encryption key: ``` php artisan key:generate ```
+4. Generate an app encryption key: ``` php artisan key:generate ```  
 Laravel requires you to have an app encryption key which is stored in your _.env_ file to encrypt cookies, password hashes and more.
-5. Create/Copy a database file.
-SQLite databases are valid just by creating a new file called _database.sqlite_ (preferred in the folder _database_). The absolute path then must be added to the _.env_ file to make Laravel use this as the database:
+5. Create/Copy a database file.  
+SQLite databases are valid just by creating a new file called _database.sqlite_ (preferred in the folder _database_). The absolute path then must be added to the _.env_ file to make Laravel use this as the database:  
 ``` DB_DATABASE="C:/Users/Simon/Documents/git/whatthehack/database/database.sqlite" ```
 
 If you are getting an error message when trying to migrate, try refreshing the composer cache with ``` composer dump-autoload ```.
@@ -67,7 +67,8 @@ Through this, it will also be possible to provide every developer a fixed, reada
 
 ### Project-specific contribution info
 
-**Authentication**
+#### Authentication
+
 Before adding a new functionality to the project's `master` branch, ensure that only allowed users are able to access your new routes (Keep the General Data Protection Regulation in mind, better known as DSGVO).
 
 No sensible data must be accessible for unauthorized users.
