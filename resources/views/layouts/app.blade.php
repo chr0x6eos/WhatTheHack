@@ -198,6 +198,11 @@
                                 <a href="/challenges">Challenges</a>
                             </li>
                         @endif
+                        @if(Auth::user())
+                            <li>
+                                <a href="/ranking">Ranking</a>
+                            </li>
+                        @endif
                 @endif
 
                 <li>

@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('userrole')->default('student');
+            $table->integer('overallPoints')->default(0);
             $table->boolean('active')->default(true);
             $table->rememberToken();
             $table->timestamps();

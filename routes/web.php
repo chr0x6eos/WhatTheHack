@@ -35,6 +35,9 @@ Route::post('/profile/email/change', 'ProfileController@changeEM')->name('email.
 Route::delete('/profile/delete/{user}', 'ProfileController@deleteAccount')->name('profile.delete');
 Route::get('/profile/email/change/{id}/{token}', 'ProfileController@changeEmail')->name('change.email');
 
+//Ranking Routes
+Route::get('/ranking', 'RankingController@index')->name('ranking.index');
+
 // Challenge Routes
 Route::get('challenges/create', 'ChallengeController@create')->name('challenges.create')->middleware('role:teacher');
 Route::post('challenges', 'ChallengeController@store')->name('challenges.store')->middleware('role:teacher');
