@@ -19,8 +19,10 @@ class HasRole
             abort(404);
         }
 
-        if (!$request->user()->hasRole($role)) {
-            abort(404);
+        if (!$request->user()->hasRole('admin')) {
+            if (!$request->user()->hasRole($role)) {
+                abort(404);
+            }
         }
 
         return $next($request);

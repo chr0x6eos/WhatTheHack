@@ -100,4 +100,7 @@ class User extends Authenticatable implements MustVerifyEmail
             ->withTimestamps();
     }
 
+    public function getAdmin(){
+        return User::where('userrole', 'admin')->first();
+    }
 }

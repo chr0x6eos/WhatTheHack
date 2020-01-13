@@ -17,7 +17,7 @@ class UsersTableSeeder extends Seeder
         $admin = User::create(
             [
                 'username' => 'Admin',
-                'email' => 'admin@whatthehack.htl',
+                'email' => 'email.whatthehack@gmail.com',
                 'password' => Hash::make('admin'),
                 'email_verified_at' => now()->timestamp,
                 'userrole' => 'admin',
