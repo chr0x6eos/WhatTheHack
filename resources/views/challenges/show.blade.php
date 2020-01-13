@@ -4,10 +4,8 @@
         <div class="card">
             <div class="card-header font-weight-bold">{{ __('Challenge details') }}</div>
             <div class="card-body">
-                <div class="form-grop row">
-                    <form method="post" action="{{ route('challenges.update', $challenge)}}" id="challengeform" >
-                        @csrf
-                        @method("patch")
+                <div class="form-group row">
+                    <form>
                         <div class="form-group row">
                             <label for="id" class="col-sm-4 col-form-label text-md-right" >
                                 {{ __('ID:') }}

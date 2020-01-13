@@ -4,7 +4,7 @@
         <div class="card">
             <div class="card-header font-weight-bold">{{ __('Add a new challenge') }}</div>
             <div class="card-body">
-                <div class="form-grop row">
+                <div class="form-group row">
                     <form method="post" action="{{ route('challenges.store') }}" id="challengeform">
                         @csrf
                         <div class="form-group row">

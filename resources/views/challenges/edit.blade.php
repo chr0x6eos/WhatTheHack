@@ -4,7 +4,7 @@
         <div class="card">
             <div class="card-header font-weight-bold">{{$challenge->name}}</div>
             <div class="card-body" >
-                <div class="form-grop row" >
+                <div class="form-group row" >
                     <form method="post" action="{{ route('challenges.update', $challenge)}}" id="challengeform">
                         @csrf
                         @method("patch")
