@@ -62,9 +62,11 @@
                     </div>
             </div>
             <div class="container">
-
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'What the hack') }}
+                    <!--
+                    <img src="C:\Users\sandr\Documents\Schule\2019_2020\ITP\WhatTheHack\resources\pics\logo.png">
+                    -->
                 </a>
 
                 <div class="login nav" id="navbarSupportedContent">
@@ -98,10 +100,14 @@
 
             <div id="dismiss">
                 <i class="fas fa-arrow-left"></i>
+                <!--
+                <img src="../../pics/x.png">
+                -->
             </div>
 
             <div class="sidebar-header">
                 <h4>WhatTheHack</h4>
+
             </div>
 
             <ul class="list-unstyled components">
