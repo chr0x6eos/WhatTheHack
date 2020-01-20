@@ -49,7 +49,7 @@
 
 
 </head>
-<body>
+<body style="background-image: {{URL::asset('/public/images/pics/ocean01.jpg')}}">
 <div class="wrapper">
     <div id="content">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm navbar-inverse navbar-fixed-top" >
@@ -201,9 +201,9 @@
                 </li>
             </ul>
         </nav>
-        @yield('content')
-    </div>
 
+    </div>
+    @yield('content')
 </div>
 
 @if($errors)

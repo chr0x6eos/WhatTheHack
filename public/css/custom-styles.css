@@ -176,7 +176,9 @@ ul.CTAs a {
     padding: 20px;
     min-height: 100vh;
     transition: all 0.2s;
+    position: fixed;
 }
+
 #sidebarCollapse.btn.btn-info.waves-effect.waves-light{
 }
 a.dropdown-item.waves-effect.waves-light:focus, a.dropdown-item.waves-effect.waves-light:hover{
