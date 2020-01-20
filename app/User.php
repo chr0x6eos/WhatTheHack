@@ -120,7 +120,6 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         if ($points > 0)
         {
-            //TODO: RENAME POINTS TO RIGHT NAME OF MODEL
             $this->points += $points;
             $this->save();
         }
