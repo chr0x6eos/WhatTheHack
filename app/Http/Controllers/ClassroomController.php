@@ -264,4 +264,16 @@ class ClassroomController extends Controller
         return view('classroom.disabled')->with('classrooms',$classrooms);
     }
 
+    public function showChallenges($id){
+        $classroom = Classroom::find($id);
+
+        if ($classroom != null) {
+            return view('classroom.showchallenges')->with('classroom', $classroom);
+        }
+        else {
+            return redirect()->route('classroom.myClassrooms')
+                ->withErrors('Classroom with id=' . $id . ' not found!');
+        }
+    }
+
 }
