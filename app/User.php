@@ -97,30 +97,13 @@ class User extends Authenticatable implements MustVerifyEmail
         return false;
     }
 
-    public function challenges()
-    {
+    public function challenges(){
         return $this
             ->belongsToMany('App\Challenges')
             ->withTimestamps();
     }
 
-    public function hasChallenge($id)
-    {
-        foreach (Auth::user()->classrooms as $c)
-        {
-            foreach ($c->challenges as $challenge)
-            {
-                if ($challenge = $id)
-                {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    public function classrooms()
-    {
+    public function classrooms(){
         return $this
             ->belongsToMany('App\Classroom')
             ->withTimestamps();

@@ -45,8 +45,7 @@ class Challenge extends Model
         return false;
     }
 
-    public function users()
-    {
+    public function challengeUsers(){
         return $this
             ->belongsToMany('App\User')
             ->withTimestamps();
