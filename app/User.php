@@ -114,7 +114,6 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         if ($points > 0)
         {
-            //TODO: RENAME POINTS TO RIGHT NAME OF MODEL
             $this->points += $points;
             $this->save();
         }
@@ -123,5 +122,13 @@ class User extends Authenticatable implements MustVerifyEmail
     public function getAdmin()
     {
         return User::where('userrole', 'admin')->first();
+    }
+
+    public function solvedChallenge($id){
+        foreach (Auth::user()->challenges as $challenge){
+            if ($challenge == $id)
+                return true;
+        }
+        return false;
     }
 }
