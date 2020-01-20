@@ -8,16 +8,18 @@
             <div class="card-body">
                 <table id="rankingTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
                     <thead>
-                    <tr>
-                        <th class="th-sm">Username</th>
-                        <th class="th-sm">Overall Points</th>
-                    </tr>
+                        <tr>
+                            <th>Rank</th>
+                            <th class="th-sm">Username</th>
+                            <th class="th-sm">Overall Points</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    @foreach($sorted as $user)
+                    @foreach($ranked as $key => $value)
                         <tr>
-                            <td>{{ $user->username }}</td>
-                            <td>{{ $user->overallPoints }}</td>
+                            <td>{{ $key }}</td>
+                            <td>{{ $value->username }}</td>
+                            <td>{{ $value->points }}</td>
                         </tr>
                     @endforeach
                     </tbody>

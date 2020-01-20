@@ -12,13 +12,20 @@ class RankingController extends Controller
         try
         {
             $users = User::all();
-            $sorted = collect($users)->sortBy('overallPoints', 1, true);
+            $sorted = collect($users)->sortBy('points', 1, true);
+            $ranked = array();
+            $rank = 1;
+
+            foreach ($sorted as $value){
+                $ranked[$rank] = $value;
+                $rank++;
+            }
         }
         catch (Exception $ex)
         {
             return redirect('subpages.ranking')->withErrors("No DB connection could be established!");
         }
 
-        return view('subpages.ranking')->with('sorted', $sorted);
+        return view('subpages.ranking')->with('ranked', $ranked);
     }
 }

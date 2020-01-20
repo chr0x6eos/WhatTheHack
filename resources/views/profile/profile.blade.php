@@ -42,7 +42,7 @@
                             <label class="col-md-4 col-form-label text-md-right font-weight-bold">
                                 {{ __('Global Points:') }}
                             </label>
-                            <label class="col-md-7 col-form-label text-md-center">{{ $user->overallPoints }}</label>
+                            <label class="col-md-7 col-form-label text-md-center">{{ $user->points }}</label>
                         </div>
 
                         <div class="container">
