@@ -297,13 +297,17 @@ class ChallengeController extends Controller
         try
         {
             $challenge = Challenge::find($id);
-            if(Storage::disk('local')->exists($challenge->files))
+            //TODO: TEST! : ADD PERMISSION CHECK IF USER IS ALLOWED TO DOWNLOAD FILES
+            if(Auth::User()->hasChallenge($challenge->id))
             {
-                return Storage::download($challenge->files);
-            }
-            else
-            {
-                return redirect()->route('challenges.show')->with('challenge',$challenge)->withErrors('This challenge has no files!');
+                if (Storage::disk('local')->exists($challenge->files))
+                {
+                    return Storage::download($challenge->files);
+                }
+                else
+                {
+                    return redirect()->route('challenges.show')->with('challenge', $challenge)->withErrors('This challenge has no files!');
+                }
             }
         }
         catch (\Exception $ex)
@@ -322,6 +326,7 @@ class ChallengeController extends Controller
         try
         {
             $challenge = Challenge::find($id);
+
             if ($challenge)
             {
                 //Upload path
@@ -381,7 +386,10 @@ class ChallengeController extends Controller
 
             if ($challenge->flag == $request->flag)
             {
-                //TODO: Add linking between user and flag (solved)
+                //TODO: Save that user has solved the challenge
+                //Add points to user
+                Auth::user()->addPoints($challenge->getPoints());
+
                 return redirect()->route('challenges.show',$challenge->id)->with('success','Congratulation! You solved the challenge!');
             }
             else
