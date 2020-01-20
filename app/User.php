@@ -88,13 +88,12 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function hasChallenge($id){
         foreach (Auth::user()->classrooms as $c){
-            foreach ($c->challenges as $challenge)
-            if($challenge=$id){
+            foreach ($c->challenges as $challenge){
+                if($challenge=$id){
                 return true;
+                }
             }
         }
-
-
         return false;
     }
 
