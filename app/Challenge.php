@@ -7,15 +7,31 @@ use Illuminate\Database\Schema\Blueprint;
 
 class Challenge extends Model
 {
+    private $validDiffs = array(
+        'tatu' => 5,
+        'easy' => 10,
+        'medium' => 25,
+        'hard' => 50,
+        'insane' => 100);
+
     // Check if inputted difficulty is valid
     public function validDifficulty($difficulty)
     {
-        $validDiffs = ['tatu','easy','medium','hard','insane'];
-        if(in_array($difficulty,$validDiffs))
+        if(array_key_exists($difficulty,$this->validDiffs))
         {
             return true;
         }
         return false;
+    }
+
+    // Get points for difficulty
+    public function getPoints()
+    {
+        if($this->validDifficulty($this->difficulty))
+        {
+            //Return points for the difficulty
+            return $this->validDiffs[$this->difficulty];
+        }
     }
 
     // Check if inputted category is valid
