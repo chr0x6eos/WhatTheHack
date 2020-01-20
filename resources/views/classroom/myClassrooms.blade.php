@@ -31,7 +31,7 @@
                     </td>
                     @endif
                     <td>
-                        <a href="{{ route('classroom.editchallenges', $classroom->id) }}" class="btn bg-light btn-outline-dark">Show challenges</a>
+                        <a href="{{ route('classroom.showChallenges', $classroom->id) }}" class="btn bg-light btn-outline-dark">Show challenges</a>
                     </td>
                 </tr>
                 @endif
