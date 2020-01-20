@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RankingController extends Controller
 {
@@ -23,9 +24,21 @@ class RankingController extends Controller
         }
         catch (Exception $ex)
         {
-            return redirect('subpages.ranking')->withErrors("No DB connection could be established!");
+            return redirect(route('home'))->withErrors($ex->getMessage());
         }
+        return view('ranking.ranking')->with('ranked', $ranked);
+    }
 
-        return view('subpages.ranking')->with('ranked', $ranked);
+    public function classroomRanking()
+    {
+        try{
+            $user = Auth::user();
+            $classrooms = $user->classrooms;
+        }
+        catch(Exception $ex)
+        {
+            return redirect(route('home'))->withErrors($ex->getMessage());
+        }
+        return view('ranking.classroomRanking')->with('classrooms', $classrooms);
     }
 }

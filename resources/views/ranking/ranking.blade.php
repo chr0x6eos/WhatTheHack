@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="card">
-            <div class="card-header font-weight-bold">{{ __('Ranking') }}</div>
+            <div class="card-header font-weight-bold">{{ __('ranking') }}</div>
 
             <div class="card-body">
                 <table id="rankingTable" class="table table-striped table-bordered" cellspacing="0" width="100%">

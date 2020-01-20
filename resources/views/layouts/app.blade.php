@@ -200,7 +200,15 @@
                         @endif
                         @if(Auth::user())
                             <li>
-                                <a href="/ranking">Ranking</a>
+                                <a href="#aboutSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Ranking</a>
+                                <ul class="collapse list-unstyled" id="aboutSubmenu">
+                                    <li>
+                                        <a href="/ranking">Global</a>
+                                    </li>
+                                    <li>
+                                        <a href="/ranking/classroom">Classrooms</a>
+                                    </li>
+                                </ul>
                             </li>
                         @endif
                 @endif
