@@ -1,7 +1,6 @@
 @extends('layouts.app')
-
 @section('content')
-<div class="container">
+<div class="content_01">
     <div class="card">
         <div class="card-header">{{ __('Information') }}</div>
 

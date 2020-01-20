@@ -5,8 +5,8 @@
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 body {
     font-family: 'Poppins', sans-serif;
-    background:url(../../resources/pics/logo.png);
-    background: #fafafa;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 p {
@@ -25,13 +25,19 @@ a:focus {
     transition: all 0.3s;
 }
 
+.wrapper {
+    display: block;
+}
 .navbar {
-    padding: 15px 10px;
+    /*padding: 15px 10px;*/
+    position: absolute;
+    width: 100%;
     background: #fff;
     border: none;
     border-radius: 0;
-    margin-bottom: 40px;
+    /*margin-bottom: 40px;*/
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    z-index:9989;
 }
 
 .navbar-btn {
@@ -39,7 +45,9 @@ a:focus {
     outline: none !important;
     border: none;
 }
-
+.content{
+    /*padding: 20px;*/
+}
 .line {
     width: 100%;
     height: 1px;
@@ -48,22 +56,22 @@ a:focus {
 }
 .navbar navbar-expand-lg navbar-light bg-light{
     background-color: #fff;
+    z-index:9989;
 }
-
 /* ---------------------------------------------------
     SIDEBAR STYLE
 ----------------------------------------------------- */
 
 #sidebar {
     width: 250px;
-    position: fixed;
+    position: absolute;
     top: 0;
     left: -250px;
     height: 100vh;
-    z-index: 999;
+    z-index: 9999;
     background: #17a2b8;
     color: #fff;
-    transition: all 0.3s;
+    transition: all 0.2s;
     overflow-y: scroll;
     box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
 }
@@ -87,18 +95,14 @@ div#dismiss {
     color:black;
     background-color: #93d8e2;
 }
-
 #dismiss:hover {
     background: #fff;
     color: #28a4b7;
 }
-
-
 #sidebar .sidebar-header {
     padding: 20px;
     background: #17a2b8;
 }
-
 #sidebar ul.components {
     padding: 20px 0;
     border-bottom: 1px solid #47748b;
@@ -108,18 +112,15 @@ div#dismiss {
     color: #fff;
     padding: 10px;
 }
-
 #sidebar ul li a {
     padding: 10px;
     font-size: 1.1em;
     display: block;
 }
-
 #sidebar ul li a:hover {
     color: #17a2b8;
     background: #fff;
 }
-
 #sidebar ul li.active>a,
 a[aria-expanded="true"] {
     color: #fff;
@@ -159,7 +160,13 @@ ul.CTAs a {
 /*-----------------------------------------------------------------
     BUTTON STYLE
 -----------------------------------------------------------------*/
+.btn-primary{
+    background-color: #17a2b8;
 
+}
+.btn-primary:hover {
+    background-color: #17a2b8;
+}
 
 /* ---------------------------------------------------
     CONTENT STYLE
@@ -168,18 +175,9 @@ ul.CTAs a {
 #container {
     padding: 20px;
     min-height: 100vh;
-    transition: all 0.3s;
-}
-.btn-primary{
-    background-color: #17a2b8;
-
-}
-.btn-primary:hover{
-    background-color: #17a2b8;
-
+    transition: all 0.2s;
 }
 #sidebarCollapse.btn.btn-info.waves-effect.waves-light{
-
 }
 a.dropdown-item.waves-effect.waves-light:focus, a.dropdown-item.waves-effect.waves-light:hover{
     background-color: #f8f9fa;

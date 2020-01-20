@@ -15,23 +15,7 @@
                     @endif
 
                     Welcome {{Auth::user()->username}}!
-                    <p>
-                        <br>
-                        Go here to view the <a href="{{ route('challenges.index') }}">Challenges</a>.
-                        <br>
-                        <br>
-                        @if (Auth::user()->isTeacher(Auth::user()->userrole)==true || Auth::user()->isAdmin(Auth::user()->userrole)==true)
-
-                            <a href="{{route('classroom.create')}} " class="btn btn-info" >Create classroom</a>
-                        @endif
-                        <br>
-                        <br>
-                        Go here to view the <a href="{{ route('classroom.index') }}">Classrooms</a>.
-                    </p>
-
-                    @if (Auth::user()->userrole == 'admin')
-                    <p>Go here to access the <a href="{{ route('manageuser.index') }}">User Management</a>.</p>
-                    @endif
+                    Your achieved Points: {{Auth::user()->u}}
                 </div>
             </div>
         </div>

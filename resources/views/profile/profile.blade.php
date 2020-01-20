@@ -6,9 +6,14 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header font-weight-bold">{{ __('My Profile') }}</div>
+                    <div class="card-header">{{ __('My Profile') }}</div>
 
                     <div class="card-body">
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label text-md-right">
+                                Welcome {{Auth::user()->username}}!
+                            </label>
+                        </div>
 
                         <div class="form-group row">
                             <label class="col-md-4 col-form-label text-md-right font-weight-bold">
