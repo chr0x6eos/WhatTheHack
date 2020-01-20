@@ -93,6 +93,21 @@ class User extends Authenticatable implements MustVerifyEmail
             ->withTimestamps();
     }
 
+    public function hasChallenge($id)
+    {
+        foreach (Auth::user()->classrooms as $c)
+        {
+            foreach ($c->challenges as $challenge)
+            {
+                if ($challenge = $id)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public function classrooms()
     {
         return $this
@@ -100,7 +115,19 @@ class User extends Authenticatable implements MustVerifyEmail
             ->withTimestamps();
     }
 
-    public function getAdmin(){
+    //Add points to user and update db
+    public function addPoints($points)
+    {
+        if ($points > 0)
+        {
+            //TODO: RENAME POINTS TO RIGHT NAME OF MODEL
+            $this->points += $points;
+            $this->save();
+        }
+    }
+
+    public function getAdmin()
+    {
         return User::where('userrole', 'admin')->first();
     }
 }
