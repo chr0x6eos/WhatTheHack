@@ -51,17 +51,23 @@ class User extends Authenticatable implements MustVerifyEmail
     // Check if the user object is assigned the requested role
     public function hasRole($role)
     {
-        if($this->userrole == $role)
-        {
+        if ($this->userrole == $role)
             return true;
-        }
         else
             return false;
     }
 
+    public function isVerified()
+    {
+        if (is_null($this->email_verified_at))
+            return false;
+        else
+            return true;
+    }
+
 
     public function isAdmin($userrole){
-        if($userrole=='admin'){
+        if ($userrole == 'admin') {
             return true;
         }
         else
@@ -69,7 +75,7 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     public function isStudent($userrole){
-        if($userrole=='student'){
+        if ($userrole == 'student') {
             return true;
         }
         else
@@ -79,7 +85,7 @@ class User extends Authenticatable implements MustVerifyEmail
     //Check if current user is author of challenge
     public function isAuthor($author)
     {
-        if($this->username == $author)
+        if ($this->username == $author)
         {
             return true;
         }
