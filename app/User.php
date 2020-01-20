@@ -99,7 +99,7 @@ class User extends Authenticatable implements MustVerifyEmail
         {
             foreach ($c->challenges as $challenge)
             {
-                if ($challenge = $id)
+                if ($challenge == $id)
                 {
                     return true;
                 }
