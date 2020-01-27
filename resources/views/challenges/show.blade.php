@@ -2,7 +2,12 @@
 @section('content')
     <div class="container">
         <div class="card">
-            <div class="card-header font-weight-bold">{{ __('Challenge details') }}</div>
+            @php{{//TODO:Make the Solved appear on the right side of the card header}} @endphp
+            @if(Auth::user()->solvedChallenge($challenge->id))
+                <div class="card-header font-weight-bold bg-success">{{ __('Challenge details')}} - Solved</div>
+            @else
+                <div class="card-header font-weight-bold ">{{ __('Challenge details') }}</div>
+            @endif
             <div class="card-body">
                 <div class="form-group row">
                     <form id="challengeform">

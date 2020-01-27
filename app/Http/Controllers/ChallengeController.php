@@ -385,16 +385,10 @@ class ChallengeController extends Controller
         {
             $challenge = Challenge::find($id);
             $user = Auth::user();
-
+            if($challenge->active == 0)
+                return redirect()->route('challenges.index')->withErrors('You should not have been there.... Contact us maybe you will get points for this achievement!');
             if ($challenge->flag == $request->flag)
             {
-               /* foreach ($challenge->challengeUsers as $u){
-                    if ($u == Auth::user()){
-
-                        return redirect()->route('challenges.show',$challenge->id)->with('success','Congratulation! You solved the challenge!');
-                    }
-               }*/
-
                 //Save that user has solved challenge
                 $challenge->challengeUsers()->attach(Auth::user());
 

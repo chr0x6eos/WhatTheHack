@@ -20,9 +20,10 @@
                         </thead>
                         <tbody>
                         @foreach($challenges as $challenge)
-                            @if(Auth::user()->solvedChallenge($challenge->id))
-                                {{//TODO:Change colour to match theme }}
-                                <tr bgcolor="#f0f8ff">
+                            @if($challenge->active==1)
+                                @if(Auth::user()->solvedChallenge($challenge->id))
+                                    @php//TODO:Change colour to match theme @endphp
+                                  <tr bgcolor="#f0f8ff">
                                     <td>{{ $challenge->name }}</td>
                                     <td>{{ $challenge->difficulty }}</td>
                                     <td>{{ $challenge->author }}</td>
@@ -32,15 +33,15 @@
                                             Disabled
                                         @endif
                                     </td>
-                                <td><a href="{{ route('challenges.show', $challenge->id) }}" class="btn btn-info">More info</a></td>
-                                @if(Auth::user() && ( Auth::user()->hasRole("admin") || Auth::user()->hasRole("teacher")))
+                                    <td><a href="{{ route('challenges.show', $challenge->id) }}" class="btn btn-info">More info</a></td>
+                                    @if(Auth::user() && ( Auth::user()->hasRole("admin") || Auth::user()->hasRole("teacher")))
                                     <td>
                                         <a href="{{ route('challenges.edit', $challenge->id) }}" class="btn btn-outline-danger">Edit</a>
                                     </td>
-                                @endif
-                             </tr>
-                            @else
-                                <tr>
+                                    @endif
+                                 </tr>
+                                @else
+                                    <tr>
                                     <td>{{ $challenge->name }}</td>
                                     <td>{{ $challenge->difficulty }}</td>
                                     <td>{{ $challenge->author }}</td>
@@ -56,7 +57,8 @@
                                             <a href="{{ route('challenges.edit', $challenge->id) }}" class="btn btn-outline-danger">Edit</a>
                                         </td>
                                     @endif
-                                </tr>
+                                    </tr>
+                                @endif
                             @endif
                         @endforeach
                         </tbody>
