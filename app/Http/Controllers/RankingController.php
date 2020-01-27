@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Classroom;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,6 +14,7 @@ class RankingController extends Controller
         try
         {
             $users = User::all();
+            $currentUser = Auth::user();
             $sorted = collect($users)->sortBy('points', 1, true);
             $ranked = array();
             $rank = 1;
@@ -26,19 +28,19 @@ class RankingController extends Controller
         {
             return redirect(route('home'))->withErrors($ex->getMessage());
         }
-        return view('ranking.ranking')->with('ranked', $ranked);
+        return view('ranking.ranking')->with(['ranked' => $ranked, 'currentUser' => $currentUser]);
     }
 
     public function classroomRanking()
     {
         try{
-            $user = Auth::user();
-            $classrooms = $user->classrooms;
+            $currentUser = Auth::user();
+            $classrooms = $currentUser->classrooms;
         }
         catch(Exception $ex)
         {
             return redirect(route('home'))->withErrors($ex->getMessage());
         }
-        return view('ranking.classroomRanking')->with('classrooms', $classrooms);
+        return view('ranking.classroomRanking')->with(['classrooms' => $classrooms, 'currentUser' => $currentUser]);
     }
 }

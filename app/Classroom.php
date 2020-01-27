@@ -41,4 +41,16 @@ class Classroom extends Model
             return true;
         return false;
     }
+
+    public function getRankedUsers(){
+        $users = $this->users;
+        $ranked = array();
+        $rank = 1;
+        $sorted = collect($users)->sortBy('points', 1, true);
+        foreach ($sorted as $value){
+            $ranked[$rank] = $value;
+            $rank++;
+        }
+        return $ranked;
+    }
 }

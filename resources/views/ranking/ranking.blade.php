@@ -3,10 +3,10 @@
 @section('content')
     <div class="container">
         <div class="card">
-            <div class="card-header font-weight-bold">{{ __('ranking') }}</div>
+            <div class="card-header font-weight-bold">{{ __('Global Ranking') }}</div>
 
             <div class="card-body">
-                <table id="rankingTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                <table id="rankingTable" class="table table-bordered" cellspacing="0" width="100%">
                     <thead>
                         <tr>
                             <th>Rank</th>
@@ -16,6 +16,13 @@
                     </thead>
                     <tbody>
                     @foreach($ranked as $key => $value)
+                        @if($value->username == $currentUser->username)
+                            <tr bgcolor="#ff1493">
+                                <td>{{ $key }}</td>
+                                <td>{{ $value->username }}</td>
+                                <td>{{ $value->points }}</td>
+                            </tr>
+                        @endif
                         <tr>
                             <td>{{ $key }}</td>
                             <td>{{ $value->username }}</td>
