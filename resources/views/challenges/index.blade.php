@@ -21,7 +21,8 @@
                         <tbody>
                         @foreach($challenges as $challenge)
                             @if(Auth::user()->solvedChallenge($challenge->id))
-                                <tr bgcolor="#ff1493">
+                                {{//TODO:Change colour to match theme }}
+                                <tr bgcolor="#f0f8ff">
                                     <td>{{ $challenge->name }}</td>
                                     <td>{{ $challenge->difficulty }}</td>
                                     <td>{{ $challenge->author }}</td>

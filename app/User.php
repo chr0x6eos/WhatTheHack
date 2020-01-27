@@ -96,11 +96,10 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return User::where('userrole', 'admin')->first();
     }
-
-    //TODO: Test
+    
     public function solvedChallenge($id){
-        foreach ($this->challenges() as $challenge){
-            if ($challenge == $id)
+        foreach ($this->challenges as $challenge){
+            if ($challenge->id == $id)
                 return true;
         }
         return false;
