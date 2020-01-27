@@ -84,7 +84,7 @@ public function __construct()
 
 In general, a user must verify its email address to access functionality pages to prevent spam. You can add a check for whether the email is verified or not by calling the `verified` middleware in addition to the `auth` middleware:
 ```
-$this->middleware('auth', 'verified');
+$this->middleware(['auth', 'verified']);
 ```
 
 A user can be of three different role types:
