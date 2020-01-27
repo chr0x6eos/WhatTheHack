@@ -42,7 +42,7 @@
         <h3>No classrooms yet!</h3>
     @endif
     <br>
-    @if(Auth::user()->isTeacher(Auth::user()->userrole)==true || Auth::user()->isAdmin(Auth::user()->userrole)==true)
+    @if(Auth::user()->hasRole('teacher') || Auth::user()->hasRole('admin'))
         <a href="{{route('classroom.create')}}" class="btn btn-success">Add new classroom</a>
     @endif
 

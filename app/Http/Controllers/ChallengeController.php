@@ -298,7 +298,7 @@ class ChallengeController extends Controller
         try
         {
             $challenge = Challenge::find($id);
-            //TODO: TEST! : ADD PERMISSION CHECK IF USER IS ALLOWED TO DOWNLOAD FILES
+
             if(Auth::User()->hasChallenge($challenge->id))
             {
                 if (Storage::disk('local')->exists($challenge->files))

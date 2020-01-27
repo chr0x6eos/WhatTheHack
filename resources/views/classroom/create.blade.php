@@ -24,7 +24,7 @@
                         </thead>
                         <tbody>
                         @foreach (\App\User::all() as $u)
-                            @if(Auth::user()->isStudent($u->userrole) == true)
+                            @if(Auth::user()->hasRole("student"))
 
                                 <tr>
                                     <td>
