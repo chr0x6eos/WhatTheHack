@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Challenge;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use App\User;
 
 class ChallengeController extends Controller
 {
@@ -140,7 +141,14 @@ class ChallengeController extends Controller
     {
         $challenge = Challenge::find($id);
 
-        return view('challenges.show')->with('challenge',$challenge);
+        if(Auth::user()->hasRole('admin') || Auth::user()->hasChallenge($challenge->id))
+        {
+            return view('challenges.show')->with('challenge', $challenge);
+        }
+        else
+        {
+            return view('challenges.index')->with('challenges',Challenge::all( ))->withErrors('You are not allowed to view this challenge!');
+        }
     }
 
     /**
