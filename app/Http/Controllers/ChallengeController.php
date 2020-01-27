@@ -383,7 +383,8 @@ class ChallengeController extends Controller
         {
             $challenge = Challenge::find($id);
 
-            if ($challenge->flag == $request->flag)
+            //Make flag case insensitive
+            if (strtolower($challenge->flag) == strtolower($request->flag))
             {
                 //TODO: Save that user has solved the challenge
                 //Add points to user
