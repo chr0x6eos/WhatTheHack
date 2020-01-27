@@ -6,12 +6,13 @@ use Illuminate\Http\Request;
 use App\Challenge;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use App\User;
 
 class ChallengeController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth', 'verified');
+        $this->middleware(['auth', 'verified']);
     }
 
     /**
@@ -140,7 +141,14 @@ class ChallengeController extends Controller
     {
         $challenge = Challenge::find($id);
 
-        return view('challenges.show')->with('challenge',$challenge);
+        if(Auth::user()->hasRole('admin') || Auth::user()->hasChallenge($challenge->id))
+        {
+            return view('challenges.show')->with('challenge', $challenge);
+        }
+        else
+        {
+            return view('challenges.index')->with('challenges',Challenge::all( ))->withErrors('You are not allowed to view this challenge!');
+        }
     }
 
     /**
@@ -297,13 +305,16 @@ class ChallengeController extends Controller
         try
         {
             $challenge = Challenge::find($id);
-            if(Storage::disk('local')->exists($challenge->files))
+            if(Auth::User()->hasChallenge($challenge->id))
             {
-                return Storage::download($challenge->files);
-            }
-            else
-            {
-                return redirect()->route('challenges.show')->with('challenge',$challenge)->withErrors('This challenge has no files!');
+                if (Storage::disk('local')->exists($challenge->files))
+                {
+                    return Storage::download($challenge->files);
+                }
+                else
+                {
+                    return redirect()->route('challenges.show')->with('challenge', $challenge)->withErrors('This challenge has no files!');
+                }
             }
         }
         catch (\Exception $ex)
@@ -322,6 +333,7 @@ class ChallengeController extends Controller
         try
         {
             $challenge = Challenge::find($id);
+
             if ($challenge)
             {
                 //Upload path
@@ -379,9 +391,13 @@ class ChallengeController extends Controller
         {
             $challenge = Challenge::find($id);
 
-            if ($challenge->flag == $request->flag)
+            //Make flag case insensitive
+            if (strtolower($challenge->flag) == strtolower($request->flag))
             {
-                //TODO: Add linking between user and flag (solved)
+                //TODO: Save that user has solved the challenge
+                //Add points to user
+                Auth::user()->addPoints($challenge->getPoints());
+
                 return redirect()->route('challenges.show',$challenge->id)->with('success','Congratulation! You solved the challenge!');
             }
             else

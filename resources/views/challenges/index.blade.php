@@ -47,8 +47,5 @@
                 @if(Auth::user() && ( Auth::user()->hasRole("admin") || Auth::user()->hasRole("teacher")))
                     <a href="{{ route('challenges.create') }}" class="btn btn-info">Add new challenge</a>
                 @endif
-                <br>
-                <br>
-                <br>
             </div>
 @endsection
