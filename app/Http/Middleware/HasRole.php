@@ -23,6 +23,11 @@ class HasRole
             if (!$request->user()->hasRole($role)) {
                 abort(404);
             }
+
+            if (!$request->user()->isVerified()) {
+                // this redirects logged-in users to /email/verify.
+                return redirect()->route('login');
+            }
         }
 
         return $next($request);
