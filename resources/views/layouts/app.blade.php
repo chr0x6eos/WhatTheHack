@@ -136,6 +136,15 @@
                     </ul>
                 </li>
 
+                <!-- My Classrooms -->
+                @if(Auth::user())
+                    @if(Auth::user()->hasRole("student"))
+                        <li>
+                            <a href="/classrooms/myClassrooms">My Classrooms</a>
+                        </li>
+                    @endif
+                @endif
+
                 <!-- ADMIN VIEW -->
                 @if (Auth::user())
                     @if(Auth::user()->hasRole("admin"))
@@ -146,7 +155,7 @@
                                     <a href="/challenges">Show Challenges</a>
                                 </li>
                                 <li>
-                                    <a href="challenges/create">Create Challenge</a>
+                                    <a href="/challenges/create">Create Challenge</a>
                                 </li>
                             </ul>
                         </li>
@@ -157,7 +166,7 @@
                                     <a href="/classroom">Show Classroom</a>
                                 </li>
                                 <li>
-                                    <a href="classroom/create">Create Classroom</a>
+                                    <a href="/classroom/create">Create Classroom</a>
                                 </li>
                             </ul>
                         </li>
@@ -185,15 +194,12 @@
                                         <a href="/classroom">Show Classroom</a>
                                     </li>
                                     <li>
-                                        <a href="classroom/create">Create Classroom</a>
+                                        <a href="/classroom/create">Create Classroom</a>
                                     </li>
                                 </ul>
                             </li>
                         @endif
                         @if(Auth::user()->hasRole("student"))
-                            <li>
-                                <a href="/classroom">Classrooms</a>
-                            </li>
                             <li>
                                 <a href="/challenges">Challenges</a>
                             </li>

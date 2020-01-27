@@ -34,6 +34,7 @@ class UsersTableSeeder extends Seeder
                 'password' => Hash::make('student'),
                 'email_verified_at' => now()->timestamp,
                 'userrole' => 'student',
+                'points' => 100,
                 'active' => true
             ]
         );

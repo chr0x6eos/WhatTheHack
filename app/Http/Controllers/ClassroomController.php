@@ -16,7 +16,7 @@ class ClassroomController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth', 'verified');
+        $this->middleware(['auth', 'verified']);
     }
 
 
@@ -268,6 +268,18 @@ class ClassroomController extends Controller
         $classroom->save();
         $classrooms = Classroom::all();
         return view('classroom.disabled')->with('classrooms',$classrooms);
+    }
+
+    public function showChallenges($id){
+        $classroom = Classroom::find($id);
+
+        if ($classroom != null) {
+            return view('classroom.showchallenges')->with('classroom', $classroom);
+        }
+        else {
+            return redirect()->route('classroom.myClassrooms')
+                ->withErrors('Classroom with id=' . $id . ' not found!');
+        }
     }
 
 }
