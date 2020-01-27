@@ -38,38 +38,11 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-
-
-    public function isTeacher($userrole)
-    {
-        if ($userrole == 'teacher') {
-            return true;
-        }
-        return false;
-    }
-
     // Check if the user object is assigned the requested role
     public function hasRole($role)
     {
         if($this->userrole == $role)
         {
-            return true;
-        }
-        else
-            return false;
-    }
-
-
-    public function isAdmin($userrole){
-        if($userrole=='admin'){
-            return true;
-        }
-        else
-            return false;
-    }
-
-    public function isStudent($userrole){
-        if($userrole=='student'){
             return true;
         }
         else
@@ -99,7 +72,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function challenges(){
         return $this
-            ->belongsToMany('App\Challenges')
+            ->belongsToMany('App\Challenge')
             ->withTimestamps();
     }
 
@@ -124,8 +97,9 @@ class User extends Authenticatable implements MustVerifyEmail
         return User::where('userrole', 'admin')->first();
     }
 
+    //TODO: Test
     public function solvedChallenge($id){
-        foreach (Auth::user()->challenges as $challenge){
+        foreach ($this->challenges() as $challenge){
             if ($challenge == $id)
                 return true;
         }

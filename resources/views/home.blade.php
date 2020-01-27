@@ -20,7 +20,7 @@
                         Go here to view the <a href="{{ route('challenges.index') }}">Challenges</a>.
                         <br>
                         <br>
-                        @if (Auth::user()->isTeacher(Auth::user()->userrole)==true || Auth::user()->isAdmin(Auth::user()->userrole)==true)
+                        @if (Auth::user()->userrole == 'teacher' ||Auth::user()->userrole == 'admin')
 
                             <a href="{{route('classroom.create')}} " class="btn btn-info" >Create classroom</a>
                         @endif

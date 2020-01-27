@@ -6,7 +6,8 @@
 
             <div class="card-body">
                 @if(isset($challenges) && sizeof($challenges) > 0)
-                    <table border="1" class="table table-striped table-bordered">
+
+                    <table border="1"class="table table-bordered">
                         <thead>
                         <th>Name</th>
                         <th>Difficulty</th>
@@ -19,23 +20,43 @@
                         </thead>
                         <tbody>
                         @foreach($challenges as $challenge)
-                            <tr>
-                                <td>{{ $challenge->name }}</td>
-                                <td>{{ $challenge->difficulty }}</td>
-                                <td>{{ $challenge->author }}</td>
-                                <td>@if($challenge->active)
-                                        Enabled
-                                    @else
-                                        Disabled
-                                    @endif
-                                </td>
+                            @if(Auth::user()->solvedChallenge($challenge->id))
+                                <tr bgcolor="#ff1493">
+                                    <td>{{ $challenge->name }}</td>
+                                    <td>{{ $challenge->difficulty }}</td>
+                                    <td>{{ $challenge->author }}</td>
+                                    <td>@if($challenge->active)
+                                            Enabled
+                                        @else
+                                            Disabled
+                                        @endif
+                                    </td>
                                 <td><a href="{{ route('challenges.show', $challenge->id) }}" class="btn btn-info">More info</a></td>
                                 @if(Auth::user() && ( Auth::user()->hasRole("admin") || Auth::user()->hasRole("teacher")))
                                     <td>
                                         <a href="{{ route('challenges.edit', $challenge->id) }}" class="btn btn-outline-danger">Edit</a>
                                     </td>
                                 @endif
-                            </tr>
+                             </tr>
+                            @else
+                                <tr>
+                                    <td>{{ $challenge->name }}</td>
+                                    <td>{{ $challenge->difficulty }}</td>
+                                    <td>{{ $challenge->author }}</td>
+                                    <td>@if($challenge->active)
+                                            Enabled
+                                        @else
+                                            Disabled
+                                        @endif
+                                    </td>
+                                    <td><a href="{{ route('challenges.show', $challenge->id) }}" class="btn btn-info">More info</a></td>
+                                    @if(Auth::user() && ( Auth::user()->hasRole("admin") || Auth::user()->hasRole("teacher")))
+                                        <td>
+                                            <a href="{{ route('challenges.edit', $challenge->id) }}" class="btn btn-outline-danger">Edit</a>
+                                        </td>
+                                    @endif
+                                </tr>
+                            @endif
                         @endforeach
                         </tbody>
                     </table>
@@ -47,8 +68,5 @@
                 @if(Auth::user() && ( Auth::user()->hasRole("admin") || Auth::user()->hasRole("teacher")))
                     <a href="{{ route('challenges.create') }}" class="btn btn-info">Add new challenge</a>
                 @endif
-                <br>
-                <br>
-                <br>
             </div>
 @endsection
