@@ -22,12 +22,13 @@
                                 <td>{{ $value->username }}</td>
                                 <td>{{ $value->points }}</td>
                             </tr>
-                        @endif
+                        @else
                         <tr>
                             <td>{{ $key }}</td>
                             <td>{{ $value->username }}</td>
                             <td>{{ $value->points }}</td>
                         </tr>
+                        @endif
                     @endforeach
                     </tbody>
                 </table>
