@@ -75,3 +75,9 @@ Route::get('classroom/showClassroom/{classroom}', 'ClassroomController@showChall
 // Support/Report Routes
 Route::get('support/{challenge}', 'SupportRequestController@create')->name('support.create');
 Route::post('submit/{challenge}', 'SupportRequestController@submit')->name('support.submit');
+
+//Deployment routes
+Route::get('deploy','DeploymentController@index')->name('deploy.index');
+Route::post('deploy/start/{deployment}','DeploymentController@start')->name('deploy.start');
+Route::post('deploy/stop/{deployment}','DeploymentController@stop')->name('deploy.stop');
+
