@@ -395,7 +395,7 @@ class ChallengeController extends Controller
             if (strtolower($challenge->flag) == strtolower($request->flag))
             {
                 //Add points to user
-                $user->addPoints($challenge->getPoints());
+                Auth::user()->addPoints($challenge->getPoints());
 
                 //Save that user has solved challenge
                 $challenge->challengeUsers()->attach(Auth::user());
