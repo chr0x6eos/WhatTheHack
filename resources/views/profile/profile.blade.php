@@ -9,7 +9,9 @@
                     <div class="card-header font-weight-bold">{{ __('My Profile') }}</div>
 
                     <div class="card-body">
-
+                        <div class="form-group row">
+                            <img src="<?php echo asset("storage/avatars/$user->avatar")?>" style=" height: 150px; width: 150px; border-radius: 50%; ">
+                        </div>
                         <div class="form-group row">
                             <label class="col-md-4 col-form-label text-md-right font-weight-bold">
                                 {{ __('Username:') }}
