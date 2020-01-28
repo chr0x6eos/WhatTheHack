@@ -40,6 +40,7 @@
     <!-- Styles
     <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
     <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('css/mdb.min.css') }}">
     <!-- Template CSS file -->
     <link rel="stylesheet" href="{{ URL::asset('css/freelancer.min.css') }}">
     <link rel="stylesheet" href="{{ URL::asset('css/addons/datatables.min.css') }}">
@@ -49,28 +50,26 @@
 
 
 </head>
-<body style="background-image: {{URL::asset('/public/images/pics/ocean01.jpg')}}">
-<div class="wrapper">
-    <div id="content">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm navbar-inverse navbar-fixed-top" >
-            <div class="navbar-toggle">
-                <!-- Left Side Of Navbar -->
-                <div class="container-fluid">
-                    <button type="button" id="sidebarCollapse" class="btn btn-info">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                </div>
-            </div>
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="{{ URL::asset('images/pics/logo.png') }}" height="50px">
-                </a>
+<body>
 
-                <div class="login nav" id="navbarSupportedContent">
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
+<div class="root">
+    <div class="flyout">
+        <nav data-test="navbar" class="navbar-dark elegant-color navbar navbar-expand-md" role="navigation">
+            <div data-test="container" class="container">
+
+                <button type="button" id="sidebarCollapse" class="navbar-toggle">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div data-test="navbar-brand" class="navbar-brand"><strong class="white-text">hack?</strong>
+
+                <img src="{{asset("public\img\logo.png")}}" style="width: auto">
+                </div>
+                <div data-test="collapse" id="navbarCollapse3" class="collapse navbar-collapse">
+
+                    <ul data-test="navbar-nav" class="navbar-nav ml-auto">
                         @if(Auth::user())
-                            <a class="dropdown-item" href="{{ route('logout') }}"
+                            <a class="green-text dropdown-item" href="{{ route('logout') }}"
                                onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}
                             </a>
@@ -78,22 +77,29 @@
                                 @csrf
                             </form>
                         @else
-                            <a class="dropdown-item" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            <a class="green-text dropdown-item" href="{{ route('login') }}">{{ __('Login') }}</a>
                         @endif
                     </ul>
                 </div>
             </div>
         </nav>
+
+        <main id="landing" style="background-image: {{URL::asset('/public/images/pics/ocean01.png')}}">
+            <br>
+            @yield('content')
+        </main>
         <!-- Sidebar -->
         <nav id="sidebar">
             <div id="dismiss">
-                <i class="fas fa-arrow-left"></i>
-                <img src="{{ URL::asset('images/pics/x_white.png') }}" height="22px">
+                <i class="fas fa-times"></i>
             </div>
+
             <div class="sidebar-header">
                 <h4>WhatTheHack</h4>
             </div>
+
             <ul class="list-unstyled components">
+                <!-- ACCOUNT -->
                 <li>
                     <a href="#accountSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                         @if (Auth::user())
@@ -124,7 +130,16 @@
                     </ul>
                 </li>
 
-                <!--admin-->
+                <!-- My Classrooms -->
+                @if(Auth::user())
+                    @if(Auth::user()->hasRole("student"))
+                        <li>
+                            <a href="/classrooms/myClassrooms">My Classrooms</a>
+                        </li>
+                    @endif
+                @endif
+
+            <!-- ADMIN VIEW -->
                 @if (Auth::user())
                     @if(Auth::user()->hasRole("admin"))
                         <li>
@@ -134,7 +149,7 @@
                                     <a href="/challenges">Show Challenges</a>
                                 </li>
                                 <li>
-                                    <a href="challenges/create">Create Challenge</a>
+                                    <a href="/challenges/create">Create Challenge</a>
                                 </li>
                             </ul>
                         </li>
@@ -145,7 +160,7 @@
                                     <a href="/classroom">Show Classroom</a>
                                 </li>
                                 <li>
-                                    <a href="classroom/create">Create Classroom</a>
+                                    <a href="/classroom/create">Create Classroom</a>
                                 </li>
                             </ul>
                         </li>
@@ -154,7 +169,6 @@
                         </li>
                     @else
                     @endif
-                <!--teacher-->
                     @if(Auth::user()->hasRole("teacher"))
                         <li>
                             <a href="#challengeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Challenges</a>
@@ -174,15 +188,12 @@
                                     <a href="/classroom">Show Classroom</a>
                                 </li>
                                 <li>
-                                    <a href="classroom/create">Create Classroom</a>
+                                    <a href="/classroom/create">Create Classroom</a>
                                 </li>
                             </ul>
                         </li>
                     @endif
                     @if(Auth::user()->hasRole("student"))
-                        <li>
-                            <a href="/classroom">Classrooms</a>
-                        </li>
                         <li>
                             <a href="/challenges">Challenges</a>
                         </li>
@@ -202,8 +213,16 @@
             </ul>
         </nav>
 
+        <footer data-test="footer" class="page-footer elegant-color">
+            <div data-test="container" class="container text-center py-3"><a href="/contact">Impressum</a></div>
+            <div class="footer-copyright text-center py-3">
+                <div data-test="container" class="container-fluid">© 2017 - 2020 Copyright: Werbeagentur Christian Aichner
+                    <p class="my-2 font-weight-bold">In cooperation with <a href="https://www.aichner-christian.com" target="_blank" class="ml-1" rel="noopener noreferrer">WCA</a>.</p>
+                </div>
+            </div>
+        </footer>
     </div>
-    @yield('content')
+
 </div>
 
 @if($errors)
@@ -214,7 +233,7 @@
 
 @if (session()->has('success'))
     <div class="alert alert-success">{{ session()->get('success') }}</div>
-    @endif
+@endif
 
 </body>
 </html>
