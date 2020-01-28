@@ -51,7 +51,6 @@
 
 </head>
 <body>
-
 <div class="root">
     <div class="flyout">
         <nav data-test="navbar" class="navbar-dark elegant-color navbar navbar-expand-md" role="navigation">
@@ -61,9 +60,10 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div data-test="navbar-brand" class="navbar-brand"><strong class="white-text">hack?</strong>
-
-                <img src="{{asset("public\img\logo.png")}}" style="width: auto">
+                <div data-test="navbar-brand" class="navbar-brand">
+                    <strong class="white-text">
+                        <img src="{{URL::asset('images/pics/logo_v4.gif')}}" width="110px">
+                    </strong>
                 </div>
                 <div data-test="collapse" id="navbarCollapse3" class="collapse navbar-collapse">
 
@@ -84,7 +84,7 @@
             </div>
         </nav>
 
-        <main id="landing" style="background-image: {{URL::asset('/public/images/pics/ocean01.png')}}">
+        <main id="landing" >
             <br>
             @yield('content')
         </main>

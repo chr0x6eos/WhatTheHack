@@ -51,11 +51,9 @@
 /* https://github.com/snek-at/front/blob/5f5bd7a9cfdb6f601b8738974557102a86891ff1/src/components/pages/Landing/landing.scss */
 
 #landing {
-    background: #3e3e3e;
+    background: #3E3E3E;
     color: white;
-    /*
-    background-image: url('{{ URL::asset('/public/images/pics/circuit_dots.svg }}');
-     */
+    background-image: url('/images/pics/circuit_dots.svg');
 }
 
 #landing .typist {
@@ -151,6 +149,9 @@ a[aria-expanded="true"] {
 
 a[data-toggle="collapse"] {
     position: relative;
+}
+a.green-text.dropdown-item.waves-effect.waves-light:hover{
+    background-color: green;
 }
 
 .dropdown-toggle::after {
