@@ -124,4 +124,46 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return User::where('userrole', 'admin')->first();
     }
+
+    static function calculateLevel($points){
+        $levels = Level::all();
+        foreach($levels as $l){
+            if($points >= $l->levelFrom && $points <= $l->levelTo){
+                $userLevel = $l->level;
+            }
+        }
+        return $userLevel;
+    }
+    static function calculateRank($points){
+        $levels = Level::all();
+        foreach($levels as $l){
+            if($points >= $l->levelFrom && $points <= $l->levelTo){
+                $userLevel = $l->levelName;
+            }
+        }
+        return $userLevel;
+    }
+
+    static function calculateProgress1($points){
+        $levels = Level::all();
+        foreach($levels as $l){
+            if($points >= $l->levelFrom && $points <= $l->levelTo){
+                $currentpoints = $points - $l->levelFrom;
+                $currentpoints = ceil($currentpoints);
+                $userLevel = $currentpoints;
+            }
+        }
+        return $userLevel;
+    }
+
+    static function calculateProgress2($points){
+        $levels = Level::all();
+        foreach($levels as $l){
+            if($points >= $l->levelFrom && $points <= $l->levelTo){
+                $neededpoints = $l->levelTo - $l->levelFrom;
+                $neededpoints = ceil($neededpoints);
+            }
+        }
+        return $neededpoints;
+    }
 }

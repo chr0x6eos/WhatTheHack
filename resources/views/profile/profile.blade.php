@@ -42,9 +42,32 @@
                             <label class="col-md-4 col-form-label text-md-right font-weight-bold">
                                 {{ __('Points:') }}
                             </label>
-                            <label class="col-md-4 col-form-label text-md-center">0</label>
+                            <label class="col-md-4 col-form-label text-md-center">{{ $user->points }}</label>
                         </div>
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label text-md-right font-weight-bold">
+                                {{ __('Level:') }}
+                            </label>
+                            <label class="col-md-4 col-form-label text-md-center">{{ App\User::calculateLevel($user->points) }}</label>
 
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label text-md-right font-weight-bold">
+                                {{ __('Level Progress:') }}
+                            </label>
+                            <label class="col-md-4 col-form-label text-md-center">{{ App\User::calculateProgress1($user->points) }}/{{ App\User::calculateProgress2($user->points)." Points" }}</label>
+                        </div>
+                        <div class="form-group row">
+                            <!-- Progress-bar -->
+
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label text-md-right font-weight-bold">
+                                {{ __('Rank:') }}
+                            </label>
+                            <label class="col-md-4 col-form-label text-md-center">{{ App\User::calculateRank($user->points) }}</label>
+
+                        </div>
                         <div class="container">
                             <div class="row">
                                 <div class="col-sm text-md-center">
@@ -60,7 +83,6 @@
                                 </form>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
