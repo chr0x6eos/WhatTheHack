@@ -52,6 +52,7 @@
                                     <button type="submit" class="btn btn-primary">
                                         {{ __('Change Password') }}
                                     </button>
+                                    <a href="{{ route('profile.show') }}" class="btn bg-light btn-outline-dark">Cancel</a>
                                 </div>
                             </div>
                         </form>

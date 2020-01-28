@@ -7,7 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
 
@@ -38,51 +38,123 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-
-
-    public function isTeacher($userrole)
-    {
-        if ($userrole == 'teacher') {
-            return true;
-        }
-        return false;
-    }
-    
     // Check if the user object is assigned the requested role
     public function hasRole($role)
     {
-        if($this->userrole == $role)
-        {
+        if ($this->userrole == $role)
             return true;
-        }
         else
             return false;
     }
 
-
-    public function isAdmin($userrole){
-        if($userrole=='admin'){
-            return true;
-        }
-        else
+    public function isVerified()
+    {
+        if (is_null($this->email_verified_at))
             return false;
-    }
-
-    public function isStudent($userrole){
-        if($userrole=='student'){
-            return true;
-        }
         else
-            return false;
+            return true;
     }
-
     //Check if current user is author of challenge
     public function isAuthor($author)
     {
-        if($this->username == $author)
+        if ($this->username == $author)
         {
             return true;
         }
         return false;
+    }
+
+    public function challenges()
+    {
+        return $this
+            ->belongsToMany('App\Challenges')
+            ->withTimestamps();
+    }
+
+    public function hasChallenge($id)
+    {
+        foreach (Auth::user()->classrooms as $c)
+        {
+            foreach ($c->challenges as $challenge)
+            {
+                if ($challenge->id == $id)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+
+    public function classrooms(){
+        return $this
+            ->belongsToMany('App\Classroom')
+            ->withTimestamps();
+    }
+
+    //Add points to user and update db
+    public function addPoints($points)
+    {
+        if ($points > 0)
+        {
+            $this->points += $points;
+            $this->save();
+        }
+    }
+
+    public function getAdmin()
+    {
+        return User::where('userrole', 'admin')->first();
+    }
+
+    public function solvedChallenge($id){
+        foreach ($this->challenges as $challenge){
+            if ($challenge->id == $id)
+                return true;
+        }
+        return false;
+    }
+
+    static function calculateLevel($points){
+        $levels = Level::all();
+        foreach($levels as $l){
+            if($points >= $l->levelFrom && $points <= $l->levelTo){
+                $userLevel = $l->level;
+            }
+        }
+        return $userLevel;
+    }
+    static function calculateRank($points){
+        $levels = Level::all();
+        foreach($levels as $l){
+            if($points >= $l->levelFrom && $points <= $l->levelTo){
+                $userLevel = $l->levelName;
+            }
+        }
+        return $userLevel;
+    }
+
+    static function calculateProgress1($points){
+        $levels = Level::all();
+        foreach($levels as $l){
+            if($points >= $l->levelFrom && $points <= $l->levelTo){
+                $currentpoints = $points - $l->levelFrom;
+                $currentpoints = ceil($currentpoints);
+                $userLevel = $currentpoints;
+            }
+        }
+        return $userLevel;
+    }
+
+    static function calculateProgress2($points){
+        $levels = Level::all();
+        foreach($levels as $l){
+            if($points >= $l->levelFrom && $points <= $l->levelTo){
+                $neededpoints = $l->levelTo - $l->levelFrom;
+                $neededpoints = ceil($neededpoints);
+            }
+        }
+        return $neededpoints;
     }
 }

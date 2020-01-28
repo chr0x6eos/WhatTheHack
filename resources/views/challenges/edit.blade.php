@@ -128,9 +128,10 @@
                                     <div class="col-md-4">
                                         <button type="submit" class="btn btn-danger">Delete</button>
                                     </div>
-                            </form>
+                                </form>
+                            @endif
                         @endif
-                    @endif
+                    </div>
                 </div>
             </div>
         </div>

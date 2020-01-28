@@ -2,10 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\EMCTokens;
+use App\Notifications\ChangeEmail;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+
 
 class ProfileController extends Controller
 {
@@ -71,7 +77,7 @@ class ProfileController extends Controller
             }
             catch (Exception $ex){
                 return redirect()->route('profile.show')
-                    ->withErrors('Cannot change password!');
+                    ->withErrors($ex->getMessage());
             }
         }
     }
@@ -105,29 +111,90 @@ class ProfileController extends Controller
                         ->withErrors('Wrong current E-Mail!');
                 }
                 else{
-                    $request->user()->fill([
-                        'email' => $newEmail
-                    ])->save();
+                    ###Generate token and save it to database###
+                    $token = Str::random(32);
+                    $emctoken = new EMCTokens();
+                    $emctoken->user_id = $user->id;
+                    $emctoken->token = $token;
+                    $emctoken->email = $newEmail;
+                    $emctoken->valid_until = now()->addMinutes(30);
+                    $emctoken->save();
+
+                    //send notification with the token to the users new email
+                    Notification::route('mail', $newEmail)->notify(new ChangeEmail($user->id, $token));
                 }
-                return redirect()->route('profile.show')->with('success','E-Mail changed!');
+                return redirect()->route('profile.show')
+                    ->with('success','An e-mail change request was sent to your new e-mail!');
             }
             catch (Exception $ex){
                 return redirect()->route('profile.show')
-                    ->withErrors('Cannot change E-Mail!');
+                    ->withErrors($ex->getMessage());
             }
         }
     }
 
-    public function deleteAccount($id){
-        $user = User::find($id);
-        if ($user != null) {
-            $user->delete();
-            return redirect()->route('home')
-                ->withErrors('Account deleted!');
+    public function changeEmail(Request $request){
+
+        //get user_id and token from the request
+        $user_id = $request->route('id');
+        $token = $request->route('token');
+        try{
+            //get all tokens and the user who wants to change the email from database
+            $emctokens = EMCTokens::all();
+            $user = User::find($user_id);
+
+            foreach ($emctokens as $emctoken){
+                if($emctoken->user_id == $user_id && $emctoken->token == $token){
+                    //check if token is expired or not
+                    $currentTS = now();
+                    //parse valid_until to carbon datetime
+                    $tokenTS = Carbon::parse($emctoken->valid_until);
+                    if($tokenTS->lt($currentTS)){
+                        $emctoken->delete();
+                        return redirect()->route('profile.show')->withErrors('E-Mail change verification expired!');
+                    }
+                    else{
+                        //change the email
+                        $user->email = $emctoken->email;
+                        $user->save();
+                        //delete the token
+                        $emctoken->delete();
+                        return redirect()->route('profile.show')->with('success', 'E-Mail changed!');
+                    }
+                }
+                else{
+                    return redirect()->route('profile.show')
+                        ->withErrors('Could not change E-Mail!');
+                }
+            }
         }
-        else {
-            redirect()->route('profile.show')
-                ->withErrors('Not able to delete account!');
+        catch(Exception $ex){
+            return redirect()->route('profile.show')
+                ->withErrors($ex->getMessage());
+        }
+    }
+
+    public function deleteAccount($id){
+        try{
+            $user = User::find($id);
+            if($user->hasRole('Admin'))
+            {
+                return redirect()->route('profile.show')
+                    ->withErrors('Admins can not delete their account!!');
+            }
+            if ($user != null) {
+                $user->delete();
+                return redirect()->route('home')
+                    ->withErrors('Account deleted!');
+            }
+            else {
+                return redirect()->route('profile.show')
+                    ->withErrors('Not able to delete account!');
+            }
+        }
+        catch (Exception $ex){
+            return redirect()->route('profile.show')
+                ->withErrors($ex->getMessage());
         }
     }
 }

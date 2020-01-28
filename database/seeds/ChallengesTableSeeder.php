@@ -41,7 +41,7 @@ class ChallengesTableSeeder extends Seeder
                 $challenge->category = "pwn";
             }
 
-            $challenge->flag = "WTH{" . $faker->bankAccountNumber . "}";
+            $challenge->flag = "WTH{" . $faker->md5 . "}";
             $challenge->author = $faker->name;
             $challenge->imageID = $faker->bankAccountNumber;
             $challenge->save();

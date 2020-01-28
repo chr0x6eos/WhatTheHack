@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use http\Exception\InvalidArgumentException;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use App\Challenge;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use App\User;
 
 class ChallengeController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth', 'verified']);
     }
 
     /**
@@ -140,8 +141,16 @@ class ChallengeController extends Controller
     public function show($id)
     {
         $challenge = Challenge::find($id);
+        $displayGIF = null; //no GIF should be displayed
 
-        return view('challenges.show')->with('challenge',$challenge);
+        if(Auth::user()->hasRole('admin') || Auth::user()->hasChallenge($challenge->id))
+        {
+            return view('challenges.show')->with(['challenge' => $challenge, 'displayGIF' => $displayGIF]);
+        }
+        else
+        {
+            return view('challenges.index')->with('challenges',Challenge::all( ))->withErrors('You are not allowed to view this challenge!');
+        }
     }
 
     /**
@@ -292,19 +301,22 @@ class ChallengeController extends Controller
             return redirect('challenges.index')->withErrors("Could not find challenge!");
         }
     }
-    
+
     public function download($id)
     {
         try
         {
             $challenge = Challenge::find($id);
-            if(Storage::disk('local')->exists($challenge->files))
+            if(Auth::User()->hasChallenge($challenge->id))
             {
-                return Storage::download($challenge->files);
-            }
-            else
-            {
-                return redirect()->route('challenges.show')->with('challenge',$challenge)->withErrors('This challenge has no files!');
+                if (Storage::disk('local')->exists($challenge->files))
+                {
+                    return Storage::download($challenge->files);
+                }
+                else
+                {
+                    return redirect()->route('challenges.show')->with('challenge', $challenge)->withErrors('This challenge has no files!');
+                }
             }
         }
         catch (\Exception $ex)
@@ -323,10 +335,11 @@ class ChallengeController extends Controller
         try
         {
             $challenge = Challenge::find($id);
+
             if ($challenge)
             {
                 //Upload path
-                $path =  'files/' . $challenge->name;
+                $path =  'files/' . $challenge->id;
 
                 // Get file extension
                 $extension = $request->file('file')->clientExtension();
@@ -366,5 +379,55 @@ class ChallengeController extends Controller
         {
             return redirect()->route('challenges.index')->withErrors('Could not upload because of error: ' . $ex->getMessage());
         }
+    }
+
+    public function flag(Request $request, $id)
+    {
+        $this->validate($request, [
+            'flag' => 'required'
+        ]);
+
+        $challenge = null;
+
+        try
+        {
+            $challenge = Challenge::find($id);
+            $displayGIF = null;   //parameter to now what gif should be displayed
+
+            //Make flag case insensitive
+            if (strtolower($challenge->flag) == strtolower($request->flag))
+            {
+                //Add points to user
+                Auth::user()->addPoints($challenge->getPoints());
+                $displayGIF = true;
+
+                //Save that user has solved challenge
+                $challenge->challengeUsers()->attach(Auth::user());
+                return view('challenges.show')->with(['challenge' => $challenge, 'displayGIF' => $displayGIF, 'success' => 'Congratulation! You solved the challenge!']);
+            }
+            else
+            {
+                $displayGIF = false;
+                return view('challenges.show')->with(['challenge' => $challenge, 'displayGIF' => $displayGIF])->withErrors('Sorry this is not the right flag! Please try again!');
+            }
+        }
+        catch (QueryException $queryException){
+            if($queryException->errorInfo[1]==1062)
+                return redirect()->route('challenges.show',$challenge->id)->with('success','Congratulations, but you already solved this one!');
+            else
+                throw $queryException;
+        }
+        catch (\Exception $ex)
+        {
+            if($challenge == null)
+            {
+               return redirect()->route('challenges.index')->withErrors('Could not submit because of error: ' . $ex->getMessage());
+            }
+            else
+            {
+               return redirect()->route('challenges.show',$challenge->id)->with('challenge',$challenge)->withErrors('Could not submit because of error: ' . $ex->getMessage());
+            }
+        }
+
     }
 }

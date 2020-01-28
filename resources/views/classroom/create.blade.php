@@ -14,7 +14,7 @@
                         <input type="text" class="form-control" name="name" placeholder="Name">
                     </p>
 
-                    <table class="table table-striped table-bordered">
+                    <table id="student" class="table table-striped table-bordered">
                         <thead>
                         <th>Username</th>
                         <th>Email</th>
@@ -22,8 +22,7 @@
                         </thead>
                         <tbody>
                         @foreach (\App\User::all() as $u)
-                            @if(Auth::user()->isStudent($u->userrole) == true)
-
+                            @if($u->hasRole("student"))
                                 <tr>
                                     <td>
                                         {{$u->username}}
@@ -60,4 +59,19 @@
             </div>
         </div>
     </div>
+    <script>
+        $(document).ready(
+            function () {
+                $('#student').DataTable( {
+                    "paging": true,
+                    "info":false,
+                    "aoColumns": [
+                        null,
+                        null,
+                        { "bSearchable": false, "orderable": false },
+                        // { "bSearchable": false, "orderable": false }
+                    ]
+                });
+            });
+    </script>
 @endsection
