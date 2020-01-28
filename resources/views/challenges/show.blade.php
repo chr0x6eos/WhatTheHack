@@ -2,7 +2,12 @@
 @section('content')
     <div class="container">
         <div class="card">
-            <div class="card-header font-weight-bold">{{ __('Challenge details') }}</div>
+            @php{{//TODO:Make the Solved appear on the right side of the card header}} @endphp
+            @if(Auth::user()->solvedChallenge($challenge->id))
+                <div class="card-header font-weight-bold bg-success">{{ __('Challenge details')}} - Solved</div>
+            @else
+                <div class="card-header font-weight-bold ">{{ __('Challenge details') }}</div>
+            @endif
             <div class="card-body">
                 <div class="form-group row">
                     <form id="challengeform">
@@ -139,16 +144,27 @@
                                 </form>
                             @endif
                         @endif
-                        <form method="POST" action="{{ route('challenges.flag', $challenge->id) }}">
-                            @csrf
-                            <strong>Flag:</strong>
-                            <br>
-                            <input type="text" name="flag">
-                            <button type="submit" class="btn btn-success">Submit flag</button>
-                        </form>
-                        <a href="{{ route('challenges.index') }}" class="btn btn-outline-secondary">Go back</a>
-                        <a href="{{ route('support.create', $challenge->id) }}" class="btn btn-outline-dark">Report a problem</a>
                 </div>
+
+                <form method="POST" action="{{ route('challenges.flag', $challenge->id) }}">
+                    @csrf
+                    <strong>Flag:</strong>
+                    <br>
+                    <input type="text" name="flag">
+                    <button type="submit" class="btn btn-success">Submit flag</button>
+                </form>
+
+                @if(isset($displayGIF))
+                    @if($displayGIF == true)
+                        <img src="/images/GIFs/snoop-dog-with-text.gif" style="height: 300px; width: 300px;">
+                    @else
+                        <img src="/images/GIFs/john-cena-with-text.gif" style="height: 300px; width: 300px;">
+                    @endif
+                @endif
+            </div>
+            <div>
+                <a href="{{ route('challenges.index') }}" class="btn btn-outline-secondary">Go back</a>
+                <a href="{{ route('support.create', $challenge->id) }}" class="btn btn-outline-dark">Report a problem</a>
             </div>
         </div>
     </div>

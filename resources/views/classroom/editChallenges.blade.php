@@ -3,11 +3,11 @@
 @section('content')
     <div class="container">
         <h1>You are in this classroom: {{$classroom->classroom_name}}</h1>
-        @if($classroom->isOwner(Auth::user()->id)||Auth::user()->hasRole('admin'))
+        @if($classroom->isOwner(Auth::user()->id) || Auth::user()->hasRole('admin'))
           <h3>Add challenges</h3>
         @endif
         <div>
-            @if($classroom->isOwner(Auth::user()->id)||Auth::user()->hasRole('admin'))
+            @if($classroom->isOwner(Auth::user()->id) || Auth::user()->hasRole('admin'))
                <form method="post" action="{{ route('classroom.attach', $classroom->id)}}" >
                 @csrf
 
