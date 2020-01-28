@@ -78,3 +78,9 @@ Route::post('submit/{challenge}', 'SupportRequestController@submit')->name('supp
 
 //User Level/Experience Routes
 Route::get('calculateLevel', 'ProfileController@calculateLevel')->name('calc.Level');
+
+//Deployment routes
+Route::get('deploy','DeploymentController@index')->name('deploy.index');
+Route::post('deploy/start/{deployment}','DeploymentController@start')->name('deploy.start');
+Route::post('deploy/stop/{deployment}','DeploymentController@stop')->name('deploy.stop');
+
