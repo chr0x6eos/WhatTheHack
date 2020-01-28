@@ -69,6 +69,7 @@ class UsersTableSeeder extends Seeder
                 'username' => 'Student4',
                 'email' => 'student4@whatthehack.htl',
                 'password' => Hash::make('student4'),
+                'email_verified_at' => now()->timestamp,
                 'userrole' => 'student',
                 'points' => 40,
                 'active' => true
