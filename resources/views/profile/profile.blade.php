@@ -55,11 +55,13 @@
                                 <div class="col-sm text-md-center">
                                     <a href="{{ route('profile.showChangeEMForm') }}" class="btn btn-info">Change E-Mail</a>
                                 </div>
-                                <form method="POST" action="{{ route('profile.delete', $user->id) }}">
-                                    @csrf
-                                    @method('delete')
-                                    <button type="submit" class="btn bg-danger" onclick="return confirm('Do you really want to delete your user account?')">Delete Account</button>
-                                </form>
+                                @if(!$user->hasRole('admin'))
+                                    <form method="POST" action="{{ route('profile.delete', $user->id) }}">
+                                        @csrf
+                                        @method('delete')
+                                        <button type="submit" class="btn bg-danger" onclick="return confirm('Do you really want to delete your user account?')">Delete Account</button>
+                                    </form>
+                                @endif
                             </div>
                         </div>
 

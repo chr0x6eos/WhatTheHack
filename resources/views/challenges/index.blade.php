@@ -7,7 +7,7 @@
             <div class="card-body">
                 @if(isset($challenges) && sizeof($challenges) > 0)
 
-                    <table border="1"class="table table-bordered">
+                    <table id="challenge" border="1"class="table table-bordered">
                         <thead>
                         <th>Name</th>
                         <th>Difficulty</th>
@@ -72,4 +72,22 @@
                     <a href="{{ route('challenges.create') }}" class="btn btn-info">Add new challenge</a>
                 @endif
             </div>
+            <script>
+                $(document).ready(
+                    function () {
+                        $('#challenge').DataTable( {
+                            "paging": true,
+                            "info":false,
+                            "aoColumns": [
+                                null,
+                                null,
+                                null,
+                                { "bSearchable": false, "orderable": false },
+                                { "bSearchable": false, "orderable": false },
+                                { "bSearchable": false, "orderable": false },
+                                // { "bSearchable": false, "orderable": false }
+                            ]
+                        });
+                    });
+            </script>
 @endsection

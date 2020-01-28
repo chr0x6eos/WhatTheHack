@@ -177,6 +177,11 @@ class ProfileController extends Controller
     public function deleteAccount($id){
         try{
             $user = User::find($id);
+            if($user->hasRole('Admin'))
+            {
+                return redirect()->route('profile.show')
+                    ->withErrors('Admins can not delete their account!!');
+            }
             if ($user != null) {
                 $user->delete();
                 return redirect()->route('home')
