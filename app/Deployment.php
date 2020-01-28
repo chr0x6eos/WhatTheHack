@@ -10,8 +10,8 @@ class Deployment extends Model
     public function start()
     {
         //NAME = VM-Name
-        $name = $this->name;
-        return shell_exec('whoami');
+        //$name = $this->name;
+        return shell_exec('sudo salt-cloud -p template_kioptrix WTH_Kioptrix');
     }
 
     //TODO:VDI - Implement stop of instance
@@ -19,6 +19,6 @@ class Deployment extends Model
     {
         //NAME = VM-Name
         $name = $this->name;
-        return shell_exec('path');
+        return shell_exec('sudo salt-cloud -d WTH_Kioptrix');
     }
 }
