@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('userrole')->default('student');
             $table->integer('points')->default(0);
             $table->boolean('active')->default(true);
+            $table->string('avatar')->default('default.jpg');
             $table->rememberToken();
             $table->timestamps();
         });
