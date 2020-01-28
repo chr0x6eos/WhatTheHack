@@ -205,6 +205,19 @@
                                 <a href="/challenges">Challenges</a>
                             </li>
                         @endif
+                        @if(Auth::user())
+                            <li>
+                                <a href="#aboutSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Ranking</a>
+                                <ul class="collapse list-unstyled" id="aboutSubmenu">
+                                    <li>
+                                        <a href="/ranking">Global</a>
+                                    </li>
+                                    <li>
+                                        <a href="/ranking/classroom">Classrooms</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endif
                 @endif
 
                 <li>

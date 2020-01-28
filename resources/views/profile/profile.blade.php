@@ -14,33 +14,33 @@
                             <label class="col-md-4 col-form-label text-md-right font-weight-bold">
                                 {{ __('Username:') }}
                             </label>
-                            <label class="col-md-4 col-form-label text-md-center">{{ $user->username }}</label>
+                            <label class="col-md-7 col-form-label text-md-center">{{ $user->username }}</label>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-md-4 col-form-label text-md-right font-weight-bold">
                                 {{ __('E-Mail:') }}
                             </label>
-                            <label class="col-md-4 col-form-label text-md-center">{{ $user->email }}</label>
+                            <label class="col-md-7 col-form-label text-md-center">{{ $user->email }}</label>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-md-4 col-form-label text-md-right font-weight-bold">
                                 {{ __('E-Mail verified at:') }}
                             </label>
-                            <label class="col-md-4 col-form-label text-md-center">@if($user->email_verified_at){{ $user->email_verified_at }}@else Not yet verified!@endif</label>
+                            <label class="col-md-7 col-form-label text-md-center">@if($user->email_verified_at){{ $user->email_verified_at }}@else Not yet verified!@endif</label>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-md-4 col-form-label text-md-right font-weight-bold">
                                 {{ __('Userrole:') }}
                             </label>
-                            <label class="col-md-4 col-form-label text-md-center">{{ $user->userrole }}</label>
+                            <label class="col-md-7 col-form-label text-md-center">{{ $user->userrole }}</label>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-md-4 col-form-label text-md-right font-weight-bold">
-                                {{ __('Points:') }}
+                                {{ __('Global Points:') }}
                             </label>
                             <label class="col-md-4 col-form-label text-md-center">{{ $user->points }}</label>
                         </div>
@@ -75,7 +75,7 @@
                                 <form method="POST" action="{{ route('profile.delete', $user->id) }}">
                                     @csrf
                                     @method('delete')
-                                    <button type="submit" class="btn bg-danger" onclick="return confirm('Do you really want to delete your user account?')">Delete Account</button>
+                                    <button type="submit" class="btn bg-danger text-white" onclick="return confirm('Do you really want to delete your user account?')">Delete Account</button>
                                 </form>
                             </div>
                         </div>
