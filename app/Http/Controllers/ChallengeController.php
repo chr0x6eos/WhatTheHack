@@ -394,9 +394,11 @@ class ChallengeController extends Controller
             //Make flag case insensitive
             if (strtolower($challenge->flag) == strtolower($request->flag))
             {
-                //TODO: Save that user has solved the challenge
                 //Add points to user
                 Auth::user()->addPoints($challenge->getPoints());
+
+                //Save that user has solved challenge
+                $challenge->challengeUsers()->attach(Auth::user());
 
                 return redirect()->route('challenges.show',$challenge->id)->with('success','Congratulation! You solved the challenge!');
             }
@@ -409,11 +411,12 @@ class ChallengeController extends Controller
         {
             if($challenge == null)
             {
-                return redirect()->route('challenges.index')->withErrors('Could not submit because of error: ' . $ex->getMessage());
+               return redirect()->route('challenges.index')->withErrors('Could not submit because of error: ' . $ex->getMessage());
             }
             else
             {
-                return redirect()->route('challenges.show')->with('challenge',$challenge)->withErrors('Could not submit because of error: ' . $ex->getMessage());
+
+               return redirect()->route('challenges.show')->with('challenge',$challenge->id)->withErrors('Could not submit because of error: ' . $ex->getMessage());
             }
         }
     }
