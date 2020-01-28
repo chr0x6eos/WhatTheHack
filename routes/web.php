@@ -75,3 +75,6 @@ Route::get('classroom/showClassroom/{classroom}', 'ClassroomController@showChall
 // Support/Report Routes
 Route::get('support/{challenge}', 'SupportRequestController@create')->name('support.create');
 Route::post('submit/{challenge}', 'SupportRequestController@submit')->name('support.submit');
+
+//User Level/Experience Routes
+Route::get('calculateLevel', 'ProfileController@calculateLevel')->name('calc.Level');

@@ -1,6 +1,19 @@
 /*
     DEMO STYLE
 */
+#progress{
+    background-color: red;
+    width: 100%;
+    height: 10px;
+    z-index: 999;
+    color: red;
+
+}
+
+body #progress{
+    background-color: red;
+    color: red;
+}
 
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 body {
