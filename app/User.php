@@ -113,7 +113,7 @@ class User extends Authenticatable implements MustVerifyEmail
         }
         return false;
     }
-    
+
 
     public function classrooms(){
         return $this

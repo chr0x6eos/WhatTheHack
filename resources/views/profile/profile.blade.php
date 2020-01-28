@@ -58,10 +58,6 @@
                             <label class="col-md-4 col-form-label text-md-center">{{ App\User::calculateProgress1($user->points) }}/{{ App\User::calculateProgress2($user->points)." Points" }}</label>
                         </div>
                         <div class="form-group row">
-                            <!-- Progress-bar -->
-
-                        </div>
-                        <div class="form-group row">
                             <label class="col-md-4 col-form-label text-md-right font-weight-bold">
                                 {{ __('Rank:') }}
                             </label>
