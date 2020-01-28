@@ -14,6 +14,12 @@ use Symfony\Component\Routing\Matcher\RedirectableUrlMatcher;
 
 class ClassroomController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth', 'verified']);
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -265,6 +271,18 @@ class ClassroomController extends Controller
         $classroom->save();
         $classrooms = Classroom::all();
         return view('classroom.disabled')->with('classrooms',$classrooms);
+    }
+
+    public function showChallenges($id){
+        $classroom = Classroom::find($id);
+
+        if ($classroom != null) {
+            return view('classroom.showchallenges')->with('classroom', $classroom);
+        }
+        else {
+            return redirect()->route('classroom.myClassrooms')
+                ->withErrors('Classroom with id=' . $id . ' not found!');
+        }
     }
 
 }

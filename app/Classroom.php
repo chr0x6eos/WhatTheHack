@@ -28,14 +28,14 @@ class Classroom extends Model
 
    public function getClassroomChallenges($id){
         foreach ($this->challenges as $challenge){
-            if($challenge->id===$id)
+            if($challenge->id == $id)
                 return true;
         }
         return false;
     }
 
     public function isOwner($id){
-        if($this->classroom_owner==$id)
+        if($this->classroom_owner == $id)
             return true;
         return false;
     }

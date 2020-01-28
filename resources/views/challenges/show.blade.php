@@ -79,7 +79,7 @@
                                 {{ __('Author:') }}
                             </label>
                             <div class="col-md-6">
-                                <input id="author" type="text" disabled name="author" class="form-control" value="{{ Auth::user()->username }}">
+                                <input id="author" type="text" disabled name="author" class="form-control" value="{{ $challenge->author }}">
                             </div>
                         </div>
                         <div class="form-group row">
