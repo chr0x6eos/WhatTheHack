@@ -6,12 +6,13 @@ use Illuminate\Http\Request;
 use App\Challenge;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use App\User;
 
 class ChallengeController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth', 'verified']);
     }
 
     /**
@@ -140,7 +141,14 @@ class ChallengeController extends Controller
     {
         $challenge = Challenge::find($id);
 
-        return view('challenges.show')->with('challenge',$challenge);
+        if(Auth::user()->hasRole('admin') || Auth::user()->hasChallenge($challenge->id))
+        {
+            return view('challenges.show')->with('challenge', $challenge);
+        }
+        else
+        {
+            return view('challenges.index')->with('challenges',Challenge::all( ))->withErrors('You are not allowed to view this challenge!');
+        }
     }
 
     /**
@@ -297,7 +305,6 @@ class ChallengeController extends Controller
         try
         {
             $challenge = Challenge::find($id);
-            //TODO: TEST! : ADD PERMISSION CHECK IF USER IS ALLOWED TO DOWNLOAD FILES
             if(Auth::User()->hasChallenge($challenge->id))
             {
                 if (Storage::disk('local')->exists($challenge->files))
@@ -383,13 +390,9 @@ class ChallengeController extends Controller
         try
         {
             $challenge = Challenge::find($id);
-            $user = Auth::user();
-            foreach ($challenge->challengeUsers as $u){
-                if ($u!=Auth::user()){
-                    return redirect()->route('challenges.show',$challenge->id)->with('success','Congratulation! You solved the challenge!');
-                }
-            }
-            if ($challenge->flag == $request->flag)
+
+            //Make flag case insensitive
+            if (strtolower($challenge->flag) == strtolower($request->flag))
             {
                 //Add points to user
                 $user->addPoints($challenge->getPoints());
