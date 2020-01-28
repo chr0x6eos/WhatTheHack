@@ -45,8 +45,13 @@ class Challenge extends Model
         return false;
     }
 
-    public function supportrequest()
-    {
+    public function challengeUsers(){
+        return $this
+            ->belongsToMany('App\User')
+            ->withTimestamps();
+    }
+
+    public function supportrequest(){
         return $this-> hasMany('App\SupportRequest');
     }
 }

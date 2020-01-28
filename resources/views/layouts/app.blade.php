@@ -50,7 +50,6 @@
 
 </head>
 <body>
-
     <div id="content">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="navbar-toggle">
@@ -85,7 +84,9 @@
                     </ul>
 
                 </div>
+
             </div>
+
         </nav>
 
         <main class="py-4">
@@ -231,7 +232,6 @@
                     </ul>
                 </li>
             </ul>
-
         </nav>
 
 

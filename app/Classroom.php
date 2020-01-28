@@ -6,15 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Classroom extends Model
 {
-    public function users()
-    {
+    public function users(){
         return $this
             ->belongsToMany('App\User')
             ->withTimestamps();
     }
 
-    public function challenges()
-    {
+    public function challenges(){
         return $this
             ->belongsToMany('App\Challenge')
             ->withTimestamps();

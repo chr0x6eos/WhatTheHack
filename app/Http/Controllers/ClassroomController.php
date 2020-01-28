@@ -19,7 +19,6 @@ class ClassroomController extends Controller
         $this->middleware(['auth', 'verified']);
     }
 
-
     /**
      * Display a listing of the resource.
      *
@@ -72,6 +71,8 @@ class ClassroomController extends Controller
             foreach ($addStudents as $student){
                 $classroom->users()->attach($student);
             }
+
+            //Creator of a classroom is automatically a member
             $classroom->users()->attach($user->getAuthIdentifier());
 
             return redirect()->route('home');
@@ -226,17 +227,18 @@ class ClassroomController extends Controller
     public function attach(Request $request, $id)
     {
         $classroom = Classroom::find($id);
+
         $this->validate($request,[
             'add_Challenges'=>'required',
         ]);
         $challenges = $request->input('add_Challenges');
 
-        foreach ($challenges as $c)
-        {
+        foreach ($challenges as $c) {
             $challenge=Challenge::find($c);
-            if($challenge->active== true)
+            if($challenge->active == true)
                 $classroom->challenges()->attach($c);
         }
+
         return redirect()->route('classroom.myclassrooms');
     }
 
