@@ -24,7 +24,7 @@
                                 <td>{{ $u->email }}</td>
                                 <td>{{ $u->userrole }}</td>
                                 <td>
-                                    <input type="checkbox" name="deletemembers[]" value="{{ $u->id }}" @if($u->userrole=="admin" || $u->userrole=="teacher") disabled="disabled" @endif>
+                                    <input type="checkbox" name="deletemembers[]" value="{{ $u->id }}" @if($u->hasRole("admin") || $u->hasRole("teacher")) disabled = "disabled" @endif>
                                 </td>
                             </tr>
                                 @endforeach
@@ -37,7 +37,6 @@
             <form method="post" action="{{ route('classroom.updatemembers', $classroom) }}">
                 @csrf
 
-                </p>
                 <h3>Add members</h3>
                 <p>
                     <table class="table table-striped table-bordered" id="addmembers">
@@ -49,7 +48,7 @@
                     </thead>
                     <tbody>
                     @foreach(\App\User::all() as $u)
-                        @if($u->userrole == "student" && !$classroom->getMembers($u->id))
+                        @if($u->hasRole("student") && !$classroom->getMembers($u->id))
                         <tr>
                             <td>{{ $u->id }}</td>
                             <td>{{ $u->username }}</td>

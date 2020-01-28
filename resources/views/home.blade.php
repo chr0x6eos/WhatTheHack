@@ -20,28 +20,28 @@
                         Go here to view the <a href="{{ route('challenges.index') }}">Challenges</a>.
                         <br>
                         <br>
-                        @if (Auth::user()->isTeacher(Auth::user()->userrole)==true || Auth::user()->isAdmin(Auth::user()->userrole)==true)
+                        @if (Auth::user()->hasRole('teacher') ||Auth::user()->hasRole('admin'))
 
                             <a href="{{route('classroom.create')}} " class="btn btn-info" >Create classroom</a>
                         @endif
                         <br>
                         Go here to view the <a href="{{ route('classroom.myclassrooms') }}">Classrooms</a>.
                     </p>
-                        <p>
-                        @if (Auth::user()->userrole == 'admin')
+
+                        @if (Auth::user()->hasRole('admin'))
                             <p>Go here to access the <a href="{{ route('classroom.index') }}">management classroom</a> page.</p>
                             @endif
-                        </p>
 
-                    @if (Auth::user()->userrole == 'admin')
+
+                    @if (Auth::user()->hasRole('admin'))
                     <p>Go here to access the <a href="{{ route('manageuser.index') }}">User Management</a>.</p>
                     @endif
 
-                    <p>
-                        @if (Auth::user()->userrole == 'admin')
+
+                        @if (Auth::user()->hasRole('admin'))
                             <p>Go here to access the <a href="{{ route('classroom.disabled') }}">disabled classrooms</a>.</p>
                             @endif
-                    </p>
+
                 </div>
             </div>
         </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use App\Challenge;
 use Illuminate\Support\Facades\Auth;
@@ -410,6 +411,12 @@ class ChallengeController extends Controller
                 return view('challenges.show')->with(['challenge' => $challenge, 'displayGIF' => $displayGIF])->withErrors('Sorry this is not the right flag! Please try again!');
             }
         }
+        catch (QueryException $queryException){
+            if($queryException->errorInfo[1]==1062)
+                return redirect()->route('challenges.show',$challenge->id)->with('success','Congratulations, but you already solved this one!');
+            else
+                throw $queryException;
+        }
         catch (\Exception $ex)
         {
             if($challenge == null)
@@ -418,9 +425,9 @@ class ChallengeController extends Controller
             }
             else
             {
-
-               return redirect()->route('challenges.show')->with('challenge',$challenge->id)->withErrors('Could not submit because of error: ' . $ex->getMessage());
+               return redirect()->route('challenges.show',$challenge->id)->with('challenge',$challenge)->withErrors('Could not submit because of error: ' . $ex->getMessage());
             }
         }
+
     }
 }

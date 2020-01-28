@@ -38,16 +38,6 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-
-
-    public function isTeacher($userrole)
-    {
-        if ($userrole == 'teacher') {
-            return true;
-        }
-        return false;
-    }
-
     // Check if the user object is assigned the requested role
     public function hasRole($role)
     {
@@ -64,24 +54,6 @@ class User extends Authenticatable implements MustVerifyEmail
         else
             return true;
     }
-
-
-    public function isAdmin($userrole){
-        if ($userrole == 'admin') {
-            return true;
-        }
-        else
-            return false;
-    }
-
-    public function isStudent($userrole){
-        if ($userrole == 'student') {
-            return true;
-        }
-        else
-            return false;
-    }
-
     //Check if current user is author of challenge
     public function isAuthor($author)
     {
@@ -134,6 +106,14 @@ class User extends Authenticatable implements MustVerifyEmail
     public function getAdmin()
     {
         return User::where('userrole', 'admin')->first();
+    }
+
+    public function solvedChallenge($id){
+        foreach ($this->challenges as $challenge){
+            if ($challenge->id == $id)
+                return true;
+        }
+        return false;
     }
 
     static function calculateLevel($points){
