@@ -64,22 +64,28 @@ class User extends Authenticatable implements MustVerifyEmail
         return false;
     }
 
-    public function hasChallenge($id){
-        foreach (Auth::user()->classrooms as $c){
-            foreach ($c->challenges as $challenge){
-                if($challenge=$id){
-                return true;
+    public function challenges()
+    {
+        return $this
+            ->belongsToMany('App\Challenges')
+            ->withTimestamps();
+    }
+
+    public function hasChallenge($id)
+    {
+        foreach (Auth::user()->classrooms as $c)
+        {
+            foreach ($c->challenges as $challenge)
+            {
+                if ($challenge->id == $id)
+                {
+                    return true;
                 }
             }
         }
         return false;
     }
 
-    public function challenges(){
-        return $this
-            ->belongsToMany('App\Challenge')
-            ->withTimestamps();
-    }
 
     public function classrooms(){
         return $this
@@ -108,5 +114,47 @@ class User extends Authenticatable implements MustVerifyEmail
                 return true;
         }
         return false;
+    }
+
+    static function calculateLevel($points){
+        $levels = Level::all();
+        foreach($levels as $l){
+            if($points >= $l->levelFrom && $points <= $l->levelTo){
+                $userLevel = $l->level;
+            }
+        }
+        return $userLevel;
+    }
+    static function calculateRank($points){
+        $levels = Level::all();
+        foreach($levels as $l){
+            if($points >= $l->levelFrom && $points <= $l->levelTo){
+                $userLevel = $l->levelName;
+            }
+        }
+        return $userLevel;
+    }
+
+    static function calculateProgress1($points){
+        $levels = Level::all();
+        foreach($levels as $l){
+            if($points >= $l->levelFrom && $points <= $l->levelTo){
+                $currentpoints = $points - $l->levelFrom;
+                $currentpoints = ceil($currentpoints);
+                $userLevel = $currentpoints;
+            }
+        }
+        return $userLevel;
+    }
+
+    static function calculateProgress2($points){
+        $levels = Level::all();
+        foreach($levels as $l){
+            if($points >= $l->levelFrom && $points <= $l->levelTo){
+                $neededpoints = $l->levelTo - $l->levelFrom;
+                $neededpoints = ceil($neededpoints);
+            }
+        }
+        return $neededpoints;
     }
 }

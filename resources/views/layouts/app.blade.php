@@ -50,7 +50,6 @@
 
 </head>
 <body>
-
     <div id="content">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="navbar-toggle">
@@ -85,7 +84,9 @@
                     </ul>
 
                 </div>
+
             </div>
+
         </nav>
 
         <main class="py-4">
@@ -204,6 +205,19 @@
                                 <a href="/challenges">Challenges</a>
                             </li>
                         @endif
+                        @if(Auth::user())
+                            <li>
+                                <a href="#aboutSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Ranking</a>
+                                <ul class="collapse list-unstyled" id="aboutSubmenu">
+                                    <li>
+                                        <a href="/ranking">Global</a>
+                                    </li>
+                                    <li>
+                                        <a href="/ranking/classroom">Classrooms</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endif
                 @endif
 
                 <li>
@@ -218,7 +232,6 @@
                     </ul>
                 </li>
             </ul>
-
         </nav>
 
 

@@ -4,7 +4,7 @@
     <div class="container">
         <h1>You are in this classroom: {{$classroom->classroom_name}}</h1>
         @if($classroom->isOwner(Auth::user()->id)||Auth::user()->hasRole('student'))
-            <h3>Add challenges</h3>
+            <h3>All challenges of this classroom</h3>
         @endif
 
 
