@@ -3,12 +3,12 @@
 <div class="container">
     @if(Auth::user()->hasRole("admin"))
     <div class="row justify-content-center">
-        <div class="row mt-5">
+        <div class="row mt-5" style="width: 100%">
             <div class="col-md-4 mb-5">
                 <div class="card h-100">
                     <div class="card-body">
-                        <h2 class="card-title">Users</h2>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex numquam, maxime minus quam molestias corporis quod, ea minima accusamus.</p>
+                        <h2 class="card-title">User Information</h2>
+                        <p class="card-text"></p>
                     </div>
                     <div class="card-footer">
                         <a href="#" class="btn btn-success btn-sm" style="width: 100%">More Info</a>
@@ -38,12 +38,31 @@
                 </div>
             </div>
         </div>
-        <div class="row mt-9">
+        <div class="row mt-9" style="width: 100%">
             <div class="col-md-12 mb-5">
                 <div class="card h-100">
                     <div class="card-body">
-                        <h2 class="card-title">User Ranking</h2>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex numquam, maxime minus quam molestias corporis quod, ea minima accusamus.</p>
+                        <h2 class="card-title">Top 5</h2>
+                        <div class="card-body">
+                            <table id="rankingTable" class="table table-bordered" cellspacing="0" width="100%">
+                                <thead>
+                                <tr>
+                                    <th>Rank</th>
+                                    <th class="th-sm">Username</th>
+                                    <th class="th-sm">Overall Points</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach(\App\Http\Controllers\RankingController::getTopFive()->ranked as $key => $value)
+                                    <tr>
+                                        <td>{{ $key }}</td>
+                                        <td>{{ $value->username }}</td>
+                                        <td>{{ $value->points }}</td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                     <div class="card-footer">
                         <a href="#" class="btn btn-success btn-sm" style="width: 100%">More Info</a>
