@@ -161,10 +161,16 @@
                             <a href="#classroomSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Classroom</a>
                             <ul class="collapse list-unstyled" id="classroomSubmenu">
                                 <li>
-                                    <a href="/classroom">Show Classroom</a>
+                                    <a href="/classroom">Show Classrooms</a>
                                 </li>
                                 <li>
                                     <a href="/classroom/create">Create Classroom</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('classroom.disabled') }}">Disabled Classrooms</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('classroom.myclassrooms') }}">My Classrooms</a>
                                 </li>
                             </ul>
                         </li>
@@ -178,9 +184,6 @@
                             <a href="#challengeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Challenges</a>
                             <ul class="collapse list-unstyled" id="challengeSubmenu">
                                 <li>
-                                    <a href="/challenges">Show Challenges</a>
-                                </li>
-                                <li>
                                     <a href="challenges/create">Create Challenge</a>
                                 </li>
                             </ul>
@@ -189,7 +192,7 @@
                             <a href="#classroomSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Classroom</a>
                             <ul class="collapse list-unstyled" id="classroomSubmenu">
                                 <li>
-                                    <a href="/classroom">Show Classroom</a>
+                                    <a href="{{ route('classroom.myclassrooms') }}">Show Classrooms</a>
                                 </li>
                                 <li>
                                     <a href="/classroom/create">Create Classroom</a>
@@ -198,9 +201,11 @@
                         </li>
                     @endif
                     @if(Auth::user()->hasRole("student"))
+                        <!--
                         <li>
                             <a href="/challenges">Challenges</a>
                         </li>
+                        -->
                     @endif
                 @endif
                 <li>
