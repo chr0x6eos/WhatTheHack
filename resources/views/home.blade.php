@@ -7,11 +7,19 @@
             <div class="col-md-4 mb-5">
                 <div class="card h-100">
                     <div class="card-body">
-                        <h2 class="card-title">User Information</h2>
-                        <p class="card-text"></p>
+                        <h2 class="card-title">Users</h2>
+                        <p class="card-text">
+                            <img src="{{URL::asset('/images/icons/username.png')}}" width="30px"> Total: {{App\User::count()}}
+                        </p>
+                        <p class="card-text">
+                            <img src="{{URL::asset('/images/icons/active.jpg')}}" width="30px"> Active: {{App\User::countActiveUsers()}}
+                        </p>
+                        <p class="card-text">
+                            <img src="{{URL::asset('/images/icons/disabled.png')}}" width="30px"> Disabled: {{App\User::countDisabledUsers()}}
+                        </p>
                     </div>
                     <div class="card-footer">
-                        <a href="#" class="btn btn-success btn-sm" style="width: 100%">More Info</a>
+                        <a href="/manage/users" class="btn btn-success btn-sm" style="width: 100%">User Management</a>
                     </div>
                 </div>
             </div>
@@ -19,10 +27,18 @@
                 <div class="card h-100">
                     <div class="card-body">
                         <h2 class="card-title">Classrooms</h2>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex numquam, maxime minus quam molestias corporis quod, ea minima accusamus.</p>
+                        <p class="card-text">
+                            <img src="{{URL::asset('/images/icons/classroom.png')}}" width="30px"> Total: {{App\Classroom::count()}}
+                        </p>
+                        <p class="card-text">
+                            <img src="{{URL::asset('/images/icons/active.jpg')}}" width="30px"> Active: {{App\Classroom::countActiveClassrooms()}}
+                        </p>
+                        <p class="card-text">
+                            <img src="{{URL::asset('/images/icons/disabled.png')}}" width="30px"> Disabled: {{App\Classroom::countDisabledClassrooms()}}
+                        </p>
                     </div>
                     <div class="card-footer">
-                        <a href="#" class="btn btn-success btn-sm" style="width: 100%">More Info</a>
+                        <a href="/classroom" class="btn btn-success btn-sm" style="width: 100%">Classroom Management</a>
                     </div>
                 </div>
             </div>
@@ -30,10 +46,18 @@
                 <div class="card h-100">
                     <div class="card-body">
                         <h2 class="card-title">Challenges</h2>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex numquam, maxime minus quam molestias corporis quod, ea minima accusamus.</p>
+                        <p class="card-text">
+                            <img src="{{URL::asset('/images/icons/challenge.png')}}" width="30px"> Total: {{App\Challenge::count()}}
+                        </p>
+                        <p class="card-text">
+                            <img src="{{URL::asset('/images/icons/active.jpg')}}" width="30px"> Active: {{App\Challenge::countActiveChallenges()}}
+                        </p>
+                        <p class="card-text">
+                            <img src="{{URL::asset('/images/icons/disabled.png')}}" width="30px"> Disabled: {{App\Challenge::countDisabledChallenges()}}
+                        </p>
                     </div>
                     <div class="card-footer">
-                        <a href="#" class="btn btn-success btn-sm" style="width: 100%">More Info</a>
+                        <a href="/challenges" class="btn btn-success btn-sm" style="width: 100%">Challenge Management</a>
                     </div>
                 </div>
             </div>
@@ -65,7 +89,7 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <a href="#" class="btn btn-success btn-sm" style="width: 100%">More Info</a>
+                        <a href="#" class="btn btn-success btn-sm" style="width: 100%">Show Global Ranking</a>
                     </div>
                 </div>
             </div>
@@ -86,7 +110,7 @@
 
                             </div>
                             <div class="card-footer">
-                                <a href="{{ route('profile.show') }}"  class="btn btn-success btn-sm" style="width: 100%">More Info</a>
+                                <a href="{{ route('profile.show') }}"  class="btn btn-success btn-sm" style="width: 100%">My Profile</a>
                             </div>
                         </div>
                     </div>
@@ -107,7 +131,7 @@
                                 </p>
                             </div>
                             <div class="card-footer">
-                                <a href="{{ route('classroom.myclassrooms') }}" class="btn btn-success btn-sm" style="width: 100%">More Info</a>
+                                <a href="{{ route('classroom.myclassrooms') }}" class="btn btn-success btn-sm" style="width: 100%">My Classrooms</a>
                             </div>
                         </div>
                     </div>
@@ -121,7 +145,7 @@
                                 @endforeach
                             </div>
                             <div class="card-footer">
-                                <a href="#" class="btn btn-success btn-sm" style="width: 100%">More Info</a>
+                                <a href="#" class="btn btn-success btn-sm" style="width: 100%">All Activities</a>
                             </div>
                         </div>
                     </div>

@@ -161,7 +161,7 @@
                             <a href="#classroomSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Classroom</a>
                             <ul class="collapse list-unstyled" id="classroomSubmenu">
                                 <li>
-                                    <a href="/classroom">Show Classrooms</a>
+                                    <a href="/classroom">Classroom Management</a>
                                 </li>
                                 <li>
                                     <a href="/classroom/create">Create Classroom</a>
