@@ -1,24 +1,24 @@
 @extends('layouts.app')
 @section('content')
 
-        <<div class="container" style="float: right; width: 15%; margin-right: 40px; position: relative">
-            <div class="card">
+        <div class="container" style="float: right; width: 15%; margin-right: 40px; position: relative;">
+            <div class="card" style="background-color: dimgrey">
                 <div class="card-header ">Solved</div>
                 <div class="card-body">
-                    <div class="form-group row"><input type="submit" class="btn btn-elegant" id="solved_button" value="Solved" /></div>
-                    <div class="form-group row"><input type="submit" class="btn btn-elegant" id="unsolved_button" value="Unsolved" /></div>
-                    <div class="form-group row "><input type="submit" class="btn btn-elegant" id="all_button" value="All" /></div>
+                    <div class="form-group row"><input type="submit" class="btn " id="solved_button" value="Solved" /></div>
+                    <div class="form-group row"><input type="submit" class="btn " id="unsolved_button" value="Unsolved" /></div>
+                    <div class="form-group row "><input type="submit" class="btn " id="all_button" value="All" /></div>
                 </div>
             </div>
-            <div class="card">
+            <div class="card" style="background-color: dimgrey">
                 <div class="card-header ">Filter</div>
                 <div class="card-body">
-                    <div class="form-group row"><input type="submit" class="btn btn-elegant" id="misc_button" value="misc" /></div>
-                    <div class="form-group row"><input type="submit" class="btn btn-elegant" id="web_button" value="Web Exploitation" /></div>
-                    <div class="form-group row"><input type="submit" class="btn btn-elegant" id="forensic_button" value="Forensic" /></div>
-                    <div class="form-group row"><input type="submit" class="btn btn-elegant" id="reversing_button" value="Reverse Engineering" /></div>
-                    <div class="form-group row"><input type="submit" class="btn btn-elegant" id="crypto_button" value="Cryptography" /></div>
-                    <div class="form-group row"><input type="submit" class="btn btn-elegant" id="pwn_button" value="Binary Exploitation" /></div>
+                    <div class="form-group row"><input type="submit" class="btn " id="misc_button" value="misc" /></div>
+                    <div class="form-group row"><input type="submit" class="btn " id="web_button" value="Web Exploitation" /></div>
+                    <div class="form-group row"><input type="submit" class="btn " id="forensic_button" value="Forensic" /></div>
+                    <div class="form-group row"><input type="submit" class="btn " id="reversing_button" value="Reverse Engineering" /></div>
+                    <div class="form-group row"><input type="submit" class="btn " id="crypto_button" value="Cryptography" /></div>
+                    <div class="form-group row"><input type="submit" class="btn " id="pwn_button" value="Binary Exploitation" /></div>
                 </div>
             </div>
         </div>
@@ -28,9 +28,9 @@
                     @if($challenge->active==1)
                         @if(Auth::user()->solvedChallenge($challenge->id))
                             @php//TODO:Change colour to match theme @endphp
-                            <div class="card picture-item " data-groups='["solved","{{$challenge->category}}"]' style="background-color: #0C9A9A">
-                                <div class="card-header"><a href="{{route('challenges.show',$challenge->id)}}">{{$challenge->name}} - {{$challenge->category}}</a>
-                                <p style="float: right;color: black">Total solves: {{$challenge->solves($challenge->id)}}</p>
+                            <div class="card picture-item   " data-groups='["solved","{{$challenge->category}}"]' style="background-color: dimgrey" >
+                                <div class="card-header" style="background-color: #0E9A00"><a href="{{route('challenges.show',$challenge->id)}}">{{$challenge->name}} - {{$challenge->category}}</a>
+                                <p style="float: right;color: black">Total solves: {{$challenge->solves($challenge->id)}} ~solved</p>
                                 </div>
                                 <div class="card-body">
                                     Author: {{$challenge->author}}
@@ -39,7 +39,7 @@
                                 </div>
                             </div>
                         @else
-                            <div class="picture-item" data-groups='["unsolved","{{$challenge->category}}"]'>
+                            <div class="picture-item" data-groups='["unsolved","{{$challenge->category}}"]' style="background-color: dimgrey">
                                 <div class="card-header"><a href="{{route('challenges.show',$challenge->id)}}">{{$challenge->name}} - {{$challenge->category}}</a>
                                     <p style="float: right;color: black">Total solves: {{$challenge->solves($challenge->id)}}</p>
                                 </div>
