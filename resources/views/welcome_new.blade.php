@@ -15,7 +15,7 @@
                                 @csrf
                                 <div class="md-form form-lg md-outline">
                                     <input id="login" data-test="input" name="login" type="text" class="form-control form-control-lg" value="" required autofocus>
-                                    <label class="" data-error="" data-success="" id="">Email or Username</label>
+                                    <label class="label-form" data-error="" data-success="" id="">Email or Username</label>
 
                                     @if ($errors->has('username') || $errors->has('email') || $errors->has('active'))
                                         <span class="invalid-feedback">
@@ -27,7 +27,7 @@
                                 </div>
                                 <div class="md-form form-lg md-outline">
                                     <input id="password" data-test="input" name="password" type="password" class="form-control form-control-lg @error('password') is-invalid @enderror" value="" required autocomplete="current-password">
-                                    <label class="" data-error="" data-success="" id="">Password</label>
+                                    <label class="label-form" data-error="" data-success="" id="">Password</label>
 
                                     @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -47,13 +47,13 @@
                                     <div>
                                         <!-- Forgot password -->
                                         @if (Route::has('password.request'))
-                                        <a href="{{ route('password.request') }}">Forgot password?</a>
+                                        <a class="card-link" href="{{ route('password.request') }}">Forgot password?</a>
                                         @endif
                                     </div>
                                 </div>
                                 <button class="btn btn-success btn-block my-4" type="submit">Log in</button>
                                 <p>Not a member?
-                                    <a href="{{ route('register') }}">Register</a>
+                                    <a class="card-link" href="{{ route('register') }}">Register</a>
                                 </p>
                             </form>
                         </div>

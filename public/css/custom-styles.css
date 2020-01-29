@@ -42,7 +42,32 @@
     height: auto;
     background: white;
 }
-
+.navbar-dark.elegant-color.navbar.navbar-expand-md{
+    position: fixed;
+    width: 100%;
+    color: white;
+}
+div.nav.nav-container{
+    width: 100%;
+}
+.label-form{
+    pointer-events: none;
+}
+.navbar-brand{
+    margin: 0px 30px;
+}
+.login_logout_btn{
+    display: block;
+    width: 100%;
+    padding: 0.25rem 1.5rem;
+    clear: both;
+    font-weight: 400;
+    color: #212529;
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+}
 /**
  * SPDX-License-Identifier: (EUPL-1.2)
  * Copyright © 2019 Werbeagentur Christian Aichner
@@ -50,10 +75,13 @@
 
 /* https://github.com/snek-at/front/blob/5f5bd7a9cfdb6f601b8738974557102a86891ff1/src/components/pages/Landing/landing.scss */
 
+
 #landing {
     background: #3E3E3E;
     color: white;
     background-image: url('/images/pics/circuit_dots.svg');
+    background-attachment: fixed;
+    height: 100%;
 }
 
 #landing .typist {
@@ -79,18 +107,37 @@
     top: 0;
     left: -250px;
     height: 100vh;
-    z-index: 999;
+    z-index: 1040;
     background: #252525;
     color: #fff;
     transition: all 0.3s;
     overflow-y: scroll;
     box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
 }
-
+a.card-link{
+    color: #01C851;
+}
 #sidebar.active {
     left: 0;
 }
-
+div.landing.py-5 {
+    padding-top: 90px;
+    height: 100%;
+    z-index: 999;
+}
+div.col-md-6{
+    padding-top: 48px;
+}
+div.col-lg-9{
+    padding-top: 48px;
+}
+div.col-md-8{
+    padding-top: 90px;
+    z-index: 999;
+}
+label.custom-control-label::after{
+    color: #01C851;
+}
 div#dismiss {
     width: 35px;
     height: 35px;
@@ -106,17 +153,14 @@ div#dismiss {
     color:white;
     background-color: #3E3E3E;
 }
-
 #dismiss:hover {
     background: #fff;
     color: #252525;
 }
-
 #sidebar .sidebar-header {
     padding: 20px;
     background: #252525;
 }
-
 #sidebar ul.components {
     padding: 20px 0;
     border-bottom: 1px solid #252525;
@@ -153,7 +197,12 @@ a[data-toggle="collapse"] {
 a.green-text.dropdown-item.waves-effect.waves-light:hover{
     background-color: green;
 }
-
+div.card-header{
+    color: black;
+}
+div.card-body{
+    color: black;
+}
 .dropdown-toggle::after {
     display: block;
     position: absolute;
@@ -183,14 +232,20 @@ ul.CTAs a {
     background: none;
     border: none;
 }
+#sidebarCollapse.navbar-toggle:focus{
+    background: black;
+    border-color: transparent;
+    color: transparent;
+}
 
 .navbar-toggle{
     padding: 0.25rem 0.75rem;
     font-size: 1.25rem;
     line-height: 1;
     background-color: transparent;
-    border: 1px solid transparent;
+    border: none;
     border-radius: 0.25rem;
 }
+
 
 

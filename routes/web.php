@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
     return view('welcome_new');
-});
+})->name('welcome');
 Route::get('/agb', function () {
     return view('subpages/agb');
 });

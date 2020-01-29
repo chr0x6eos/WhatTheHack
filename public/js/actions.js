@@ -1,6 +1,5 @@
 $(document).ready(function () {
 
-
     $("#sidebar").mCustomScrollbar({
         theme: "minimal"
     });
@@ -14,5 +13,4 @@ $(document).ready(function () {
         // open sidebar
         $('#sidebar').addClass('active');
     });
-
 });
