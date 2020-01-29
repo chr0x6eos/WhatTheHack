@@ -1,103 +1,69 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <h1>You are in this classroom: {{$classroom->classroom_name}}</h1>
-        @if($classroom->isOwner(Auth::user()->id)||Auth::user()->hasRole('student'))
-            <h3>All challenges of this classroom</h3>
-        @endif
 
-
-        <div>
-            <form method="post" action="{{route('classroom.detach',$classroom->id)}}" >
-                @csrf
-                {{ method_field("delete") }}
-                <h3>This challenges are available</h3>
-                <table id="challenges2" border="1" class=" table table-striped table-bordered">
-                    <thead>
-                    <th>Challenge id</th>
-                    <th>Challenge name</th>
-                    <th>Challenge difficulty</th>
-                    <th>Challenge description</th>
-                    <th>Challenge category</th>
-                    <th class="th-sm">Challenge Details</th>
-                    </thead>
-                    <tbody>
-                    @foreach ($classroom->challenges as $c)
-                        <tr>
-                            <td>
-                                {{$c->id}}
-                            </td>
-                            <td>
-                                {{$c->name}}
-                            </td>
-                            <td>
-                                {{$c->difficulty}}
-                            </td>
-                            <td>
-                                {{$c->description}}
-                            </td>
-                            <td>
-                                {{$c->category}}
-                            </td>
-                            <td>
-                                <a href="{{route('challenges.show',$c->id)}}" class="button badge-info">Details</a>
-                            </td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul class="list-unstyled"   >
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-                <br>
-                <br>
-
-            </form>
+    <div class="container" style="float: right; width: 15%; margin-right: 40px; position: relative">
+        <div class="card" >
+            <div class="card-header">Filter</div>
+            <div class="card-body">
+                <div class="form-group row"><input type="submit" class="btn btn-elegant" id="solved_button" value="Solved" /></div>
+                <div class="form-group row"><input type="submit" class="btn btn-elegant" id="unsolved_button" value="Unsolved" /></div>
+                <div class="form-group row"><input type="submit" class="btn btn-elegant" id="all_button" value="All" /></div>
+            </div>
         </div>
     </div>
-
-    <script>
-        $(document).ready(
-            function () {
-                $('#challenges').DataTable( {
-                    "paging": true,
-                    "info":false,
-                    "aoColumns": [
-                        null,
-                        null,
-                        { "bSearchable": true, "orderable": false },
-                        { "bSearchable": false, "orderable": false },
-                        null,
-                        { "bSearchable": false, "orderable": false },
-                        // { "bSearchable": false, "orderable": false }
-                    ]
+    <div class="container" style="width: 1000px">
+        <h1>You are in this classroom: {{$classroom->classroom_name}}</h1>
+        <div class="my-shuffle-container row " style="width: 100%; margin-right: 40px">
+            @foreach($classroom->challenges as $challenge)
+                @if($challenge->active==1)
+                    @if(Auth::user()->solvedChallenge($challenge->id))
+                        @php//TODO:Change colour to match theme @endphp
+                        <div class="card picture-item " data-groups='["solved"]' style="background-color: #0C9A9A">
+                            <div class="card-header"><a href="{{route('challenges.show',$challenge->id)}}">{{$challenge->name}} - {{$challenge->category}}</a>
+                                <p style="float: right;color: black">Total solves: {{$challenge->solves($challenge->id)}}</p>
+                            </div>
+                            <div class="card-body">
+                                Author: {{$challenge->author}}
+                                <br>
+                                {{$challenge->description}}
+                            </div>
+                        </div>
+                    @else
+                        <div class="picture-item" data-groups='["unsolved"]'>
+                            <div class="card-header"><a href="{{route('challenges.show',$challenge->id)}}">{{$challenge->name}} - {{$challenge->category}}</a>
+                                <p style="float: right;color: black">Total solves: {{$challenge->solves($challenge->id)}}</p>
+                            </div>
+                            <div class="card-body">
+                                Author: {{$challenge->author}}
+                                <br>
+                                {{$challenge->description}}
+                            </div>
+                        </div>
+                    @endif
+                @endif
+            @endforeach
+        </div>
+        <script>
+            $(document).ready(function() {
+                var Shuffle = window.Shuffle;
+                var element = document.querySelector('.my-shuffle-container');
+                var sizer = element.querySelector('.my-sizer-element');
+                var shuffleInstance = new Shuffle(element, {
+                    itemSelector: '.picture-item',
+                });
+                $("#solved_button").on("click", function () {
+                    shuffleInstance.filter("solved");
+                });
+                $("#unsolved_button").on("click", function () {
+                    shuffleInstance.filter("unsolved");
+                });
+                $("#all_button").on("click", function () {
+                    shuffleInstance.filter();
                 });
             });
-
-        $(document).ready(
-            function () {
-                $('#challenges2').DataTable( {
-                    "paging": true,
-                    "info":false,
-                    "aoColumns": [
-                        null,
-                        null,
-                        { "bSearchable": true, "orderable": false },
-                        { "bSearchable": false, "orderable": false },
-                        null,
-                        { "bSearchable": false, "orderable": false },
-                        // { "bSearchable": false, "orderable": false }
-                    ]
-                });
-            });
-    </script>
+        </script>
+    </div>
 @endsection
 
 
