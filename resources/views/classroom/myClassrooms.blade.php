@@ -4,7 +4,7 @@
     <body>
 
     @if(sizeof($classrooms) > 0)
-        <table class="table table-striped table-bordered">
+        <table id="classroom" class="table table-striped table-bordered">
             <thead>
             <th>Id</th>
             <th>Name</th>
@@ -42,10 +42,28 @@
         <h3>No classrooms yet!</h3>
     @endif
     <br>
-    @if(Auth::user()->isTeacher(Auth::user()->userrole)==true || Auth::user()->isAdmin(Auth::user()->userrole)==true)
+    @if(Auth::user()->hasRole('teacher') || Auth::user()->hasRole('admin'))
         <a href="{{route('classroom.create')}}" class="btn btn-success">Add new classroom</a>
     @endif
-
+    <mdb-icon fab icon="facebook-f"></mdb-icon>
     </body>
-
+    <script>
+        $(document).ready(
+            function () {
+                $('#classroom').DataTable( {
+                    "paging": true,
+                    "info":false,
+                    "aoColumns": [
+                        null,
+                        null,
+                        null,
+                        { "bSearchable": false, "orderable": false },
+                        { "bSearchable": false, "orderable": false },
+                        { "bSearchable": false, "orderable": false },
+                        // { "bSearchable": false, "orderable": false }
+                    ]
+                });
+                $('.dataTables_length').addClass('bs-select');
+            });
+    </script>
 @endsection

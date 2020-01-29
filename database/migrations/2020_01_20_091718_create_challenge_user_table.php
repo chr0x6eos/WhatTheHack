@@ -28,6 +28,7 @@ class CreateChallengeUserTable extends Migration
             $table->foreign('challenge_id')
                 ->references('id')
                 ->on('challenges');
+            $table->unique(['user_id','challenge_id']);
         });
     }
 

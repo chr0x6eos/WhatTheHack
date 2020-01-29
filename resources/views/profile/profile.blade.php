@@ -6,10 +6,12 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header font-weight-bold">{{ __('My Profile') }}</div>
+                    <div class="card-header">{{ __('My Profile') }}</div>
 
                     <div class="card-body">
-
+                        <div class="form-group row">
+                            <img src="<?php echo asset("storage/avatars/$user->avatar")?>" style=" height: 150px; width: 150px; border-radius: 50%; ">
+                        </div>
                         <div class="form-group row">
                             <label class="col-md-4 col-form-label text-md-right font-weight-bold">
                                 {{ __('Username:') }}
@@ -72,11 +74,13 @@
                                 <div class="col-sm text-md-center">
                                     <a href="{{ route('profile.showChangeEMForm') }}" class="btn btn-info">Change E-Mail</a>
                                 </div>
-                                <form method="POST" action="{{ route('profile.delete', $user->id) }}">
-                                    @csrf
-                                    @method('delete')
-                                    <button type="submit" class="btn bg-danger text-white" onclick="return confirm('Do you really want to delete your user account?')">Delete Account</button>
-                                </form>
+                                @if(!$user->hasRole('admin'))
+                                    <form method="POST" action="{{ route('profile.delete', $user->id) }}">
+                                        @csrf
+                                        @method('delete')
+                                        <button type="submit" class="btn bg-danger" onclick="return confirm('Do you really want to delete your user account?')">Delete Account</button>
+                                    </form>
+                                @endif
                             </div>
                         </div>
                     </div>

@@ -6,7 +6,8 @@
 
             <div class="card-body">
                 @if(isset($challenges) && sizeof($challenges) > 0)
-                    <table border="1" class="table table-striped table-bordered">
+
+                    <table id="challenge" border="1"class="table table-bordered">
                         <thead>
                         <th>Name</th>
                         <th>Difficulty</th>
@@ -19,23 +20,46 @@
                         </thead>
                         <tbody>
                         @foreach($challenges as $challenge)
-                            <tr>
-                                <td>{{ $challenge->name }}</td>
-                                <td>{{ $challenge->difficulty }}</td>
-                                <td>{{ $challenge->author }}</td>
-                                <td>@if($challenge->active)
-                                        Enabled
-                                    @else
-                                        Disabled
-                                    @endif
-                                </td>
-                                <td><a href="{{ route('challenges.show', $challenge->id) }}" class="btn btn-info">More info</a></td>
-                                @if(Auth::user() && ( Auth::user()->hasRole("admin") || Auth::user()->hasRole("teacher")))
+                            @if($challenge->active==1)
+                                @if(Auth::user()->solvedChallenge($challenge->id))
+                                    @php//TODO:Change colour to match theme @endphp
+                                  <tr bgcolor="#f0f8ff">
+                                    <td>{{ $challenge->name }}</td>
+                                    <td>{{ $challenge->difficulty }}</td>
+                                    <td>{{ $challenge->author }}</td>
+                                    <td>@if($challenge->active)
+                                            Enabled
+                                        @else
+                                            Disabled
+                                        @endif
+                                    </td>
+                                    <td><a href="{{ route('challenges.show', $challenge->id) }}" class="btn btn-info">More info</a></td>
+                                    @if(Auth::user() && ( Auth::user()->hasRole("admin") || Auth::user()->hasRole("teacher")))
                                     <td>
                                         <a href="{{ route('challenges.edit', $challenge->id) }}" class="btn btn-outline-danger">Edit</a>
                                     </td>
+                                    @endif
+                                 </tr>
+                                @else
+                                    <tr>
+                                    <td>{{ $challenge->name }}</td>
+                                    <td>{{ $challenge->difficulty }}</td>
+                                    <td>{{ $challenge->author }}</td>
+                                    <td>@if($challenge->active)
+                                            Enabled
+                                        @else
+                                            Disabled
+                                        @endif
+                                    </td>
+                                    <td><a href="{{ route('challenges.show', $challenge->id) }}" class="btn btn-info">More info</a></td>
+                                    @if(Auth::user() && ( Auth::user()->hasRole("admin") || Auth::user()->hasRole("teacher")))
+                                        <td>
+                                            <a href="{{ route('challenges.edit', $challenge->id) }}" class="btn btn-outline-danger">Edit</a>
+                                        </td>
+                                    @endif
+                                    </tr>
                                 @endif
-                            </tr>
+                            @endif
                         @endforeach
                         </tbody>
                     </table>
@@ -48,4 +72,22 @@
                     <a href="{{ route('challenges.create') }}" class="btn btn-info">Add new challenge</a>
                 @endif
             </div>
+            <script>
+                $(document).ready(
+                    function () {
+                        $('#challenge').DataTable( {
+                            "paging": true,
+                            "info":false,
+                            "aoColumns": [
+                                null,
+                                null,
+                                null,
+                                { "bSearchable": false, "orderable": false },
+                                { "bSearchable": false, "orderable": false },
+                                { "bSearchable": false, "orderable": false },
+                                // { "bSearchable": false, "orderable": false }
+                            ]
+                        });
+                    });
+            </script>
 @endsection
