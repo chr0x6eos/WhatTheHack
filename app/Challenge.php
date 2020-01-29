@@ -54,4 +54,9 @@ class Challenge extends Model
     public function supportrequest(){
         return $this-> hasMany('App\SupportRequest');
     }
+
+    public function solves($id){
+        $solves=count($this->challengeUsers()->get());
+        return $solves;
+    }
 }
