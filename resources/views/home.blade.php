@@ -95,7 +95,10 @@
                         <div class="card h-100">
                             <div class="card-body">
                                 <h2 class="card-title">Activity</h2>
-                                <p class="card-text"></p>
+
+                                @foreach(\App\Activity::latest(5) as $a)
+                                    <p class="card-text">✓ {{$a}}</p>
+                                @endforeach
                             </div>
                             <div class="card-footer">
                                 <a href="#" class="btn btn-success btn-sm" style="width: 100%">More Info</a>
