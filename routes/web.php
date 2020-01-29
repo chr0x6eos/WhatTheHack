@@ -12,8 +12,13 @@
 */
 
 Route::get('/', function () {
-    return view('welcome_new');
-});
+    if (Auth::user()) {
+        return redirect()->route('home');
+    } else {
+        return view('welcome_new');
+    }
+})->name('main');
+
 Route::get('/agb', function () {
     return view('subpages/agb');
 });
