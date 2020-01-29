@@ -233,8 +233,6 @@
                 </li>
             </ul>
         </nav>
-
-
     </div>
  @yield('content')
 

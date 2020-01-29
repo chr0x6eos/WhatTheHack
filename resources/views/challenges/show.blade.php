@@ -148,13 +148,8 @@
                     <input type="text" name="flag">
                     <button type="submit" class="btn btn-success">Submit flag</button>
                 </form>
-
-                @if(isset($displayGIF))
-                    @if($displayGIF == true)
-                        <img src="/images/GIFs/snoop-dog-with-text.gif" style="height: 300px; width: 300px;">
-                    @else
-                        <img src="/images/GIFs/john-cena-with-text.gif" style="height: 300px; width: 300px;">
-                    @endif
+                @if(isset($gifPath) && $gifPath != "")
+                        <img src="{{ $gifPath }}" style="height: 350px; width: auto">
                 @endif
             </div>
             <div>
