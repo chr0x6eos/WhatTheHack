@@ -67,7 +67,7 @@ class User extends Authenticatable implements MustVerifyEmail
     public function challenges()
     {
         return $this
-            ->belongsToMany('App\Challenges')
+            ->belongsToMany('App\Challenge')
             ->withTimestamps();
     }
 

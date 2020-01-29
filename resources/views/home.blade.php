@@ -1,49 +1,122 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
+    @if(Auth::user()->hasRole("admin"))
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                    <div class="alert alert-success" role="alert">
-                        {{ session('status') }}
+        <div class="row mt-5">
+            <div class="col-md-4 mb-5">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h2 class="card-title">Users</h2>
+                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex numquam, maxime minus quam molestias corporis quod, ea minima accusamus.</p>
                     </div>
-                    @endif
-
-                    Welcome {{Auth::user()->username}}!
-                    <p>
-                        <br>
-                        Go here to view the <a href="{{ route('challenges.index') }}">Challenges</a>.
-                        <br>
-                        <br>
-                        @if (Auth::user()->hasRole('teacher') ||Auth::user()->hasRole('admin'))
-
-                            <a href="{{route('classroom.create')}} " class="btn btn-info" >Create classroom</a>
-                        @endif
-                        <br>
-                        Go here to view the <a href="{{ route('classroom.myclassrooms') }}">Classrooms</a>.
-                    </p>
-
-                        @if (Auth::user()->hasRole('admin'))
-                            <p>Go here to access the <a href="{{ route('classroom.index') }}">management classroom</a> page.</p>
-                            @endif
-
-
-                    @if (Auth::user()->hasRole('admin'))
-                    <p>Go here to access the <a href="{{ route('manageuser.index') }}">User Management</a>.</p>
-                    @endif
-
-
-                        @if (Auth::user()->hasRole('admin'))
-                            <p>Go here to access the <a href="{{ route('classroom.disabled') }}">disabled classrooms</a>.</p>
-                            @endif
-
+                    <div class="card-footer">
+                        <a href="#" class="btn btn-success btn-sm" style="width: 100%">More Info</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-5">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h2 class="card-title">Classrooms</h2>
+                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex numquam, maxime minus quam molestias corporis quod, ea minima accusamus.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="btn btn-success btn-sm" style="width: 100%">More Info</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-5">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h2 class="card-title">Challenges</h2>
+                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex numquam, maxime minus quam molestias corporis quod, ea minima accusamus.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="btn btn-success btn-sm" style="width: 100%"">More Info</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-9">
+            <div class="col-md-12 mb-5">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h2 class="card-title">User Ranking</h2>
+                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex numquam, maxime minus quam molestias corporis quod, ea minima accusamus.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="btn btn-success btn-sm" style="width: 100%">More Info</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    @endif
+    @if(Auth::user()->hasRole("student") || Auth::user()->hasRole("teacher"))
+            <div class="row justify-content-center">
+                <div class="row mt-5" style="width: 100%">
+                    <div class="col-md-4 mb-9">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h2 class="card-title">Profile</h2>
+                                <p class="card-text"><img src="{{URL::asset('/images/icons/username.png')}}" width="30px"> {{ Auth::user()->username }}</p>
+                                <p class="card-text"><img src="{{URL::asset('/images/icons/xp.png')}}" width="30px"> Level {{ App\User::calculateLevel(Auth::user()->points) }}</p>
+                                <p class="card-text"><img src="{{URL::asset('/images/icons/level.png')}}" width="30px"> {{ App\User::calculateProgress1(Auth::user()->points) }}/{{ App\User::calculateProgress2(Auth::user()->points) }} Points</p>
+                                <p class="card-text"><img src="{{URL::asset('/images/icons/rank.png')}}" width="30px"> {{ App\User::calculateRank(Auth::user()->points) }}</p>
+
+                            </div>
+                            <div class="card-footer">
+                                <a href="{{ route('profile.show') }}"  class="btn btn-success btn-sm" style="width: 100%">More Info</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-9">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h2 class="card-title">My Classrooms</h2>
+                                <p class="card-text">
+                                    @foreach(Auth::user()->classrooms as $classroom)
+                                        @if($classroom->active == "1")
+                                            <tr>
+                                                <td><img src="{{URL::asset('/images/icons/classroom.png')}}" width="30px"> {{ $classroom->classroom_name }}</td>
+                                                <br>
+                                            </tr>
+                                        @endif
+                                    @endforeach
+                                </p>
+                            </div>
+                            <div class="card-footer">
+                                <a href="{{ route('classroom.myclassrooms') }}" class="btn btn-success btn-sm" style="width: 100%">More Info</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-9">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h2 class="card-title">Activity</h2>
+                                <p class="card-text"></p>
+                            </div>
+                            <div class="card-footer">
+                                <a href="#" class="btn btn-success btn-sm" style="width: 100%">More Info</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-5" style="width: 100%">
+                    <div class="col-md-12 mb-7">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h2 class="card-title">User Ranking</h2>
+                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex numquam, maxime minus quam molestias corporis quod, ea minima accusamus.</p>
+                            </div>
+                            <div class="card-footer">
+                                <a href="#" class="btn btn-success btn-sm" style="width: 100%">More Info</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
 </div>
 @endsection
