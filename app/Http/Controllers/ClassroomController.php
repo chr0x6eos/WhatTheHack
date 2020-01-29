@@ -75,7 +75,7 @@ class ClassroomController extends Controller
             //Creator of a classroom is automatically a member
             $classroom->users()->attach($user->getAuthIdentifier());
 
-            return redirect()->route('home');
+            return redirect()->route('classroom.myclassrooms');
         }
         catch (Exception $ex)
         {

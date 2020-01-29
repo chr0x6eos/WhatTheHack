@@ -31,6 +31,34 @@ class RankingController extends Controller
         return view('ranking.ranking')->with(['ranked' => $ranked, 'currentUser' => $currentUser]);
     }
 
+    static function getTopFive()
+    {
+        try
+        {
+            $users = User::all();
+            $sorted = collect($users)->sortBy('points', 1, true);
+            $ranked = array();
+            $rank = 1;
+            foreach($sorted as $value) {
+                $ranked[$rank] = $value ;
+                $rank++;
+                if($rank > 5){
+                    break;
+                }
+            }
+
+            //foreach ($sorted as $value){
+            //    $ranked[$rank] = $value;
+            //    $rank++;
+            //}
+        }
+        catch (Exception $ex)
+        {
+            return redirect(route('home'))->withErrors($ex->getMessage());
+        }
+        return view('home')->with('ranked', $ranked);
+    }
+
     public function classroomRanking()
     {
         try{
