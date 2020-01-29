@@ -12,14 +12,6 @@
                 <div class="form-group row">
                     <form id="challengeform">
                         <div class="form-group row">
-                            <label for="id" class="col-sm-4 col-form-label text-md-right" >
-                                {{ __('ID:') }}
-                            </label>
-                            <div class="col-md-6">
-                                <input id="id" type="text" disabled class="form-control" name="id" required autofocus value="{{ $challenge->id }}">
-                            </div>
-                        </div>
-                        <div class="form-group row">
                             <label for="name" class="col-sm-4 col-form-label text-md-right" >
                                 {{ __('Challenge name:') }}
                             </label>
@@ -133,9 +125,11 @@
                             </p>
                         @endif
                     </form>
+
+                    <div class="form-group-row">
                         @if(Auth::user()->hasRole("admin") || Auth::user()->isAuthor($challenge->author))
-                            <a href="{{ route('challenges.edit', $challenge->id) }}" class="btn btn-info">Edit</a>
-                            <a href="{{ route('challenges.files', $challenge->id) }}" class="btn btn-secondary">Files</a>
+                            <a href="{{ route('challenges.edit', $challenge->id) }}" class="btn btn-info col">Edit</a>
+                            <a href="{{ route('challenges.files', $challenge->id) }}" class="btn btn-secondary col">Upload Files</a>
                             @if(!$challenge->active)
                                 <form method="POST" action="{{ route('challenges.destroy',$challenge->id) }}">
                                     @csrf
@@ -144,18 +138,24 @@
                                 </form>
                             @endif
                         @endif
-                </div>
 
-                <form method="POST" action="{{ route('challenges.flag', $challenge->id) }}">
-                    @csrf
-                    <strong>Flag:</strong>
-                    <br>
-                    <input type="text" name="flag">
-                    <button type="submit" class="btn btn-success">Submit flag</button>
-                </form>
-                @if(isset($gifPath) && $gifPath != "")
-                        <img src="{{ $gifPath }}" style="height: 350px; width: auto">
-                @endif
+                        <div>
+                            <form method="POST" action="{{ route('challenges.flag', $challenge->id) }}">
+                                @csrf
+                                <strong>Flag:</strong>
+                                <br>
+                                <input id="flag" data-test="input" name="flag" type="text">
+                                <button type="submit" class="btn btn-success">Submit flag</button>
+                            </form>
+                        </div>
+                        <div>
+                            @if(isset($gifPath) && $gifPath != "")
+                                <img src="{{ $gifPath }}" style="height: 350px; width: 450px;">
+                            @endif
+                        </div>
+
+                    </div>
+                </div>
             </div>
             <div>
                 <a href="{{ route('challenges.index') }}" class="btn btn-outline-secondary">Go back</a>

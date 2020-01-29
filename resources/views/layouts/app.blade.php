@@ -93,7 +93,9 @@
         <!-- Sidebar -->
         <nav id="sidebar">
             <div id="dismiss">
-                <i class="fas fa-times"></i>
+                <i class="fas fa-times">
+                    <img src="/images/pics/white-arrow-transparent.png" style="height: 30px; width: 30px;">
+                </i>
             </div>
 
             <div class="sidebar-header">
@@ -200,6 +202,19 @@
                             <a href="/challenges">Challenges</a>
                         </li>
                     @endif
+
+                        <li>
+                            <a href="#rankingSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Ranking</a>
+                            <ul class="collapse list-unstyled" id="rankingSubmenu">
+                                <li>
+                                    <a href="/ranking">Global</a>
+                                </li>
+                                <li>
+                                    <a href="/ranking/classroom">Classroom</a>
+                                </li>
+                            </ul>
+                        </li>
+
                 @endif
                 <li>
                     <a href="#aboutSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">About</a>

@@ -395,7 +395,7 @@ class ChallengeController extends Controller
             $displayGIF = null;   //parameter to now what gif should be displayed
 
             //choose random GIF
-            $gifName = random_int(1, 5);
+            $gifName = random_int(1, 6);
 
             //Make flag case insensitive
             if (strtolower($challenge->flag) == strtolower($request->flag))
