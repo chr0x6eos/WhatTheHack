@@ -141,10 +141,11 @@ class ChallengeController extends Controller
     public function show($id)
     {
         $challenge = Challenge::find($id);
+        $displayGIF = null; //no GIF should be displayed
 
         if(Auth::user()->hasRole('admin') || Auth::user()->hasChallenge($challenge->id))
         {
-            return view('challenges.show')->with('challenge', $challenge);
+            return view('challenges.show')->with(['challenge' => $challenge, 'displayGIF' => $displayGIF]);
         }
         else
         {
@@ -391,21 +392,23 @@ class ChallengeController extends Controller
         try
         {
             $challenge = Challenge::find($id);
+            $displayGIF = null;   //parameter to now what gif should be displayed
 
             //Make flag case insensitive
             if (strtolower($challenge->flag) == strtolower($request->flag))
             {
+                //Add points to user
+                Auth::user()->addPoints($challenge->getPoints());
+                $displayGIF = true;
+
                 //Save that user has solved challenge
                 $challenge->challengeUsers()->attach(Auth::user());
-
-                //Add points to user
-                $user->addPoints($challenge->getPoints());
-
-                return redirect()->route('challenges.show',$challenge->id)->with('success','Congratulation! You solved the challenge!');
+                return view('challenges.show')->with(['challenge' => $challenge, 'displayGIF' => $displayGIF, 'success' => 'Congratulation! You solved the challenge!']);
             }
             else
             {
-                return view('challenges.show')->with('challenge', $challenge)->withErrors('Sorry this is not the right flag! Please try again!');
+                $displayGIF = false;
+                return view('challenges.show')->with(['challenge' => $challenge, 'displayGIF' => $displayGIF])->withErrors('Sorry this is not the right flag! Please try again!');
             }
         }
         catch (QueryException $queryException){
