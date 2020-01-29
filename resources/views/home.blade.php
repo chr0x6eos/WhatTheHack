@@ -33,7 +33,7 @@
                         <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex numquam, maxime minus quam molestias corporis quod, ea minima accusamus.</p>
                     </div>
                     <div class="card-footer">
-                        <a href="#" class="btn btn-success btn-sm" style="width: 100%"">More Info</a>
+                        <a href="#" class="btn btn-success btn-sm" style="width: 100%">More Info</a>
                     </div>
                 </div>
             </div>
@@ -79,8 +79,9 @@
                                     @foreach(Auth::user()->classrooms as $classroom)
                                         @if($classroom->active == "1")
                                             <tr>
-                                                <td><img src="{{URL::asset('/images/icons/classroom.png')}}" width="30px"> {{ $classroom->classroom_name }}</td>
-                                                <br>
+                                                <p class="card-text">
+                                                    <td><img src="{{URL::asset('/images/icons/classroom.png')}}" width="30px"> {{ $classroom->classroom_name }}</td>
+                                                </p>
                                             </tr>
                                         @endif
                                     @endforeach
@@ -107,11 +108,30 @@
                     <div class="col-md-12 mb-7">
                         <div class="card h-100">
                             <div class="card-body">
-                                <h2 class="card-title">User Ranking</h2>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex numquam, maxime minus quam molestias corporis quod, ea minima accusamus.</p>
+                                <h2 class="card-title">Top 5</h2>
+                                <div class="card-body">
+                                    <table id="rankingTable" class="table table-bordered" cellspacing="0" width="100%">
+                                        <thead>
+                                        <tr>
+                                            <th>Rank</th>
+                                            <th class="th-sm">Username</th>
+                                            <th class="th-sm">Overall Points</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach(\App\Http\Controllers\RankingController::getTopFive()->ranked as $key => $value)
+                                                <tr>
+                                                    <td>{{ $key }}</td>
+                                                    <td>{{ $value->username }}</td>
+                                                    <td>{{ $value->points }}</td>
+                                                </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                             <div class="card-footer">
-                                <a href="#" class="btn btn-success btn-sm" style="width: 100%">More Info</a>
+                                <a href="/ranking" class="btn btn-success btn-sm" style="width: 100%">Show Global Ranking</a>
                             </div>
                         </div>
                     </div>
