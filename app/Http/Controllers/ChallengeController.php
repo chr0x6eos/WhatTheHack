@@ -141,11 +141,11 @@ class ChallengeController extends Controller
     public function show($id)
     {
         $challenge = Challenge::find($id);
-        $displayGIF = null; //no GIF should be displayed
+        $gifPath = ""; //no GIF should be displayed
 
         if(Auth::user()->hasRole('admin') || Auth::user()->hasChallenge($challenge->id))
         {
-            return view('challenges.show')->with(['challenge' => $challenge, 'displayGIF' => $displayGIF]);
+            return view('challenges.show')->with(['challenge' => $challenge, 'gifPath' => $gifPath]);
         }
         else
         {
@@ -396,6 +396,10 @@ class ChallengeController extends Controller
             if(!$challenge->active) {
                 return redirect()->route('challenges.index')->withErrors('You should not have been there... Please report this issue');
             }
+
+            //choose random GIF
+            $gifName = random_int(1, 6);
+
             //Make flag case insensitive
             if (strtolower($challenge->flag) == strtolower($request->flag))
             {
@@ -404,14 +408,17 @@ class ChallengeController extends Controller
 
                 //Add points to user
                 Auth::user()->addPoints($challenge->getPoints());
-                $displayGIF = true;
 
+                //Path to a GIF
+                $gifPath = '/images/GIFs/WIN/' . $gifName . '.gif';
                 return view('challenges.show')->with(['challenge' => $challenge, 'displayGIF' => $displayGIF, 'success' => 'Congratulation! You solved the challenge!']);
             }
             else
             {
-                $displayGIF = false;
-                return view('challenges.show')->with(['challenge' => $challenge, 'displayGIF' => $displayGIF])->withErrors('Sorry this is not the right flag! Please try again!');
+                //Path to a GIF
+                $gifPath = '/images/GIFs/FAIL/' . $gifName . '.gif';
+
+                return view('challenges.show')->with(['challenge' => $challenge, 'gifPath' => $gifPath])->withErrors('Sorry this is not the right flag! Please try again!');
             }
         }
         catch (QueryException $queryException){
