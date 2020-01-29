@@ -6,15 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Classroom extends Model
 {
-    public function users()
-    {
+    public function users(){
         return $this
             ->belongsToMany('App\User')
             ->withTimestamps();
     }
 
-    public function challenges()
-    {
+    public function challenges(){
         return $this
             ->belongsToMany('App\Challenge')
             ->withTimestamps();
@@ -30,15 +28,27 @@ class Classroom extends Model
 
    public function getClassroomChallenges($id){
         foreach ($this->challenges as $challenge){
-            if($challenge->id===$id)
+            if($challenge->id == $id)
                 return true;
         }
         return false;
     }
 
     public function isOwner($id){
-        if($this->classroom_owner==$id)
+        if($this->classroom_owner == $id)
             return true;
         return false;
+    }
+
+    public function getRankedUsers(){
+        $users = $this->users;
+        $ranked = array();
+        $rank = 1;
+        $sorted = collect($users)->sortBy('points', 1, true);
+        foreach ($sorted as $value){
+            $ranked[$rank] = $value;
+            $rank++;
+        }
+        return $ranked;
     }
 }

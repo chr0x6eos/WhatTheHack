@@ -16,14 +16,17 @@ class CreateChallengeClassroomTable extends Migration
         Schema::create('challenge_classroom', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
-            $table->bigInteger('challenge_id')->unsigned();
+
 
             $table->bigInteger('classroom_id')->unsigned();
             $table->foreign('classroom_id')
                 ->references('id')
                 ->on('classrooms');
 
-            $table->foreign('challenge_id')->references('id')->on('challenges');
+            $table->bigInteger('challenge_id')->unsigned();
+            $table->foreign('challenge_id')
+                ->references('id')
+                ->on('challenges');
         });
     }
 

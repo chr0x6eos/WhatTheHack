@@ -82,6 +82,11 @@ public function __construct()
 }
 ```
 
+In general, a user must verify its email address to access functionality pages to prevent spam. You can add a check for whether the email is verified or not by calling the `verified` middleware in addition to the `auth` middleware:
+```
+$this->middleware(['auth', 'verified']);
+```
+
 A user can be of three different role types:
 - Student (`student`)
 - Teacher (`teacher`)
@@ -91,7 +96,8 @@ Additionally, a `role:[role]` Middleware is available for each of the three role
 ```
 $this->middleware('role:admin');
 ```
-The role middleware initially also checks if a user session is active in general, therefore you do not have to use both the `auth` and the `role:[role]` middleware within one authorization check.
+The role middleware initially also checks if a user session is active in general and if the user has a verified email address, therefore you do not have to use the `auth`, the `verified` and the `role:[role]` middleware within one authorization check.  
+A user of type admin will skip role check for student and teacher, which should be kept in mind when programming routes accessible for both students and teachers.
 
 A middleware can also be applied directly to the web route:
 ```

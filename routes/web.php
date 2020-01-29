@@ -35,6 +35,10 @@ Route::post('/profile/email/change', 'ProfileController@changeEM')->name('email.
 Route::delete('/profile/delete/{user}', 'ProfileController@deleteAccount')->name('profile.delete');
 Route::get('/profile/email/change/{id}/{token}', 'ProfileController@changeEmail')->name('change.email');
 
+//ranking Routes
+Route::get('/ranking', 'RankingController@index')->name('ranking.index');
+Route::get('/ranking/classroom', 'RankingController@classroomRanking')->name('ranking.classroom');
+
 // Challenge Routes
 Route::get('challenges/create', 'ChallengeController@create')->name('challenges.create')->middleware('role:teacher');
 Route::post('challenges', 'ChallengeController@store')->name('challenges.store')->middleware('role:teacher');
@@ -70,7 +74,17 @@ Route::delete('classroom/{classroom}/detach','ClassroomController@detach')->name
 Route::delete('classroom/{classroom}', 'ClassroomController@destroy')->name('classroom.destroy')->middleware('role:teacher');
 Route::get('classroom/disabledClassrooms', 'ClassroomController@disabled')->name('classroom.disabled')->middleware('role:teacher');
 Route::patch('classroom/restore/{classroom}', 'ClassroomController@restore')->name('classroom.restore')->middleware('role:teacher');
+Route::get('classroom/showClassroom/{classroom}', 'ClassroomController@showChallenges')->name('classroom.showChallenges');
 
 // Support/Report Routes
 Route::get('support/{challenge}', 'SupportRequestController@create')->name('support.create');
 Route::post('submit/{challenge}', 'SupportRequestController@submit')->name('support.submit');
+
+//User Level/Experience Routes
+Route::get('calculateLevel', 'ProfileController@calculateLevel')->name('calc.Level');
+
+//Deployment routes
+Route::get('deploy','DeploymentController@index')->name('deploy.index');
+Route::post('deploy/start/{deployment}','DeploymentController@start')->name('deploy.start');
+Route::post('deploy/stop/{deployment}','DeploymentController@stop')->name('deploy.stop');
+

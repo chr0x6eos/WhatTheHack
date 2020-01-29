@@ -36,6 +36,7 @@
                             </div>
                         </form>
                     </div>
+
                     {{--
                     <script>
                         var CSRF_TOKEN = document.querySelector('meta[name="csrf-token"]').getAttribute("content");

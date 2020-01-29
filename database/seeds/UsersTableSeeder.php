@@ -34,6 +34,7 @@ class UsersTableSeeder extends Seeder
                 'password' => Hash::make('student'),
                 'email_verified_at' => now()->timestamp,
                 'userrole' => 'student',
+                'points' => 100,
                 'active' => true
             ]
         );
@@ -45,6 +46,7 @@ class UsersTableSeeder extends Seeder
                 'email' => 'heins@whatthehack.htl',
                 'password' => Hash::make('student'),
                 'userrole' => 'student',
+                'points' => 20,
                 'active' => true
             ]
         );
@@ -56,6 +58,7 @@ class UsersTableSeeder extends Seeder
                 'email' => 'student3@whatthehack.htl',
                 'password' => Hash::make('student3'),
                 'userrole' => 'student',
+                'points' => 30,
                 'active' => true
             ]
         );
@@ -66,7 +69,9 @@ class UsersTableSeeder extends Seeder
                 'username' => 'Student4',
                 'email' => 'student4@whatthehack.htl',
                 'password' => Hash::make('student4'),
+                'email_verified_at' => now()->timestamp,
                 'userrole' => 'student',
+                'points' => 40,
                 'active' => true
             ]
         );
@@ -100,6 +105,7 @@ class UsersTableSeeder extends Seeder
                 'email' => 'studen7t@whatthehack.htl',
                 'password' => Hash::make('student7'),
                 'userrole' => 'student',
+                'points' => 70,
                 'active' => true
             ]
         );
