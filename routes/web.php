@@ -27,6 +27,11 @@ Route::get('/contact', function () {
 });
 
 Auth::routes(['verify' => true]);
+
+Route::get('/login', function () {
+    return redirect()->route('main');
+})->name('login');
+
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/challenges','ChallengeController@index')->name('challenges.index');
 Route::get('/classroom', 'ClassroomController@index')->name('classroom.index');
