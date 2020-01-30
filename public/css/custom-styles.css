@@ -33,19 +33,26 @@
     border-color: #00c851;
     box-shadow: inset 0 0 0 1px #00c851;
 }
-
-.card-text{
+.card-header{
     color: black;
+    text-decoration: none;
 }
-.card-header {
-    color: black;
-
+.card-header.challenges-header:hover{
+    background-color: #00c851;
+    text-decoration: none;
 }
-.card-header {
-    color: black;
+a.challenge_name:hover{
+    text-decoration: none;
 }
-.card-title {
-    color: black;
+.challenge_name_link:hover{
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: none;
+}
+div.card_showChallenge{
+   width: 100%;
+    margin-top: 48px;
 }
 
 .navbar .search-results {
@@ -56,7 +63,41 @@
     height: auto;
     background: white;
 }
-
+.navbar-dark.elegant-color.navbar.navbar-expand-md{
+    position: fixed;
+    width: 100%;
+    color: white;
+}
+div.nav.nav-container{
+    width: 100%;
+}
+.label-form{
+    pointer-events: none;
+}
+.navbar-brand{
+    margin: 0px 30px;
+}
+.table_01{
+    width: 20%;
+    font-weight: bold;
+    font-size: medium;
+}
+.table_02{
+    width: 80%;
+    font-size: medium;
+}
+.login_logout_btn{
+    display: block;
+    width: 100%;
+    padding: 0.25rem 1.5rem;
+    clear: both;
+    font-weight: 400;
+    color: #212529;
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+}
 /**
  * SPDX-License-Identifier: (EUPL-1.2)
  * Copyright © 2019 Werbeagentur Christian Aichner
@@ -64,10 +105,13 @@
 
 /* https://github.com/snek-at/front/blob/5f5bd7a9cfdb6f601b8738974557102a86891ff1/src/components/pages/Landing/landing.scss */
 
+
 #landing {
     background: #3E3E3E;
     color: white;
     background-image: url('/images/pics/circuit_dots.svg');
+    background-attachment: fixed;
+    height: 100%;
 }
 
 #landing .typist {
@@ -93,18 +137,40 @@
     top: 0;
     left: -250px;
     height: 100vh;
-    z-index: 999;
+    z-index: 1040;
     background: #252525;
     color: #fff;
     transition: all 0.3s;
     overflow-y: scroll;
     box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
 }
-
+a.card-link{
+    color: #01C851;
+}
 #sidebar.active {
     left: 0;
 }
-
+.card{
+    margin-top: 48px;
+}
+div.landing.py-5 {
+    padding-top: 90px;
+    height: 100%;
+    z-index: 999;
+}
+div.col-md-6{
+    padding-top: 48px;
+}
+div.col-lg-9{
+    padding-top: 48px;
+}
+div.col-md-8{
+    padding-top: 90px;
+    z-index: 999;
+}
+label.custom-control-label::after{
+    color: #01C851;
+}
 div#dismiss {
     width: 35px;
     height: 35px;
@@ -118,19 +184,16 @@ div#dismiss {
     -o-transition: all 0.3s;
     transition: all 0.3s;
     color:white;
-    background-color: #3E3E3E;
+    /* background-color: #3E3E3E; */
 }
-
 #dismiss:hover {
     background: #fff;
     color: #252525;
 }
-
 #sidebar .sidebar-header {
     padding: 20px;
     background: #252525;
 }
-
 #sidebar ul.components {
     padding: 20px 0;
     border-bottom: 1px solid #252525;
@@ -142,6 +205,7 @@ div#dismiss {
 }
 
 #sidebar ul li a {
+    color: white;
     padding: 10px;
     font-size: 1.1em;
     display: block;
@@ -160,6 +224,15 @@ a[aria-expanded="true"] {
     color: white;
     background: #01C851;
 }
+p.total_solves{
+    float: right;
+    color: black;
+    display: inline;
+}
+p.challenge_name{
+    color: black;
+    display: inline;
+}
 
 a[data-toggle="collapse"] {
     position: relative;
@@ -167,7 +240,15 @@ a[data-toggle="collapse"] {
 a.green-text.dropdown-item.waves-effect.waves-light:hover{
     background-color: green;
 }
-
+a.dropdown-toggle{
+    color: white;
+}
+div.card-header{
+    color: black;
+}
+div.card-body{
+    color: black;
+}
 .dropdown-toggle::after {
     display: block;
     position: absolute;
@@ -197,14 +278,230 @@ ul.CTAs a {
     background: none;
     border: none;
 }
+#sidebarCollapse.navbar-toggle:focus{
+    background: black;
+    border-color: transparent;
+    color: transparent;
+}
 
 .navbar-toggle{
     padding: 0.25rem 0.75rem;
     font-size: 1.25rem;
     line-height: 1;
     background-color: transparent;
-    border: 1px solid transparent;
+    border: none;
     border-radius: 0.25rem;
 }
 
+.toast-alert {
+    max-width: 450px;
+    overflow: hidden;
+    font-size: 0.875rem;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-left: 6px solid;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    border-radius: 0.25rem;
+}
+.toast-alert:not(:last-child) {
+    margin-bottom: 0.75rem;
+}
+.toast-alert.showing {
+    opacity: 1;
+}
+.toast-alert.show {
+    display: block;
+    opacity: 1;
+}
+.toast-alert.hide {
+    display: none;
+}
 
+/* Toast Error and Success Notifications */
+
+.toast-header-alert {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 0.25rem 0.75rem;
+    background-clip: padding-box;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Bootstrap alert coloring */
+.toast-alert.alert-primary {
+    border-color: #004085;
+}
+.toast-alert.alert-primary .close  {
+    color: #004085;
+    opacity: .75;
+}
+.toast-alert.alert-secondary {
+    border-color: #383d41;
+}
+.toast-alert.alert-secondary .close  {
+    color: #383d41;
+    opacity: .75;
+}
+.toast-alert.alert-success {
+    border-color: #00c851;
+}
+.toast-alert.alert-success .close  {
+    color: #00c851;
+    opacity: .75;
+}
+.toast-alert.alert-info {
+    border-color: #17a2b8;
+}
+.toast-alert.alert-info .close  {
+    color: #17a2b8;
+    opacity: .75;
+}
+.toast-alert.alert-warning {
+    border-color: #856404;
+}
+.toast-alert.alert-waring .close  {
+    color: #856404;
+    opacity: .75;
+}
+.toast-alert.alert-danger {
+    border-color: #ff3547 ;
+}
+.toast-alert.alert-danger .close  {
+    color: #ff3547 ;
+    opacity: .75;
+}
+.toast-alert.alert-light {
+    border-color: #818182;
+}
+.toast-alert.alert-light .close  {
+    color: #818182;
+    opacity: .75;
+}
+.toast-alert.alert-dark {
+    border-color: #1b1e21;
+}
+.toast-alert.alert-dark .close  {
+    color: #1b1e21;
+    opacity: .75;
+}
+
+/* Toast container locations  */
+.toast-top-center {
+    top: 12px;
+    right: 0;
+    width: 100%;
+}
+.toast-bottom-center {
+    bottom: 0;
+    right: 0;
+    width: 100%;
+}
+.toast-top-full-width {
+    top: 0;
+    right: 0;
+    width: 100%;
+}
+.toast-bottom-full-width {
+    bottom: 0;
+    right: 0;
+    width: 100%;
+}
+.toast-top-left {
+    top: 12px;
+    left: 12px;
+}
+.toast-top-right {
+    top: 12px;
+    right: 12px;
+}
+.toast-bottom-right {
+    right: 12px;
+    bottom: 12px;
+}
+.toast-bottom-left {
+    bottom: 12px;
+    left: 12px;
+}
+
+#toast-alert-container {
+    position: fixed;
+    z-index: 999999;
+    pointer-events: none;
+    /*overrides*/
+}
+#toast-alert-container * {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+#toast-alert-container > div {
+    position: relative;
+    pointer-events: auto;
+    overflow: hidden;
+    margin: 0 0 6px;
+    width: 400px;
+    -moz-border-radius: 3px 3px 3px 3px;
+    -webkit-border-radius: 3px 3px 3px 3px;
+    border-radius: 3px 3px 3px 3px;
+    background-position: 15px center;
+    background-repeat: no-repeat;
+}
+#toast-alert-container > div.rtl {
+    direction: rtl;
+    padding: 15px 50px 15px 15px;
+    background-position: right 15px center;
+}
+#toast-alert-container.toast-top-center > div,
+#toast-alert-container.toast-bottom-center > div {
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+#toast-alert-container.toast-top-full-width > div,
+#toast-alert-container.toast-bottom-full-width > div {
+    width: 96%;
+    margin-left: auto;
+    margin-right: auto;
+}
+/*Responsive Design*/
+@media all and (max-width: 240px) {
+    #toast-alert-container > div {
+        width: 11em;
+    }
+    #toast-alert-container > div.rtl {
+    }
+    #toast-alert-container .toast-close-button {
+        right: -0.2em;
+        top: -0.2em;
+    }
+    #toast-alert-container .rtl .toast-close-button {
+        left: -0.2em;
+        right: 0.2em;
+    }
+}
+@media all and (min-width: 241px) and (max-width: 480px) {
+    #toast-alert-container > div {
+        width: 18em;
+    }
+    #toast-alert-container > div.rtl {
+    }
+    #toast-alert-container .toast-close-button {
+        right: -0.2em;
+        top: -0.2em;
+    }
+    #toast-alert-container .rtl .toast-close-button {
+        left: -0.2em;
+        right: 0.2em;
+    }
+}
+@media all and (min-width: 481px) and (max-width: 768px) {
+    #toast-alert-container > div {
+        width: 25em;
+    }
+    #toast-alert-container > div.rtl {
+    }
+}

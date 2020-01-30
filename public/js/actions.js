@@ -1,6 +1,5 @@
 $(document).ready(function () {
 
-
     $("#sidebar").mCustomScrollbar({
         theme: "minimal"
     });
@@ -15,4 +14,6 @@ $(document).ready(function () {
         $('#sidebar').addClass('active');
     });
 
+    /* Toast js actions */
+    $('.toast-alert').toast('show')
 });

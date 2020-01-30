@@ -17,7 +17,7 @@ Route::get('/', function () {
     } else {
         return view('welcome_new');
     }
-})->name('main');
+})->name('welcome');
 
 Route::get('/agb', function () {
     return view('subpages/agb');
@@ -98,3 +98,6 @@ Route::get('deploy','DeploymentController@index')->name('deploy.index');
 Route::post('deploy/start/{deployment}','DeploymentController@start')->name('deploy.start');
 Route::post('deploy/stop/{deployment}','DeploymentController@stop')->name('deploy.stop');
 
+Route::get('/activity', function () {
+    return view('activity');
+})->name('activity');
