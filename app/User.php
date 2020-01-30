@@ -71,15 +71,11 @@ class User extends Authenticatable implements MustVerifyEmail
             ->withTimestamps();
     }
 
-    public function hasChallenge($id)
-    {
-        foreach (Auth::user()->classrooms as $c)
-        {
-            foreach ($c->challenges as $challenge)
-            {
-                if ($challenge->id == $id)
-                {
-                    return true;
+    public function hasChallenge($id){
+        foreach (Auth::user()->classrooms as $c){
+            foreach ($c->challenges as $challenge){
+                if($challenge==$id){
+                return true;
                 }
             }
         }
