@@ -59,8 +59,7 @@ class SupportRequestController extends Controller
 
     public function sendMail (SupportRequest $supportRequest)
     {
-        $admin = new User();
-        $admin = $admin->getAdmin();
+        $admin = User()->getAdmin();
 
         $admin->notify(new SupportEmail($supportRequest));
         Auth::user()->notify(new AckEmail($supportRequest));

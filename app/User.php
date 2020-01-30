@@ -104,9 +104,14 @@ class User extends Authenticatable implements MustVerifyEmail
         }
     }
 
-    public function getAdmin()
+    public static function getAdmin()
     {
         return User::where('userrole', 'admin')->first();
+    }
+
+    public static function getUser($username)
+    {
+        return User::where('username', $username)->first();
     }
 
     static function countActiveUsers()

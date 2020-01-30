@@ -70,18 +70,19 @@ class ClassroomController extends Controller
             $user = Auth::user();
 
             $classroom->classroom_name = $request->name;
-            $classroom->classroom_owner=$user->getAuthIdentifier();
+            $classroom->classroom_owner =$user->getAuthIdentifier();
             // $classroom->active = $request->active;
 
             $addStudents = $request->input('add_Students');
             $classroom->save();
+
+            //Creator of a classroom is automatically a member
+            $classroom->users()->attach($user->getAuthIdentifier());
+
             foreach ($addStudents as $student)
             {
                 $classroom->users()->attach($student);
             }
-
-            //Creator of a classroom is automatically a member
-            $classroom->users()->attach($user->getAuthIdentifier());
 
             return redirect()->route('classroom.index');
         }
