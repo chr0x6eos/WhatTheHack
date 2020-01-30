@@ -15,7 +15,7 @@ class CreateClassroomsTable extends Migration
     {
         Schema::create('classrooms', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('classroom_name');
+            $table->string('classroom_name')->unique(); //TODO: SHOULD CLASSROOM-NAME BE UNIQUE?
             $table->string('classroom_owner');
             $table->boolean('active')->default(true);
             $table->timestamps();

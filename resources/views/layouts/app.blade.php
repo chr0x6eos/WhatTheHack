@@ -115,13 +115,19 @@
                         </a>
                         <ul class="collapse list-unstyled" id="accountSubmenu">
                                 @if (Auth::user())
-                            <li>
+                                {{-- //TODO: REMOVE COMMENT AFTER TATÜ --}}
+                                {{--
+                                <li>
+                                    <a href="{{ route('profile.show') }}">Profile</a>
+                                </li>
+                                --}}
+                                <li>
                                 <a  href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
-                            </li>
+                                </li>
                             @else
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('main') }}">{{ __('Login') }}</a>

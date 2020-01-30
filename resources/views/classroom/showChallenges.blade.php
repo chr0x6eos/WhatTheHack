@@ -11,6 +11,7 @@
                             <br>
                             @foreach($classroom->challenges as $challenge)
                                 @if($challenge->active==1)
+                                    {{-- //TODO: ADD OLD VIEW FROM MASTER --}}
                                     <div class="card">
                                         <a href="{{route('challenges.show',$challenge->id)}}">
                                             <div class="card-header challenges-header">

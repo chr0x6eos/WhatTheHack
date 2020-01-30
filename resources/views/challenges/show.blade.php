@@ -3,6 +3,7 @@
 
     <div class="container" >
         <div class="card">
+            {{-- //TODO: ADD LINES FROM MASTER, WHICH CHECK IF CHALLENGE HAS BEEN SOLVED --}}
             <div class="card-header font-weight-bold ">{{$challenge->name}}</div>
             <div class="card-body">
                 <div class="table">

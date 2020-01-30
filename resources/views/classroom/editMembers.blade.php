@@ -34,7 +34,7 @@
                     Delete members
                 </button>
             </form>
-            <form method="post" action="{{ route('classroom.updatemembers', $classroom) }}">
+            <form method="post" action="{{ route('classroom.updateMembers', $classroom) }}">
                 @csrf
 
                 <h3>Add members</h3>

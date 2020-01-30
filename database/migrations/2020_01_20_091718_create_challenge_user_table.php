@@ -28,7 +28,7 @@ class CreateChallengeUserTable extends Migration
             $table->foreign('challenge_id')
                 ->references('id')
                 ->on('challenges');
-            //$table->unique(['user_id','challenge_id']); //TODO: ONLY FOR TATÜ COMMENTED, REMOVE LATER
+            //$table->unique(['user_id','challenge_id']); //TODO: ONLY FOR TATÜ SO USER CAN DO CHALLENGE MULTIPLE TIMES, REMOVE LATER
         });
     }
 
