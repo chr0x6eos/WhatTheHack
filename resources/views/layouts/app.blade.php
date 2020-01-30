@@ -238,11 +238,7 @@
                 </li>
             </ul>
         </nav>
-
-            @yield('content')
-        </main>
         <!-- Sidebar -->
-
         <footer data-test="footer" class="page-footer elegant-color">
             <div data-test="container" class="container text-center py-3"><a href="/contact">Impressum</a></div>
             <div class="footer-copyright text-center py-3">
