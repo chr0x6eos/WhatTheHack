@@ -89,7 +89,7 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <a href="#" class="btn btn-success btn-sm" style="width: 100%">Show Global Ranking</a>
+                        <a href="/ranking" class="btn btn-success btn-sm" style="width: 100%">Show Global Ranking</a>
                     </div>
                 </div>
             </div>
@@ -145,7 +145,7 @@
                                 @endforeach
                             </div>
                             <div class="card-footer">
-                                <a href="#" class="btn btn-success btn-sm" style="width: 100%">All Activities</a>
+                                <a href="{{route('activity')}}" class="btn btn-success btn-sm" style="width: 100%">More Info</a>
                             </div>
                         </div>
                     </div>
