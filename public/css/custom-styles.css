@@ -52,6 +52,7 @@ a:hover{
 }
 div.card_showChallenge{
    width: 100%;
+    margin-top: 48px;
 }
 .navbar .search-results {
     position: absolute;
