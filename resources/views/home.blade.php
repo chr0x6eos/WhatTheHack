@@ -89,7 +89,7 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <a href="#" class="btn btn-success btn-sm" style="width: 100%">Show Global Ranking</a>
+                        <a href="/ranking" class="btn btn-success btn-sm" style="width: 100%">Show Global Ranking</a>
                     </div>
                 </div>
             </div>
