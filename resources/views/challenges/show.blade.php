@@ -72,7 +72,8 @@
                         @endif
                     </div>
                 </div>
-                <a href="{{ route('classroom.myClassrooms') }}" class="btn btn-outline-dark">Go back</a>
+                {{-- //TODO: FIX THIS PFUSCH!--}}
+                <a href="{{ route('classroom.showChallenges', 1) }}" class="btn btn-outline-dark">Go back</a>
                 <a href="{{ route('support.create', $challenge->id) }}" class="btn btn-outline-dark">Report a problem</a>
             </div>
             </div>
