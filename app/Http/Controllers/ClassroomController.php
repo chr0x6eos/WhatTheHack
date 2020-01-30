@@ -102,7 +102,7 @@ class ClassroomController extends Controller
      */
     public function myClassrooms(){
         $classrooms = Auth::user()->classrooms;
-        return view('classroom.myclassrooms')->with('classrooms', $classrooms);
+        return view('classroom.myClassrooms')->with('classrooms', $classrooms);
     }
 
     public function edit($id)
@@ -121,7 +121,7 @@ class ClassroomController extends Controller
     public function editMembers($id){
         $classroom = Classroom::find($id);
         if ($classroom != null) {
-            return view('classroom.editmembers')->with('classroom', $classroom);
+            return view('classroom.editMembers')->with('classroom', $classroom);
         }
         else {
             return redirect()->route('classroom.myclassrooms')
@@ -276,7 +276,7 @@ class ClassroomController extends Controller
         $classroom = Classroom::find($id);
 
         if ($classroom != null) {
-            return view('classroom.showchallenges')->with('classroom', $classroom);
+            return view('classroom.showChallenges')->with('classroom', $classroom);
         }
         else {
             return redirect()->route('classroom.myClassrooms')
