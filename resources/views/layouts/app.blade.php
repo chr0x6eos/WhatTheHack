@@ -49,8 +49,7 @@
     <!-- CSS file for customization -->
     <link rel="stylesheet" href="{{ URL::asset('css/custom-styles.css') }}">
     <!-- <link rel="stylesheet" href="{{ URL::asset('css/addons/datatables-select.min.css') }}"> -->
-
-
+    <link rel="stylesheet" href="{{ URL::asset('css/app.css') }}">
 </head>
 <body>
 <div class="root">
@@ -95,9 +94,7 @@
         <!-- Sidebar -->
         <nav id="sidebar">
             <div id="dismiss">
-                <i class="fas fa-times">
-                    <img src="/images/pics/white-arrow-transparent.png" style="height: 30px; width: 30px;">
-                </i>
+                <i class="fas fa-times"></i>
             </div>
 
             <div class="sidebar-header">
