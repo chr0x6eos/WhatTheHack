@@ -415,8 +415,6 @@ class ChallengeController extends Controller
                 //Path to a GIF
                 $gifPath = '/images/GIFs/WIN/' . $gifName . '.gif';
 
-                //Save that user has solved challenge
-                $challenge->challengeUsers()->attach(Auth::user());
                 $success = 'Congratulation, you solved the challenge!';
                 return view('challenges.show')->with(['challenge' => $challenge, 'success' => $success, 'gifPath' => $gifPath]);
             }
@@ -432,9 +430,6 @@ class ChallengeController extends Controller
             if($queryException->errorInfo[1]==1062){
                 $gifPath = "";
                 return redirect()->route('challenges.show',$challenge->id)->with(['success' => 'Congratulations, but you already solved this one!', 'gifPath' => $gifPath]);
-            }
-            else{
-                throw $queryException;
             }
         }
         catch (\Exception $ex)
