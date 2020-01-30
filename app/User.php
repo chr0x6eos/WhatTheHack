@@ -108,6 +108,27 @@ class User extends Authenticatable implements MustVerifyEmail
         return User::where('userrole', 'admin')->first();
     }
 
+    static function countActiveUsers(){
+        $counter = 0;
+        $users = User::all();
+        foreach ($users as $user){
+            if ($user->active == 1){
+                $counter++;
+            }
+        }
+        return $counter;
+    }
+    static function countDisabledUsers(){
+        $counter = 0;
+        $users = User::all();
+        foreach ($users as $user){
+            if ($user->active == 0){
+                $counter++;
+            }
+        }
+        return $counter;
+    }
+
     public function solvedChallenge($id){
         foreach ($this->challenges as $challenge){
             if ($challenge->id == $id)

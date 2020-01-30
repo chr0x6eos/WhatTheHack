@@ -9,6 +9,7 @@
 
     <title>{{ config('app.name', 'What the hack') }}</title>
 
+
     <!-- Scripts
     <script src="{{ asset('js/app.js') }}" defer></script> -->
     <!-- Original laravel scripts
@@ -30,6 +31,7 @@
     <script type="text/javascript" src="{{ URL::asset('js/addons/datatables.min.js') }}"></script>
     <!-- <script type="text/javascript" src="{{ URL::asset('js/addons/datatables-select.min.js') }}"></script> -->
     <script src="{{ asset('js/actions.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/shuffle.js') }}"></script>
     <!-- jQuery Custom Scroller CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
 
@@ -161,10 +163,16 @@
                             <a href="#classroomSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Classroom</a>
                             <ul class="collapse list-unstyled" id="classroomSubmenu">
                                 <li>
-                                    <a href="/classroom">Show Classroom</a>
+                                    <a href="/classroom">Classroom Management</a>
                                 </li>
                                 <li>
                                     <a href="/classroom/create">Create Classroom</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('classroom.disabled') }}">Disabled Classrooms</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('classroom.myclassrooms') }}">My Classrooms</a>
                                 </li>
                             </ul>
                         </li>
@@ -178,9 +186,6 @@
                             <a href="#challengeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Challenges</a>
                             <ul class="collapse list-unstyled" id="challengeSubmenu">
                                 <li>
-                                    <a href="/challenges">Show Challenges</a>
-                                </li>
-                                <li>
                                     <a href="challenges/create">Create Challenge</a>
                                 </li>
                             </ul>
@@ -189,7 +194,7 @@
                             <a href="#classroomSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Classroom</a>
                             <ul class="collapse list-unstyled" id="classroomSubmenu">
                                 <li>
-                                    <a href="/classroom">Show Classroom</a>
+                                    <a href="{{ route('classroom.myclassrooms') }}">Show Classrooms</a>
                                 </li>
                                 <li>
                                     <a href="/classroom/create">Create Classroom</a>
@@ -198,9 +203,11 @@
                         </li>
                     @endif
                     @if(Auth::user()->hasRole("student"))
+                        <!--
                         <li>
                             <a href="/challenges">Challenges</a>
                         </li>
+                        -->
                     @endif
 
                         <li>

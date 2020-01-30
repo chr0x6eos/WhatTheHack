@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+
     <div class="container">
         <div class="card">
             @php{{//TODO:Make the Solved appear on the right side of the card header}} @endphp
@@ -8,6 +9,7 @@
             @else
                 <div class="card-header font-weight-bold ">{{ __('Challenge details') }}</div>
             @endif
+
             <div class="card-body">
                 <div class="form-group row">
                     <form id="challengeform">

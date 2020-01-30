@@ -143,7 +143,8 @@ class ChallengeController extends Controller
         $challenge = Challenge::find($id);
         $gifPath = ""; //no GIF should be displayed
 
-        if(Auth::user()->hasRole('admin') || Auth::user()->hasChallenge($challenge->id))
+        //Every admin and teacher can view challenges
+        if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('teacher') || Auth::user()->hasChallenge($challenge->id))
         {
             return view('challenges.show')->with(['challenge' => $challenge, 'gifPath' => $gifPath]);
         }
@@ -272,7 +273,8 @@ class ChallengeController extends Controller
         //Only allow deletion of the challenge if user is admin // or author of the challenge
         if(Auth::user()->hasRole("admin")) //|| Auth::user()->isAuthor($challenge->author))
         {
-            if($challenge->active == false) {
+            if($challenge->active == false)
+            {
                 $challenge->delete();
             }
             else
@@ -307,7 +309,8 @@ class ChallengeController extends Controller
         try
         {
             $challenge = Challenge::find($id);
-            if(Auth::User()->hasChallenge($challenge->id))
+
+            if(Auth::User()->hasChallenge($challenge->id) || Auth::user()->hasRole('admin') || Auth::user()->hasRole('teacher'))
             {
                 if (Storage::disk('local')->exists($challenge->files))
                 {
@@ -396,9 +399,16 @@ class ChallengeController extends Controller
             //choose random GIF
             $gifName = random_int(1, 6);
 
+            if(!$challenge->active) {
+                return redirect()->route('challenges.index')->withErrors('You should not have been there... Please report this issue');
+            }
+
             //Make flag case insensitive
             if (strtolower($challenge->flag) == strtolower($request->flag))
             {
+                //Save that user has solved challenge
+                $challenge->challengeUsers()->attach(Auth::user());
+
                 //Add points to user
                 Auth::user()->addPoints($challenge->getPoints());
 
@@ -439,6 +449,5 @@ class ChallengeController extends Controller
                return redirect()->route('challenges.show',$challenge->id)->with(['challenge' => $challenge, 'gifPath' => $gifPath])->withErrors('Could not submit because of error: ' . $ex->getMessage());
             }
         }
-
     }
 }
