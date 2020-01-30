@@ -237,6 +237,48 @@
             </ul>
         </nav>
 
+        <!-- Error Message -->
+        @if($errors)
+            @foreach ($errors->all() as $error)
+                <div id="toast-alert-container" class="toast-top-center example">
+                    <div id="alert" class="toast-alert alert-danger hide" role="alert" data-delay="7000" data-autohide="true" aria-live="assertive" aria-atomic="true">
+                        <div class="toast-header-alert">
+                            <i class="fas fa-2x fa-exclamation-circle mr-2"></i>
+
+                            <strong class="mr-auto">Error</strong>
+
+                            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="toast-body">
+                            {{ $error }}
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        @endif
+
+        <!-- Success Message -->
+        @if (session()->has('success'))
+            <div id="toast-alert-container" class="toast-top-center example">
+                <div id="success" class="toast-alert alert-success hide" role="alert" data-delay="5000" data-autohide="true" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header-alert">
+                        <i class="far fa-2x fa-thumbs-up mr-2"></i>
+
+                        <strong class="mr-auto">Success</strong>
+
+                        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="toast-body">
+                        {{ session()->get('success') }}
+                    </div>
+                </div>
+            </div>
+        @endif
+
         <footer data-test="footer" class="page-footer elegant-color">
             <div data-test="container" class="container text-center py-3"><a href="/contact">Impressum</a></div>
             <div class="footer-copyright text-center py-3">
@@ -248,16 +290,5 @@
     </div>
 
 </div>
-
-@if($errors)
-    @foreach ($errors->all() as $error)
-        <div class="alert alert-danger">{{ $error }}</div>
-    @endforeach
-@endif
-
-@if (session()->has('success'))
-    <div class="alert alert-success">{{ session()->get('success') }}</div>
-@endif
-
 </body>
 </html>
