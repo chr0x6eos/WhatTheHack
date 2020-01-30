@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <div class="col-2">
+        <div class="col-4">
             <form method="post" action="{{ route('classroom.deleteMembers', $classroom) }}">
                 @csrf
                 @method('patch')
@@ -83,6 +83,7 @@
                     </a>
                 </p>
             </form>
+                
             <script>
                 $(document).ready(
                     function () {
