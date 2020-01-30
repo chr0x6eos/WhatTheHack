@@ -148,12 +148,11 @@
                                 <button type="submit" class="btn btn-success">Submit flag</button>
                             </form>
                         </div>
-                        <div>
-                            @if(isset($gifPath) && $gifPath != "")
-                                <img src="{{ $gifPath }}" style="height: 350px; width: 450px;">
-                            @endif
-                        </div>
-
+                            <div>
+                                @if(isset($gifPath) && $gifPath != "")
+                                    <img src="{{ $gifPath }}" style="height: 350px; width: 450px;">
+                                @endif
+                            </div>
                     </div>
                 </div>
             </div>

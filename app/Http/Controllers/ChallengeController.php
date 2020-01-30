@@ -392,7 +392,6 @@ class ChallengeController extends Controller
         try
         {
             $challenge = Challenge::find($id);
-            $displayGIF = null;   //parameter to now what gif should be displayed
 
             //choose random GIF
             $gifName = random_int(1, 6);
@@ -408,7 +407,8 @@ class ChallengeController extends Controller
 
                 //Save that user has solved challenge
                 $challenge->challengeUsers()->attach(Auth::user());
-                return view('challenges.show')->with(['challenge' => $challenge, 'success' => 'Congratulation! You solved the challenge!', 'gifPath' => $gifPath]);
+                $success = 'Congratulation, you solved the challenge!';
+                return view('challenges.show')->with(['challenge' => $challenge, 'success' => $success, 'gifPath' => $gifPath]);
             }
             else
             {
@@ -419,10 +419,13 @@ class ChallengeController extends Controller
             }
         }
         catch (QueryException $queryException){
-            if($queryException->errorInfo[1]==1062)
-                return redirect()->route('challenges.show',$challenge->id)->with('success','Congratulations, but you already solved this one!');
-            else
+            if($queryException->errorInfo[1]==1062){
+                $gifPath = "";
+                return redirect()->route('challenges.show',$challenge->id)->with(['success' => 'Congratulations, but you already solved this one!', 'gifPath' => $gifPath]);
+            }
+            else{
                 throw $queryException;
+            }
         }
         catch (\Exception $ex)
         {
@@ -432,7 +435,8 @@ class ChallengeController extends Controller
             }
             else
             {
-               return redirect()->route('challenges.show',$challenge->id)->with('challenge',$challenge)->withErrors('Could not submit because of error: ' . $ex->getMessage());
+                $gifPath = "";
+               return redirect()->route('challenges.show',$challenge->id)->with(['challenge' => $challenge, 'gifPath' => $gifPath])->withErrors('Could not submit because of error: ' . $ex->getMessage());
             }
         }
 
