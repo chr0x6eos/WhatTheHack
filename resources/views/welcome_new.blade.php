@@ -8,7 +8,6 @@
                 <div data-test="col" class="col-md-6">
 
                     <div data-test="card" class="card text-dark">
-                        <div class="Toastify"></div>
                         <div data-test="card" class="card-body">
                             <h2>Login</h2>
                             <form method="POST" action="{{ route('login') }}" class="text-center p-5">

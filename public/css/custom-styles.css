@@ -150,6 +150,9 @@ a.card-link{
 #sidebar.active {
     left: 0;
 }
+.card{
+    margin-top: 48px;
+}
 div.landing.py-5 {
     padding-top: 90px;
     height: 100%;
@@ -202,6 +205,7 @@ div#dismiss {
 }
 
 #sidebar ul li a {
+    color: white;
     padding: 10px;
     font-size: 1.1em;
     display: block;
@@ -235,6 +239,9 @@ a[data-toggle="collapse"] {
 }
 a.green-text.dropdown-item.waves-effect.waves-light:hover{
     background-color: green;
+}
+a.dropdown-toggle{
+    color: white;
 }
 div.card-header{
     color: black;
