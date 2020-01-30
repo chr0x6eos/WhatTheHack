@@ -51,4 +51,26 @@ class Classroom extends Model
         }
         return $ranked;
     }
+
+    static function countActiveClassrooms(){
+        $classrooms = Classroom::all();
+        $counter = 0;
+        foreach ($classrooms as $classroom){
+            if($classroom->active == 1){
+                $counter++;
+            }
+        }
+        return $counter;
+    }
+
+    static function countDisabledClassrooms(){
+        $classrooms = Classroom::all();
+        $counter = 0;
+        foreach ($classrooms as $classroom){
+            if($classroom->active == 0){
+                $counter++;
+            }
+        }
+        return $counter;
+    }
 }

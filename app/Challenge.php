@@ -59,4 +59,26 @@ class Challenge extends Model
         $solves=count($this->challengeUsers()->get());
         return $solves;
     }
+
+    static function countActiveChallenges(){
+        $challenges = Challenge::all();
+        $counter = 0;
+        foreach ($challenges as $challenge){
+            if($challenge->active == 1){
+                $counter++;
+            }
+        }
+        return $counter;
+    }
+
+    static function countDisabledChallenges(){
+        $challenges = Challenge::all();
+        $counter = 0;
+        foreach ($challenges as $challenge){
+            if($challenge->active == 0){
+                $counter++;
+            }
+        }
+        return $counter;
+    }
 }

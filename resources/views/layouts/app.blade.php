@@ -91,10 +91,16 @@
         </nav>
 
         <main id="landing" >
-            <nav id="sidebar" class="sticky-top">
-                <div id="dismiss">
-                    <i class="fas fa-times"></i>
-                </div>
+            <br>
+            @yield('content')
+        </main>
+        <!-- Sidebar -->
+        <nav id="sidebar">
+            <div id="dismiss">
+                <i class="fas fa-times">
+                    <img src="/images/pics/white-arrow-transparent.png" style="height: 30px; width: 30px;">
+                </i>
+            </div>
 
                 <div class="sidebar-header">
                     <h4>WhatTheHack</h4>
@@ -141,79 +147,97 @@
                         @endif
                     @endif
 
-                <!-- ADMIN VIEW -->
-                    @if (Auth::user())
-                        @if(Auth::user()->hasRole("admin"))
-                            <li>
-                                <a href="#challengeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Challenges</a>
-                                <ul class="collapse list-unstyled" id="challengeSubmenu">
-                                    <li>
-                                        <a href="/challenges">Show Challenges</a>
-                                    </li>
-                                    <li>
-                                        <a href="/challenges/create">Create Challenge</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#classroomSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Classroom</a>
-                                <ul class="collapse list-unstyled" id="classroomSubmenu">
-                                    <li>
-                                        <a href="/classroom">Show Classroom</a>
-                                    </li>
-                                    <li>
-                                        <a href="/classroom/create">Create Classroom</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="/manage/users">User Management</a>
-                            </li>
-                        @else
-                        @endif
-                        @if(Auth::user()->hasRole("teacher"))
-                            <li>
-                                <a href="#challengeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Challenges</a>
-                                <ul class="collapse list-unstyled" id="challengeSubmenu">
-                                    <li>
-                                        <a href="/challenges">Show Challenges</a>
-                                    </li>
-                                    <li>
-                                        <a href="challenges/create">Create Challenge</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#classroomSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Classroom</a>
-                                <ul class="collapse list-unstyled" id="classroomSubmenu">
-                                    <li>
-                                        <a href="/classroom">Show Classroom</a>
-                                    </li>
-                                    <li>
-                                        <a href="/classroom/create">Create Classroom</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endif
-                        @if(Auth::user()->hasRole("student"))
-                            <li>
-                                <a href="/challenges">Challenges</a>
-                            </li>
-                        @endif
+            <!-- ADMIN VIEW -->
+                @if (Auth::user())
+                    @if(Auth::user()->hasRole("admin"))
+                        <li>
+                            <a href="#challengeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Challenges</a>
+                            <ul class="collapse list-unstyled" id="challengeSubmenu">
+                                <li>
+                                    <a href="/challenges">Show Challenges</a>
+                                </li>
+                                <li>
+                                    <a href="/challenges/create">Create Challenge</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#classroomSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Classroom</a>
+                            <ul class="collapse list-unstyled" id="classroomSubmenu">
+                                <li>
+                                    <a href="/classroom">Classroom Management</a>
+                                </li>
+                                <li>
+                                    <a href="/classroom/create">Create Classroom</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('classroom.disabled') }}">Disabled Classrooms</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('classroom.myclassrooms') }}">My Classrooms</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="/manage/users">User Management</a>
+                        </li>
+                    @else
                     @endif
-                    <li>
-                        <a href="#aboutSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">About</a>
-                        <ul class="collapse list-unstyled" id="aboutSubmenu">
-                            <li>
-                                <a href="/contact">Contact</a>
-                            </li>
-                            <li>
-                                <a href="/agb">Terms of use</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
+                    @if(Auth::user()->hasRole("teacher"))
+                        <li>
+                            <a href="#challengeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Challenges</a>
+                            <ul class="collapse list-unstyled" id="challengeSubmenu">
+                                <li>
+                                    <a href="challenges/create">Create Challenge</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#classroomSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Classroom</a>
+                            <ul class="collapse list-unstyled" id="classroomSubmenu">
+                                <li>
+                                    <a href="{{ route('classroom.myclassrooms') }}">Show Classrooms</a>
+                                </li>
+                                <li>
+                                    <a href="/classroom/create">Create Classroom</a>
+                                </li>
+                            </ul>
+                        </li>
+                    @endif
+                    @if(Auth::user()->hasRole("student"))
+                        <!--
+                        <li>
+                            <a href="/challenges">Challenges</a>
+                        </li>
+                        -->
+                    @endif
+
+                        <li>
+                            <a href="#rankingSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Ranking</a>
+                            <ul class="collapse list-unstyled" id="rankingSubmenu">
+                                <li>
+                                    <a href="/ranking">Global</a>
+                                </li>
+                                <li>
+                                    <a href="/ranking/classroom">Classroom</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                @endif
+                <li>
+                    <a href="#aboutSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">About</a>
+                    <ul class="collapse list-unstyled" id="aboutSubmenu">
+                        <li>
+                            <a href="/contact">Contact</a>
+                        </li>
+                        <li>
+                            <a href="/agb">Terms of use</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
 
             @yield('content')
         </main>
@@ -230,14 +254,14 @@
     </div>
 </div>
 
+@if (session()->has('success'))
+    <div class="alert alert-success">{{ session()->get('success') }}</div>
+@endif
+
 @if($errors)
     @foreach ($errors->all() as $error)
         <div class="alert alert-danger">{{ $error }}</div>
     @endforeach
-@endif
-
-@if (session()->has('success'))
-    <div class="alert alert-success">{{ session()->get('success') }}</div>
 @endif
 
 </body>
