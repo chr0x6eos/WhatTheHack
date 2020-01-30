@@ -118,7 +118,7 @@ div#dismiss {
     -o-transition: all 0.3s;
     transition: all 0.3s;
     color:white;
-    background-color: #3E3E3E;
+    /* background-color: #3E3E3E; */
 }
 
 #dismiss:hover {
