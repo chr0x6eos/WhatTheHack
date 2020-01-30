@@ -13,4 +13,7 @@ $(document).ready(function () {
         // open sidebar
         $('#sidebar').addClass('active');
     });
+
+    /* Toast js actions */
+    $('.toast-alert').toast('show')
 });

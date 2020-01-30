@@ -49,8 +49,7 @@
     <!-- CSS file for customization -->
     <link rel="stylesheet" href="{{ URL::asset('css/custom-styles.css') }}">
     <!-- <link rel="stylesheet" href="{{ URL::asset('css/addons/datatables-select.min.css') }}"> -->
-
-
+    <link rel="stylesheet" href="{{ URL::asset('css/app.css') }}">
 </head>
 <body>
 <div class="root">
@@ -97,9 +96,7 @@
         <!-- Sidebar -->
         <nav id="sidebar">
             <div id="dismiss">
-                <i class="fas fa-times">
-                    <img src="/images/pics/white-arrow-transparent.png" style="height: 30px; width: 30px;">
-                </i>
+                <i class="fas fa-times"></i>
             </div>
 
                 <div class="sidebar-header">
@@ -238,6 +235,49 @@
                 </li>
             </ul>
         </nav>
+
+        <!-- Error Message -->
+        @if($errors)
+            @foreach ($errors->all() as $error)
+                <div id="toast-alert-container" class="toast-top-center example">
+                    <div id="alert" class="toast-alert alert-danger hide" role="alert" data-delay="7000" data-autohide="true" aria-live="assertive" aria-atomic="true">
+                        <div class="toast-header-alert">
+                            <i class="fas fa-2x fa-exclamation-circle mr-2"></i>
+
+                            <strong class="mr-auto">Error</strong>
+
+                            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="toast-body">
+                            {{ $error }}
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        @endif
+
+        <!-- Success Message -->
+        @if (session()->has('success'))
+            <div id="toast-alert-container" class="toast-top-center example">
+                <div id="success" class="toast-alert alert-success hide" role="alert" data-delay="5000" data-autohide="true" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header-alert">
+                        <i class="far fa-2x fa-thumbs-up mr-2"></i>
+
+                        <strong class="mr-auto">Success</strong>
+
+                        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="toast-body">
+                        {{ session()->get('success') }}
+                    </div>
+                </div>
+            </div>
+        @endif
+
         <!-- Sidebar -->
         <footer data-test="footer" class="page-footer elegant-color">
             <div data-test="container" class="container text-center py-3"><a href="/contact">Impressum</a></div>
@@ -249,16 +289,5 @@
         </footer>
     </div>
 </div>
-
-@if (session()->has('success'))
-    <div class="alert alert-success">{{ session()->get('success') }}</div>
-@endif
-
-@if($errors)
-    @foreach ($errors->all() as $error)
-        <div class="alert alert-danger">{{ $error }}</div>
-    @endforeach
-@endif
-
 </body>
 </html>
