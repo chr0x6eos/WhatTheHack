@@ -224,9 +224,6 @@
                     <a href="#aboutSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">About</a>
                     <ul class="collapse list-unstyled" id="aboutSubmenu">
                         <li>
-                            <a href="/contact">Contact</a>
-                        </li>
-                        <li>
                             <a href="/agb">Terms of use</a>
                         </li>
                     </ul>
