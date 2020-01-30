@@ -26,90 +26,6 @@ class UsersTableSeeder extends Seeder
         );
         $admin->save();
 
-        //Create student user
-        $student = User::create(
-            [
-                'username' => 'Student',
-                'email' => 'student@whatthehack.htl',
-                'password' => Hash::make('student'),
-                'email_verified_at' => now()->timestamp,
-                'userrole' => 'student',
-                'points' => 100,
-                'active' => true
-            ]
-        );
-        $student->save();
-
-        $student2 = User::create(
-            [
-                'username' => 'Heins',
-                'email' => 'heins@whatthehack.htl',
-                'password' => Hash::make('student'),
-                'userrole' => 'student',
-                'points' => 20,
-                'active' => true
-            ]
-        );
-        $student2->save();
-
-        $student3 = User::create(
-            [
-                'username' => 'Student3',
-                'email' => 'student3@whatthehack.htl',
-                'password' => Hash::make('student3'),
-                'userrole' => 'student',
-                'points' => 30,
-                'active' => true
-            ]
-        );
-        $student3->save();
-
-        $student4 = User::create(
-            [
-                'username' => 'Student4',
-                'email' => 'student4@whatthehack.htl',
-                'password' => Hash::make('student4'),
-                'email_verified_at' => now()->timestamp,
-                'userrole' => 'student',
-                'points' => 40,
-                'active' => true
-            ]
-        );
-        $student4->save();
-
-        $student5 = User::create(
-            [
-                'username' => 'Student5',
-                'email' => 'student5@whatthehack.htl',
-                'password' => Hash::make('student5'),
-                'userrole' => 'student',
-                'active' => true
-            ]
-        );
-        $student5->save();
-
-        $student6 = User::create(
-            [
-                'username' => 'Student6',
-                'email' => 'student6@whatthehack.htl',
-                'password' => Hash::make('student6'),
-                'userrole' => 'student',
-                'active' => true
-            ]
-        );
-        $student6->save();
-
-        $student7 = User::create(
-            [
-                'username' => 'Student7',
-                'email' => 'studen7t@whatthehack.htl',
-                'password' => Hash::make('student7'),
-                'userrole' => 'student',
-                'points' => 70,
-                'active' => true
-            ]
-        );
-        $student7->save();
         //Create teacher user
         $teacher = User::create(
             [
@@ -122,5 +38,149 @@ class UsersTableSeeder extends Seeder
             ]
         );
         $teacher->save();
+
+        //Create student user
+        $student = User::create(
+            [
+                'username' => 'Student',
+                'email' => 'student@whatthehack.htl',
+                'password' => Hash::make('student'),
+                'email_verified_at' => now()->timestamp,
+                'userrole' => 'student',
+                'points' => 10,
+                'active' => true
+            ]
+        );
+        $student->save();
+
+        $tatu = User::create(
+            [
+                'username' => 'TaTü',
+                'email' => 'tatü@whatthehack.htl',
+                'password' => Hash::make('tatü2020'),
+                'email_verified_at' => now()->timestamp,
+                'userrole' => 'student',
+                'points' => 0,
+                'active' => true
+            ]
+        );
+        $tatu->save();
+
+        $ruehl = User::create(
+            [
+                'username' => 'Rühl',
+                'email' => 'ruehl@whatthehack.htl',
+                'password' => Hash::make('ruehl24'),
+                'email_verified_at' => now()->timestamp,
+                'userrole' => 'student',
+                'points' => 24,
+                'active' => true
+            ]
+        );
+        $ruehl->save();
+
+        $woschbar = User::create(
+            [
+                'username' => 'DaWoschbar',
+                'email' => 'woschbar@whatthehack.htl',
+                'password' => Hash::make('dawoschbar'),
+                'email_verified_at' => now()->timestamp,
+                'userrole' => 'student',
+                'points' => 1,
+                'active' => true
+            ]
+        );
+        $woschbar->save();
+
+        $chronoros = User::create(
+            [
+                'username' => 'Chronoros',
+                'email' => 'chronoros@whatthehack.htl',
+                'password' => Hash::make('chronoros'),
+                'email_verified_at' => now()->timestamp,
+                'userrole' => 'student',
+                'points' => 100,
+                'active' => true
+            ]
+        );
+        $chronoros->save();
+
+        $busche = User::create(
+            [
+                'username' => 'Buschuschnig',
+                'email' => 'buschuschnig@whatthehack.htl',
+                'password' => Hash::make('buschuschnig'),
+                'email_verified_at' => now()->timestamp,
+                'userrole' => 'student',
+                'points' => 60,
+                'active' => true
+            ]
+        );
+        $busche->save();
+
+        $rueschhacker = User::create(
+            [
+                'username' => 'Rüschhacker',
+                'email' => 'rhacker@whatthehack.htl',
+                'password' => Hash::make('rhacker'),
+                'email_verified_at' => now()->timestamp,
+                'userrole' => 'student',
+                'points' => 1000,
+                'active' => true
+            ]
+        );
+        $rueschhacker->save();
+
+        $sandmann = User::create(
+            [
+                'username' => 'sandmann',
+                'email' => 'sandmann@whatthehack.htl',
+                'password' => Hash::make('sandmann'),
+                'email_verified_at' => now()->timestamp,
+                'userrole' => 'student',
+                'points' => 999,
+                'active' => true
+            ]
+        );
+        $sandmann->save();
+
+        $oschta = User::create(
+            [
+                'username' => 'Oschta',
+                'email' => 'oschta@whatthehack.htl',
+                'password' => Hash::make('oschta'),
+                'email_verified_at' => now()->timestamp,
+                'userrole' => 'student',
+                'points' => 20,
+                'active' => true
+            ]
+        );
+        $oschta->save();
+
+        $hehn = User::create(
+            [
+                'username' => 'Hehn',
+                'email' => 'hehn@whatthehack.htl',
+                'password' => Hash::make('hehn'),
+                'email_verified_at' => now()->timestamp,
+                'userrole' => 'student',
+                'points' => 10,
+                'active' => true
+            ]
+        );
+        $hehn->save();
+
+        $prast = User::create(
+            [
+                'username' => 'Prast',
+                'email' => 'prast@whatthehack.htl',
+                'password' => Hash::make('prast'),
+                'email_verified_at' => now()->timestamp,
+                'userrole' => 'student',
+                'points' => 20,
+                'active' => true
+            ]
+        );
+        $hehn->save();
     }
 }
