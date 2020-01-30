@@ -27,10 +27,9 @@
                 @foreach($challenges as $challenge)
                     @if($challenge->active==1)
                         @if(Auth::user()->solvedChallenge($challenge->id))
-                            @php//TODO:Change colour to match theme @endphp
-                            <div class="card picture-item   " data-groups='["solved","{{$challenge->category}}"]' style="background-color: dimgrey" >
+                            <div class="card picture-item" data-groups='["solved","{{$challenge->category}}"]' style="background-color: dimgrey" >
                                 <div class="card-header" style="background-color: #0E9A00"><a href="{{route('challenges.show',$challenge->id)}}">{{$challenge->name}} - {{$challenge->category}}</a>
-                                <p style="float: right;color: black">Total solves: {{$challenge->solves($challenge->id)}} ~solved</p>
+                                <p style="float: right;color: black">Total solves: {{$challenge->solves($challenge->id)}} - solved</p>
                                 </div>
                                 <div class="card-body">
                                     Author: {{$challenge->author}}

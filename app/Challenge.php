@@ -37,7 +37,7 @@ class Challenge extends Model
     // Check if inputted category is valid
     public function validCategory($category)
     {
-        $validCat = ['pwn','web','forensic','reversing','crypto','misc'];
+        $validCat = ['pwn','web','forensic','reverse-engineering','cryptography','miscellaneous'];
         if(in_array($category, $validCat))
         {
             return true;
