@@ -191,7 +191,7 @@
                             <a href="#classroomSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Classroom</a>
                             <ul class="collapse list-unstyled" id="classroomSubmenu">
                                 <li>
-                                    <a href="{{ route('classroom.myClassrooms') }}">Show Classrooms</a>
+                                    <a href="{{ route('classroom.myclassrooms') }}">Show Classrooms</a>
                                 </li>
                                 <li>
                                     <a href="/classroom/create">Create Classroom</a>

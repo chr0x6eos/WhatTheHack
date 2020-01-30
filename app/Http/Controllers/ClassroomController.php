@@ -136,7 +136,7 @@ class ClassroomController extends Controller
             return view('classroom.editChallenges')->with('classroom', $classroom);
         }
         else {
-            return redirect()->route('classroom.myClassrooms')
+            return redirect()->route('classroom.myclassrooms')
                 ->withErrors('Classroom with id=' . $id . ' not found!');
         }
     }
@@ -279,7 +279,7 @@ class ClassroomController extends Controller
             return view('classroom.showChallenges')->with('classroom', $classroom);
         }
         else {
-            return redirect()->route('classroom.myClassrooms')
+            return redirect()->route('classroom.myclassrooms')
                 ->withErrors('Classroom with id=' . $id . ' not found!');
         }
     }
