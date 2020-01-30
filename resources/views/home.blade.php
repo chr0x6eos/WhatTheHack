@@ -128,7 +128,7 @@
                                             </tr>
                                         @endif
                                     @endforeach
-                                </p>
+                            </p>
                             </div>
                             <div class="card-footer">
                                 <a href="{{ route('classroom.myclassrooms') }}" class="btn btn-success btn-sm" style="width: 100%">My Classrooms</a>

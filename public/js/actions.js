@@ -15,4 +15,6 @@ $(document).ready(function () {
         $('#sidebar').addClass('active');
     });
 
+    /* Toast js actions */
+    $('.toast-alert').toast('show')
 });
