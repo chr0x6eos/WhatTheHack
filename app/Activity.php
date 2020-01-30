@@ -16,17 +16,25 @@ class Activity extends Model
         return $this->belongsTo(User::class);
     }
 
-    static function latest($limit){
+    static function latest($limit = null){
         $activities = array();
-       $result= Activity::orderby('created_at','desc')
-           ->get()
-           ->take($limit);
-       foreach ($result as $item){
-           $user = User::find($item->user_id);
-           $challenge=Challenge::find($item->challenge_id);
-           $timestamp=$item->created_at;
-           $activities[]=$user->username.' solved '.$challenge->name.' at '.date('d.m h:i',strtotime($timestamp));
-       }
-       return $activities;
+        $result = null;
+        if($limit== null)
+        {
+            $result = Activity::orderby('created_at', 'desc')
+                ->get();
+        }
+        else {
+            $result = Activity::orderby('created_at', 'desc')
+                ->get()
+                ->take($limit);
+        }
+        foreach ($result as $item) {
+            $user = User::find($item->user_id);
+            $challenge = Challenge::find($item->challenge_id);
+            $timestamp = $item->created_at;
+            $activities[] = $user->username . ' solved ' . $challenge->name . ' at ' . date('d.m h:i', strtotime($timestamp));
+        }
+        return $activities;
     }
 }

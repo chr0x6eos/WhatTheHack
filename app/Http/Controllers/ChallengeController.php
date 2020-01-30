@@ -141,11 +141,11 @@ class ChallengeController extends Controller
     public function show($id)
     {
         $challenge = Challenge::find($id);
-        $displayGIF = null; //no GIF should be displayed
+        $gifPath = ""; //no GIF should be displayed
 
         if(Auth::user()->hasRole('admin') || Auth::user()->hasChallenge($challenge->id))
         {
-            return view('challenges.show')->with(['challenge' => $challenge, 'displayGIF' => $displayGIF]);
+            return view('challenges.show')->with(['challenge' => $challenge, 'gifPath' => $gifPath]);
         }
         else
         {
@@ -393,29 +393,37 @@ class ChallengeController extends Controller
         {
             $challenge = Challenge::find($id);
             $displayGIF = null;   //parameter to now what gif should be displayed
+            if(!$challenge->active) {
+                return redirect()->route('challenges.index')->withErrors('You should not have been there... Please report this issue');
+            }
+
+            //choose random GIF
+            $gifName = random_int(1, 6);
 
             //Make flag case insensitive
             if (strtolower($challenge->flag) == strtolower($request->flag))
             {
-                //Add points to user
-                Auth::user()->addPoints($challenge->getPoints());
-                $displayGIF = true;
-
                 //Save that user has solved challenge
                 $challenge->challengeUsers()->attach(Auth::user());
+
+                //Add points to user
+                Auth::user()->addPoints($challenge->getPoints());
+
+                //Path to a GIF
+                $gifPath = '/images/GIFs/WIN/' . $gifName . '.gif';
                 return view('challenges.show')->with(['challenge' => $challenge, 'displayGIF' => $displayGIF, 'success' => 'Congratulation! You solved the challenge!']);
             }
             else
             {
-                $displayGIF = false;
-                return view('challenges.show')->with(['challenge' => $challenge, 'displayGIF' => $displayGIF])->withErrors('Sorry this is not the right flag! Please try again!');
+                //Path to a GIF
+                $gifPath = '/images/GIFs/FAIL/' . $gifName . '.gif';
+
+                return view('challenges.show')->with(['challenge' => $challenge, 'gifPath' => $gifPath])->withErrors('Sorry this is not the right flag! Please try again!');
             }
         }
         catch (QueryException $queryException){
             if($queryException->errorInfo[1]==1062)
                 return redirect()->route('challenges.show',$challenge->id)->with('success','Congratulations, but you already solved this one!');
-            else
-                throw $queryException;
         }
         catch (\Exception $ex)
         {

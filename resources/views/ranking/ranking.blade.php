@@ -17,7 +17,7 @@
                     <tbody>
                     @foreach($ranked as $key => $value)
                         @if($value->username == $currentUser->username)
-                            <tr bgcolor="#ff1493">
+                            <tr bgcolor="#00c800">
                                 <td>{{ $key }}</td>
                                 <td>{{ $value->username }}</td>
                                 <td>{{ $value->points }}</td>
