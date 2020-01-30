@@ -37,7 +37,7 @@
     color: black;
     text-decoration: none;
 }
-.card-header:hover{
+.card-header.challenges-header:hover{
     background-color: #00c851;
     text-decoration: none;
 }
@@ -54,6 +54,7 @@ div.card_showChallenge{
    width: 100%;
     margin-top: 48px;
 }
+
 .navbar .search-results {
     position: absolute;
     top: 60px;
@@ -75,6 +76,15 @@ div.nav.nav-container{
 }
 .navbar-brand{
     margin: 0px 30px;
+}
+.table_01{
+    width: 20%;
+    font-weight: bold;
+    font-size: medium;
+}
+.table_02{
+    width: 80%;
+    font-size: medium;
 }
 .login_logout_btn{
     display: block;

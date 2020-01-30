@@ -14,7 +14,7 @@
                                     @if(Auth::user()->solvedChallenge($challenge->id))
                                         <div class="card">
                                             <a href="{{route('challenges.show',$challenge->id)}}" class="challenge_name_link">
-                                                <div class="card-header">
+                                                <div class="card-header challenges-header">
                                                     <p class="challenge_name">{{$challenge->name}}</p>
                                                     <p class="total_solves">Total solves: {{$challenge->solves($challenge->id)}}</p>
                                                 </div>
@@ -27,7 +27,7 @@
                                     @else
                                         <div class="card">
                                             <a href="{{route('challenges.show',$challenge->id)}}">
-                                                <div class="card-header">
+                                                <div class="card-header challenges-header">
                                                     <p style="display: inline">{{$challenge->name}}</p>
                                                     <p class="total_solves">Total solves: {{$challenge->solves($challenge->id)}}</p>
                                                 </div>
