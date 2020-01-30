@@ -33,7 +33,26 @@
     border-color: #00c851;
     box-shadow: inset 0 0 0 1px #00c851;
 }
-
+.card-header{
+    color: black;
+    text-decoration: none;
+}
+.card-header:hover{
+    background-color: #00c851;
+    text-decoration: none;
+}
+a.challenge_name:hover{
+    text-decoration: none;
+}
+.challenge_name_link:hover{
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: none;
+}
+div.card_showChallenge{
+   width: 100%;
+}
 .navbar .search-results {
     position: absolute;
     top: 60px;
@@ -189,6 +208,15 @@ a{
 a[aria-expanded="true"] {
     color: white;
     background: #01C851;
+}
+p.total_solves{
+    float: right;
+    color: black;
+    display: inline;
+}
+p.challenge_name{
+    color: black;
+    display: inline;
 }
 
 a[data-toggle="collapse"] {
