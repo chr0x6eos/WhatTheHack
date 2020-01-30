@@ -34,6 +34,20 @@
     box-shadow: inset 0 0 0 1px #00c851;
 }
 
+.card-text{
+    color: black;
+}
+.card-header {
+    color: black;
+
+}
+.card-header {
+    color: black;
+}
+.card-title {
+    color: black;
+}
+
 .navbar .search-results {
     position: absolute;
     top: 60px;
