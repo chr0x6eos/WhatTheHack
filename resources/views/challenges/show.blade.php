@@ -142,12 +142,19 @@
                         @endif
 
                         <div>
-                            <form method="POST" action="{{ route('challenges.flag', $challenge->id) }}">
+                            <form method="POST" action="{{ route('challenges.flag',$challenge->id) }}">
                                 @csrf
-                                <strong>Flag:</strong>
-                                <br>
-                                <input id="flag" data-test="input" name="flag" type="text">
-                                <button type="submit" class="btn btn-success">Submit flag</button>
+
+                                <input id="flag" data-test="input" name="flag" type="text" class="form-control form-control-lg {{ $errors->has('flag') ? ' is-invalid' : '' }}" value="" required autofocus>
+                                <label class="label-form" data-error="" data-success="" id="">Flag:</label>
+
+                                @if ($errors->has('flag'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('flag') }}</strong>
+                                    </span>
+                                @endif
+
+                                <button type="submit" class="btn btn-success">Submit Flag</button>
                             </form>
                         </div>
                             <div>
