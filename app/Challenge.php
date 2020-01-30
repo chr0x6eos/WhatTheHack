@@ -54,4 +54,31 @@ class Challenge extends Model
     public function supportrequest(){
         return $this-> hasMany('App\SupportRequest');
     }
+
+    public function solves($id){
+        $solves=count($this->challengeUsers()->get());
+        return $solves;
+    }
+
+    static function countActiveChallenges(){
+        $challenges = Challenge::all();
+        $counter = 0;
+        foreach ($challenges as $challenge){
+            if($challenge->active == 1){
+                $counter++;
+            }
+        }
+        return $counter;
+    }
+
+    static function countDisabledChallenges(){
+        $challenges = Challenge::all();
+        $counter = 0;
+        foreach ($challenges as $challenge){
+            if($challenge->active == 0){
+                $counter++;
+            }
+        }
+        return $counter;
+    }
 }
