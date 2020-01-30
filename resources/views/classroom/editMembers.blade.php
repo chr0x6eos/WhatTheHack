@@ -78,7 +78,7 @@
                     </div>
                 @endif
                 <p>
-                    <a href="{{ route('classroom.myclassrooms') }}" class="btn btn-danger">
+                    <a href="{{ route('classroom.myClassrooms') }}" class="btn btn-danger">
                         Cancel
                     </a>
                 </p>

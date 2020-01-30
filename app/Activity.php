@@ -3,33 +3,40 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
+
 class Activity extends Model
 {
     protected $table = 'challenge_user';
 
-    public function challenge() {
+    public function challenge()
+    {
         return $this->belongsTo(Challenge::class);
     }
 
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 
-    static function latest($limit = null){
+    static function latest($limit = null)
+    {
         $activities = array();
         $result = null;
+
         if($limit== null)
         {
             $result = Activity::orderby('created_at', 'desc')
                 ->get();
         }
-        else {
+        else
+        {
             $result = Activity::orderby('created_at', 'desc')
                 ->get()
                 ->take($limit);
         }
-        foreach ($result as $item) {
+
+        foreach ($result as $item)
+        {
             $user = User::find($item->user_id);
             $challenge = Challenge::find($item->challenge_id);
             $timestamp = $item->created_at;

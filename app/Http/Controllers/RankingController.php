@@ -19,14 +19,15 @@ class RankingController extends Controller
             $ranked = array();
             $rank = 1;
 
-            foreach ($sorted as $value){
+            foreach ($sorted as $value)
+            {
                 $ranked[$rank] = $value;
                 $rank++;
             }
         }
         catch (Exception $ex)
         {
-            return redirect(route('home'))->withErrors($ex->getMessage());
+            return redirect()->route('home')->withErrors('Error occurred: ' . $ex->getMessage());
         }
         return view('ranking.ranking')->with(['ranked' => $ranked, 'currentUser' => $currentUser]);
     }
@@ -39,10 +40,13 @@ class RankingController extends Controller
             $sorted = collect($users)->sortBy('points', 1, true);
             $ranked = array();
             $rank = 1;
-            foreach($sorted as $value) {
-                $ranked[$rank] = $value ;
+
+            foreach($sorted as $value)
+            {
+                $ranked[$rank] = $value;
                 $rank++;
-                if($rank > 5){
+                if($rank > 5)
+                {
                     break;
                 }
             }
@@ -54,20 +58,21 @@ class RankingController extends Controller
         }
         catch (Exception $ex)
         {
-            return redirect(route('home'))->withErrors($ex->getMessage());
+            return redirect()->route('home')->withErrors($ex->getMessage());
         }
         return view('home')->with('ranked', $ranked);
     }
 
     public function classroomRanking()
     {
-        try{
+        try
+        {
             $currentUser = Auth::user();
             $classrooms = $currentUser->classrooms;
         }
         catch(Exception $ex)
         {
-            return redirect(route('home'))->withErrors($ex->getMessage());
+            return redirect()->route('home')->withErrors($ex->getMessage());
         }
         return view('ranking.classroomRanking')->with(['classrooms' => $classrooms, 'currentUser' => $currentUser]);
     }

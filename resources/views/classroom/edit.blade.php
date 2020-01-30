@@ -6,7 +6,6 @@
         <div class="col-2">
             <form method="post" action="{{ route('classroom.update', $classroom->id)}}" >
                 @csrf
-
                 <h3>Edit classroom information</h3>
                 <p>
                     <strong>ID</strong>
@@ -24,17 +23,15 @@
                     <option value="0" @if($classroom->active == "0") selected="selected" @endif>Disabled</option>
                 </select>
 
-           <ul class="list-unstyled">
-
-                            @if ($errors->any())
-                                <div class="alert alert-danger">
-
-                                @foreach ($errors->all() as $error)
+                <ul class="list-unstyled">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            @foreach ($errors->all() as $error)
                                 <li>{{ $error }}</li>
                             @endforeach
-                        </ul>
-                    </div>
-                @endif
+                        </div>
+                    @endif
+                </ul>
                 <br>
                 <br>
                 <p>
@@ -43,7 +40,7 @@
                     </button>
                 </p>
                 <p>
-                    <a href="{{ route('classroom.myclassrooms') }}" class="btn btn-danger">
+                    <a href="{{ route('classroom.myClassrooms') }}" class="btn btn-danger">
                         Cancel
                     </a>
                 </p>

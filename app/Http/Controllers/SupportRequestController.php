@@ -19,29 +19,29 @@ class SupportRequestController extends Controller
         $this->middleware('auth');
     }
 
-    public function create($id){
-
+    public function create($id)
+    {
         $challenge = Challenge::find($id);
         return view('support.index')->with('challenge', $challenge);
     }
 
     public function submit(Request $request)
     {
-        try{
+        try
+        {
+            $this->validate($request, [
+                'message' => 'required'
+            ]);
+
             $supportRequest = new SupportRequest();
 
             $supportRequest->id = $request->id;
-
             $supportRequest->challenge_id = $request->challenge;
-
             $supportRequest->user_id = Auth::user()->id;
 
             $subject = "Support Request to challenge:". $request->challenge . " - by user " . Auth::user()->username;
             $supportRequest->subject = $subject;
 
-            $this->validate($request, [
-                'message' => 'required'
-            ]);
             $supportRequest->message = $request->get('message');
             $supportRequest->solved = false;
 
@@ -50,16 +50,15 @@ class SupportRequestController extends Controller
             $this->sendMail($supportRequest);
 
             return redirect()->route('challenges.show', $request->challenge)->with('success', 'Support request has been sent! Check your mail inbox for a confirmation message.');
-            #return redirect()->route('challenges.show')->with('success', 'Support request has been sent! Check your mail inbox for a confirmation message.');
         }
-        catch (Exception $ex){
+        catch (Exception $ex)
+        {
             return redirect()->route('support.create')->withErrors("Cannot send support request because of error: " . $ex. "!");
         }
     }
 
-    public function sendMail (SupportRequest $supportRequest){
-
-
+    public function sendMail (SupportRequest $supportRequest)
+    {
         $admin = new User();
         $admin = $admin->getAdmin();
 

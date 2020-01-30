@@ -87,7 +87,8 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
 
-    public function classrooms(){
+    public function classrooms()
+    {
         return $this
             ->belongsToMany('App\Classroom')
             ->withTimestamps();
@@ -108,48 +109,66 @@ class User extends Authenticatable implements MustVerifyEmail
         return User::where('userrole', 'admin')->first();
     }
 
-    static function countActiveUsers(){
+    static function countActiveUsers()
+    {
         $counter = 0;
         $users = User::all();
-        foreach ($users as $user){
-            if ($user->active == 1){
+        foreach ($users as $user)
+        {
+            if ($user->active == 1)
+            {
                 $counter++;
             }
         }
         return $counter;
     }
-    static function countDisabledUsers(){
+    static function countDisabledUsers()
+    {
         $counter = 0;
         $users = User::all();
-        foreach ($users as $user){
-            if ($user->active == 0){
+        foreach ($users as $user)
+        {
+            if ($user->active == 0)
+            {
                 $counter++;
             }
         }
         return $counter;
     }
 
-    public function solvedChallenge($id){
-        foreach ($this->challenges as $challenge){
+    public function solvedChallenge($id)
+    {
+        foreach ($this->challenges as $challenge)
+        {
             if ($challenge->id == $id)
                 return true;
         }
         return false;
     }
 
-    static function calculateLevel($points){
+    static function calculateLevel($points)
+    {
         $levels = Level::all();
-        foreach($levels as $l){
-            if($points >= $l->levelFrom && $points <= $l->levelTo){
+        $userLevel = "";
+
+        foreach($levels as $l)
+        {
+            if($points >= $l->levelFrom && $points <= $l->levelTo)
+            {
                 $userLevel = $l->level;
             }
         }
         return $userLevel;
     }
-    static function calculateRank($points){
+    static function calculateRank($points
+    ){
         $levels = Level::all();
-        foreach($levels as $l){
-            if($points >= $l->levelFrom && $points <= $l->levelTo){
+        $userLevel = "";
+
+        foreach($levels as $l)
+        {
+            if($points >= $l->levelFrom && $points <= $l->levelTo)
+            {
                 $userLevel = $l->levelName;
             }
         }
@@ -158,24 +177,33 @@ class User extends Authenticatable implements MustVerifyEmail
 
     static function calculateProgress1($points){
         $levels = Level::all();
-        foreach($levels as $l){
-            if($points >= $l->levelFrom && $points <= $l->levelTo){
-                $currentpoints = $points - $l->levelFrom;
-                $currentpoints = ceil($currentpoints);
-                $userLevel = $currentpoints;
+        $userLevel = "";
+
+        foreach($levels as $l)
+        {
+            if($points >= $l->levelFrom && $points <= $l->levelTo)
+            {
+                $currentPoints = $points - $l->levelFrom;
+                $currentPoints = ceil($currentPoints);
+                $userLevel = $currentPoints;
             }
         }
         return $userLevel;
     }
 
-    static function calculateProgress2($points){
+    static function calculateProgress2($points)
+    {
         $levels = Level::all();
-        foreach($levels as $l){
-            if($points >= $l->levelFrom && $points <= $l->levelTo){
-                $neededpoints = $l->levelTo - $l->levelFrom;
-                $neededpoints = ceil($neededpoints);
+        $neededPoints = 0;
+
+        foreach($levels as $l)
+        {
+            if($points >= $l->levelFrom && $points <= $l->levelTo)
+            {
+                $neededPoints = $l->levelTo - $l->levelFrom;
+                $neededPoints = ceil($neededPoints);
             }
         }
-        return $neededpoints;
+        return $neededPoints;
     }
 }

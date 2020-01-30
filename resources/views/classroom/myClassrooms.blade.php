@@ -4,7 +4,6 @@
         <div data-test="container" class="container">
             <div data-test="row" class="row">
                 <div data-test="col" class="col-lg-9">
-
                     <div data-test="card" class="card text-dark">
                         <div data-test="card" class="card-body">
                             <h2>My Classrooms</h2>
@@ -33,7 +32,7 @@
                                                             <a href="{{ route('classroom.edit', $classroom->id) }}" class="btn bg-light btn-outline-dark">Edit</a>
                                                         </td>
                                                         <td>
-                                                            <a href="{{ route('classroom.editmembers', $classroom->id) }}" class="btn bg-light btn-outline-dark">Edit</a>
+                                                            <a href="{{ route('classroom.editMembers', $classroom->id) }}" class="btn bg-light btn-outline-dark">Edit</a>
                                                         </td>
                                                     @endif
                                                     <td>
@@ -52,7 +51,7 @@
                                     <a href="{{route('classroom.create')}}" class="btn btn-success">Add new classroom</a>
                                 @endif
                                 <mdb-icon fab icon="facebook-f"></mdb-icon>
-                                </body>
+
                                 <script>
                                     $(document).ready(
                                         function () {
@@ -74,6 +73,7 @@
                                 </script>
                             </div>
                         </div>
+                    </div>
                 </div>
             </div>
         </div>

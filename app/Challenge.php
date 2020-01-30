@@ -51,16 +51,18 @@ class Challenge extends Model
             ->withTimestamps();
     }
 
-    public function supportrequest(){
-        return $this-> hasMany('App\SupportRequest');
+    public function supportrequest()
+    {
+        return $this->hasMany('App\SupportRequest');
     }
 
-    public function solves($id){
-        $solves=count($this->challengeUsers()->get());
-        return $solves;
+    public function solves($id)
+    {
+        return count($this->challengeUsers()->get());
     }
 
-    static function countActiveChallenges(){
+    static function countActiveChallenges()
+    {
         $challenges = Challenge::all();
         $counter = 0;
         foreach ($challenges as $challenge){
@@ -71,7 +73,8 @@ class Challenge extends Model
         return $counter;
     }
 
-    static function countDisabledChallenges(){
+    static function countDisabledChallenges()
+    {
         $challenges = Challenge::all();
         $counter = 0;
         foreach ($challenges as $challenge){

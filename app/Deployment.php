@@ -11,7 +11,7 @@ class Deployment extends Model
     {
         //NAME = VM-Name
         //$name = $this->name;
-        return shell_exec('sudo salt-cloud -p template_kioptrix WTH_Kioptrix');
+        return shell_exec('sudo salt-cloud -p template_Win7 WTH_Win7');
     }
 
     //TODO:VDI - Implement stop of instance
@@ -19,6 +19,6 @@ class Deployment extends Model
     {
         //NAME = VM-Name
         $name = $this->name;
-        return shell_exec('sudo salt-cloud -d WTH_Kioptrix');
+        return shell_exec('sudo salt-cloud -d WTH_Win7');
     }
 }

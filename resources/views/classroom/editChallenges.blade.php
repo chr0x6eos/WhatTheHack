@@ -63,7 +63,7 @@
                     <button type="submit"  class="btn btn-success">
                         Submit
                     </button>
-                    <a href="{{ route('classroom.myclassrooms')}}" class="btn btn-danger">
+                    <a href="{{ route('classroom.myClassrooms')}}" class="btn btn-danger">
                         Cancel
                     </a>
                 </p>
@@ -135,7 +135,7 @@
                     <button type="submit"  class="btn btn-success">
                         Submit
                     </button>
-                    <a href="{{ route('classroom.myclassrooms') }}" class="btn btn-danger">
+                    <a href="{{ route('classroom.myClassrooms') }}" class="btn btn-danger">
                         Cancel
                     </a>
                 </p>

@@ -80,7 +80,7 @@
                                 @csrf
                             </form>
                         @else
-                            <a class="green-text dropdown-item" href="{{ route('welcome') }}">
+                            <a class="green-text dropdown-item" href="{{ route('main') }}">
                                 {{ __('Login') }}
                             </a>
                         @endif
@@ -124,7 +124,7 @@
                             </li>
                             @else
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('welcome') }}">{{ __('Login') }}</a>
+                                    <a class="nav-link" href="{{ route('main') }}">{{ __('Login') }}</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
@@ -169,7 +169,7 @@
                                     <a href="{{ route('classroom.disabled') }}">Disabled Classrooms</a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('classroom.myclassrooms') }}">My Classrooms</a>
+                                    <a href="{{ route('classroom.myClassrooms') }}">My Classrooms</a>
                                 </li>
                             </ul>
                         </li>
@@ -191,7 +191,7 @@
                             <a href="#classroomSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Classroom</a>
                             <ul class="collapse list-unstyled" id="classroomSubmenu">
                                 <li>
-                                    <a href="{{ route('classroom.myclassrooms') }}">Show Classrooms</a>
+                                    <a href="{{ route('classroom.myClassrooms') }}">Show Classrooms</a>
                                 </li>
                                 <li>
                                     <a href="/classroom/create">Create Classroom</a>
