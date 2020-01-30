@@ -40,7 +40,7 @@ class Activity extends Model
             $user = User::find($item->user_id);
             $challenge = Challenge::find($item->challenge_id);
             $timestamp = $item->created_at;
-            $activities[] = $user->username . ' solved ' . $challenge->name . ' at ' . date('d.m h:i', strtotime($timestamp));
+            $activities[] = $user->username . ' solved ' . $challenge->name . ' on the ' . date('d.m', strtotime($timestamp)) . ' at ' . date('H:i:s', strtotime($timestamp));
         }
         return $activities;
     }
