@@ -114,9 +114,7 @@
                             @endif
                         </a>
                         <ul class="collapse list-unstyled" id="accountSubmenu">
-                            <li>
                                 @if (Auth::user())
-                                    <a href="{{ route('profile.show') }}">Profile</a>
                             <li>
                                 <a  href="{{ route('logout') }}"
                                     onclick="event.preventDefault();

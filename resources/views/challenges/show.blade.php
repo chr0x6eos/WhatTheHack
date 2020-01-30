@@ -3,13 +3,7 @@
 
     <div class="container" >
         <div class="card">
-            @php{{//TODO:Make the Solved appear on the right side of the card header}} @endphp
-            @if(Auth::user()->solvedChallenge($challenge->id))
-                <div class="card-header font-weight-bold bg-success">{{$challenge->name}} - Solved</div>
-            @else
-                <div class="card-header font-weight-bold ">{{$challenge->name}}</div>
-            @endif
-
+            <div class="card-header font-weight-bold ">{{$challenge->name}}</div>
             <div class="card-body">
                 <div class="table">
                 <table id="tablePreview" class="table table-borderless">

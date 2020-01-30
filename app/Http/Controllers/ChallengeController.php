@@ -391,6 +391,7 @@ class ChallengeController extends Controller
         ]);
 
         $challenge = null;
+        $gifName = "";
 
         try
         {
@@ -427,9 +428,14 @@ class ChallengeController extends Controller
             }
         }
         catch (QueryException $queryException){
-            if($queryException->errorInfo[1]==1062){
-                $gifPath = "";
-                return redirect()->route('challenges.show',$challenge->id)->with(['success' => 'Congratulations, but you already solved this one!', 'gifPath' => $gifPath]);
+            if($queryException->errorInfo[1]==1062)
+            {
+                $gifName = random_int(1, 6);
+                //Path to a GIF
+                $gifPath = '/images/GIFs/WIN/' . $gifName . '.gif';
+
+                $success = 'Congratulation, you solved the challenge!';
+                return view('challenges.show')->with(['challenge' => $challenge, 'success' => $success, 'gifPath' => $gifPath]);
             }
         }
         catch (\Exception $ex)
