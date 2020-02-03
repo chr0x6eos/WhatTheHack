@@ -49,11 +49,11 @@
                             </label>
                             <div class="col-md-6">
                                 <select id="category "name="category" class="form-control">
-                                    <option value="misc" selected="selected">misc</option>
+                                    <option value="miscellaneous" selected="selected">miscellaneous</option>
                                     <option value="web">web</option>
                                     <option value="forensic">forensic</option>
-                                    <option value="reversing">reversing</option>
-                                    <option value="crypto">crypto</option>
+                                    <option value="reverse-engineering">reverse-engineering</option>
+                                    <option value="cryptography">cryptography</option>
                                     <option value="pwn">pwn</option>
                                 </select>
                             </div>
@@ -97,14 +97,16 @@
                             </div>
                         </div>
                         <p>
+                        {{--
                         <div class="form-group row">
                             <label for="imageID" class="col-sm-4 col-form-label text-md-right">
                                 {{ __('Docker Image ID (optional):') }}
                             </label>
                             <div class="col-md-6">
-                                <input id="imageID" type="text" class="form-control" name="imageID" required autofocus>
+                                <input id="imageID" type="text" class="form-control" name="imageID" autofocus>
                             </div>
                         </div>
+                        --}}
                         <p>
                             <strong>Files (optional):</strong>
                             Please upload the files after creating the challenge.

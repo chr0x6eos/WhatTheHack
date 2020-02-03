@@ -114,16 +114,17 @@
                             @endif
                         </a>
                         <ul class="collapse list-unstyled" id="accountSubmenu">
-                            <li>
                                 @if (Auth::user())
+                                <li>
                                     <a href="{{ route('profile.show') }}">Profile</a>
-                            <li>
+                                </li>
+                                <li>
                                 <a  href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
-                            </li>
+                                </li>
                             @else
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('main') }}">{{ __('Login') }}</a>
@@ -171,7 +172,7 @@
                                     <a href="{{ route('classroom.disabled') }}">Disabled Classrooms</a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('classroom.myclassrooms') }}">My Classrooms</a>
+                                    <a href="{{ route('classroom.myClassrooms') }}">My Classrooms</a>
                                 </li>
                             </ul>
                         </li>
@@ -193,7 +194,7 @@
                             <a href="#classroomSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Classroom</a>
                             <ul class="collapse list-unstyled" id="classroomSubmenu">
                                 <li>
-                                    <a href="{{ route('classroom.myclassrooms') }}">Show Classrooms</a>
+                                    <a href="{{ route('classroom.myClassrooms') }}">Show Classrooms</a>
                                 </li>
                                 <li>
                                     <a href="/classroom/create">Create Classroom</a>
@@ -225,9 +226,6 @@
                 <li>
                     <a href="#aboutSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">About</a>
                     <ul class="collapse list-unstyled" id="aboutSubmenu">
-                        <li>
-                            <a href="/contact">Contact</a>
-                        </li>
                         <li>
                             <a href="/agb">Terms of use</a>
                         </li>

@@ -3,8 +3,8 @@
     <div class="container">
         <div class="card">
             <div class="card-header font-weight-bold">{{$challenge->name}}</div>
-            <div class="card-body" >
-                <div class="form-group row" >
+            <div class="card-body">
+                <div class="form-group row">
                     <form method="post" action="{{ route('challenges.update', $challenge)}}" id="challengeform">
                         @csrf
                         @method("patch")
@@ -52,11 +52,11 @@
                             </label>
                             <div class="col-md-6">
                                 <select id="category "name="category" class="form-control">
-                                    <option value="misc" @if($challenge->category=="misc")selected="selected"@endif>misc</option>
+                                    <option value="miscellaneous" @if($challenge->category=="miscellaneous")selected="selected"@endif>miscellaneous</option>
                                     <option value="web" @if($challenge->category=="web")selected="selected"@endif>web</option>
                                     <option value="forensic" @if($challenge->category=="forensic")selected="selected"@endif>forensic</option>
-                                    <option value="reversing" @if($challenge->category=="reversing")selected="selected"@endif>reversing</option>
-                                    <option value="crypto" @if($challenge->category=="crypto")selected="selected"@endif>crypto</option>
+                                    <option value="reverse-engineering" @if($challenge->category=="reverse-engineering")selected="selected"@endif>reverse-engineering</option>
+                                    <option value="cryptography" @if($challenge->category=="cryptography")selected="selected"@endif>cryptography</option>
                                     <option value="pwn" @if($challenge->category=="pwn")selected="selected"@endif>pwn</option>
                                 </select>
                             </div>
