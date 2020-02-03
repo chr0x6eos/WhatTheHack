@@ -10,7 +10,7 @@
                             <br>
                             <br>
                             @foreach($classroom->challenges as $challenge)
-                                @if($challenge->active==1)
+                                @if($challenge->active)
                                     @if(Auth::user()->solvedChallenge($challenge->id))
                                         <div class="card">
                                             <a href="{{route('challenges.show',$challenge->id)}}" class="challenge_name_link">
@@ -47,41 +47,4 @@
             </div>
         </div>
     </div>
-    <script>
-        $(document).ready(function() {
-            var Shuffle = window.Shuffle;
-            var element = document.querySelector('.my-shuffle-container');
-            var sizer = element.querySelector('.my-sizer-element');
-            var shuffleInstance = new Shuffle(element, {
-                itemSelector: '.picture-item',
-            });
-            $("#solved_button").on("click", function () {
-                shuffleInstance.filter("solved");
-            });
-            $("#unsolved_button").on("click", function () {
-                shuffleInstance.filter("unsolved");
-            });
-            $("#all_button").on("click", function () {
-                shuffleInstance.filter();
-            });
-            $("#misc_button").on("click", function () {
-                shuffleInstance.filter("misc");
-            });
-            $("#web_button").on("click", function () {
-                shuffleInstance.filter("web");
-            });
-            $("#forensic_button").on("click", function () {
-                shuffleInstance.filter("forensic");
-            });
-            $("#crypto_button").on("click", function () {
-                shuffleInstance.filter("crypto");
-            });
-            $("#pwn_button").on("click", function () {
-                shuffleInstance.filter("pwn");
-            });
-            $("#reversing_button").on("click", function () {
-                shuffleInstance.filter("reversing");
-            });
-        });
-    </script>
 @endsection

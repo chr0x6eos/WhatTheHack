@@ -29,15 +29,32 @@ class ClassroomController extends Controller
         try
         {
             if(Auth::user()->hasRole('admin'))
+            {
                 $classrooms = Classroom::all();
+            }
+            //Teacher can view all classrooms he is either an owner or a member
+            elseif(Auth::user()->hasRole('teacher'))
+            {
+                $classrooms = null;
+                foreach (Classroom::all() as $classroom)
+                {
+                    if ($classroom->getMembers(Auth::user()->getAuthIdentifier()) || $classroom->isOwner(Auth::user()->getAuthIdentifier()))
+                    {
+                        $classrooms[] = $classroom;
+                    }
+                }
+            }
             else
+            {
                 return redirect()->route('classroom.myClassrooms')->withErrors('You are not allowed to view all classrooms!');
+            }
+
+            return view('classroom.index')->with('classrooms', $classrooms);
         }
         catch (Exception $ex)
         {
             return redirect()->route('classroom.index')->withErrors("No database connection");
         }
-        return view('classroom.index')->with('classrooms',$classrooms);
     }
 
     /**
@@ -62,7 +79,7 @@ class ClassroomController extends Controller
         {
             $this->validate($request,[
                 'name' => 'required',
-                'add_Students'=>'required',
+                //'add_Students'=>'required',
             ]);
 
             $classroom = new Classroom();
@@ -124,27 +141,29 @@ class ClassroomController extends Controller
             return view('classroom.edit')->with('classroom', $classroom);
         }
         else
-            {
+        {
             return redirect()->route('classroom.index')
-                ->withErrors('Classroom with id=' . $id . ' not found!');
+                ->withErrors('Classroom with id ' . $id . ' not found!');
         }
     }
 
     public function editMembers($id)
     {
         $classroom = Classroom::find($id);
+
         if ($classroom != null)
         {
             return view('classroom.editMembers')->with('classroom', $classroom);
         }
         else
         {
-            return redirect()->route('classroom.myClassrooms')
-                ->withErrors('Classroom with id=' . $id . ' not found!');
+            return redirect()->route('classroom.index')
+                ->withErrors('Classroom with id ' . $id . ' not found!');
         }
     }
 
-    public function editChallenges($id){
+    public function editChallenges($id)
+    {
         $classroom = Classroom::find($id);
 
         if ($classroom != null)
@@ -153,8 +172,8 @@ class ClassroomController extends Controller
         }
         else
         {
-            return redirect()->route('classroom.myClassrooms')
-                ->withErrors('Classroom with id=' . $id . ' not found!');
+            return redirect()->route('classroom.index')
+                ->withErrors('Classroom with id ' . $id . ' not found!');
         }
     }
 
@@ -171,7 +190,8 @@ class ClassroomController extends Controller
         $classroom->classroom_name = $request->name;
         $classroom->active = $request->active;
         $classroom->save();
-        return redirect()->route('classroom.myClassrooms');
+
+        return redirect()->route('classroom.index');
     }
 
     public function updateMembers(Request $request, $id)
@@ -188,7 +208,7 @@ class ClassroomController extends Controller
         {
             $classroom->users()->attach($student);
         }
-        return redirect()->route('classroom.myClassrooms');
+        return redirect()->route('classroom.index');
     }
 
     public function deleteMembers(Request $request, $id)
@@ -205,14 +225,8 @@ class ClassroomController extends Controller
         {
             $classroom->users()->detach($student);
         }
-        return redirect()->route('classroom.myClassrooms');
+        return redirect()->route('classroom.index');
     }
-
-    /* Not used?
-    public function updateChallenges(Request $request, $id){
-
-    }
-    */
 
     /**
      * Remove the specified resource from storage.
@@ -271,7 +285,7 @@ class ClassroomController extends Controller
                 $classroom->challenges()->attach($c);
         }
 
-        return redirect()->route('classroom.myClassrooms');
+        return redirect()->route('classroom.index');
     }
 
     public function detach(Request $request,$id)
@@ -284,7 +298,7 @@ class ClassroomController extends Controller
         {
             $classroom->challenges()->detach($c);
         }
-        return redirect()->route('classroom.myClassrooms');
+        return redirect()->route('classroom.index');
     }
 
 
@@ -319,9 +333,8 @@ class ClassroomController extends Controller
         }
         else
         {
-            return redirect()->route('classroom.myClassrooms')
+            return redirect()->route('classroom.index')
                 ->withErrors('Classroom with id ' . $id . ' not found!');
         }
     }
-
 }

@@ -80,7 +80,7 @@ class Classroom extends Model
         $counter = 0;
         foreach ($classrooms as $classroom)
         {
-            if($classroom->active == 0)
+            if(!$classroom->active)
             {
                 $counter++;
             }
