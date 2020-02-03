@@ -431,21 +431,10 @@ class ChallengeController extends Controller
         }
         catch (QueryException $queryException)
         {
-            /* //TODO: REMOVE COMMENT AFTER TATÜ
-            if($queryException->errorInfo[1]==1062){
-                $gifPath = "";
-                return redirect()->route('challenges.show',$challenge->id)->with(['success' => 'Congratulations, but you already solved this one!', 'gifPath' => $gifPath]);
-            }
-            */
-            //TODO: REMOVE THIS AFTER TATÜ
             if($queryException->errorInfo[1]==1062)
             {
-                $gifName = random_int(1, 6);
-                //Path to a GIF
-                $gifPath = '/images/GIFs/WIN/' . $gifName . '.gif';
-
-                $success = 'Congratulation, you solved the challenge!';
-                return view('challenges.show')->with(['challenge' => $challenge, 'success' => $success, 'gifPath' => $gifPath]);
+                $gifPath = "";
+                return redirect()->route('challenges.show',$challenge->id)->with(['success' => 'Congratulations, but you already solved this one!', 'gifPath' => $gifPath]);
             }
             else
             {

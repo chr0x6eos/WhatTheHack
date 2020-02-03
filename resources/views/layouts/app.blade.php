@@ -115,12 +115,9 @@
                         </a>
                         <ul class="collapse list-unstyled" id="accountSubmenu">
                                 @if (Auth::user())
-                                {{-- //TODO: REMOVE COMMENT AFTER TATÜ --}}
-                                {{--
                                 <li>
                                     <a href="{{ route('profile.show') }}">Profile</a>
                                 </li>
-                                --}}
                                 <li>
                                 <a  href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
