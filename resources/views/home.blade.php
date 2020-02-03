@@ -19,7 +19,7 @@
                         </p>
                     </div>
                     <div class="card-footer">
-                        <a href="/manage/users" class="btn btn-success btn-sm" style="width: 100%">User Management</a>
+                        <a href="{{route('manageuser.index')}}" class="btn btn-success btn-sm" style="width: 100%">User Management</a>
                     </div>
                 </div>
             </div>
@@ -38,7 +38,7 @@
                         </p>
                     </div>
                     <div class="card-footer">
-                        <a href="/classroom" class="btn btn-success btn-sm" style="width: 100%">Classroom Management</a>
+                        <a href="{{route('classroom.index')}}" class="btn btn-success btn-sm" style="width: 100%">Classroom Management</a>
                     </div>
                 </div>
             </div>
@@ -57,7 +57,7 @@
                         </p>
                     </div>
                     <div class="card-footer">
-                        <a href="/challenges" class="btn btn-success btn-sm" style="width: 100%">Challenge Management</a>
+                        <a href="{{route('challenges.index')}}" class="btn btn-success btn-sm" style="width: 100%">Challenge Management</a>
                     </div>
                 </div>
             </div>
@@ -89,7 +89,7 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <a href="/ranking" class="btn btn-success btn-sm" style="width: 100%">Show Global Ranking</a>
+                        <a href="{{route('ranking.index')}}" class="btn btn-success btn-sm" style="width: 100%">Show Global Ranking</a>
                     </div>
                 </div>
             </div>
@@ -128,10 +128,10 @@
                                             </tr>
                                         @endif
                                     @endforeach
-                            </p>
+                                </p>
                             </div>
                             <div class="card-footer">
-                                <a href="{{ route('classroom.myclassrooms') }}" class="btn btn-success btn-sm" style="width: 100%">My Classrooms</a>
+                                <a href="{{ route('classroom.myClassrooms') }}" class="btn btn-success btn-sm" style="width: 100%">My Classrooms</a>
                             </div>
                         </div>
                     </div>
@@ -139,7 +139,6 @@
                         <div class="card h-100">
                             <div class="card-body">
                                 <h2 class="card-title">Activity</h2>
-
                                 @foreach(\App\Activity::latest(5) as $a)
                                     <p class="card-text">✓ {{$a}}</p>
                                 @endforeach
@@ -177,7 +176,7 @@
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <a href="/ranking" class="btn btn-success btn-sm" style="width: 100%">Show Global Ranking</a>
+                                <a href="{{route('ranking.index')}}" class="btn btn-success btn-sm" style="width: 100%">Show Global Ranking</a>
                             </div>
                         </div>
                     </div>
