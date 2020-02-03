@@ -80,7 +80,7 @@
                                 @csrf
                             </form>
                         @else
-                            <a class="green-text dropdown-item" href="{{ route('welcome') }}">
+                            <a class="green-text dropdown-item" href="{{ route('main') }}">
                                 {{ __('Login') }}
                             </a>
                         @endif
@@ -126,7 +126,7 @@
                             </li>
                             @else
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('welcome') }}">{{ __('Login') }}</a>
+                                    <a class="nav-link" href="{{ route('main') }}">{{ __('Login') }}</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>

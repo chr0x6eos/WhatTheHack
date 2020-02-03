@@ -17,7 +17,7 @@ Route::get('/', function () {
     } else {
         return view('welcome_new');
     }
-})->name('welcome');
+})->name('main');
 
 Route::get('/agb', function () {
     return view('subpages/agb');

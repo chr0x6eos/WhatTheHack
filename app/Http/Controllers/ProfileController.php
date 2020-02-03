@@ -183,9 +183,16 @@ class ProfileController extends Controller
                     ->withErrors('Admins can not delete their account!!');
             }
             if ($user != null) {
-                $user->delete();
-                return redirect()->route('home')
-                    ->withErrors('Account deleted!');
+
+                if($user->classrooms == null){
+                    $user->delete();
+                    return redirect()->route('/')
+                        ->withErrors('Account deleted!');
+                }
+                else{
+                    return redirect()->route('profile.show')
+                        ->withErrors('Can not delete account. User is still in a classroom!');
+                }
             }
             else {
                 return redirect()->route('profile.show')

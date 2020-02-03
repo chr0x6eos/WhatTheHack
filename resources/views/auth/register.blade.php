@@ -36,7 +36,7 @@
 
                                 <div class="md-form form-lg md-outline">
                                     <input id="password" data-test="input" name="password" type="password" class="form-control form-control-lg @error('password') is-invalid @enderror" value="" required autocomplete="new-password">
-                                    <label class="label-form" data-error="" data-success="" id="">Password</label>
+                                    <label for="password" class="label-form" data-error="" data-success="" id="">Password</label>
 
                                     @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -45,10 +45,10 @@
                                     @enderror
                                 </div>
                                 <div class="md-form form-lg md-outline">
-                                    <input id="password-confirm" data-test="input" name="password-confirm" type="password" class="form-control form-control-lg @error('password') is-invalid @enderror" value="" required autocomplete="new-password">
-                                    <label class="label-form" data-error="" data-success="" id="">Confirm Password</label>
+                                    <input id="password-confirm" data-test="input" name="password-confirm" type="password" class="form-control form-control-lg @error('password-confirm') is-invalid @enderror" value="" required autocomplete="new-password">
+                                    <label for="password-confirm" class="label-form" data-error="" data-success="" id="">Confirm Password</label>
 
-                                    @error('password')
+                                    @error('password-confirm')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
