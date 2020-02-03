@@ -28,7 +28,7 @@ class ChallengeController extends Controller
             if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('teacher'))
                 $challenges = Challenge::all();
             else
-                return redirect()->route('home')->withErrors('You are not allowed to view all classrooms!');
+                return redirect()->route('home')->withErrors('You are not allowed to view all challenges!');
         }
         catch (Exception $ex)
         {
