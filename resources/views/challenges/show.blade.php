@@ -3,8 +3,14 @@
 
     <div class="container" >
         <div class="card">
-            {{-- //TODO: ADD LINES FROM MASTER, WHICH CHECK IF CHALLENGE HAS BEEN SOLVED --}}
-            <div class="card-header font-weight-bold ">{{$challenge->name}}</div>
+            @if(Auth::user()->solvedChallenge($challenge->id))
+                <div class="card-header challenges-header bg-success">
+                    <p style="display: inline">{{$challenge->name}}</p>
+                    <p class="total_solves">Solved</p>
+                </div>
+            @else
+                <div class="card-header font-weight-bold ">{{$challenge->name}}</div>
+            @endif
             <div class="card-body">
                 <div class="table">
                 <table id="tablePreview" class="table table-borderless">

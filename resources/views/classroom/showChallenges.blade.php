@@ -11,20 +11,34 @@
                             <br>
                             @foreach($classroom->challenges as $challenge)
                                 @if($challenge->active==1)
-                                    {{-- //TODO: ADD OLD VIEW FROM MASTER --}}
-                                    <div class="card">
-                                        <a href="{{route('challenges.show',$challenge->id)}}">
-                                            <div class="card-header challenges-header">
-                                                <p style="display: inline">{{$challenge->name}}</p>
-                                                <p class="total_solves">Total solves: {{$challenge->solves($challenge->id)}}</p>
+                                    @if(Auth::user()->solvedChallenge($challenge->id))
+                                        <div class="card">
+                                            <a href="{{route('challenges.show',$challenge->id)}}" class="challenge_name_link">
+                                                <div class="card-header challenges-header bg-success">
+                                                    <p class="challenge_name">{{$challenge->name}}</p>
+                                                    <p class="total_solves">Total solves: {{$challenge->solves($challenge->id)}}</p>
+                                                </div>
+                                            </a>
+                                            <div class="card-body">
+                                                <p>Author: {{$challenge->author}}</p>
+                                                <p>{{$challenge->description}}</p>
                                             </div>
-                                        </a>
-                                        <div class="card-body">
-                                            <p>Author: {{$challenge->author}}</p>
-                                            <p>{{$challenge->description}}</p>
                                         </div>
-                                    </div>
-                                    <br>
+                                    @else
+                                        <div class="card">
+                                            <a href="{{route('challenges.show',$challenge->id)}}">
+                                                <div class="card-header challenges-header">
+                                                    <p class="challenge_name">{{$challenge->name}}</p>
+                                                    <p class="total_solves">Total solves: {{$challenge->solves($challenge->id)}}</p>
+                                                </div>
+                                            </a>
+                                            <div class="card-body">
+                                                <p>Author: {{$challenge->author}}</p>
+                                                <p>{{$challenge->description}}</p>
+                                            </div>
+                                        </div>
+                                        <br>
+                                    @endif
                                 @endif
                             @endforeach
                         </div>

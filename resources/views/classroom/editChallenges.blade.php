@@ -18,7 +18,7 @@
                                         <th class="th-sm">Challenge id</th>
                                         <th class="th-sm">Challenge name</th>
                                         <th class="th-sm">Challenge difficulty</th>
-                                        <th class="th-sm">Status</th> {{-- //TODO: SHOULD STATUS BE SHOWN INSTEAD OF DESCRIPTION? DESCRIPTION IS REALLY LONG... --}}
+                                        <th class="th-sm">Status</th>
                                         <th class="th-sm">Challenge category</th>
                                         <th>Add</th>
                                     </thead>
