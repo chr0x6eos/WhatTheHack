@@ -78,7 +78,7 @@ class Challenge extends Model
         $challenges = Challenge::all();
         $counter = 0;
         foreach ($challenges as $challenge){
-            if($challenge->active == 0){
+            if(!$challenge->active){
                 $counter++;
             }
         }

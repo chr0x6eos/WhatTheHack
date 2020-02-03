@@ -36,7 +36,7 @@
                                                     {{$c->difficulty}}
                                                 </td>
                                                 <td>
-                                                    @if($c->active)Active @else Retired @endif
+                                                    @if($c->active)Active @else Disabled @endif
                                                 </td>
                                                 <td>
                                                     {{$c->category}}
@@ -49,17 +49,13 @@
                                     @endforeach
                                     </tbody>
                                 </table>
-                                <br>
                                 <p>
                                     <button type="submit" class="btn btn-success">
                                         Add selected
                                     </button>
-                                    <a href="{{ route('classroom.myClassrooms')}}" class="btn btn-danger">
-                                        Cancel
-                                    </a>
                                 </p>
                             </form>
-
+                            <br>
                             <form method="post" action="{{route('classroom.detach',$classroom->id)}}" >
                                 @csrf
                                 {{ method_field("delete") }}
@@ -87,7 +83,7 @@
                                                 {{$c->difficulty}}
                                             </td>
                                             <td>
-                                                @if($c->active)Active @else Retired @endif
+                                                @if($c->active)Active @else Disabled @endif
                                             </td>
                                             <td>
                                                 {{$c->category}}
@@ -105,18 +101,16 @@
                                     </tbody>
                                 </table>
                                 <br>
-                                <br>
                                 <p>
-
                                     <button type="submit"  class="btn btn-success">
                                         Remove selected
                                     </button>
-                                    <a href="{{ route('classroom.myClassrooms') }}" class="btn btn-danger">
-                                        Cancel
-                                    </a>
                                 </p>
                             </form>
                     @endif
+                        <a href="{{ route('classroom.myClassrooms') }}" class="btn btn-outline-dark">
+                            Go back
+                        </a>
                     </div>
                 </div>
             </div>
