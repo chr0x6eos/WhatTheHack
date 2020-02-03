@@ -3,13 +3,14 @@
 
     <div class="container" >
         <div class="card">
-            @php{{//TODO:Make the Solved appear on the right side of the card header}} @endphp
             @if(Auth::user()->solvedChallenge($challenge->id))
-                <div class="card-header font-weight-bold bg-success">{{$challenge->name}} - Solved</div>
+                <div class="card-header challenges-header bg-success">
+                    <p style="display: inline">{{$challenge->name}}</p>
+                    <p class="total_solves">Solved</p>
+                </div>
             @else
                 <div class="card-header font-weight-bold ">{{$challenge->name}}</div>
             @endif
-
             <div class="card-body">
                 <div class="table">
                 <table id="tablePreview" class="table table-borderless">
@@ -77,12 +78,12 @@
                         @endif
                     </div>
                 </div>
-                <a href="{{ route('classroom.myclassrooms') }}" class="btn btn-outline-dark">Go back</a>
+                {{-- //TODO: FIX THIS PFUSCH!--}}
+                <a href="{{ route('classroom.showChallenges', 1) }}" class="btn btn-outline-dark">Go back</a>
                 <a href="{{ route('support.create', $challenge->id) }}" class="btn btn-outline-dark">Report a problem</a>
             </div>
             </div>
         </div>
-    </div>
 @endsection
 
 

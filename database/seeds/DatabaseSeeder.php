@@ -11,9 +11,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(ChallengesTableSeeder::class);
-        $this->call(UsersTableSeeder::class);
-        $this->call(DeploymentTableSeeder::class);
-        $this->call(LevelTableSeeder::class);
+        //IMPORTANT: ALWAYS NEEDS TO BE RUN IF DB IS REFRESHED
+        $this->call(LevelTableSeeder::class); //Add levels to DB
+
+        //Add test data
+        $this->call(ChallengesTableSeeder::class); //Add test challenges to DB
+        $this->call(UsersTableSeeder::class); //Add test users to DB
+        $this->call(ClassroomTableSeeder::class);
+
+        //$this->call(DeploymentTableSeeder::class);
+
     }
 }

@@ -85,25 +85,36 @@ class ManageUserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        if ($request->type == 'active_status') {
-            if ($user->active) {
+        if ($request->type == 'active_status')
+        {
+            if ($user->active)
+            {
                 $user->active = 0;
-            } else {
+            }
+            else
+            {
                 $user->active = 1;
             }
 
             $user->save();
 
-        } elseif ($request->type == 'userrole_change') {
-            if ($request->userrole == 'student' || $request->userrole == 'teacher' || $request->userrole == 'admin') {
+        }
+        elseif ($request->type == 'userrole_change')
+        {
+            if ($request->userrole == 'student' || $request->userrole == 'teacher' || $request->userrole == 'admin')
+            {
                 $user->userrole = $request->userrole;
-            } else {
+            }
+            else
+            {
                 return redirect()->route('manageuser.index')
                     ->withErrors(['mu_c_invalid_userrole_change' => 'Invalid request. (MU_C_INVALID_USERROLE_CHANGE)']);
             }
-            
-            $user->save(); 
-        } else {
+
+            $user->save();
+        }
+        else
+        {
             return redirect()->route('manageuser.index')
                 ->withErrors(['mu_c_invalid_update_request' => 'Invalid request. (MU_C_INVALID_UPDATE_REQUEST)']);
         }

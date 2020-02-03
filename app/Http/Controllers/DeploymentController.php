@@ -30,7 +30,7 @@ class DeploymentController extends Controller
         }
         catch (Exception $ex)
         {
-            return redirect('home')->withErrors("Could not connect to database!");
+            return redirect()->route('home')->withErrors("Could not connect to database!");
         }
     }
 

@@ -25,11 +25,14 @@ class ChallengeController extends Controller
     {
         try
         {
-            $challenges = Challenge::all();
+            if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('teacher'))
+                $challenges = Challenge::all();
+            else
+                return redirect()->route('home')->withErrors('You are not allowed to view all challenges!');
         }
         catch (Exception $ex)
         {
-            return redirect('challenges.index')->withErrors("No DB connection could be established!");
+            return redirect()->route('challenges.index')->withErrors("No DB connection could be established!");
         }
 
         return view('challenges.index')->with('challenges',$challenges);
@@ -300,7 +303,7 @@ class ChallengeController extends Controller
         }
         catch (\Exception $ex)
         {
-            return redirect('challenges.index')->withErrors("Could not find challenge!");
+            return redirect()->route('challenges.index')->withErrors("Could not find challenge!");
         }
     }
 
@@ -426,10 +429,17 @@ class ChallengeController extends Controller
                 return view('challenges.show')->with(['challenge' => $challenge, 'gifPath' => $gifPath])->withErrors('Sorry this is not the right flag! Please try again!');
             }
         }
-        catch (QueryException $queryException){
-            if($queryException->errorInfo[1]==1062){
+        catch (QueryException $queryException)
+        {
+            if($queryException->errorInfo[1]==1062)
+            {
                 $gifPath = "";
                 return redirect()->route('challenges.show',$challenge->id)->with(['success' => 'Congratulations, but you already solved this one!', 'gifPath' => $gifPath]);
+            }
+            else
+            {
+                $gifPath = "";
+                return redirect()->route('challenges.show',$challenge->id)->with(['challenge' => $challenge, 'gifPath' => $gifPath])->withErrors('Could not submit because of an error!');
             }
         }
         catch (\Exception $ex)
@@ -440,7 +450,7 @@ class ChallengeController extends Controller
             }
             else
             {
-                $gifPath = "";
+               $gifPath = "";
                return redirect()->route('challenges.show',$challenge->id)->with(['challenge' => $challenge, 'gifPath' => $gifPath])->withErrors('Could not submit because of error: ' . $ex->getMessage());
             }
         }

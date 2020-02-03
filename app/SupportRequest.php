@@ -6,11 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class SupportRequest extends Model
 {
-    public function user(){
+    public function user()
+    {
         return $this->hasOne('App\User');
     }
 
-    public function challenge(){
+    public function challenge()
+    {
         return $this->hasOne('App\Challenge');
     }
 }

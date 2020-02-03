@@ -20,26 +20,28 @@ class ProfileController extends Controller
         $this->middleware('auth');
     }
 
-    public function show(){
-
+    public function show()
+    {
         $user = Auth::user();
 
-        if($user != null){
+        if($user != null)
+        {
             return view('profile.profile')->with('user', $user);
         }
-        else{
+        else
+        {
             return view('auth.login');
         }
     }
 
-    public function showChangePWForm(){
-
+    public function showChangePWForm()
+    {
         $user = Auth::user();
         return view('auth.passwords.change')->with('user', $user);
     }
 
-    public function changePW(Request $request){
-
+    public function changePW(Request $request)
+    {
         $this->validate($request,
             [
                 'currentPassword' => 'required|max:50',
@@ -54,28 +56,35 @@ class ProfileController extends Controller
 
         $user = Auth::user();
 
-        if($user == null){
+        if($user == null)
+        {
             return redirect()->route('auth.login')
                 ->withErrors('User not found! Please log in!');
         }
-        else{
-            try{
-                if(!Hash::check($currentPW, $user->password)){
+        else
+        {
+            try
+            {
+                if(!Hash::check($currentPW, $user->password))
+                {
                     return redirect()->route('profile.showChangePWForm')
                         ->withErrors('Wrong current password!');
                 }
-                elseif($password != $confirmPassword){
+                elseif($password != $confirmPassword)
+                {
                     return redirect()->route('profile.showChangePWForm')
                         ->withErrors('Passwords do not match!');
                 }
-                else{
+                else
+                {
                     $request->user()->fill([
                         'password' => Hash::make($password)
                     ])->save();
                 }
                 return redirect()->route('profile.show')->with('success','Password changed!');
             }
-            catch (Exception $ex){
+            catch (Exception $ex)
+            {
                 return redirect()->route('profile.show')
                     ->withErrors($ex->getMessage());
             }
@@ -100,17 +109,22 @@ class ProfileController extends Controller
         $email = $request->email;
         $newEmail = $request->newEmail;
 
-        if($user == null){
+        if($user == null)
+        {
             return redirect()->route('auth.login')
                 ->withErrors('User not found! Please log in!');
         }
-        else{
-            try{
-                if($email != $user->email){
+        else
+        {
+            try
+            {
+                if($email != $user->email)
+                {
                     return redirect()->route('profile.showChangeEMForm')
                         ->withErrors('Wrong current E-Mail!');
                 }
-                else{
+                else
+                {
                     ###Generate token and save it to database###
                     $token = Str::random(32);
                     $emctoken = new EMCTokens();
@@ -126,34 +140,40 @@ class ProfileController extends Controller
                 return redirect()->route('profile.show')
                     ->with('success','An e-mail change request was sent to your new e-mail!');
             }
-            catch (Exception $ex){
+            catch (Exception $ex)
+            {
                 return redirect()->route('profile.show')
                     ->withErrors($ex->getMessage());
             }
         }
     }
 
-    public function changeEmail(Request $request){
-
-        //get user_id and token from the request
+    public function changeEmail(Request $request)
+    {
+        // Get user_id and token from the request
         $user_id = $request->route('id');
         $token = $request->route('token');
-        try{
+        try
+        {
             //get all tokens and the user who wants to change the email from database
             $emctokens = EMCTokens::all();
             $user = User::find($user_id);
 
-            foreach ($emctokens as $emctoken){
-                if($emctoken->user_id == $user_id && $emctoken->token == $token){
+            foreach ($emctokens as $emctoken)
+            {
+                if($emctoken->user_id == $user_id && $emctoken->token == $token)
+                {
                     //check if token is expired or not
                     $currentTS = now();
                     //parse valid_until to carbon datetime
                     $tokenTS = Carbon::parse($emctoken->valid_until);
-                    if($tokenTS->lt($currentTS)){
+                    if($tokenTS->lt($currentTS))
+                    {
                         $emctoken->delete();
                         return redirect()->route('profile.show')->withErrors('E-Mail change verification expired!');
                     }
-                    else{
+                    else
+                    {
                         //change the email
                         $user->email = $emctoken->email;
                         $user->save();
@@ -162,37 +182,43 @@ class ProfileController extends Controller
                         return redirect()->route('profile.show')->with('success', 'E-Mail changed!');
                     }
                 }
-                else{
+                else
+                {
                     return redirect()->route('profile.show')
                         ->withErrors('Could not change E-Mail!');
                 }
             }
         }
-        catch(Exception $ex){
+        catch(Exception $ex)
+        {
             return redirect()->route('profile.show')
                 ->withErrors($ex->getMessage());
         }
     }
 
     public function deleteAccount($id){
-        try{
+        try
+        {
             $user = User::find($id);
             if($user->hasRole('Admin'))
             {
                 return redirect()->route('profile.show')
                     ->withErrors('Admins can not delete their account!!');
             }
-            if ($user != null) {
+            if ($user != null)
+            {
                 $user->delete();
                 return redirect()->route('home')
                     ->withErrors('Account deleted!');
             }
-            else {
+            else
+            {
                 return redirect()->route('profile.show')
                     ->withErrors('Not able to delete account!');
             }
         }
-        catch (Exception $ex){
+        catch (Exception $ex)
+        {
             return redirect()->route('profile.show')
                 ->withErrors($ex->getMessage());
         }
