@@ -35,7 +35,7 @@
                                 </tbody>
                             </table>
                             <button type="submit" class="btn btn-success">
-                                Add members
+                                Add selected
                             </button>
                         </form>
                         <br>
@@ -66,7 +66,7 @@
                                     </tbody>
                                 </table>
                                 <button type="submit" class="btn btn-danger">
-                                    Remove selected members from the classroom
+                                    Remove selected
                                 </button>
                                 <p>
                                     <a href="{{ route('classroom.myClassrooms') }}" class="btn btn-outline-dark">
