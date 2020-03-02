@@ -50,6 +50,7 @@
     <link rel="stylesheet" href="{{ URL::asset('css/custom-styles.css') }}">
     <!-- <link rel="stylesheet" href="{{ URL::asset('css/addons/datatables-select.min.css') }}"> -->
     <link rel="stylesheet" href="{{ URL::asset('css/app.css') }}">
+    <link rel="icon" href="{{ URL::asset('/favicon.svg') }}" type="image/x-icon"/>
 </head>
 <body>
 <div class="root">
