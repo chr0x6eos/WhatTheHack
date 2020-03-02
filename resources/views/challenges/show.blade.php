@@ -80,6 +80,11 @@
                 </div>
                 {{-- //TODO: FIX THIS PFUSCH!--}}
                 <a href="{{ route('classroom.showChallenges', 1) }}" class="btn btn-outline-dark">Go back</a>
+
+                @if(Auth::user()->hasRole('teacher') || Auth::user()->hasRole('admin'))
+                <a href="{{ route('challenges.edit', $challenge->id) }}" class="btn btn-outline-dark">Edit Challenge</a>
+                @endif
+                
                 <a href="{{ route('support.create', $challenge->id) }}" class="btn btn-outline-dark">Report a problem</a>
             </div>
             </div>
