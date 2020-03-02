@@ -100,6 +100,7 @@
                             </div>
                         </div>
                         <p>
+                        {{--
                         <div class="form-group row">
                             <label for="imageID" class="col-sm-4 col-form-label text-md-right">
                                 {{ __('Docker Image ID (optional):') }}
@@ -108,6 +109,7 @@
                                 <input id="imageID" type="text" class="form-control" name="imageID" required autofocus value="{{ $challenge->imageID }}">
                             </div>
                         </div>
+                        --}}
 
                         <div class="form-group row">
                             <div class="col-md-8 offset-md-4">
