@@ -21,6 +21,10 @@ class HasRole
 
         if (!$request->user()->hasRole('admin')) {
             if (!$request->user()->hasRole($role)) {
+                if ($request->user()->hasRole('student')) {
+                    return redirect()->route('home');
+                }
+
                 abort(404);
             }
 
