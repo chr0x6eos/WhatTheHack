@@ -65,7 +65,8 @@
                 <div data-test="navbar-brand" class="navbar-brand">
                     <strong class="white-text">
                         <a href="/">
-                            <img src="{{URL::asset('images/pics/logo_v4.gif')}}" width="110px" href="/">
+                            <span id="logo_v4">hack?</span>
+                            <!-- <img src="{{URL::asset('images/pics/logo_v4.gif')}}" width="110px" href="/"> -->
                         </a>
                     </strong>
                 </div>
