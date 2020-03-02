@@ -2015,11 +2015,11 @@ h6 {
 }
 
 .bq-primary {
-  border-left: 3px solid #4285f4 !important;
+  border-left: 3px solid #00c851 !important;
 }
 
 .bq-primary .bq-title {
-  color: #4285f4 !important;
+  color: #00c851 !important;
 }
 
 .bq-danger {
@@ -6001,8 +6001,7 @@ table.table a.btn.btn-success {
 
 .btn-info {
   color: #fff;
-  background-color: #33b5e5 !important;
-}
+    background-color: #01C851;}
 
 .btn-info:hover {
   color: #fff;
@@ -9017,7 +9016,7 @@ table.table a.btn.btn-black {
 }
 
 .navbar.navbar-light form .md-form input:focus:not([readonly]) {
-  border-color: #4285f4;
+    border-color: transparent;
 }
 
 .navbar.navbar-light form .md-form .form-control {
@@ -9092,7 +9091,7 @@ table.table a.btn.btn-black {
 }
 
 .navbar.navbar-dark form .md-form input:focus:not([readonly]) {
-  border-color: #4285f4;
+    border-color: #01C851;
 }
 
 .navbar.navbar-dark form .md-form .form-control {
@@ -9150,7 +9149,7 @@ table.table a.btn.btn-black {
 }
 
 .pagination .page-item.active .page-link:hover {
-  background-color: #4285f4;
+  background-color: #01C851;
 }
 
 .pagination .page-item.disabled .page-link {
@@ -10446,6 +10445,8 @@ body.scrollable {
   box-shadow: none;
   transition: all 0.3s;
 }
+
+
 
 .md-form.md-outline input[type=text]:focus:not([readonly]),
 .md-form.md-outline input[type=password]:focus:not([readonly]),

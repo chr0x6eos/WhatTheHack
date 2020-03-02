@@ -39,13 +39,13 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
-    <!-- Styles
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
+    <!-- Styles -->
     <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ URL::asset('css/mdb.min.css') }}">
     <!-- Template CSS file -->
     <link rel="stylesheet" href="{{ URL::asset('css/freelancer.min.css') }}">
     <link rel="stylesheet" href="{{ URL::asset('css/addons/datatables.min.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('css/app.css') }}">
     <!-- CSS file for customization -->
     <link rel="stylesheet" href="{{ URL::asset('css/custom-styles.css') }}">
     <!-- <link rel="stylesheet" href="{{ URL::asset('css/addons/datatables-select.min.css') }}"> -->
@@ -96,7 +96,7 @@
             @yield('content')
         </main>
         <!-- Sidebar -->
-        <nav id="sidebar">
+        <nav id="sidebar" style="position: absolute">
             <div id="dismiss">
                 <i class="fas fa-times"></i>
             </div>
