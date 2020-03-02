@@ -152,10 +152,10 @@
                             <a href="#challengeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Challenges</a>
                             <ul class="collapse list-unstyled" id="challengeSubmenu">
                                 <li>
-                                    <a href="/challenges">Show Challenges</a>
+                                    <a href="{{route('challenges.index')}}">Show Challenges</a>
                                 </li>
                                 <li>
-                                    <a href="/challenges/create">Create Challenge</a>
+                                    <a href="{{route('challenges.create')}}">Create Challenge</a>
                                 </li>
                             </ul>
                         </li>
@@ -163,10 +163,10 @@
                             <a href="#classroomSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Classroom</a>
                             <ul class="collapse list-unstyled" id="classroomSubmenu">
                                 <li>
-                                    <a href="/classroom">Classroom Management</a>
+                                    <a href="{{route('classroom.index')}}">Classroom Management</a>
                                 </li>
                                 <li>
-                                    <a href="/classroom/create">Create Classroom</a>
+                                    <a href="{{route('classroom.create')}}">Create Classroom</a>
                                 </li>
                                 <li>
                                     <a href="{{ route('classroom.disabled') }}">Disabled Classrooms</a>
@@ -177,7 +177,7 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="/manage/users">User Management</a>
+                            <a href="{{route('manageuser.index')}}">User Management</a>
                         </li>
                     @else
                     @endif
@@ -186,7 +186,10 @@
                             <a href="#challengeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Challenges</a>
                             <ul class="collapse list-unstyled" id="challengeSubmenu">
                                 <li>
-                                    <a href="challenges/create">Create Challenge</a>
+                                    <a href="{{route('challenges.index')}}">All challenges</a>
+                                </li>
+                                <li>
+                                    <a href="{{route('challenges.create')}}">Create Challenge</a>
                                 </li>
                             </ul>
                         </li>
@@ -194,29 +197,22 @@
                             <a href="#classroomSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Classroom</a>
                             <ul class="collapse list-unstyled" id="classroomSubmenu">
                                 <li>
-                                    <a href="{{ route('classroom.myClassrooms') }}">Show Classrooms</a>
+                                    <a href="{{ route('classroom.index') }}">Show Classrooms</a>
                                 </li>
                                 <li>
-                                    <a href="/classroom/create">Create Classroom</a>
+                                    <a href="{{route('classroom.create')}}">Create Classroom</a>
                                 </li>
                             </ul>
                         </li>
-                    @endif
-                    @if(Auth::user()->hasRole("student"))
-                        <!--
-                        <li>
-                            <a href="/challenges">Challenges</a>
-                        </li>
-                        -->
                     @endif
                         <li>
                             <a href="#rankingSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Ranking</a>
                             <ul class="collapse list-unstyled" id="rankingSubmenu">
                                 <li>
-                                    <a href="/ranking">Global</a>
+                                    <a href="{{route('ranking.index')}}">Global</a>
                                 </li>
                                 <li>
-                                    <a href="/ranking/classroom">Classroom</a>
+                                    <a href="{{route('ranking.classroom')}}">Classroom</a>
                                 </li>
                             </ul>
                         </li>
