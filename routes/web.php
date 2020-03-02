@@ -44,6 +44,7 @@ Route::get('profile/changeEmail', 'ProfileController@showChangeEMForm')->name('p
 Route::post('profile/email/change', 'ProfileController@changeEM')->name('email.change');
 Route::delete('profile/delete/{user}', 'ProfileController@deleteAccount')->name('profile.delete');
 Route::get('profile/email/change/{id}/{token}', 'ProfileController@changeEmail')->name('change.email');
+Route::post('profile/search', 'ProfileController@searchProfile')->name('profile.search');
 
 // Ranking Routes
 Route::get('ranking', 'RankingController@index')->name('ranking.index');

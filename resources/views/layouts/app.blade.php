@@ -209,7 +209,6 @@
                         </li>
                         -->
                     @endif
-
                         <li>
                             <a href="#rankingSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Ranking</a>
                             <ul class="collapse list-unstyled" id="rankingSubmenu">
@@ -222,6 +221,18 @@
                             </ul>
                         </li>
 
+                        <li>
+                            <form method="POST" action="{{ route('profile.search') }}">
+                                @csrf
+                                <input id="username" data-test="input" name="username" type="text" class="form-control {{ $errors->has('username') ? ' is-invalid' : '' }}" value="" required autofocus placeholder="Search...">
+                                @if ($errors->has('username'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('username') }}</strong>
+                                    </span>
+                                @endif
+                                <button type="submit" class="btn btn-outline-green">Search Members</button>
+                            </form>
+                        </li>
                 @endif
                 <li>
                     <a href="#aboutSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">About</a>

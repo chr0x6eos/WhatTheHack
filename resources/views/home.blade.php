@@ -167,7 +167,13 @@
                                         @foreach(\App\Http\Controllers\RankingController::getTopFive()->ranked as $key => $value)
                                                 <tr>
                                                     <td>{{ $key }}</td>
-                                                    <td>{{ $value->username }}</td>
+                                                    <td>
+                                                        <form method="POST" action="{{ route('profile.search') }}">
+                                                            @csrf
+                                                            <input type="hidden" value="{{ $value->username }}" name="username">
+                                                            <button type="submit" class="btn btn-link">{{ $value->username }}</button>
+                                                        </form>
+                                                    </td>
                                                     <td>{{ $value->points }}</td>
                                                 </tr>
                                         @endforeach

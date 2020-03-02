@@ -229,4 +229,34 @@ class ProfileController extends Controller
                 ->withErrors($ex->getMessage());
         }
     }
+
+    public function searchProfile(Request $request){
+
+        $this->validate($request, [
+            'username' => 'required|max:50',
+        ]);
+
+        try{
+            $users = User::all();
+            $username = $request->username;
+
+            if($username != "" || $username != null){
+                foreach ($users as $user){
+                    if($user->username == $username){
+                        return view('profile.visitProfile')->with('user', $user);
+                    }
+                }
+                return redirect()->route('home')
+                    ->withErrors('Can not find this user!');
+            }
+            else{
+                return redirect()->route('home')
+                    ->withErrors('Search field is empty! Please enter a username!');
+            }
+        }
+        catch (Exception $ex){
+            return redirect()->route('home')
+                ->withErrors($ex->getMessage());
+        }
+    }
 }
