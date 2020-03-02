@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @section('content')
-
     <div class="container">
         <div class="card">
             <div class="card-header font-weight-bold">{{ __('All Classrooms') }}</div>
@@ -27,11 +26,11 @@
                                             <a href="{{ route('classroom.edit', $classroom->id) }}" class="btn bg-light btn-outline-dark">Edit</a>
                                         </td>
                                         <td>
-                                            <a href="{{ route('classroom.editmembers', $classroom->id) }}" class="btn bg-light btn-outline-dark">Edit</a>
+                                            <a href="{{ route('classroom.editMembers', $classroom->id) }}" class="btn bg-light btn-outline-dark">Edit</a>
                                         </td>
                                     @endif
                                     <td>
-                                        <a href="{{ route('classroom.editchallenges', $classroom->id) }}" class="btn bg-light btn-outline-dark">Edit</a>
+                                        <a href="{{ route('classroom.editChallenges', $classroom->id) }}" class="btn bg-light btn-outline-dark">Edit</a>
                                     </td>
                                 </tr>
                             @endif

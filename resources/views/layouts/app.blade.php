@@ -49,14 +49,13 @@
     <!-- CSS file for customization -->
     <link rel="stylesheet" href="{{ URL::asset('css/custom-styles.css') }}">
     <!-- <link rel="stylesheet" href="{{ URL::asset('css/addons/datatables-select.min.css') }}"> -->
-
-
+    <link rel="stylesheet" href="{{ URL::asset('css/app.css') }}">
 </head>
 <body>
 <div class="root">
     <div class="flyout">
-        <nav data-test="navbar" class="navbar-dark elegant-color navbar navbar-expand-md" role="navigation">
-            <div data-test="container" class="container">
+        <nav data-test="navbar" class="navbar-dark elegant-color navbar navbar-expand-md fixed-top" role="navigation">
+            <div class="container nav-container">
 
                 <button type="button" id="sidebarCollapse" class="navbar-toggle">
                     <span class="navbar-toggler-icon"></span>
@@ -64,7 +63,9 @@
 
                 <div data-test="navbar-brand" class="navbar-brand">
                     <strong class="white-text">
-                        <img src="{{URL::asset('images/pics/logo_v4.gif')}}" width="110px">
+                        <a href="/">
+                            <img src="{{URL::asset('images/pics/logo_v4.gif')}}" width="110px" href="/">
+                        </a>
                     </strong>
                 </div>
                 <div data-test="collapse" id="navbarCollapse3" class="collapse navbar-collapse">
@@ -79,13 +80,13 @@
                                 @csrf
                             </form>
                         @else
-                            <a class="green-text dropdown-item" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            <a class="green-text dropdown-item" href="{{ route('main') }}">
+                                {{ __('Login') }}
+                            </a>
                         @endif
                     </ul>
                 </div>
-
             </div>
-
         </nav>
 
         <main id="landing" >
@@ -95,55 +96,54 @@
         <!-- Sidebar -->
         <nav id="sidebar">
             <div id="dismiss">
-                <i class="fas fa-times">
-                    <img src="/images/pics/white-arrow-transparent.png" style="height: 30px; width: 30px;">
-                </i>
+                <i class="fas fa-times"></i>
             </div>
 
-            <div class="sidebar-header">
-                <h4>WhatTheHack</h4>
-            </div>
+                <div class="sidebar-header">
+                    <h4>WhatTheHack</h4>
+                </div>
 
-            <ul class="list-unstyled components">
-                <!-- ACCOUNT -->
-                <li>
-                    <a href="#accountSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                        @if (Auth::user())
-                            {{ Auth::user()->username }} <span class="caret"></span>
-                        @else
-                            Account
-                        @endif
-                    </a>
-                    <ul class="collapse list-unstyled" id="accountSubmenu">
-                        <li>
+                <ul class="list-unstyled components">
+                    <!-- ACCOUNT -->
+                    <li>
+                        <a href="#accountSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                             @if (Auth::user())
-                                <a href="{{ route('profile.show') }}">Profile</a>
-                        <li>
-                            <a  href="{{ route('logout') }}"
-                                onclick="event.preventDefault();
+                                {{ Auth::user()->username }} <span class="caret"></span>
+                            @else
+                                Account
+                            @endif
+                        </a>
+                        <ul class="collapse list-unstyled" id="accountSubmenu">
+                                @if (Auth::user())
+                                <li>
+                                    <a href="{{ route('profile.show') }}">Profile</a>
+                                </li>
+                                <li>
+                                <a  href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
-                            </a>
-                        </li>
-                        @else
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    {{ __('Logout') }}
+                                </a>
+                                </li>
+                            @else
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('main') }}">{{ __('Login') }}</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
+                            @endif
+                        </ul>
+                    </li>
+
+                    <!-- My Classrooms -->
+                    @if(Auth::user())
+                        @if(Auth::user()->hasRole("student"))
+                            <li>
+                                <a href="/classrooms/myClassrooms">My Classrooms</a>
                             </li>
                         @endif
-                    </ul>
-                </li>
-
-                <!-- My Classrooms -->
-                @if(Auth::user())
-                    @if(Auth::user()->hasRole("student"))
-                        <li>
-                            <a href="/classrooms/myClassrooms">My Classrooms</a>
-                        </li>
                     @endif
-                @endif
 
             <!-- ADMIN VIEW -->
                 @if (Auth::user())
@@ -152,10 +152,10 @@
                             <a href="#challengeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Challenges</a>
                             <ul class="collapse list-unstyled" id="challengeSubmenu">
                                 <li>
-                                    <a href="/challenges">Show Challenges</a>
+                                    <a href="{{route('challenges.index')}}">Show Challenges</a>
                                 </li>
                                 <li>
-                                    <a href="/challenges/create">Create Challenge</a>
+                                    <a href="{{route('challenges.create')}}">Create Challenge</a>
                                 </li>
                             </ul>
                         </li>
@@ -163,21 +163,21 @@
                             <a href="#classroomSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Classroom</a>
                             <ul class="collapse list-unstyled" id="classroomSubmenu">
                                 <li>
-                                    <a href="/classroom">Classroom Management</a>
+                                    <a href="{{route('classroom.index')}}">Classroom Management</a>
                                 </li>
                                 <li>
-                                    <a href="/classroom/create">Create Classroom</a>
+                                    <a href="{{route('classroom.create')}}">Create Classroom</a>
                                 </li>
                                 <li>
                                     <a href="{{ route('classroom.disabled') }}">Disabled Classrooms</a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('classroom.myclassrooms') }}">My Classrooms</a>
+                                    <a href="{{ route('classroom.myClassrooms') }}">My Classrooms</a>
                                 </li>
                             </ul>
                         </li>
                         <li>
-                            <a href="/manage/users">User Management</a>
+                            <a href="{{route('manageuser.index')}}">User Management</a>
                         </li>
                     @else
                     @endif
@@ -186,7 +186,10 @@
                             <a href="#challengeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Challenges</a>
                             <ul class="collapse list-unstyled" id="challengeSubmenu">
                                 <li>
-                                    <a href="challenges/create">Create Challenge</a>
+                                    <a href="{{route('challenges.index')}}">All challenges</a>
+                                </li>
+                                <li>
+                                    <a href="{{route('challenges.create')}}">Create Challenge</a>
                                 </li>
                             </ul>
                         </li>
@@ -194,30 +197,22 @@
                             <a href="#classroomSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Classroom</a>
                             <ul class="collapse list-unstyled" id="classroomSubmenu">
                                 <li>
-                                    <a href="{{ route('classroom.myclassrooms') }}">Show Classrooms</a>
+                                    <a href="{{ route('classroom.index') }}">Show Classrooms</a>
                                 </li>
                                 <li>
-                                    <a href="/classroom/create">Create Classroom</a>
+                                    <a href="{{route('classroom.create')}}">Create Classroom</a>
                                 </li>
                             </ul>
                         </li>
                     @endif
-                    @if(Auth::user()->hasRole("student"))
-                        <!--
-                        <li>
-                            <a href="/challenges">Challenges</a>
-                        </li>
-                        -->
-                    @endif
-
                         <li>
                             <a href="#rankingSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Ranking</a>
                             <ul class="collapse list-unstyled" id="rankingSubmenu">
                                 <li>
-                                    <a href="/ranking">Global</a>
+                                    <a href="{{route('ranking.index')}}">Global</a>
                                 </li>
                                 <li>
-                                    <a href="/ranking/classroom">Classroom</a>
+                                    <a href="{{route('ranking.classroom')}}">Classroom</a>
                                 </li>
                             </ul>
                         </li>
@@ -227,9 +222,6 @@
                     <a href="#aboutSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">About</a>
                     <ul class="collapse list-unstyled" id="aboutSubmenu">
                         <li>
-                            <a href="/contact">Contact</a>
-                        </li>
-                        <li>
                             <a href="/agb">Terms of use</a>
                         </li>
                     </ul>
@@ -237,6 +229,49 @@
             </ul>
         </nav>
 
+        <!-- Error Message -->
+        @if($errors)
+            @foreach ($errors->all() as $error)
+                <div id="toast-alert-container" class="toast-top-center example">
+                    <div id="alert" class="toast-alert alert-danger hide" role="alert" data-delay="7000" data-autohide="true" aria-live="assertive" aria-atomic="true">
+                        <div class="toast-header-alert">
+                            <i class="fas fa-2x fa-exclamation-circle mr-2"></i>
+
+                            <strong class="mr-auto">Error</strong>
+
+                            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="toast-body">
+                            {{ $error }}
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        @endif
+
+        <!-- Success Message -->
+        @if (session()->has('success'))
+            <div id="toast-alert-container" class="toast-top-center example">
+                <div id="success" class="toast-alert alert-success hide" role="alert" data-delay="5000" data-autohide="true" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header-alert">
+                        <i class="far fa-2x fa-thumbs-up mr-2"></i>
+
+                        <strong class="mr-auto">Success</strong>
+
+                        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="toast-body">
+                        {{ session()->get('success') }}
+                    </div>
+                </div>
+            </div>
+        @endif
+
+        <!-- Sidebar -->
         <footer data-test="footer" class="page-footer elegant-color">
             <div data-test="container" class="container text-center py-3"><a href="/contact">Impressum</a></div>
             <div class="footer-copyright text-center py-3">
@@ -246,18 +281,6 @@
             </div>
         </footer>
     </div>
-
 </div>
-
-@if($errors)
-    @foreach ($errors->all() as $error)
-        <div class="alert alert-danger">{{ $error }}</div>
-    @endforeach
-@endif
-
-@if (session()->has('success'))
-    <div class="alert alert-success">{{ session()->get('success') }}</div>
-@endif
-
 </body>
 </html>

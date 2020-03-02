@@ -15,7 +15,7 @@
                                 @csrf
                                 <div class="md-form form-lg md-outline">
                                     <input id="username" data-test="input" name="username" type="text" class="form-control form-control-lg {{ $errors->has('username') ? ' is-invalid' : '' }}" value="" required autofocus>
-                                    <label class="" data-error="" data-success="" id="">Username</label>
+                                    <label class="label-form" data-error="" data-success="" id="">Username</label>
 
                                     @if ($errors->has('username'))
                                         <span class="invalid-feedback">
@@ -25,7 +25,7 @@
                                 </div>
                                 <div class="md-form form-lg md-outline">
                                     <input id="email" data-test="input" name="email" type="email" class="form-control form-control-lg @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-                                    <label class="" data-error="" data-success="" id="">Email</label>
+                                    <label class="label-form" data-error="" data-success="" id="">Email</label>
 
                                     @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -36,7 +36,7 @@
 
                                 <div class="md-form form-lg md-outline">
                                     <input id="password" data-test="input" name="password" type="password" class="form-control form-control-lg @error('password') is-invalid @enderror" value="" required autocomplete="new-password">
-                                    <label class="" data-error="" data-success="" id="">Password</label>
+                                    <label for="password" class="label-form" data-error="" data-success="" id="">Password</label>
 
                                     @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -45,10 +45,10 @@
                                     @enderror
                                 </div>
                                 <div class="md-form form-lg md-outline">
-                                    <input id="password-confirm" data-test="input" name="password-confirm" type="password" class="form-control form-control-lg @error('password') is-invalid @enderror" value="" required autocomplete="new-password">
-                                    <label class="" data-error="" data-success="" id="">Confirm Password</label>
+                                    <input id="password-confirm" data-test="input" name="password-confirm" type="password" class="form-control form-control-lg @error('password-confirm') is-invalid @enderror" value="" required autocomplete="new-password">
+                                    <label for="password-confirm" class="label-form" data-error="" data-success="" id="">Confirm Password</label>
 
-                                    @error('password')
+                                    @error('password-confirm')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
