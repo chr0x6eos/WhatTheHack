@@ -99,6 +99,11 @@ Route::get('deploy','DeploymentController@index')->name('deploy.index');
 Route::post('deploy/start/{deployment}','DeploymentController@start')->name('deploy.start');
 Route::post('deploy/stop/{deployment}','DeploymentController@stop')->name('deploy.stop');
 
+//secret route
+Route::get('/admin/secret', function () {
+    return view('subpages.secret');
+})->name('secret');
+
 Route::get('/activity', function () {
     return view('activity');
 })->name('activity');
