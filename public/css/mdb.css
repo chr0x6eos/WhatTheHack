@@ -1848,18 +1848,18 @@ a:not([href]):not([tabindex]):hover {
 }
 
 .bg-primary {
-    background-color: #4285f4 !important
+    background-color: #000 !important
 }
 
 a.bg-primary:hover,
 a.bg-primary:focus,
 button.bg-primary:hover,
 button.bg-primary:focus {
-    background-color: #1266f1 !important
+    background-color: #000 !important
 }
 
 .border-primary {
-    border-color: #4285f4 !important
+    border-color: #000!important
 }
 
 .bg-danger {
@@ -6672,7 +6672,7 @@ table.table a.btn.btn-success {
 
 .btn-info {
     color: #fff;
-    background-color: #33b5e5 !important
+    background-color: #01C851 !important
 }
 
 .btn-info:hover {
@@ -9853,7 +9853,7 @@ table.table a.btn.btn-black {
 }
 
 .navbar.navbar-light form .md-form input:focus:not([readonly]) {
-    border-color: #4285f4
+    border-color: #000
 }
 
 .navbar.navbar-light form .md-form .form-control {
@@ -9929,7 +9929,7 @@ table.table a.btn.btn-black {
 }
 
 .navbar.navbar-dark form .md-form input:focus:not([readonly]) {
-    border-color: #4285f4
+    border-color: #000
 }
 
 .navbar.navbar-dark form .md-form .form-control {
