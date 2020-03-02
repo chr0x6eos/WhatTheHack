@@ -10,7 +10,6 @@
             <h1 class="adsimple-221105344">Impressum</h1>
             <p class="adsimple-221105344">Duty to provide information in accordance with Section 5 of the E-Commerce Act, Section 14 of the German Business Code, Section 63 of the Commercial Code and disclosure requirements under Section 25 of the Media Act.</p>
             <p class="adsimple-221105344">
-           <br>
             <p><strong>Contact:</strong> Reiner Rabensteiner</p>
             <strong>E-Mail:</strong> <a href="mailto:reiner.rabensteiner@htl-villach.at"> reiner.rabensteiner@htl-villach.at</a>
             </p>
@@ -18,6 +17,7 @@
             <p class="adsimple-221105344">
             <p>
                 <h1>WhatTheHack Development team</h1>
+            <p>This platform was developed by students of 5AHITN in 2019/20 as part of the ITP lessons.</p>
             Roman Schabus - <a href="https://twitter.com/woschbar">@DaWoschbar</a><br>
             Darius Haslauer -<a href="https://github.com/Buschuschnig">@Buschuschnig</a> <br>
             Sandro Omann - @Sanjey_Sandmann<br>
