@@ -1,13 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
+<head>
+</head>
+    <body>
 
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">{{ __('My Profile') }}</div>
-
+                    <div id="chartContainer" style="height: 370px; width: 100%;"></div>
                     <div class="card-body">
                         <div class="form-group row">
                             <label class="col-md-4 col-form-label text-md-right font-weight-bold">
@@ -85,5 +88,98 @@
             </div>
         </div>
     </div>
+    <script>
+        window.onload = function () {
 
+            var chart = new CanvasJS.Chart("chartContainer", {
+                animationEnabled: true,
+                title:{
+                    text: "Your points over time"
+                },
+                /*subtitles: [{
+                    text: "GBP & EUR to INR",
+                    fontSize: 18
+                }],*/
+                axisY: {
+                    includeZero: true,
+                    prefix: "points"
+                },
+                legend:{
+                    cursor: "pointer",
+                    itemclick: toggleDataSeries
+                },
+                toolTip: {
+                    shared: true
+                },
+                data: [
+                    {
+                        type: "line",
+                        name: "web",
+                        showInLegend: "true",
+                        xValueType: "dateTime",
+                        xValueFormatString: "YYYY-MMM-dd HH",
+                        yValueFormatString: "#,##0.##",
+                        dataPoints: <?php echo json_encode(Auth::user()->progress("web"),JSON_NUMERIC_CHECK); ?>
+                    },
+                    {
+                        type: "line",
+                        name: "pwn",
+                        showInLegend: "true",
+                        xValueType: "dateTime",
+                        xValueFormatString: "YYYY-MMM-dd HH",
+                        yValueFormatString: "#,##0.##",
+                        dataPoints: <?php echo json_encode(Auth::user()->progress("pwn"),JSON_NUMERIC_CHECK); ?>
+                    },
+                    {
+                        type: "line",
+                        name: "forensic",
+                        showInLegend: "true",
+                        xValueType: "dateTime",
+                        xValueFormatString: "YYYY-MMM-dd HH",
+                        yValueFormatString: "#,##0.##",
+                        dataPoints: <?php echo json_encode(Auth::user()->progress("forensic"),JSON_NUMERIC_CHECK); ?>
+                    },
+                    {
+                        type: "line",
+                        name: "reverse-engineering",
+                        showInLegend: "true",
+                        xValueType: "dateTime",
+                        xValueFormatString: "YYYY-MMM-dd HH",
+                        yValueFormatString: "#,##0.##",
+                        dataPoints: <?php echo json_encode(Auth::user()->progress("reverse-engineering"),JSON_NUMERIC_CHECK); ?>
+                    },
+                    {
+                        type: "line",
+                        name: "miscellaneous",
+                        showInLegend: "true",
+                        xValueType: "dateTime",
+                        xValueFormatString: "YYYY-MMM-dd HH",
+                        yValueFormatString: "#,##0.##",
+                        dataPoints: <?php echo json_encode(Auth::user()->progress("miscellaneous"),JSON_NUMERIC_CHECK); ?>
+                    },
+                    {
+                        type: "line",
+                        name: "cryptography",
+                        showInLegend: "true",
+                        xValueType: "dateTime",
+                        xValueFormatString: "YYYY-MMM-dd HH:mm",
+                        yValueFormatString: "#,##0.##",
+                        dataPoints: <?php echo json_encode(Auth::user()->progress("cryptography"),JSON_NUMERIC_CHECK); ?>
+                    }
+                ]
+            });
+            chart.render();
+
+            function toggleDataSeries(e){
+                if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                    e.dataSeries.visible = false;
+                }
+                else{
+                    e.dataSeries.visible = true;
+                }
+                chart.render();
+            }
+        }
+    </script>
+    <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 @endsection

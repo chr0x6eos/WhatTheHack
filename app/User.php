@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
+use function Sodium\add;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -69,6 +70,14 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this
             ->belongsToMany('App\Challenge')
             ->withTimestamps();
+    }
+
+    public function challengeWithTimestamps()
+    {
+        return $this
+            ->belongsToMany('App\Challenge')
+            ->withPivot('created_at');
+
     }
 
     public function hasChallenge($id)
@@ -210,5 +219,24 @@ class User extends Authenticatable implements MustVerifyEmail
             }
         }
         return $neededPoints;
+    }
+
+    public function progress($cat)
+    {
+        $user = Auth::user();
+        $result = [];
+        $pointZero = array('label'=>$user->created_at->format('Y-m-d H:i'), 'y'=>'0');
+        array_push($result,$pointZero);
+        $count = 0;
+        foreach ($user->challengeWithTimestamps as $c)
+        {
+            if($c->category == $cat)
+            {
+                $count+=$c->getPoints();
+                $label = array('label'=>$c['pivot']->created_at->format('Y-m-d H:i'), 'y'=>$count);
+                array_push($result,$label);
+            }
+        }
+        return $result;
     }
 }
