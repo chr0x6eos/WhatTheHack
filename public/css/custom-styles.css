@@ -17,6 +17,10 @@
     top: 35%;
     color: white;
 }
+label.label-form{
+    color: #01C851;
+}
+
 
 .navbar .md-form .md-form.md-outline input[type="text"]:focus:not([readonly]),
 .navbar .md-form .md-form.md-outline input[type="password"]:focus:not([readonly]),
@@ -32,6 +36,12 @@
 .navbar .md-form .md-form.md-outline textarea.md-textarea:focus:not([readonly]) {
     border-color: #00c851;
     box-shadow: inset 0 0 0 1px #00c851;
+}
+.md-form.md-outline input[type=text]:focus:not([readonly]), .md-form.md-outline input[type=password]:focus:not([readonly]), .md-form.md-outline input[type=email]:focus:not([readonly]), .md-form.md-outline input[type=url]:focus:not([readonly]), .md-form.md-outline input[type=time]:focus:not([readonly]), .md-form.md-outline input[type=date]:focus:not([readonly]), .md-form.md-outline input[type=datetime-local]:focus:not([readonly]), .md-form.md-outline input[type=tel]:focus:not([readonly]), .md-form.md-outline input[type=number]:focus:not([readonly]), .md-form.md-outline input[type=search-md]:focus:not([readonly]), .md-form.md-outline input[type=search]:focus:not([readonly]), .md-form.md-outline textarea.md-textarea:focus:not([readonly]){
+    box-shadow: inset 0 0 0 1px #00c851;
+}
+.md-form.md-outline input[type=text]:focus:not([readonly]) + label, .md-form.md-outline input[type=password]:focus:not([readonly]) + label, .md-form.md-outline input[type=email]:focus:not([readonly]) + label, .md-form.md-outline input[type=url]:focus:not([readonly]) + label, .md-form.md-outline input[type=time]:focus:not([readonly]) + label, .md-form.md-outline input[type=date]:focus:not([readonly]) + label, .md-form.md-outline input[type=datetime-local]:focus:not([readonly]) + label, .md-form.md-outline input[type=tel]:focus:not([readonly]) + label, .md-form.md-outline input[type=number]:focus:not([readonly]) + label, .md-form.md-outline input[type=search-md]:focus:not([readonly]) + label, .md-form.md-outline input[type=search]:focus:not([readonly]) + label, .md-form.md-outline textarea.md-textarea:focus:not([readonly]) + label {
+    color: #00c851;
 }
 .card-header{
     color: black;
@@ -175,6 +185,17 @@ div.col-md-8{
 label.custom-control-label::after{
     color: #01C851;
 }
+.btn-info{
+    background-color: #01C851;
+}
+.custom-control-input:checked~.custom-control-label::before{
+    background-color: #01C851;
+    border-color: #01C851;
+}
+.custom-control-input:checked~.custom-control-label::before{
+    background-color: #01C851;
+    border-color: #01C851;
+}
 div#dismiss {
     width: 35px;
     height: 35px;
@@ -194,9 +215,17 @@ div#dismiss {
     background: #fff;
     color: #252525;
 }
+#mCSB_1{
+    border: 3px;
+    border: red;
+
+}
 #sidebar .sidebar-header {
     padding: 20px;
     background: #252525;
+}
+#sidebar{
+    position: absolute;
 }
 #sidebar ul.components {
     padding: 20px 0;
@@ -213,6 +242,14 @@ div#dismiss {
     padding: 10px;
     font-size: 1.1em;
     display: block;
+}
+.md-form.md-outline input[type=text]:focus:not([readonly]), .md-form.md-outline input[type=password]:focus:not([readonly]), .md-form.md-outline input[type=email]:focus:not([readonly]), .md-form.md-outline input[type=url]:focus:not([readonly]), .md-form.md-outline input[type=time]:focus:not([readonly]), .md-form.md-outline input[type=date]:focus:not([readonly]), .md-form.md-outline input[type=datetime-local]:focus:not([readonly]), .md-form.md-outline input[type=tel]:focus:not([readonly]), .md-form.md-outline input[type=number]:focus:not([readonly]), .md-form.md-outline input[type=search-md]:focus:not([readonly]), .md-form.md-outline input[type=search]:focus:not([readonly]), .md-form.md-outline textarea.md-textarea:focus:not([readonly]) {
+    border-color: #01C851;
+}
+
+.pagination .page-item.active .page-link{
+    background-color: #01C851;
+
 }
 
 #sidebar ul li a:hover {
@@ -282,7 +319,7 @@ ul.CTAs a {
     background: none;
     border: none;
 }
-#sidebarCollapse.navbar-toggle:focus{
+#sidebarCollapse.navbar-toggle:focus:active{
     background: black;
     border-color: transparent;
     color: transparent;
@@ -337,10 +374,10 @@ ul.CTAs a {
 
 /* Bootstrap alert coloring */
 .toast-alert.alert-primary {
-    border-color: #004085;
+    border-color: black;
 }
 .toast-alert.alert-primary .close  {
-    color: #004085;
+    color: black;
     opacity: .75;
 }
 .toast-alert.alert-secondary {
@@ -358,10 +395,10 @@ ul.CTAs a {
     opacity: .75;
 }
 .toast-alert.alert-info {
-    border-color: #17a2b8;
+    border-color: #01C851;
 }
 .toast-alert.alert-info .close  {
-    color: #17a2b8;
+    color: #01C851;
     opacity: .75;
 }
 .toast-alert.alert-warning {
