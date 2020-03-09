@@ -102,10 +102,13 @@ class ClassroomController extends Controller
             //Creator of a classroom is automatically a member
             $classroom->users()->attach($user->getAuthIdentifier());
 
-            //Add all selected students to the classroom
-            foreach ($addStudents as $student)
+            if($addStudents != null && sizeof($addStudents) > 0)
             {
-                $classroom->users()->attach($student);
+                //Add all selected students to the classroom
+                foreach ($addStudents as $student)
+                {
+                    $classroom->users()->attach($student);
+                }
             }
 
             return redirect()->route('classroom.index');
