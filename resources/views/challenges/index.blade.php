@@ -10,18 +10,18 @@
                             <br>
                             <br>
                             @foreach($challenges as $challenge)
-                                <div class="card">
+                                <div class="card challenges-header">
                                     <a href="{{route('challenges.show',$challenge->id)}}">
-                                        <div class="card-header challenges-header">
+                                        <div class="card-header">
                                             <p class="challenge_name">{{$challenge->name}}</p>
                                             <p class="total_solves">Total solves: {{$challenge->solves($challenge->id)}}</p>
                                         </div>
+                                        <div class="card-body">
+                                            <p>Status: @if($challenge->active)Active @else Disabled @endif</p>
+                                            <p>Author: {{$challenge->author}}</p>
+                                            <p>{{$challenge->description}}</p>
+                                        </div>
                                     </a>
-                                    <div class="card-body">
-                                        <p>Status: @if($challenge->active)Active @else Disabled @endif</p>
-                                        <p>Author: {{$challenge->author}}</p>
-                                        <p>{{$challenge->description}}</p>
-                                    </div>
                                 </div>
                                 <br>
                             @endforeach

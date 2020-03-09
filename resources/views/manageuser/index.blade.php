@@ -34,7 +34,7 @@
                                 <tbody>
                                 @foreach($users as $user)
                                     <tr>
-                                        <th scope="row">{{ $user->id }}</td>
+                                        <th scope="row">{{ $user->id }}</th>
                                         <td>{{ $user->username }}</td>
                                         <td>
                                             <form method="POST" action="{{ route('manageuser.update', $user) }}", id="manageuserform">

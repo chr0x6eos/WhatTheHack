@@ -47,7 +47,11 @@ label.label-form{
     color: black;
     text-decoration: none;
 }
-.card-header.challenges-header:hover{
+/*.card-header.challenges-header:hover{
+    background-color: #00c851;
+    text-decoration: none;
+}*/
+.card.challenges-header:hover{
     background-color: #00c851;
     text-decoration: none;
 }
