@@ -15,12 +15,13 @@ use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
+    //constructor
     public function __construct()
     {
         $this->middleware('auth');
     }
 
-    ###show the profile of logged-in user###
+    //show details of a specific user
     public function show()
     {
         $user = Auth::user();
@@ -35,32 +36,28 @@ class ProfileController extends Controller
         }
     }
 
-    ###############################
-    ###Password-Change Functions###
-    ###############################
-
-    ###show the view for the password change###
+    //show a form that is used to change the password
     public function showChangePWForm()
     {
         $user = Auth::user();
         return view('auth.passwords.change')->with('user', $user);
     }
 
-    ###change password of user###
+    //change the password of a specific user
     public function changePW(Request $request)
     {
         $this->validate($request,
-            [
-                'currentPassword' => 'required|max:50',
-                'password' => 'required|max:50',
-                'confirmPassword' => 'required|max:50'
-            ]
+                        [
+                            'currentPassword' => 'required|max:50',
+                            'password' => 'required|max:50',
+                            'confirmPassword' => 'required|max:50'
+                        ]
         );
+        $user = Auth::user();
 
         $currentPW = $request->currentPassword;
         $password = $request->password;
         $confirmPassword = $request->confirmPassword;
-        $user = Auth::user();
 
         if ($user == null)
         {
@@ -86,8 +83,8 @@ class ProfileController extends Controller
                 {
                     //change the password and save it in the database
                     $request->user()->fill([
-                        'password' => Hash::make($password)
-                    ])->save();
+                                               'password' => Hash::make($password)
+                                           ])->save();
                 }
                 return redirect()->route('profile.show')->with('success', 'Password changed!');
             }
@@ -99,9 +96,8 @@ class ProfileController extends Controller
         }
     }
 
-    ############################
-    ###Email-Change Functions###
-    ############################
+    public function showChangeEMForm()
+    {
 
     ###show the view for the change email form###
     public function showChangeEMForm()
@@ -110,14 +106,13 @@ class ProfileController extends Controller
         return view('profile.changeEM')->with('user', $user);
     }
 
-    ###create token and send an email to the user when user wants to change email###
     public function changeEM(Request $request)
     {
         $this->validate($request,
-            [
-                'email' => 'required|max:100',
-                'newEmail' => 'required|max:100',
-            ]
+                        [
+                            'email' => 'required|max:100',
+                            'newEmail' => 'required|max:100',
+                        ]
         );
 
         $user = Auth::user();
@@ -174,7 +169,7 @@ class ProfileController extends Controller
         {
             //get all tokens and the user who wants to change the email from database
             $emctokens = EMCTokens::all();
-            $user = User::find($user_id);
+            $user = User::findOrFail($user_id);
 
             foreach ($emctokens as $emctoken)
             {
@@ -183,6 +178,7 @@ class ProfileController extends Controller
                     $currentTS = now();
                     //parse valid_until to carbon datetime
                     $tokenTS = Carbon::parse($emctoken->valid_until);
+                    if ($tokenTS->lt($currentTS))
                     //check if token is expired or not
                     if ($tokenTS->lt($currentTS))
                     {
@@ -213,13 +209,11 @@ class ProfileController extends Controller
         }
     }
 
-
-    ### delete user account of logged-in user###
     public function deleteAccount($id)
     {
         try
         {
-            $user = User::find($id);
+            $user = User::findOrFail($id);
             if ($user->hasRole('Admin'))
             {
                 return redirect()->route('profile.show')

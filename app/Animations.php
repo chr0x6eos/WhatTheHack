@@ -15,6 +15,7 @@ class Animations extends Model
     {
         parent::__construct($attributes);
 
+        //this model is not being used anymore
         /*
         $winDIR = 'GIFs/WIN';
         $failDIR = 'GIFs/FAIL';

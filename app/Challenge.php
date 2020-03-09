@@ -45,22 +45,26 @@ class Challenge extends Model
         return false;
     }
 
+    //relation between challenges and users
     public function challengeUsers(){
         return $this
             ->belongsToMany('App\User')
             ->withTimestamps();
     }
 
+    //relation between support request and challenges
     public function supportrequest()
     {
         return $this->hasMany('App\SupportRequest');
     }
 
+    //how often has a specific challenge been solved
     public function solves($id)
     {
         return count($this->challengeUsers()->get());
     }
 
+    //how many challenges are active
     static function countActiveChallenges()
     {
         $challenges = Challenge::all();
@@ -73,6 +77,7 @@ class Challenge extends Model
         return $counter;
     }
 
+    //how many challenges are disabled
     static function countDisabledChallenges()
     {
         $challenges = Challenge::all();

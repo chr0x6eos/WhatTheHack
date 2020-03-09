@@ -48,7 +48,7 @@
                                         <th>ID</th>
                                         <th>Name</th>
                                         <th>Email</th>
-                                        <th>Userrole</th>
+                                        <th>User-Role</th>
                                         <th>Delete</th>
                                     </thead>
                                     <tbody>
