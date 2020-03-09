@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 class ManageUserController extends Controller
 {
 
+    //constructor
     public function __construct()
     {
         $this->middleware('role:admin');
