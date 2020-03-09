@@ -9,7 +9,7 @@
                     <div class="card-body">
                         <h2 class="card-title">Users</h2>
                         <p class="card-text">
-                            <img src="{{URL::asset('/images/icons/username.png')}}" width="30px"> Total: {{App\User::count()}}
+                            <img src="{{URL::asset('/images/icons/username.svg')}}" width="30px"> Total: {{App\User::count()}}
                         </p>
                         <p class="card-text">
                             <img src="{{URL::asset('/images/icons/active.jpg')}}" width="30px"> Active: {{App\User::countActiveUsers()}}
@@ -109,10 +109,10 @@
                         <div class="card h-100">
                             <div class="card-body">
                                 <h2 class="card-title">Profile</h2>
-                                <p class="card-text"><img src="{{URL::asset('/images/icons/username.png')}}" width="30px"> {{ Auth::user()->username }}</p>
-                                <p class="card-text"><img src="{{URL::asset('/images/icons/xp.png')}}" width="30px"> Level {{ App\User::calculateLevel(Auth::user()->points) }}</p>
-                                <p class="card-text"><img src="{{URL::asset('/images/icons/level.png')}}" width="30px"> {{ App\User::calculateProgress1(Auth::user()->points) }}/{{ App\User::calculateProgress2(Auth::user()->points) }} Points</p>
-                                <p class="card-text"><img src="{{URL::asset('/images/icons/rank.png')}}" width="30px"> {{ App\User::calculateRank(Auth::user()->points) }}</p>
+                                <p class="card-text"><img src="{{URL::asset('/images/icons/username.svg')}}" width="30px"> {{ Auth::user()->username }}</p>
+                                <p class="card-text"><img src="{{URL::asset('/images/icons/level.svg')}}" width="30px"> Level {{ App\User::calculateLevel(Auth::user()->points) }}</p>
+                                <p class="card-text"><img src="{{URL::asset('/images/icons/xp.svg')}}" width="30px"> {{ App\User::calculateProgress1(Auth::user()->points) }}/{{ App\User::calculateProgress2(Auth::user()->points) }} Points</p>
+                                <p class="card-text"><img src="{{URL::asset('/images/icons/rank.svg')}}" width="30px"> {{ App\User::calculateRank(Auth::user()->points) }}</p>
 
                             </div>
                             <div class="card-footer">

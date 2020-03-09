@@ -48,7 +48,9 @@
     <link rel="stylesheet" href="{{ URL::asset('css/app.css') }}">
     <!-- CSS file for customization -->
     <link rel="stylesheet" href="{{ URL::asset('css/custom-styles.css') }}">
-
+    <!-- <link rel="stylesheet" href="{{ URL::asset('css/addons/datatables-select.min.css') }}"> -->
+    <link rel="stylesheet" href="{{ URL::asset('css/app.css') }}">
+    <link rel="icon" href="{{ URL::asset('/images/icons/favicon.svg') }}" type="image/x-icon"/>
 </head>
 <body>
 <div class="root">
@@ -63,7 +65,8 @@
                 <div data-test="navbar-brand" class="navbar-brand">
                     <strong class="white-text">
                         <a href="/">
-                            <img src="{{URL::asset('images/pics/logo_v4.gif')}}" width="110px" href="/">
+                            <span id="logo_v4">hack?</span>
+                            <!-- <img src="{{URL::asset('images/pics/logo_v4.gif')}}" width="110px" href="/"> -->
                         </a>
                     </strong>
                 </div>
