@@ -53,7 +53,11 @@ class RegisterController extends Controller
             'username' => array('required', 'string', 'max:255', 'unique:users', new BadCharacters),
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users', 'regex:/^[a-zA-Z0-9_.+-]+@(?:(?:[a-zA-Z0-9-]+\.)?[a-zA-Z]+\.)?(edu.htl-villach|htl-villach)\.at$/'],
             'password' => ['required', 'string', 'min:8', 'same:password-confirm'],
-        ], ['email.regex' => 'Invalid email domain! Valid domains: edu.htl-villach.at or htl-villach.at']);
+        ],
+            [
+                'email.regex' => 'Invalid email domain! Valid domains: edu.htl-villach.at or htl-villach.at'
+            ]
+        );
     }
 
     /**

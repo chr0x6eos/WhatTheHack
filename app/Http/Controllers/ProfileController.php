@@ -115,8 +115,11 @@ class ProfileController extends Controller
     {
         $this->validate($request,
             [
-                'email' => 'required|max:100',
-                'newEmail' => 'required|max:100',
+                'email' => ['required', 'max:100'],
+                'newEmail' => ['required', 'max:100', 'regex:/^[a-zA-Z0-9_.+-]+@(?:(?:[a-zA-Z0-9-]+\.)?[a-zA-Z]+\.)?(edu.htl-villach|htl-villach)\.at$/'],
+            ],
+            [
+                'newEmail.regex' => 'Invalid email domain! Valid domains: edu.htl-villach.at or htl-villach.at'
             ]
         );
 
@@ -141,6 +144,22 @@ class ProfileController extends Controller
                 }
                 else
                 {
+                    //check if user already requested a token
+                    $allTokens = EMCTokens::all();
+                    foreach ($allTokens as $emc){
+                        if($user->id == $emc->user_id){
+                          if(Carbon::parse($emc->valid_until)->gt(now())){ //check if token is valid
+                              return redirect()->route('profile.show')
+                                  ->withErrors('Request to change email is possible every 30min!');
+                          }
+                          else{
+                              //delete invalid token
+                              $emc->delete();
+                              //after deletion of the invalid token create a new one
+                          }
+                        }
+                    }
+
                     //Generate token and save it to database
                     $token = Str::random(32);
                     $emctoken = new EMCTokens();
