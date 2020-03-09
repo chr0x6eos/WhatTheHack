@@ -114,7 +114,7 @@
                         <div class="form-group row">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-info">Submit</button>
-                                <a href="{{ route('challenges.index') }} " class="btn btn-outline-danger">Cancel</a>
+                                <a href="{{ route('challenges.show', $challenge->id) }} " class="btn btn-outline-danger">Cancel</a>
                             </div>
                         </div>
                     </form>

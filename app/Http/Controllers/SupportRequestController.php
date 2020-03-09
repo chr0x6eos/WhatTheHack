@@ -19,6 +19,7 @@ class SupportRequestController extends Controller
         $this->middleware('auth');
     }
 
+    //create a new ticket, return the support index route
     public function create($id)
     {
         try
@@ -32,6 +33,7 @@ class SupportRequestController extends Controller
         }
     }
 
+    //submit a nw request
     public function submit(Request $request)
     {
         try
@@ -64,6 +66,7 @@ class SupportRequestController extends Controller
         }
     }
 
+    //send a mail to the administrator
     public function sendMail (SupportRequest $supportRequest)
     {
         User()->getAdmin()->notify(new SupportEmail($supportRequest));

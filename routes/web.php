@@ -44,6 +44,7 @@ Route::get('profile/changeEmail', 'ProfileController@showChangeEMForm')->name('p
 Route::post('profile/email/change', 'ProfileController@changeEM')->name('email.change');
 Route::delete('profile/delete/{user}', 'ProfileController@deleteAccount')->name('profile.delete');
 Route::get('profile/email/change/{id}/{token}', 'ProfileController@changeEmail')->name('change.email');
+Route::post('profile/search', 'ProfileController@searchProfile')->name('profile.search');
 
 // Ranking Routes
 Route::get('ranking', 'RankingController@index')->name('ranking.index');
@@ -96,6 +97,11 @@ Route::get('calculateLevel', 'ProfileController@calculateLevel')->name('calc.lev
 Route::get('deploy','DeploymentController@index')->name('deploy.index');
 Route::post('deploy/start/{deployment}','DeploymentController@start')->name('deploy.start');
 Route::post('deploy/stop/{deployment}','DeploymentController@stop')->name('deploy.stop');
+
+//secret route
+Route::get('/admin/secret', function () {
+    return view('subpages.secret');
+})->name('secret');
 
 Route::get('/activity', function () {
     return view('activity');

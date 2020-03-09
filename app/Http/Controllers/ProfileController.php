@@ -15,11 +15,13 @@ use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
+    //constructor
     public function __construct()
     {
         $this->middleware('auth');
     }
 
+    //show details of a specific user
     public function show()
     {
         $user = Auth::user();
@@ -34,12 +36,14 @@ class ProfileController extends Controller
         }
     }
 
+    //show a form that is used to change the password
     public function showChangePWForm()
     {
         $user = Auth::user();
         return view('auth.passwords.change')->with('user', $user);
     }
 
+    //change the password of a specific user
     public function changePW(Request $request)
     {
         $this->validate($request,
@@ -64,6 +68,7 @@ class ProfileController extends Controller
         {
             try
             {
+                //check if the entered current password is right and check if the new passwords are the same
                 if (!Hash::check($currentPW, $user->password))
                 {
                     return redirect()->route('profile.showChangePWForm')
@@ -76,6 +81,7 @@ class ProfileController extends Controller
                 }
                 else
                 {
+                    //change the password and save it in the database
                     $request->user()->fill([
                                                'password' => Hash::make($password)
                                            ])->save();
@@ -93,6 +99,9 @@ class ProfileController extends Controller
     public function showChangeEMForm()
     {
 
+    ###show the view for the change email form###
+    public function showChangeEMForm()
+    {
         $user = Auth::user();
         return view('profile.changeEM')->with('user', $user);
     }
@@ -119,6 +128,7 @@ class ProfileController extends Controller
         {
             try
             {
+                //check if entered current email is correct
                 if ($email != $user->email)
                 {
                     return redirect()->route('profile.showChangeEMForm')
@@ -126,7 +136,7 @@ class ProfileController extends Controller
                 }
                 else
                 {
-                    ###Generate token and save it to database###
+                    //Generate token and save it to database
                     $token = Str::random(32);
                     $emctoken = new EMCTokens();
                     $emctoken->user_id = $user->id;
@@ -149,6 +159,7 @@ class ProfileController extends Controller
         }
     }
 
+    ### change email after user clicked on the link in the verification email###
     public function changeEmail(Request $request)
     {
         // Get user_id and token from the request
@@ -164,10 +175,11 @@ class ProfileController extends Controller
             {
                 if ($emctoken->user_id == $user_id && $emctoken->token == $token)
                 {
-                    //check if token is expired or not
                     $currentTS = now();
                     //parse valid_until to carbon datetime
                     $tokenTS = Carbon::parse($emctoken->valid_until);
+                    if ($tokenTS->lt($currentTS))
+                    //check if token is expired or not
                     if ($tokenTS->lt($currentTS))
                     {
                         $emctoken->delete();
@@ -231,6 +243,46 @@ class ProfileController extends Controller
         catch (Exception $ex)
         {
             return redirect()->route('profile.show')
+                ->withErrors($ex->getMessage());
+        }
+    }
+
+    ###search for a profile of a specified user###
+    public function searchProfile(Request $request)
+    {
+
+        $this->validate($request, [
+            'username' => 'required|max:50',
+        ]);
+
+        try
+        {
+            //get all users and the username from the POST request
+            $users = User::all();
+            $username = $request->username;
+
+            //search for the user and return the user if found
+            if ($username != "" || $username != null)
+            {
+                foreach ($users as $user)
+                {
+                    if ($user->username == $username)
+                    {
+                        return view('profile.visitProfile')->with('user', $user);
+                    }
+                }
+                return redirect()->route('home')
+                    ->withErrors('Can not find this user!');
+            }
+            else
+            {
+                return redirect()->route('home')
+                    ->withErrors('Search field is empty! Please enter a username!');
+            }
+        }
+        catch (Exception $ex)
+        {
+            return redirect()->route('home')
                 ->withErrors($ex->getMessage());
         }
     }
