@@ -222,7 +222,7 @@
                     <a href="#aboutSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">About</a>
                     <ul class="collapse list-unstyled" id="aboutSubmenu">
                         <li>
-                            <a href="/agb">Terms of use</a>
+                            <a href="{{ route('tos') }}">Terms of use</a>
                         </li>
                     </ul>
                 </li>
