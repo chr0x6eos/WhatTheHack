@@ -25,11 +25,11 @@ class Classroom extends Model
     //get members of a specific classroom
     public function getMembers($id)
     {
-       foreach ($this->users as $u)
-       {
-           if($u->id == $id)
-               return true;
-       }
+        foreach ($this->users as $u)
+        {
+            if($u->id == $id)
+                return true;
+        }
         return false;
     }
 
