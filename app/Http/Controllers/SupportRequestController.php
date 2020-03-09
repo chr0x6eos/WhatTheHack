@@ -22,8 +22,15 @@ class SupportRequestController extends Controller
     //create a new ticket, return the support index route
     public function create($id)
     {
-        $challenge = Challenge::find($id);
-        return view('support.index')->with('challenge', $challenge);
+        try
+        {
+            $challenge = Challenge::findOrFail($id);
+            return view('support.index')->with('challenge', $challenge);
+        }
+        catch (\Exception $exception)
+        {
+            return redirect('home')->withErrors('Could not find challenge!');
+        }
     }
 
     //submit a nw request
@@ -41,7 +48,7 @@ class SupportRequestController extends Controller
             $supportRequest->challenge_id = $request->challenge;
             $supportRequest->user_id = Auth::user()->id;
 
-            $subject = "Support Request to challenge:". $request->challenge . " - by user " . Auth::user()->username;
+            $subject = "Support Request to challenge: ". $request->challenge . " - by user " . Auth::user()->username;
             $supportRequest->subject = $subject;
 
             $supportRequest->message = $request->get('message');
@@ -62,9 +69,7 @@ class SupportRequestController extends Controller
     //send a mail to the administrator
     public function sendMail (SupportRequest $supportRequest)
     {
-        $admin = User()->getAdmin();
-
-        $admin->notify(new SupportEmail($supportRequest));
+        User()->getAdmin()->notify(new SupportEmail($supportRequest));
         Auth::user()->notify(new AckEmail($supportRequest));
     }
 }

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Challenge;
 use App\Classroom;
 use Illuminate\Http\Request;
-
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Mockery\Exception;
@@ -28,12 +27,13 @@ class ClassroomController extends Controller
     {
         try
         {
-            if(Auth::user()->hasRole('admin'))
+            //The admin is allowed to see all classrooms
+            if (Auth::user()->hasRole('admin'))
             {
                 $classrooms = Classroom::all();
             }
             //Teacher can view all classrooms he is either an owner or a member
-            elseif(Auth::user()->hasRole('teacher'))
+            elseif (Auth::user()->hasRole('teacher'))
             {
                 $classrooms = null;
                 foreach (Classroom::all() as $classroom)
@@ -46,14 +46,14 @@ class ClassroomController extends Controller
             }
             else
             {
-                return redirect()->route('classroom.myClassrooms')->withErrors('You are not allowed to view all classrooms!');
+                return redirect()->route('home')->withErrors('You are not allowed to view all classrooms!');
             }
 
             return view('classroom.index')->with('classrooms', $classrooms);
         }
         catch (Exception $ex)
         {
-            return redirect()->route('classroom.index')->withErrors("No database connection");
+            return redirect()->route('home')->withErrors("No database connection");
         }
     }
 
@@ -70,24 +70,25 @@ class ClassroomController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         try
         {
-            $this->validate($request,[
+            $this->validate($request, [
                 'name' => 'required',
-                //'add_Students'=>'required',
+                //'add_Students'=>'required', //Not required, because empty classrooms can exist
             ]);
 
             $classroom = new Classroom();
+
             $classroom->id = $request->id;
             $user = Auth::user();
 
             $classroom->classroom_name = $request->name;
-            $classroom->classroom_owner =$user->getAuthIdentifier();
+            $classroom->classroom_owner = $user->getAuthIdentifier();
             // $classroom->active = $request->active;
 
             $addStudents = $request->input('add_Students');
@@ -96,6 +97,7 @@ class ClassroomController extends Controller
             //Creator of a classroom is automatically a member
             $classroom->users()->attach($user->getAuthIdentifier());
 
+            //Add all selected students to the classroom
             foreach ($addStudents as $student)
             {
                 $classroom->users()->attach($student);
@@ -105,14 +107,14 @@ class ClassroomController extends Controller
         }
         catch (Exception $ex)
         {
-            return redirect()->route('classroom.create')->withErrors("Cannot create because of error: " . $ex. "!");
+            return redirect()->route('classroom.create')->withErrors("Cannot create because of error: " . $ex . "!");
         }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -123,7 +125,7 @@ class ClassroomController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function myClassrooms()
@@ -134,13 +136,12 @@ class ClassroomController extends Controller
 
     public function edit($id)
     {
-        $classroom = Classroom::find($id);
-
-        if ($classroom != null)
+        try
         {
+            $classroom = Classroom::findOrFail($id);
             return view('classroom.edit')->with('classroom', $classroom);
         }
-        else
+        catch (\Exception $exception)
         {
             return redirect()->route('classroom.index')
                 ->withErrors('Classroom with id ' . $id . ' not found!');
@@ -149,13 +150,12 @@ class ClassroomController extends Controller
 
     public function editMembers($id)
     {
-        $classroom = Classroom::find($id);
-
-        if ($classroom != null)
+        try
         {
+            $classroom = Classroom::find($id);
             return view('classroom.editMembers')->with('classroom', $classroom);
         }
-        else
+        catch (\Exception $exception)
         {
             return redirect()->route('classroom.index')
                 ->withErrors('Classroom with id ' . $id . ' not found!');
@@ -164,13 +164,12 @@ class ClassroomController extends Controller
 
     public function editChallenges($id)
     {
-        $classroom = Classroom::find($id);
-
-        if ($classroom != null)
+        try
         {
+            $classroom = Classroom::find($id);
             return view('classroom.editChallenges')->with('classroom', $classroom);
         }
-        else
+        catch (\Exception $exception)
         {
             return redirect()->route('classroom.index')
                 ->withErrors('Classroom with id ' . $id . ' not found!');
@@ -180,129 +179,172 @@ class ClassroomController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        $classroom = Classroom::find($id);
-        $classroom->classroom_name = $request->name;
-        $classroom->active = $request->active;
-        $classroom->save();
+        try
+        {
+            $classroom = Classroom::findOrFail($id);
 
-        return redirect()->route('classroom.index');
+            $classroom->classroom_name = $request->name;
+            $classroom->active = $request->active;
+            $classroom->save();
+
+            return redirect()->route('classroom.index')->with('success', 'Successfully edited!');
+        }
+        catch (\Exception $exception)
+        {
+            return redirect()->route('classroom.index')->withErrors('Error upon editing classroom!');
+        }
     }
 
     public function updateMembers(Request $request, $id)
     {
-        $this->validate($request,[
-            'addmember'=>'required',
-        ]);
-
-        $classroom = Classroom::find($id);
-        $addStudents = $request->input('addmember');
-        $classroom->save();
-
-        foreach($addStudents as $student)
+        try
         {
-            $classroom->users()->attach($student);
+            $this->validate($request, [
+                'addmember' => 'required',
+            ]);
+            $classroom = Classroom::findOrFail($id);
+            $addStudents = $request->input('addmember');
+            $classroom->save();
+
+            foreach ($addStudents as $student)
+            {
+                $classroom->users()->attach($student);
+            }
+            return redirect()->route('classroom.index');
         }
-        return redirect()->route('classroom.index');
+        catch (\Exception $exception)
+        {
+            return redirect()->route('classroom.index')->withErrors('Error upon updating classroom members!');
+        }
     }
 
     public function deleteMembers(Request $request, $id)
     {
-        $this->validate($request,[
-            'deletemembers'=>'required',
-        ]);
-
-        $classroom = Classroom::find($id);
-        $deleteStudents = $request->input('deletemembers');
-        $classroom->save();
-
-        foreach($deleteStudents as $student)
+        try
         {
-            $classroom->users()->detach($student);
+            $this->validate($request, [
+                'deletemembers' => 'required',
+            ]);
+
+            $classroom = Classroom::find($id);
+            $deleteStudents = $request->input('deletemembers');
+            $classroom->save();
+
+            foreach ($deleteStudents as $student)
+            {
+                $classroom->users()->detach($student);
+            }
+            return redirect()->route('classroom.index')->with('success', 'Successfully deleted members!');
         }
-        return redirect()->route('classroom.index');
+        catch (\Exception $exception)
+        {
+            return redirect()->route('classroom.index')->withErrors('Error upon deleting classroom members!');
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $classroom = Classroom::find($id);
-        if(Auth::user()->hasRole("admin"))
+        try
         {
-            if($classroom->active == "0")
-            {
-                $challenges = $classroom->challenges;
-                $members = $classroom->users;
-                foreach ($challenges as $c)
-                {
-                    $classroom->challenges()->detach($c);
-                }
-                foreach ($members as $m)
-                {
-                    $classroom->users()->detach($m);
-                }
-                $classroom->delete();
+            $classroom = Classroom::findOrFail($id);
 
-                return redirect()->route('classroom.disabled');
+            if (Auth::user()->hasRole("admin"))
+            {
+                if ($classroom->active == "0")
+                {
+                    $challenges = $classroom->challenges;
+                    $members = $classroom->users;
+                    foreach ($challenges as $c)
+                    {
+                        $classroom->challenges()->detach($c);
+                    }
+                    foreach ($members as $m)
+                    {
+                        $classroom->users()->detach($m);
+                    }
+                    $classroom->delete();
+
+                    return redirect()->route('classroom.disabled');
+                }
+                else
+                {
+                    return redirect()->route('classroom.index')->withErrors('An active classroom cannot be deleted!');
+                }
             }
             else
             {
-                return redirect()->route('classroom.index')->withErrors('An active classroom cannot be deleted!');
+                return redirect()->route('classroom.index')->withErrors('You are not authorized to delete this classroom!');
             }
-        }
-        else
-        {
-            return redirect()->route('classroom.index')->withErrors('You are not authorized to delete this classroom!');
-        }
 
-        return redirect()->route('classroom.index')->with('success','Successfully deleted classroom!');
+            return redirect()->route('classroom.index')->with('success', 'Successfully deleted classroom!');
+        }
+        catch (\Exception $exception)
+        {
+            return redirect()->route('classroom.index')->withErrors('Error upon deleting classroom!');
+        }
     }
 
     //Associate a multitude of challenges with a classroom
     public function attach(Request $request, $id)
     {
-        $this->validate($request,[
-            'add_Challenges'=>'required',
-        ]);
-
-        $classroom = Classroom::find($id);
-        $challenges = $request->input('add_Challenges');
-
-        foreach ($challenges as $c)
+        try
         {
-            $challenge=Challenge::find($c);
-            if($challenge->active == true)
-                $classroom->challenges()->attach($c);
-        }
+            $this->validate($request, [
+                'add_Challenges' => 'required',
+            ]);
 
-        return redirect()->route('classroom.index');
+            $classroom = Classroom::findOrFail($id);
+            $challenges = $request->input('add_Challenges');
+
+            foreach ($challenges as $c)
+            {
+                $challenge = Challenge::find($c);
+                if ($challenge->active == true)
+                    $classroom->challenges()->attach($c);
+            }
+
+            return redirect()->route('classroom.index')->with('success', 'Added challenges to classroom!');
+        }
+        catch (\Exception $exception)
+        {
+            return redirect()->route('classroom.index')->withErrors('Error upon adding challenges to classroom!');
+        }
     }
 
-    public function detach(Request $request,$id)
+    public function detach(Request $request, $id)
     {
-        $classroom = Classroom::find($id);
-
-        $challenges = $request->input('remove_Challenges');
-
-        foreach ($challenges as $c)
+        try
         {
-            $classroom->challenges()->detach($c);
+            $classroom = Classroom::findOrFail($id);
+            $challenges = $request->input('remove_Challenges');
+
+            foreach ($challenges as $c)
+            {
+                $classroom->challenges()->detach($c);
+            }
+            return redirect()->route('classroom.index')->with('success','Successfully removed challenges from classroom!');
         }
-        return redirect()->route('classroom.index');
+        catch (\Exception $exception)
+        {
+            return redirect()->route('classroom.index')->withErrors('Error upon removing challenges from classroom!');
+        }
     }
 
 
-    public function disabled(){
+    public function disabled()
+    {
         try
         {
             $classrooms = Classroom::all();
@@ -311,27 +353,34 @@ class ClassroomController extends Controller
         {
             return redirect()->route('classroom.disabled')->withErrors("No database connection!");
         }
-        return view('classroom.disabled')->with('classrooms',$classrooms);
+        return view('classroom.disabled')->with('classrooms', $classrooms);
     }
 
     public function restore($id)
     {
-        $classroom = Classroom::find($id);
-        $classroom->active = "1";
-        $classroom->save();
-        $classrooms = Classroom::all();
-        return view('classroom.disabled')->with('classrooms',$classrooms);
+        try
+        {
+            $classroom = Classroom::findOrFail($id);
+            $classroom->active = "1";
+            $classroom->save();
+
+            $classrooms = Classroom::all();
+            return view('classroom.disabled')->with('classrooms', $classrooms);
+        }
+        catch (\Exception $exception)
+        {
+            return view('classroom.disabled')->with('classrooms',Classroom::all())->withErrors('Error upon restoring the classroom!');
+        }
     }
 
     public function showChallenges($id)
     {
-        $classroom = Classroom::find($id);
-
-        if ($classroom != null)
+        try
         {
+            $classroom = Classroom::find($id);
             return view('classroom.showChallenges')->with('classroom', $classroom);
         }
-        else
+        catch (\Exception $exception)
         {
             return redirect()->route('classroom.index')
                 ->withErrors('Classroom with id ' . $id . ' not found!');
