@@ -4,7 +4,7 @@
         <div class="card">
             <div class="card-header font-weight-bold">{{ __('All Classrooms') }}</div>
             <div class="card-body">
-                @if(sizeof($classrooms) > 0)
+                @if($classrooms != null && sizeof($classrooms) > 0)
                     <table id="classroom" class="table table-bordered" cellspacing="0" width="100%">
                         <thead>
                         <tr>

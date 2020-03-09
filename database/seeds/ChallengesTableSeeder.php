@@ -77,7 +77,7 @@ schaffen den Code zu knacken, um die Flagge zu erhalten? Die Flagge sollte dann 
             {
                 $challenge->difficulty = "easy";
                 $challenge->targetSolution = $faker->text;
-                $challenge->category = "misc";
+                $challenge->category = "miscellaneous";
                 $challenge->hint = $faker->text;
             }
             else if($i % 3 == 0)
