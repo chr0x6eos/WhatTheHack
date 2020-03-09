@@ -12,7 +12,7 @@
                             <h2>Login</h2>
                             <form method="POST" action="{{ route('login') }}" class="text-center p-5">
                                 @csrf
-                                <div class="md-form form-lg md-o    utline">
+                                <div class="md-form form-lg md-outline">
                                     <input id="login" data-test="input" name="login" type="text" class="form-control form-control-lg" value="" required autofocus>
                                     <label class="label-form" data-error="" data-success="" id="">Email or Username</label>
 
