@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Classroom extends Model
 {
+    //realtion between users and classrooms
     public function users()
     {
         return $this
@@ -13,6 +14,7 @@ class Classroom extends Model
             ->withTimestamps();
     }
 
+    //relation between challenges and classrooms
     public function challenges()
     {
         return $this
@@ -20,6 +22,7 @@ class Classroom extends Model
             ->withTimestamps();
     }
 
+    //get members of a specific classroom
     public function getMembers($id)
     {
        foreach ($this->users as $u)
@@ -30,8 +33,9 @@ class Classroom extends Model
         return false;
     }
 
-   public function getClassroomChallenges($id)
-   {
+    //get all challenges of a specific classroom
+    public function getClassroomChallenges($id)
+    {
         foreach ($this->challenges as $challenge)
         {
             if($challenge->id == $id)
@@ -40,6 +44,7 @@ class Classroom extends Model
         return false;
     }
 
+    //get the classroom owner
     public function isOwner($id)
     {
         if($this->classroom_owner == $id)
@@ -47,6 +52,7 @@ class Classroom extends Model
         return false;
     }
 
+    //get a list of all users of a specific classroom
     public function getRankedUsers()
     {
         $users = $this->users;
@@ -60,6 +66,7 @@ class Classroom extends Model
         return $ranked;
     }
 
+    //number of active classrooms
     static function countActiveClassrooms()
     {
         $classrooms = Classroom::all();
@@ -74,6 +81,7 @@ class Classroom extends Model
         return $counter;
     }
 
+    //number of disabled classrooms
     static function countDisabledClassrooms()
     {
         $classrooms = Classroom::all();

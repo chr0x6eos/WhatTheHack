@@ -20,6 +20,7 @@ class ProfileController extends Controller
         $this->middleware('auth');
     }
 
+    //show details of a specific user
     public function show()
     {
         $user = Auth::user();
@@ -34,6 +35,7 @@ class ProfileController extends Controller
         }
     }
 
+    //show a form that is used to change the password
     public function showChangePWForm()
     {
         $user = Auth::user();

@@ -19,12 +19,14 @@ class SupportRequestController extends Controller
         $this->middleware('auth');
     }
 
+    //create a new ticket, return the support index route
     public function create($id)
     {
         $challenge = Challenge::find($id);
         return view('support.index')->with('challenge', $challenge);
     }
 
+    //submit a nw request
     public function submit(Request $request)
     {
         try
@@ -57,6 +59,7 @@ class SupportRequestController extends Controller
         }
     }
 
+    //send a mail to the administrator
     public function sendMail (SupportRequest $supportRequest)
     {
         $admin = User()->getAdmin();
