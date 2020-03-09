@@ -287,10 +287,9 @@
 
         <!-- Sidebar -->
         <footer data-test="footer" class="page-footer elegant-color">
-            <div data-test="container" class="container text-center py-3"><a href="/contact">Impressum</a></div>
+            <div data-test="container" class="container text-center py-3"><a href="/tos">Terms of use</a></div>
             <div class="footer-copyright text-center py-3">
-                <div data-test="container" class="container-fluid">© 2017 - 2020 Copyright: Werbeagentur Christian Aichner
-                    <p class="my-2 font-weight-bold">In cooperation with <a href="https://www.aichner-christian.com" target="_blank" class="ml-1" rel="noopener noreferrer">WCA</a>.</p>
+                <div data-test="container" class="container-fluid">© 2020 Copyright: WhatTheHack? Development Team
                 </div>
             </div>
         </footer>
