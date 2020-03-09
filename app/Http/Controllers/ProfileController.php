@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
+    //constructor
     public function __construct()
     {
         $this->middleware('auth');
@@ -42,6 +43,7 @@ class ProfileController extends Controller
         return view('auth.passwords.change')->with('user', $user);
     }
 
+    //change the password of a specific user
     public function changePW(Request $request)
     {
         $this->validate($request,

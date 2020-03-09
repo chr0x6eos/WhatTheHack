@@ -23,6 +23,7 @@ class ClassroomController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    //show classrooms
     public function index()
     {
         try
@@ -62,6 +63,8 @@ class ClassroomController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    //create a new classroom
     public function create()
     {
         return view('classroom.create');
@@ -73,6 +76,8 @@ class ClassroomController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
+
+    //store the data of a specific classroom
     public function store(Request $request)
     {
         try
@@ -128,12 +133,14 @@ class ClassroomController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
+    //return a list of all my classrooms
     public function myClassrooms()
     {
         $classrooms = Auth::user()->classrooms;
         return view('classroom.myClassrooms')->with('classrooms', $classrooms);
     }
 
+    //edit a specific classroom
     public function edit($id)
     {
         try
@@ -148,6 +155,7 @@ class ClassroomController extends Controller
         }
     }
 
+    //add and remove members to a specific classroom
     public function editMembers($id)
     {
         try
@@ -162,6 +170,7 @@ class ClassroomController extends Controller
         }
     }
 
+    //add and remove challenges to a classroom
     public function editChallenges($id)
     {
         try
@@ -183,6 +192,7 @@ class ClassroomController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
+    //update a specific classroom
     public function update(Request $request, $id)
     {
         try
@@ -201,6 +211,7 @@ class ClassroomController extends Controller
         }
     }
 
+    //update the members of a classroom
     public function updateMembers(Request $request, $id)
     {
         try
@@ -224,6 +235,7 @@ class ClassroomController extends Controller
         }
     }
 
+    //delete members of a classroom
     public function deleteMembers(Request $request, $id)
     {
         try
@@ -254,6 +266,8 @@ class ClassroomController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
+
+    //destroy/delete a classroom, only when classroom is already disabled
     public function destroy($id)
     {
         try
@@ -323,6 +337,7 @@ class ClassroomController extends Controller
         }
     }
 
+    //detach the relations between classroom, users and challenges
     public function detach(Request $request, $id)
     {
         try
@@ -342,7 +357,7 @@ class ClassroomController extends Controller
         }
     }
 
-
+    //disable a specific classroom
     public function disabled()
     {
         try
@@ -356,6 +371,7 @@ class ClassroomController extends Controller
         return view('classroom.disabled')->with('classrooms', $classrooms);
     }
 
+    //restore a specific classroom
     public function restore($id)
     {
         try
@@ -373,6 +389,7 @@ class ClassroomController extends Controller
         }
     }
 
+    //show challenges of a specific classroom
     public function showChallenges($id)
     {
         try
