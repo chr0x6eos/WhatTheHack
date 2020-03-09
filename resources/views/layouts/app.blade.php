@@ -39,17 +39,18 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
-    <!-- Styles
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
+    <!-- Styles -->
     <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ URL::asset('css/mdb.min.css') }}">
     <!-- Template CSS file -->
     <link rel="stylesheet" href="{{ URL::asset('css/freelancer.min.css') }}">
     <link rel="stylesheet" href="{{ URL::asset('css/addons/datatables.min.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('css/app.css') }}">
     <!-- CSS file for customization -->
     <link rel="stylesheet" href="{{ URL::asset('css/custom-styles.css') }}">
     <!-- <link rel="stylesheet" href="{{ URL::asset('css/addons/datatables-select.min.css') }}"> -->
     <link rel="stylesheet" href="{{ URL::asset('css/app.css') }}">
+    <link rel="icon" href="{{ URL::asset('/images/icons/favicon.svg') }}" type="image/x-icon"/>
 </head>
 <body>
 <div class="root">
@@ -64,7 +65,8 @@
                 <div data-test="navbar-brand" class="navbar-brand">
                     <strong class="white-text">
                         <a href="/">
-                            <img src="{{URL::asset('images/pics/logo_v4.gif')}}" width="110px" href="/">
+                            <span id="logo_v4">hack?</span>
+                            <!-- <img src="{{URL::asset('images/pics/logo_v4.gif')}}" width="110px" href="/"> -->
                         </a>
                     </strong>
                 </div>
@@ -94,7 +96,7 @@
             @yield('content')
         </main>
         <!-- Sidebar -->
-        <nav id="sidebar">
+        <nav id="sidebar" style="position: absolute">
             <div id="dismiss">
                 <i class="fas fa-times"></i>
             </div>
@@ -217,6 +219,18 @@
                             </ul>
                         </li>
 
+                        <li>
+                            <form method="POST" action="{{ route('profile.search') }}">
+                                @csrf
+                                <input id="username" data-test="input" name="username" type="text" class="form-control {{ $errors->has('username') ? ' is-invalid' : '' }}" value="" required autofocus placeholder="Search...">
+                                @if ($errors->has('username'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('username') }}</strong>
+                                    </span>
+                                @endif
+                                <button type="submit" class="btn btn-outline-green">Search Members</button>
+                            </form>
+                        </li>
                 @endif
                 <li>
                     <a href="#aboutSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">About</a>
