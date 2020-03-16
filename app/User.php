@@ -236,9 +236,9 @@ class User extends Authenticatable implements MustVerifyEmail
         return $neededPoints;
     }
 
-    public function progress($cat)
+    public function progress($cat,$id)
     {
-        $user = Auth::user();
+        $user = User::findorFail($id);
         $result = [];
         $count = 0;
         //get the date when the user was created to get a point zero

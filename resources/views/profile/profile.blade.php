@@ -112,7 +112,7 @@
                         xValueType: "dateTime",
                         xValueFormatString: "YYYY-MMM-dd HH",
                         yValueFormatString: "#,##0.##",
-                        dataPoints: <?php echo json_encode(Auth::user()->progress("web"),JSON_NUMERIC_CHECK); ?>
+                        dataPoints: <?php echo json_encode(Auth::user()->progress("web",$user->id),JSON_NUMERIC_CHECK); ?>
                     },
                     {
                         type: "line",
@@ -121,7 +121,7 @@
                         xValueType: "dateTime",
                         xValueFormatString: "YYYY-MMM-dd HH",
                         yValueFormatString: "#,##0.##",
-                        dataPoints: <?php echo json_encode(Auth::user()->progress("pwn"),JSON_NUMERIC_CHECK); ?>
+                        dataPoints: <?php echo json_encode(Auth::user()->progress("pwn",$user->id),JSON_NUMERIC_CHECK); ?>
                     },
                     {
                         type: "line",
@@ -130,7 +130,7 @@
                         xValueType: "dateTime",
                         xValueFormatString: "YYYY-MMM-dd HH",
                         yValueFormatString: "#,##0.##",
-                        dataPoints: <?php echo json_encode(Auth::user()->progress("forensic"),JSON_NUMERIC_CHECK); ?>
+                        dataPoints: <?php echo json_encode(Auth::user()->progress("forensic",$user->id),JSON_NUMERIC_CHECK); ?>
                     },
                     {
                         type: "line",
@@ -139,7 +139,7 @@
                         xValueType: "dateTime",
                         xValueFormatString: "YYYY-MMM-dd HH",
                         yValueFormatString: "#,##0.##",
-                        dataPoints: <?php echo json_encode(Auth::user()->progress("reverse-engineering"),JSON_NUMERIC_CHECK); ?>
+                        dataPoints: <?php echo json_encode(Auth::user()->progress("reverse-engineering",$user->id),JSON_NUMERIC_CHECK); ?>
                     },
                     {
                         type: "line",
@@ -148,7 +148,7 @@
                         xValueType: "dateTime",
                         xValueFormatString: "YYYY-MMM-dd HH",
                         yValueFormatString: "#,##0.##",
-                        dataPoints: <?php echo json_encode(Auth::user()->progress("miscellaneous"),JSON_NUMERIC_CHECK); ?>
+                        dataPoints: <?php echo json_encode(Auth::user()->progress("miscellaneous",$user->id),JSON_NUMERIC_CHECK); ?>
                     },
                     {
                         type: "line",
@@ -157,7 +157,7 @@
                         xValueType: "dateTime",
                         xValueFormatString: "YYYY-MMM-dd HH:mm",
                         yValueFormatString: "#,##0.##",
-                        dataPoints: <?php echo json_encode(Auth::user()->progress("cryptography"),JSON_NUMERIC_CHECK); ?>
+                        dataPoints: <?php echo json_encode(Auth::user()->progress("cryptography",$user->id),JSON_NUMERIC_CHECK); ?>
                     }
                 ]
             });
