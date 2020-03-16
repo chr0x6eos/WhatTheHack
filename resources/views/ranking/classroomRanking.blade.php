@@ -14,7 +14,7 @@
                 </select><br><br>
 
                 @foreach($classrooms as $classroom)
-                <table id="{{ $classroom->id }}" class="table table-bordered" cellspacing="0" width="100%">
+                <table id="{{ $classroom->id }}" class="table table-bordered" cellspacing="0" width="100%" cellpadding="0">
                     <thead>
                         <tr>
                             <td class="font-weight-bold">{{ $classroom->classroom_name }}</td>
@@ -30,13 +30,25 @@
                         @if($value->username == $currentUser->username)
                             <tr bgcolor="#00c800">
                                 <td>{{ $key }}</td>
-                                <td>{{ $value->username }}</td>
+                                <td>
+                                    <form method="POST" action="{{ route('profile.search') }}">
+                                        @csrf
+                                        <input type="hidden" value="{{ $value->username }}" name="username">
+                                        <button type="submit" class="btn btn-link py-0">{{ $value->username }}</button>
+                                    </form>
+                                </td>
                                 <td>{{ $value->points }}</td>
                             </tr>
                         @else
                         <tr>
                             <td>{{ $key }}</td>
-                            <td>{{ $value->username }}</td>
+                            <td>
+                                <form method="POST" action="{{ route('profile.search') }}">
+                                    @csrf
+                                    <input type="hidden" value="{{ $value->username }}" name="username">
+                                    <button type="submit" class="btn btn-link py-0">{{ $value->username }}</button>
+                                </form>
+                            </td>
                             <td>{{ $value->points }}</td>
                         </tr>
                         @endif
