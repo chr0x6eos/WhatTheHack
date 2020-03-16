@@ -28,14 +28,14 @@
                                                     @csrf
                                                     @method('patch')
 
-                                                    <input type="submit" class="btn btn-success">
+                                                    <button type="submit" class="btn btn-info">Restore</button>
                                                 </form>
                                             </td>
                                             <td>
                                                 <form method="post" action="{{ route('classroom.destroy', $classroom->id)}}" >
                                                     @csrf
                                                     @method('delete')
-                                                    <input type="submit" class="btn btn-danger">
+                                                    <button type="submit" class="btn btn-danger">Delete</button>
                                                 </form>
                                             </td>
                                         </tr>
