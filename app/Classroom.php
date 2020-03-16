@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Classroom extends Model
 {
-    //realtion between users and classrooms
+    //relation between users and classrooms
     public function users()
     {
         return $this
