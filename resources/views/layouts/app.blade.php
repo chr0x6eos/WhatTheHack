@@ -49,7 +49,6 @@
     <!-- CSS file for customization -->
     <link rel="stylesheet" href="{{ URL::asset('css/custom-styles.css') }}">
     <!-- <link rel="stylesheet" href="{{ URL::asset('css/addons/datatables-select.min.css') }}"> -->
-    <link rel="stylesheet" href="{{ URL::asset('css/app.css') }}">
     <link rel="icon" href="{{ URL::asset('/images/icons/favicon.svg') }}" type="image/x-icon"/>
 </head>
 <body>
