@@ -239,28 +239,32 @@ class User extends Authenticatable implements MustVerifyEmail
     public function progress($cat)
     {
         $user = Auth::user();
-        //$days = date_diff($user->created_at->format('Y-M-D'),date("Y-M-D"));
         $result = [];
         $count = 0;
-        $pointZero = array('label'=>$user->created_at->format('Y-m-d'), 'y'=>'0');
-        array_push($result,$pointZero);
+        //get the date when the user was created to get a point zero
         $dateOld = $user->created_at->format('Y-m-d');
+        //add it to the result array
+        array_push($result,$pointZero = array('label'=>$dateOld, 'y'=>$count));
+       //get all challenges a user has solved with the timestamps from the pivot table
         foreach ($user->challengeWithTimestamps as $c)
         {
             if($c->category == $cat)
             {
                 $count += $c->getPoints();
+                //get the date of the first entry
                 $dateNew = $c['pivot']->created_at->format('Y-m-d');
+                //get the difference between the two dates in days
                 $days = (strtotime($dateNew)-strtotime($dateOld))/(60*60*24);
+                //add a point for every day between the two dates
                 for($i = 1; $i < $days; $i++ )
                 {
-                    $addDate = 'P'.$i.'D';
                     $label = array('label'=>date('Y-m-d', strtotime($dateOld. '+ '.$i.' days')),'y'=>$count);
                     array_push($result,$label);
                 }
                 $label = array('label'=>$c['pivot']->created_at->format('Y-m-d'), 'y'=>$count);
                 array_push($result,$label);
-                $dateOld = $c['pivot']->created_at->format('Y-m-d');
+                //set a new old date
+                $dateOld = $dateNew;
             }
         }
         return $result;
