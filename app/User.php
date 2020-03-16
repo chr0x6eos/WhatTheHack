@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Faker\Provider\DateTime;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -224,17 +225,28 @@ class User extends Authenticatable implements MustVerifyEmail
     public function progress($cat)
     {
         $user = Auth::user();
+        //$days = date_diff($user->created_at->format('Y-M-D'),date("Y-M-D"));
         $result = [];
-        $pointZero = array('label'=>$user->created_at->format('Y-m-d H:i'), 'y'=>'0');
-        array_push($result,$pointZero);
         $count = 0;
+        $pointZero = array('label'=>$user->created_at->format('Y-m-d'), 'y'=>'0');
+        array_push($result,$pointZero);
+        $dateOld = $user->created_at->format('Y-m-d');
         foreach ($user->challengeWithTimestamps as $c)
         {
             if($c->category == $cat)
             {
-                $count+=$c->getPoints();
-                $label = array('label'=>$c['pivot']->created_at->format('Y-m-d H:i'), 'y'=>$count);
+                $count += $c->getPoints();
+                $dateNew = $c['pivot']->created_at->format('Y-m-d');
+                $days = (strtotime($dateNew)-strtotime($dateOld))/(60*60*24);
+                for($i = 1; $i < $days; $i++ )
+                {
+                    $addDate = 'P'.$i.'D';
+                    $label = array('label'=>date('Y-m-d', strtotime($dateOld. '+ '.$i.' days')),'y'=>$count);
+                    array_push($result,$label);
+                }
+                $label = array('label'=>$c['pivot']->created_at->format('Y-m-d'), 'y'=>$count);
                 array_push($result,$label);
+                $dateOld = $c['pivot']->created_at->format('Y-m-d');
             }
         }
         return $result;

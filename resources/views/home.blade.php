@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
+
     @if(Auth::user()->hasRole("admin"))
     <div class="row justify-content-center">
         <div class="row mt-5" style="width: 100%">
