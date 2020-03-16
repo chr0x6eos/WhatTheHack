@@ -78,10 +78,39 @@ class RegisterController extends Controller
         //Add user to WTH classroom
         try
         {
-            Classroom::getClassRoom("What The Hack")->users()->attach($user);
+            $classroom = null;
+
+            try
+            {
+                $classroom = Classroom::getClassRoom("What The Hack");
+                if ($classroom == null)
+                {
+                    //Throw exception and create classroom
+                    throw new \Exception();
+                }
+            }
+            catch (\Exception $exception)
+            {
+                //If no classroom exists, create one
+                try
+                {
+                    Classroom::createClassroom("What The Hack", null);
+                }
+                catch (\Exception $exception) {}
+            }
+            finally
+            {
+                try
+                {
+                    $classroom = Classroom::getClassRoom("What The Hack");
+
+                    if ($classroom != null)
+                        $classroom->users()->attach($user);
+                }
+                catch (\Exception $exception){}
+            }
         }
-        catch (\Exception $exception)
-        {}
+        catch (\Exception $exception){}
 
         return $user;
     }

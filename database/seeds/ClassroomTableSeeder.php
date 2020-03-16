@@ -16,33 +16,7 @@ class ClassroomTableSeeder extends Seeder
     public function run()
     {
         //$this->tatu();
-        $this->createClassroom("What The Hack", User::all());
-    }
-
-    private function createClassroom($name, $users)
-    {
-        $admin = User::getUser("Admin");
-
-        $classroom = new Classroom();
-        $classroom->classroom_name = $name;
-        $classroom->classroom_owner = $admin->id;
-        $classroom->save();
-
-        //Creator of a classroom is automatically a member
-        $classroom->users()->attach($admin->id);
-
-        //Add specified users to classroom
-        foreach ($users as $user)
-        {
-            $classroom->users()->attach($user);
-        }
-
-        //Add all challenges to classroom
-        foreach (Challenge::all() as $c)
-        {
-            if($c->active == true)
-                $classroom->challenges()->attach($c);
-        }
+        Classroom::createClassroom("What The Hack", User::all());
     }
 
     private function tatu()
@@ -51,6 +25,6 @@ class ClassroomTableSeeder extends Seeder
         $student = User::getUser("Student");
 
         $users = array($tatu, $student);
-        $this->createClassroom("Tatü", $users);
+        Classroom::createClassroom("Tatü", $users);
     }
 }
