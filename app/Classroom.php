@@ -95,4 +95,9 @@ class Classroom extends Model
         }
         return $counter;
     }
+
+    static function getClassRoom($name)
+    {
+        return Classroom::where('classroom_name', $name)->first();
+    }
 }
