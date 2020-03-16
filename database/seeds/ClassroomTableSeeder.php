@@ -1,9 +1,10 @@
 <?php
 
-use App\Challenge;
 use Illuminate\Database\Seeder;
 use App\Classroom;
 use App\User;
+use App\Challenge;
+
 
 class ClassroomTableSeeder extends Seeder
 {

@@ -13,7 +13,7 @@ class ChallengesTableSeeder extends Seeder
      */
     public function run()
     {
-        //$this->fake();
+        $this->fake();
         $this->tatu();
     }
 
@@ -96,7 +96,7 @@ schaffen den Code zu knacken, um die Flagge zu erhalten? Die Flagge sollte dann 
 
             $challenge->flag = "WTH{" . $faker->md5 . "}";
             $challenge->author = $faker->name;
-            $challenge->imageID = $faker->bankAccountNumber;
+            //$challenge->imageID = $faker->bankAccountNumber;
             $challenge->save();
         }
     }
