@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Classroom;
 use App\Http\Controllers\Controller;
 use App\Rules\BadCharacters;
 use App\User;
@@ -64,10 +65,15 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+
+        //Add user to WTH classroom
+        Classroom::getClassRoom("What The Hack")->users()->attach($user);
+
+        return $user;
     }
 }

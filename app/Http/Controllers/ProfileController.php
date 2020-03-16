@@ -98,10 +98,6 @@ class ProfileController extends Controller
 
     public function showChangeEMForm()
     {
-
-    ###show the view for the change email form###
-    public function showChangeEMForm()
-    {
         $user = Auth::user();
         return view('profile.changeEM')->with('user', $user);
     }
