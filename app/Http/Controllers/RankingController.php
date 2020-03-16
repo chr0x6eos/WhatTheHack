@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class RankingController extends Controller
 {
+    //get a list of all users, sorted by their points
     public function index()
     {
         try
@@ -32,6 +33,7 @@ class RankingController extends Controller
         return view('ranking.ranking')->with(['ranked' => $ranked, 'currentUser' => $currentUser]);
     }
 
+    //get a list of the top 5 users
     static function getTopFive()
     {
         try
@@ -63,6 +65,7 @@ class RankingController extends Controller
         return view('home')->with('ranked', $ranked);
     }
 
+    //user ranking of a specific classroom
     public function classroomRanking()
     {
         try

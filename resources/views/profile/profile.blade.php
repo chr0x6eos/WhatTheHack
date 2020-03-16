@@ -1,9 +1,5 @@
 @extends('layouts.app')
-
 @section('content')
-<head>
-</head>
-    <body>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -50,7 +46,6 @@
                                 {{ __('Level:') }}
                             </label>
                             <label class="col-md-7 col-form-label text-md-center">{{ App\User::calculateLevel($user->points) }}</label>
-
                         </div>
                         <div class="form-group row">
                             <label class="col-md-4 col-form-label text-md-right font-weight-bold">
@@ -63,7 +58,6 @@
                                 {{ __('Rank:') }}
                             </label>
                             <label class="col-md-7 col-form-label text-md-center">{{ App\User::calculateRank($user->points) }}</label>
-
                         </div>
                         <div class="container">
                             <div class="row">

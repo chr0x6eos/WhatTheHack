@@ -49,6 +49,7 @@ class User extends Authenticatable implements MustVerifyEmail
             return false;
     }
 
+    //check if the user is already verified
     public function isVerified()
     {
         if (is_null($this->email_verified_at))
@@ -66,6 +67,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return false;
     }
 
+    //function that is used for the relation between users and challenges
     public function challenges()
     {
         return $this
@@ -81,6 +83,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     }
 
+    //check if a specific user is allowed to do a challenge
     public function hasChallenge($id)
     {
         foreach (Auth::user()->classrooms as $c)
@@ -96,7 +99,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return false;
     }
 
-
+    //relation between classrooms and users
     public function classrooms()
     {
         return $this
@@ -114,16 +117,19 @@ class User extends Authenticatable implements MustVerifyEmail
         }
     }
 
+    //get admin
     public static function getAdmin()
     {
         return User::where('userrole', 'admin')->first();
     }
 
+    //get username
     public static function getUser($username)
     {
         return User::where('username', $username)->first();
     }
 
+    //get a number of all active users
     static function countActiveUsers()
     {
         $counter = 0;
@@ -137,6 +143,8 @@ class User extends Authenticatable implements MustVerifyEmail
         }
         return $counter;
     }
+
+    //get a number of all disabled users
     static function countDisabledUsers()
     {
         $counter = 0;
@@ -151,6 +159,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return $counter;
     }
 
+    //check if a specific challenge has already been done
     public function solvedChallenge($id)
     {
         foreach ($this->challenges as $challenge)
@@ -161,6 +170,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return false;
     }
 
+    //calculate a level for the user
     static function calculateLevel($points)
     {
         $levels = Level::all();
@@ -175,6 +185,8 @@ class User extends Authenticatable implements MustVerifyEmail
         }
         return $userLevel;
     }
+
+    //with the calculated level, get a user rank
     static function calculateRank($points
     ){
         $levels = Level::all();
@@ -190,6 +202,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return $userLevel;
     }
 
+    //calculate the min value for the progress
     static function calculateProgress1($points){
         $levels = Level::all();
         $userLevel = "";
@@ -206,6 +219,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return $userLevel;
     }
 
+    //calculate the max value for the progress
     static function calculateProgress2($points)
     {
         $levels = Level::all();
