@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
         $this->call(UsersTableSeeder::class); //Add test users to DB
         $this->call(ClassroomTableSeeder::class);
 
+        $this->call(ShowCaseSeeder::class);
+
         //$this->call(DeploymentTableSeeder::class);
 
     }
