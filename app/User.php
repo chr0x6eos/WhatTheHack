@@ -2,10 +2,12 @@
 
 namespace App;
 
+use Faker\Provider\DateTime;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
+use function Sodium\add;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -71,6 +73,14 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this
             ->belongsToMany('App\Challenge')
             ->withTimestamps();
+    }
+
+    public function challengeWithTimestamps()
+    {
+        return $this
+            ->belongsToMany('App\Challenge')
+            ->withPivot('created_at');
+
     }
 
     //check if a specific user is allowed to do a challenge
@@ -224,5 +234,39 @@ class User extends Authenticatable implements MustVerifyEmail
             }
         }
         return $neededPoints;
+    }
+
+    public function progress($cat,$id)
+    {
+        $user = User::findorFail($id);
+        $result = [];
+        $count = 0;
+        //get the date when the user was created to get a point zero
+        $dateOld = $user->created_at->format('Y-m-d');
+        //add it to the result array
+        array_push($result,$pointZero = array('label'=>$dateOld, 'y'=>$count));
+       //get all challenges a user has solved with the timestamps from the pivot table
+        foreach ($user->challengeWithTimestamps as $c)
+        {
+            if($c->category == $cat)
+            {
+                $count += $c->getPoints();
+                //get the date of the first entry
+                $dateNew = $c['pivot']->created_at->format('Y-m-d');
+                //get the difference between the two dates in days
+                $days = (strtotime($dateNew)-strtotime($dateOld))/(60*60*24);
+                //add a point for every day between the two dates
+                for($i = 1; $i < $days; $i++ )
+                {
+                    $label = array('label'=>date('Y-m-d', strtotime($dateOld. '+ '.$i.' days')),'y'=>$count);
+                    array_push($result,$label);
+                }
+                $label = array('label'=>$c['pivot']->created_at->format('Y-m-d'), 'y'=>$count);
+                array_push($result,$label);
+                //set a new old date
+                $dateOld = $dateNew;
+            }
+        }
+        return $result;
     }
 }

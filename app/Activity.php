@@ -26,7 +26,7 @@ class Activity extends Model
         $activities = array();
         $result = null;
 
-        if($limit== null)
+        if($limit == null)
         {
             $result = Activity::orderby('created_at', 'desc')
                 ->get();
@@ -47,4 +47,6 @@ class Activity extends Model
         }
         return $activities;
     }
+
+
 }
