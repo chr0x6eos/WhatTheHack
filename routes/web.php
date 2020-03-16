@@ -19,9 +19,10 @@ Route::get('/', function () {
     }
 })->name('main');
 
-Route::get('agb', function () {
-    return view('subpages.agb');
-});
+Route::get('tos', function () {
+    return view('subpages.tos');
+})->name('tos');
+
 Route::get('contact', function () {
     return view('subpages.contact');
 });
