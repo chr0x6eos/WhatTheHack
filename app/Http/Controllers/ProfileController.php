@@ -46,7 +46,7 @@ class ProfileController extends Controller
         return view('auth.passwords.change')->with('user', $user);
     }
 
-    ###change password of user###
+    //change password of user
     public function changePW(Request $request)
     {
         $this->validate($request,
@@ -99,18 +99,14 @@ class ProfileController extends Controller
         }
     }
 
-    ############################
-    ###Email-Change Functions###
-    ############################
-
-    ###show the view for the change email form###
+    //how the view for the change email form
     public function showChangeEMForm()
     {
         $user = Auth::user();
         return view('profile.changeEM')->with('user', $user);
     }
 
-    ###create token and send an email to the user when user wants to change email###
+    //create token and send an email to the user when user wants to change email
     public function changeEM(Request $request)
     {
         $this->validate($request,
@@ -183,7 +179,7 @@ class ProfileController extends Controller
         }
     }
 
-    ### change email after user clicked on the link in the verification email###
+    //change email after user clicked on the link in the verification email
     public function changeEmail(Request $request)
     {
         // Get user_id and token from the request
@@ -233,7 +229,7 @@ class ProfileController extends Controller
     }
 
 
-    ### delete user account of logged-in user###
+    //delete user account of logged-in user
     public function deleteAccount($id)
     {
         try
@@ -272,7 +268,7 @@ class ProfileController extends Controller
         }
     }
 
-    ###search for a profile of a specified user###
+    //search for a profile of a specified user
     public function searchProfile(Request $request)
     {
 
