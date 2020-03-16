@@ -1,7 +1,5 @@
 @extends('layouts.app')
-
 @section('content')
-
     <div class="container">
         <div class="card">
             <div class="card-header font-weight-bold">{{ __('Classroom Ranking') }}</div>
@@ -72,7 +70,4 @@
             </div>
         </div>
     </div>
-
-
-
 @endsection

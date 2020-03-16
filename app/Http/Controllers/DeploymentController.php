@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class DeploymentController extends Controller
 {
+    //This view is currently WIP, and is not used at the moment
 
     //Only allow authenticated users
     public function __construct()
@@ -100,6 +101,7 @@ class DeploymentController extends Controller
         //
     }
 
+    //start virtual instance
     public function start($id)
     {
         try
@@ -114,6 +116,7 @@ class DeploymentController extends Controller
         }
     }
 
+    //stop virtual instance
     public function stop($id)
     {
         try

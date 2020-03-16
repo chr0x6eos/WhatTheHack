@@ -19,9 +19,10 @@ Route::get('/', function () {
     }
 })->name('main');
 
-Route::get('agb', function () {
-    return view('subpages.agb');
-});
+Route::get('tos', function () {
+    return view('subpages.tos');
+})->name('tos');
+
 Route::get('contact', function () {
     return view('subpages.contact');
 });
@@ -70,7 +71,6 @@ Route::patch('manage/users/update/{user}', 'ManageUserController@update')->name(
 
 // Classroom Management Routes
 Route::get('classrooms/myClassrooms', 'ClassroomController@myClassrooms')->name('classroom.myClassrooms');
-
 Route::get('classroom/create', 'ClassroomController@create')->name('classroom.create')->middleware('role:teacher');
 Route::post('classroom', 'ClassroomController@store')->name('classroom.store')->middleware('role:teacher');
 Route::get('classroom/edit/{classroom}','ClassroomController@edit')->name('classroom.edit')->middleware('role:teacher');
