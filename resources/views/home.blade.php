@@ -162,12 +162,12 @@
                             <div class="card-body">
                                 <h2 class="card-title">Top 5</h2>
                                 <div class="card-body">
-                                    <table id="rankingTable" class="table table-bordered" cellspacing="0" width="100%">
+                                    <table id="rankingTable" class="table table-bordered" cellspacing="0" width="100%" cellpadding="0">
                                         <thead>
                                         <tr>
                                             <th>Rank</th>
-                                            <th class="th-sm">Username</th>
-                                            <th class="th-sm">Overall Points</th>
+                                            <th>Username</th>
+                                            <th>Overall Points</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -178,7 +178,7 @@
                                                         <form method="POST" action="{{ route('profile.search') }}">
                                                             @csrf
                                                             <input type="hidden" value="{{ $value->username }}" name="username">
-                                                            <button type="submit" class="btn btn-link">{{ $value->username }}</button>
+                                                            <button type="submit" class="btn btn-link py-0">{{ $value->username }}</button>
                                                         </form>
                                                     </td>
                                                     <td>{{ $value->points }}</td>
