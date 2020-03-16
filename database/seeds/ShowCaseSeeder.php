@@ -14,9 +14,13 @@ class ShowCaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->createUsers();
-        $this->createClassrooms();
-        $this->solveAllChallenges(User::getUser("posseggs"));
+        try
+        {
+            $this->createUsers();
+            $this->setupClassrooms();
+            $this->genSolves();
+        }
+        catch (Exception $ex) {}
     }
 
     //Create additional users for showcase
@@ -78,7 +82,8 @@ class ShowCaseSeeder extends Seeder
         )->save();
     }
 
-    private function createClassroom($name,$users)
+    //Create classrooms
+    private function createClassroom($name, $users)
     {
         $admin = User::getUser("Admin");
 
@@ -107,7 +112,8 @@ class ShowCaseSeeder extends Seeder
         }
     }
 
-    private function createClassrooms()
+    //Create users and classrooms
+    private function setupClassrooms()
     {
         $u1 = User::getUser("posseggs");
         $u2 = User::getUser("RAM");
@@ -119,28 +125,44 @@ class ShowCaseSeeder extends Seeder
         $this->createClassroom("5AHITN",$users);
     }
 
-    private function solveAllChallenges($u)
+    //Function to solve challenges
+    private function solveChallenges($challenges, $u)
     {
-        foreach (Challenge::all() as $c)
+        try
         {
-            $c->challengeUsers()->attach($u);
-
-            //Add points to user
-            $u->addPoints($c->getPoints());
+            if ($challenges != null && sizeof($challenges) > 0)
+            {
+                foreach ($challenges as $c)
+                {
+                    //Check if valid challenge
+                    if($c instanceof Challenge)
+                    {
+                        $c->solveChallenge($u);
+                    }
+                }
+            }
         }
+        catch (Exception $exception){}
     }
 
-    private function solveChallenges($challenges,$u)
+    //Solve a random amount of challenges
+    private function solveRandom($u)
     {
-        if ($challenges != null && sizeof($challenges) > 0)
-        {
-            foreach ($challenges as $c)
-            {
-                $c->challengeUsers()->attach($u);
+        //Take a random number of challenges
+        $random = rand(0,count(DB::table('challenges')->get()));
 
-                //Add points to user
-                $u->addPoints($c->getPoints());
-            }
+        $challenges = Challenge::inRandomOrder()->limit($random)->get();
+
+        $this->solveChallenges($challenges, $u);
+    }
+
+    //Generate solves foreach user
+    private function genSolves()
+    {
+        $users = User::all();
+        foreach ($users as $u)
+        {
+            $this->solveRandom($u);
         }
     }
 }
