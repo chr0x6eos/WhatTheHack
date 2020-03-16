@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Classroom;
 use App\Http\Controllers\Controller;
 use App\Rules\BadCharacters;
 use App\User;
@@ -44,30 +45,44 @@ class RegisterController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'username' => array('required', 'string', 'max:255','unique:users',new BadCharacters),
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'username' => array('required', 'string', 'max:255', 'unique:users', new BadCharacters),
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users', 'regex:/^[a-zA-Z0-9_.+-]+@(?:(?:[a-zA-Z0-9-]+\.)?[a-zA-Z]+\.)?(edu.htl-villach|htl-villach)\.at$/'],
             'password' => ['required', 'string', 'min:8', 'same:password-confirm'],
-        ]);
+        ],
+            [
+                'email.regex' => 'Invalid email domain! Valid domains: edu.htl-villach.at or htl-villach.at'
+            ]
+        );
     }
 
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param array $data
      * @return \App\User
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+
+        //Add user to WTH classroom
+        try
+        {
+            Classroom::getClassRoom("What The Hack")->users()->attach($user);
+        }
+        catch (\Exception $exception)
+        {}
+
+        return $user;
     }
 }

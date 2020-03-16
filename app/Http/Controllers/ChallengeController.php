@@ -449,11 +449,7 @@ class ChallengeController extends Controller
             //Make flag case-insensitive
             if (strtolower($challenge->flag) == strtolower($request->flag))
             {
-                //Save that user has solved challenge
-                $challenge->challengeUsers()->attach(Auth::user());
-
-                //Add points to user
-                Auth::user()->addPoints($challenge->getPoints());
+                $challenge->solveChallenge(Auth::user());
 
                 //Path to the randomly selected GIF
                 $gifPath = '/images/GIFs/WIN/' . $gifName . '.gif';

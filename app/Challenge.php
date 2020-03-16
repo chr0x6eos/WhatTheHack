@@ -3,7 +3,6 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Schema\Blueprint;
 
 class Challenge extends Model
 {
@@ -88,5 +87,21 @@ class Challenge extends Model
             }
         }
         return $counter;
+    }
+    public function solveChallenge($user)
+    {
+        //Save that user has solved challenge
+        //Only allow active users to solve challenges
+        if($user->active)
+        {
+            $this->challengeUsers()->attach($user);
+
+            //Add points to user
+            $user->addPoints($this->getPoints());
+        }
+        else
+        {
+            throw new \Exception("User is not active!");
+        }
     }
 }

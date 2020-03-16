@@ -1,9 +1,10 @@
 <?php
 
-use App\Challenge;
 use Illuminate\Database\Seeder;
 use App\Classroom;
 use App\User;
+use App\Challenge;
+
 
 class ClassroomTableSeeder extends Seeder
 {
@@ -14,10 +15,11 @@ class ClassroomTableSeeder extends Seeder
      */
     public function run()
     {
-        $this->tatu();
+        //$this->tatu();
+        $this->createClassroom("What The Hack", User::all());
     }
 
-    private function createClassroom($name,$users)
+    private function createClassroom($name, $users)
     {
         $admin = User::getUser("Admin");
 
@@ -30,12 +32,9 @@ class ClassroomTableSeeder extends Seeder
         $classroom->users()->attach($admin->id);
 
         //Add specified users to classroom
-        if (is_array($users))
+        foreach ($users as $user)
         {
-            foreach ($users as $user)
-            {
-                $classroom->users()->attach($user);
-            }
+            $classroom->users()->attach($user);
         }
 
         //Add all challenges to classroom
@@ -51,7 +50,7 @@ class ClassroomTableSeeder extends Seeder
         $tatu = User::getUser("TaTü");
         $student = User::getUser("Student");
 
-        $users = array($tatu,$student);
-        $this->createClassroom("Tatü",$users);
+        $users = array($tatu, $student);
+        $this->createClassroom("Tatü", $users);
     }
 }

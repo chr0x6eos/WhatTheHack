@@ -17,7 +17,10 @@ class DatabaseSeeder extends Seeder
         //Add test data
         $this->call(ChallengesTableSeeder::class); //Add test challenges to DB
         $this->call(UsersTableSeeder::class); //Add test users to DB
-        $this->call(ClassroomTableSeeder::class);
+        $this->call(ShowCaseSeeder::class); //Add showcase users, classrooms and solve challenges
+
+        $this->call(ClassroomTableSeeder::class); //Add WTH classroom
+
 
         //$this->call(DeploymentTableSeeder::class);
 

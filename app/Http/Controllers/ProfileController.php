@@ -96,23 +96,24 @@ class ProfileController extends Controller
         }
     }
 
-    public function showChangeEMForm()
-    {
-
-    ###show the view for the change email form###
+    //how the view for the change email form
     public function showChangeEMForm()
     {
         $user = Auth::user();
         return view('profile.changeEM')->with('user', $user);
     }
 
+    //create token and send an email to the user when user wants to change email
     public function changeEM(Request $request)
     {
         $this->validate($request,
-                        [
-                            'email' => 'required|max:100',
-                            'newEmail' => 'required|max:100',
-                        ]
+            [
+                'email' => ['required', 'max:100'],
+                'newEmail' => ['required', 'max:100', 'regex:/^[a-zA-Z0-9_.+-]+@(?:(?:[a-zA-Z0-9-]+\.)?[a-zA-Z]+\.)?(edu.htl-villach|htl-villach)\.at$/'],
+            ],
+            [
+                'newEmail.regex' => 'Invalid email domain! Valid domains: edu.htl-villach.at or htl-villach.at'
+            ]
         );
 
         $user = Auth::user();
@@ -136,6 +137,22 @@ class ProfileController extends Controller
                 }
                 else
                 {
+                    //check if user already requested a token
+                    $allTokens = EMCTokens::all();
+                    foreach ($allTokens as $emc){
+                        if($user->id == $emc->user_id){
+                          if(Carbon::parse($emc->valid_until)->gt(now())){ //check if token is valid
+                              return redirect()->route('profile.show')
+                                  ->withErrors('Request to change email is possible every 30min!');
+                          }
+                          else{
+                              //delete invalid token
+                              $emc->delete();
+                              //after deletion of the invalid token create a new one
+                          }
+                        }
+                    }
+
                     //Generate token and save it to database
                     $token = Str::random(32);
                     $emctoken = new EMCTokens();
@@ -159,7 +176,7 @@ class ProfileController extends Controller
         }
     }
 
-    ### change email after user clicked on the link in the verification email###
+    //change email after user clicked on the link in the verification email
     public function changeEmail(Request $request)
     {
         // Get user_id and token from the request
@@ -178,7 +195,6 @@ class ProfileController extends Controller
                     $currentTS = now();
                     //parse valid_until to carbon datetime
                     $tokenTS = Carbon::parse($emctoken->valid_until);
-                    if ($tokenTS->lt($currentTS))
                     //check if token is expired or not
                     if ($tokenTS->lt($currentTS))
                     {
@@ -209,6 +225,7 @@ class ProfileController extends Controller
         }
     }
 
+    //delete user account of logged-in user
     public function deleteAccount($id)
     {
         try
@@ -247,7 +264,7 @@ class ProfileController extends Controller
         }
     }
 
-    ###search for a profile of a specified user###
+    //search for a profile of a specified user
     public function searchProfile(Request $request)
     {
 
