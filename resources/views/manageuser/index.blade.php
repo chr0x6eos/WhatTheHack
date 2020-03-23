@@ -2,7 +2,7 @@
 @section('content')
     <div class="container">
 
-        <div class="card">
+        <div class="card" style="overflow: auto;">
             <div class="card-header font-weight-bold">{{ __('User Management') }}</div>
 
             <div class="card-body">

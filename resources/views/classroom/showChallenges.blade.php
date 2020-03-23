@@ -12,6 +12,7 @@
                             @foreach($classroom->challenges as $challenge)
                                 @if($challenge->active)
                                     @if(Auth::user()->solvedChallenge($challenge->id))
+                                        <a href="{{route('challenges.show',$challenge->id)}}" class="challenge_name_link">
                                         <div class="card">
                                             <a href="{{route('challenges.show',$challenge->id)}}" class="challenge_name_link">
                                                 <div class="card-header challenges-header bg-success">
@@ -19,10 +20,12 @@
                                                     <p class="total_solves">Total solves: {{$challenge->solves($challenge->id)}}</p>
                                                 </div>
                                             </a>
+                                            <a href="{{route('challenges.show',$challenge->id)}}" class="challenge_name_link">
                                             <div class="card-body">
                                                 <p>Author: {{$challenge->author}}</p>
                                                 <p>{{$challenge->description}}</p>
                                             </div>
+                                            </a>
                                         </div>
                                     @else
                                         <div class="card">
@@ -32,10 +35,12 @@
                                                     <p class="total_solves">Total solves: {{$challenge->solves($challenge->id)}}</p>
                                                 </div>
                                             </a>
+                                            <a href="{{route('challenges.show',$challenge->id)}}">
                                             <div class="card-body">
                                                 <p>Author: {{$challenge->author}}</p>
                                                 <p>{{$challenge->description}}</p>
                                             </div>
+                                            </a>
                                         </div>
                                         <br>
                                     @endif

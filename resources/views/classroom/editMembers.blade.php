@@ -6,7 +6,7 @@
             <div data-test="col" class="col-md-12 mb7">
                 <div class="card card_showChallenge">
                     <div data-test="card" class="card-body">
-                        <p class="h2" style="display: inline">Edit the members of the classroom </p><p class="h2" style="color: #01C851; display: inline">{{$classroom->classroom_name}}</p>
+                        <p class="h2" style="display: inline">Edit the members of the classroom: </p><p class="h2" style="color: #01C851; display: inline"> {{$classroom->classroom_name}}</p>
                         <br>
                         <br>
                         <form method="post" action="{{ route('classroom.updateMembers', $classroom) }}">
