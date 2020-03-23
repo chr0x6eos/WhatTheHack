@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+    <div id="landing" class="py-5">
 <div class="container">
     @if(Auth::user()->hasRole("admin"))
     <div class="row justify-content-center">
@@ -184,4 +185,5 @@
             </div>
         @endif
 </div>
+    </div>
 @endsection

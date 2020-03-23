@@ -1,9 +1,10 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-        <div class="card">
-            <div class="card-header font-weight-bold">{{ __('All Classrooms') }}</div>
+        <div class="card" style="overflow: auto;">
             <div class="card-body">
+                <h2>All Classrooms:</h2>
+                <br>
                 @if(sizeof($classrooms) > 0)
                     <table id="classroom" class="table table-bordered" cellspacing="0" width="100%">
                         <thead>

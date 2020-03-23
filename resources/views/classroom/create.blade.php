@@ -4,9 +4,9 @@
     <div class="container">
 
         <div class="card">
-            <div class="card-header font-weight-bold">{{ __('Create Classroom') }}</div>
-
             <div class="card-body">
+                <h2>Create new Classroom:</h2>
+                <br>
                 <form method="post" action="{{route('classroom.store')}}" >
                     @csrf
                     <p>

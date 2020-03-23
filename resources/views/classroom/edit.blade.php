@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
 <div id="landing" class="py-5">
     <div data-test="container" class="container">

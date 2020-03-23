@@ -119,7 +119,8 @@ div.nav.nav-container{
 #landing {
     background: #3E3E3E;
     color: white;
-    background-image: url('/images/pics/circuit_dots.svg');
+    /*background-image: url('/images/pics/circuit_dots.svg');*/
+    background-image: url('/images/pics/binary_v3.svg');
     background-attachment: fixed;
     height: 100%;
 }
@@ -178,12 +179,20 @@ div.col-md-8{
     padding-top: 90px;
     z-index: 999;
 }
+.form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #01C851;
+    outline: 0;
+    box-shadow: 0 0 0 0.1rem #01C851;
+}
 label.custom-control-label::after{
     color: #01C851;
 }
 .btn-info{
     background-color: #01C851;
 }
+
 .custom-control-input:checked~.custom-control-label::before{
     background-color: #01C851;
     border-color: #01C851;

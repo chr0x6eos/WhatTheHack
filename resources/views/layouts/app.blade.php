@@ -43,7 +43,6 @@
     <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ URL::asset('css/mdb.min.css') }}">
     <!-- Template CSS file -->
-    <link rel="stylesheet" href="{{ URL::asset('css/freelancer.min.css') }}">
     <link rel="stylesheet" href="{{ URL::asset('css/addons/datatables.min.css') }}">
     <link rel="stylesheet" href="{{ URL::asset('css/app.css') }}">
     <!-- CSS file for customization -->
@@ -88,12 +87,13 @@
             </div>
         </nav>
 
-        <main id="landing" >
+        <main id="landing">
             <br>
             @yield('content')
+            <br>
         </main>
         <!-- Sidebar -->
-        <nav id="sidebar" style="position: absolute">
+        <nav id="sidebar" style="position: fixed">
             <div id="dismiss">
                 <i class="fas fa-times"></i>
             </div>
@@ -274,8 +274,7 @@
         <footer data-test="footer" class="page-footer elegant-color">
             <div data-test="container" class="container text-center py-3"><a href="/contact">Impressum</a></div>
             <div class="footer-copyright text-center py-3">
-                <div data-test="container" class="container-fluid">© 2017 - 2020 Copyright: Werbeagentur Christian Aichner
-                    <p class="my-2 font-weight-bold">In cooperation with <a href="https://www.aichner-christian.com" target="_blank" class="ml-1" rel="noopener noreferrer">WCA</a>.</p>
+                <div data-test="container" class="container-fluid">© 2020 Copyright: WhatTheHack Developtment
                 </div>
             </div>
         </footer>
