@@ -250,7 +250,6 @@ class User extends Authenticatable implements MustVerifyEmail
         {
             if($c->category == $cat)
             {
-                $count += $c->getPoints();
                 //get the date of the first entry
                 $dateNew = $c['pivot']->created_at->format('Y-m-d');
                 //get the difference between the two dates in days
@@ -261,6 +260,7 @@ class User extends Authenticatable implements MustVerifyEmail
                     $label = array('label'=>date('Y-m-d', strtotime($dateOld. '+ '.$i.' days')),'y'=>$count);
                     array_push($result,$label);
                 }
+                $count += $c->getPoints();
                 $label = array('label'=>$c['pivot']->created_at->format('Y-m-d'), 'y'=>$count);
                 array_push($result,$label);
                 //set a new old date
