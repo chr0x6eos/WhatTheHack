@@ -4,7 +4,7 @@
         <div data-test="container" class="container">
             <div data-test="row" class="row">
                 <div data-test="col" class="col-md-6 pt-5">
-                    <h1 class="mt-5">Built for <div class="Typist d-inline typist"><span style="color: #00c851">hackers</span><span class="Cursor Cursor--blinking">_</span></div></h1></div>
+                    <h1 class="mt-5">What the Hack <div class="Typist d-inline typist"><span style="color: #00c851">is going on</span><span class="Cursor Cursor--blinking"> ?</span></div></h1></div>
                 <div data-test="col" class="col-md-6">
 
                     <div data-test="card" class="card text-dark">

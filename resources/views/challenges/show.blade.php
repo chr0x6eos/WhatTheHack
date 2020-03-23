@@ -57,7 +57,6 @@
                             <td class="table_01">Resource:</td>
                             <td class="table_02"><a href="{{route('challenges.download', $challenge->id)}}">Download</a></td>
                         </tr>
-
                     @endif
                     </tbody>
                     <!--Table body-->
@@ -78,7 +77,7 @@
                         @endif
                     </div>
                 </div>
-                <a href="{{ route('classroom.myClassrooms') }}" class="btn btn-outline-dark">Go back</a>
+                {{-- //TODO: FIX THIS PFUSCH!--}}
                 <a href="{{ route('support.create', $challenge->id) }}" class="btn btn-outline-dark">Report a problem</a>
             </div>
             </div>

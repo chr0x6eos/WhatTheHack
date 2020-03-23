@@ -43,7 +43,6 @@
     <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ URL::asset('css/mdb.min.css') }}">
     <!-- Template CSS file -->
-    <link rel="stylesheet" href="{{ URL::asset('css/freelancer.min.css') }}">
     <link rel="stylesheet" href="{{ URL::asset('css/addons/datatables.min.css') }}">
     <link rel="stylesheet" href="{{ URL::asset('css/app.css') }}">
     <!-- CSS file for customization -->
@@ -90,12 +89,13 @@
             </div>
         </nav>
 
-        <main id="landing" >
+        <main id="landing">
             <br>
             @yield('content')
+            <br>
         </main>
         <!-- Sidebar -->
-        <nav id="sidebar" style="position: absolute">
+        <nav id="sidebar" style="position: fixed">
             <div id="dismiss">
                 <i class="fas fa-times"></i>
             </div>
