@@ -49,10 +49,19 @@ class User extends Authenticatable implements MustVerifyEmail
             return false;
     }
 
+<<<<<<< Updated upstream
     //check if the user is already verified
     public function isVerified()
     {
         if (is_null($this->email_verified_at))
+=======
+
+    public function isAdmin($userrole){
+        if($userrole =='admin'){
+            return true;
+        }
+        else
+>>>>>>> Stashed changes
             return false;
         else
             return true;
@@ -67,6 +76,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return false;
     }
 
+<<<<<<< Updated upstream
     //function that is used for the relation between users and challenges
     public function challenges()
     {
@@ -93,6 +103,13 @@ class User extends Authenticatable implements MustVerifyEmail
                 if ($challenge->id == $id)
                 {
                     return true;
+=======
+    public function hasChallenge($id){
+        foreach (Auth::user()->classrooms as $c){
+            foreach ($c->challenges as $challenge){
+                if($challenge==$id){
+                return true;
+>>>>>>> Stashed changes
                 }
             }
         }
@@ -123,6 +140,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return User::where('userrole', 'admin')->first();
     }
 
+<<<<<<< Updated upstream
     //get username
     public static function getUser($username)
     {
@@ -165,10 +183,16 @@ class User extends Authenticatable implements MustVerifyEmail
         foreach ($this->challenges as $challenge)
         {
             if ($challenge->id == $id)
+=======
+    public function solvedChallenge($id){
+        foreach (Auth::user()->challenges as $challenge){
+            if ($challenge == $id)
+>>>>>>> Stashed changes
                 return true;
         }
         return false;
     }
+<<<<<<< Updated upstream
 
     //calculate a level for the user
     static function calculateLevel($points)
@@ -269,4 +293,6 @@ class User extends Authenticatable implements MustVerifyEmail
         }
         return $result;
     }
+=======
+>>>>>>> Stashed changes
 }

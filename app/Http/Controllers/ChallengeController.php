@@ -437,6 +437,7 @@ class ChallengeController extends Controller
         try
         {
             $challenge = Challenge::find($id);
+<<<<<<< Updated upstream
 
             //Choose random GIF
             $gifName = random_int(1, 6);
@@ -444,6 +445,13 @@ class ChallengeController extends Controller
             if (!$challenge->active)
             {
                 return redirect()->route('challenges.index')->withErrors('You should not have been there... Please report this issue!');
+=======
+            $user = Auth::user();
+            foreach ($challenge->challengeUsers as $u){
+                if ($u == Auth::user()){
+                    return redirect()->route('challenges.show',$challenge->id)->with('success','Congratulation! You solved the challenge!');
+                }
+>>>>>>> Stashed changes
             }
 
             //Make flag case-insensitive
