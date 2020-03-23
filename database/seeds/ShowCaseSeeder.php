@@ -82,36 +82,6 @@ class ShowCaseSeeder extends Seeder
         )->save();
     }
 
-    //Create classrooms
-    private function createClassroom($name, $users)
-    {
-        $admin = User::getUser("Admin");
-
-        $classroom = new Classroom();
-        $classroom->classroom_name = $name;
-        $classroom->classroom_owner = $admin->id;
-        $classroom->save();
-
-        //Creator of a classroom is automatically a member
-        $classroom->users()->attach($admin->id);
-
-        //Add specified users to classroom
-        if (is_array($users) && sizeof($users) > 0)
-        {
-            foreach ($users as $user)
-            {
-                $classroom->users()->attach($user);
-            }
-        }
-
-        //Add all challenges to classroom
-        foreach (Challenge::all() as $c)
-        {
-            if($c->active == true)
-                $classroom->challenges()->attach($c);
-        }
-    }
-
     //Create users and classrooms
     private function setupClassrooms()
     {
@@ -122,7 +92,7 @@ class ShowCaseSeeder extends Seeder
         $u5 = User::getUser("sandmann");
 
         $users = array($u1,$u2,$u3,$u4,$u5);
-        $this->createClassroom("5AHITN",$users);
+        Classroom::createClassroom("5AHITN", $users, true);
     }
 
     //Function to solve challenges

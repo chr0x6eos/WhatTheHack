@@ -1,19 +1,13 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container">
+    <div id="landing" class="py-5">
+    <div class="container" >
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-mg-8">
                 <div class="card">
-                    <div class="card-header">{{ __('My Profile') }}</div>
+                    <div class="card-header">{{ __('Profile: ') }}{{ $user->username }}</div>
                     <div id="chartContainer" style="height: 370px; width: 100%;"></div>
                     <div class="card-body">
-                        <div class="form-group row">
-                            <label class="col-md-4 col-form-label text-md-right font-weight-bold">
-                                {{ __('Username:') }}
-                            </label>
-                            <label class="col-md-7 col-form-label text-md-center">{{ $user->username }}</label>
-                        </div>
-
                         <div class="form-group row">
                             <label class="col-md-4 col-form-label text-md-right font-weight-bold">
                                 {{ __('E-Mail:') }}
@@ -59,6 +53,7 @@
                             </label>
                             <label class="col-md-7 col-form-label text-md-center">{{ App\User::calculateRank($user->points) }}</label>
                         </div>
+                        <br>
                         <div class="container">
                             <div class="row">
                                 <div class="col-sm text-md-center">
@@ -78,8 +73,10 @@
                         </div>
                     </div>
                 </div>
+                <br>
             </div>
         </div>
+    </div>
     </div>
     <script>
         window.onload = function () {

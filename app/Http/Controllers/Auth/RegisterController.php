@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Classroom;
 use App\Http\Controllers\Controller;
 use App\Rules\BadCharacters;
 use App\User;
@@ -68,10 +69,49 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+
+        //Add user to WTH classroom
+        try
+        {
+            $classroom = null;
+
+            try
+            {
+                $classroom = Classroom::getClassRoom("What The Hack");
+                if ($classroom == null)
+                {
+                    //Throw exception and create classroom
+                    throw new \Exception();
+                }
+            }
+            catch (\Exception $exception)
+            {
+                //If no classroom exists, create one
+                try
+                {
+                    Classroom::createClassroom("What The Hack", null);
+                }
+                catch (\Exception $exception) {}
+            }
+            finally
+            {
+                try
+                {
+                    $classroom = Classroom::getClassRoom("What The Hack");
+
+                    if ($classroom != null)
+                        $classroom->users()->attach($user);
+                }
+                catch (\Exception $exception){}
+            }
+        }
+        catch (\Exception $exception){}
+
+        return $user;
     }
 }
