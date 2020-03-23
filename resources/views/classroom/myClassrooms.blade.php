@@ -3,11 +3,10 @@
     <div id="landing" class="py-5">
         <div data-test="container" class="container">
             <div data-test="row" class="row">
-                <div data-test="col" class="col-lg-9">
-                    <div data-test="card" class="card text-dark">
+                <div data-test="col" class="col-md-12 mb7">
+                    <div data-test="card" class="card text-dark" style="overflow: auto;" >
                         <div data-test="card" class="card-body">
                             <h2>My Classrooms</h2>
-                            <div class="text-center p-5">
                                 @if($classrooms != null && sizeof($classrooms) > 0)
                                     <table id="classroom" class="table table-striped table-bordered">
                                         <thead>
@@ -71,7 +70,6 @@
                                             $('.dataTables_length').addClass('bs-select');
                                         });
                                 </script>
-                            </div>
                         </div>
                     </div>
                 </div>
