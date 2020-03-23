@@ -26,13 +26,15 @@
                                     <input type="file" name="file" class="custom-file-input" id="inputGroupFile04">
                                     <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
                                 </div>
+                                <br>
                                 <div class="input-group-append">
-                                    <button class="btn btn-outline-secondary" type="submit">Upload</button>
+                                    <br>
+                                    <button class="btn btn-outline-green" type="submit">Upload</button>
                                 </div>
                             </div>
                             <br>
                             <div >
-                                <a href="{{ route('challenges.edit', $challenge->id) }}" class="btn btn-outline-secondary">Go back</a>
+                                <a href="{{ route('challenges.edit', $challenge->id) }}" class="btn btn-outline-black">Go back</a>
                             </div>
                         </form>
                     </div>
