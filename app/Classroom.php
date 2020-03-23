@@ -95,4 +95,41 @@ class Classroom extends Model
         }
         return $counter;
     }
+
+    static function getClassRoom($name)
+    {
+        return Classroom::where('classroom_name', $name)->first();
+    }
+
+    static function createClassroom($name, $users, $addAll = false)
+    {
+        $admin = User::getUser("Admin");
+
+        $classroom = new Classroom();
+        $classroom->classroom_name = $name;
+        $classroom->classroom_owner = $admin->id;
+        $classroom->save();
+
+        //Creator of a classroom is automatically a member
+        $classroom->users()->attach($admin->id);
+
+        //Add specified users to classroom
+        if($users != null && sizeof($users) > 0)
+        {
+            foreach ($users as $user)
+            {
+                $classroom->users()->attach($user);
+            }
+        }
+
+        //Check if all challenges should be added to the classroom
+        if($addAll)
+        {
+            foreach (Challenge::all() as $c)
+            {
+                if ($c->active == true)
+                    $classroom->challenges()->attach($c);
+            }
+        }
+    }
 }

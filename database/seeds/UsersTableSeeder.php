@@ -13,18 +13,6 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        //Create admin user
-        User::create(
-            [
-                'username' => 'Admin',
-                'email' => 'email.whatthehack@gmail.com',
-                'password' => Hash::make('admin'),
-                'email_verified_at' => now()->timestamp,
-                'userrole' => 'admin',
-                'active' => true
-            ]
-        )->save();
-
         //Create teacher user
         User::create(
             [
