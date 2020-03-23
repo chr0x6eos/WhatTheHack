@@ -17,7 +17,7 @@ class AdminUserSeeder extends Seeder
             [
                 'username' => 'Admin',
                 'email' => 'email.whatthehack@gmail.com',
-                'password' => Hash::make('admin'),
+                'password' => Hash::make(env('PW_ADMIN')),
                 'email_verified_at' => now()->timestamp,
                 'userrole' => 'admin',
                 'active' => true

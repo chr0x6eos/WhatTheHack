@@ -6,7 +6,7 @@
             <div data-test="col" class="col-md-12 mb7">
                 <div class="card card_showChallenge">
                     <div data-test="card" class="card-body">
-                        <p class="h2" style="display: inline">Edit the members of the classroom </p><p class="h2" style="color: #01C851; display: inline">{{$classroom->classroom_name}}</p>
+                        <p class="h2" style="display: inline">Edit the members of the classroom: </p><p class="h2" style="color: #01C851; display: inline"> {{$classroom->classroom_name}}</p>
                         <br>
                         <br>
                         <form method="post" action="{{ route('classroom.updateMembers', $classroom) }}">
@@ -21,7 +21,8 @@
                                 </thead>
                                 <tbody>
                                 @foreach(\App\User::all() as $u)
-                                    @if($u->hasRole("student") && !$classroom->getMembers($u->id) && $u->active)
+                                    @if($u->hasRole("student") || $u->hasRole("teacher"))
+                                        @if(!$classroom->getMembers($u->id) && $u->active)
                                         <tr>
                                             <td>{{ $u->id }}</td>
                                             <td>{{ $u->username }}</td>
@@ -30,6 +31,7 @@
                                                 <input type="checkbox" class="col-12" name="addmember[]" value="{{ $u->id }}">
                                             </td>
                                         </tr>
+                                            @endif
                                     @endif
                                 @endforeach
                                 </tbody>

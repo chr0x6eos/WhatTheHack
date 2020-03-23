@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+    <div id="landing" class="py-5">
 <div class="container">
 
     @if(Auth::user()->hasRole("admin"))
@@ -197,4 +198,5 @@
             </div>
         @endif
 </div>
+    </div>
 @endsection

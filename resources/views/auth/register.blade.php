@@ -4,7 +4,7 @@
         <div data-test="container" class="container">
             <div data-test="row" class="row">
                 <div data-test="col" class="col-md-6 pt-5">
-                    <h1 class="mt-5">Built for <div class="Typist d-inline typist"><span>en</span><span class="Cursor Cursor--blinking">_</span></div></h1></div>
+                    <h1 class="mt-5">Built for <span style="color: #00c851">hackers</span><span class="Cursor Cursor--blinking">_</span></h1></div>
                 <div data-test="col" class="col-md-6">
 
                     <div data-test="card" class="card text-dark">
@@ -24,7 +24,7 @@
                                     @endif
                                 </div>
                                 <div class="md-form form-lg md-outline">
-                                    <input id="email" data-test="input" name="email" type="email" class="form-control form-control-lg @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                                    <input id="email" data-test="input" name="email" type="email" class="form-control form-control-lg @error('email') is-invalid @enderror" name="email"  required autocomplete="email">
                                     <label class="label-form" data-error="" data-success="" id="">Email</label>
 
                                     @error('email')

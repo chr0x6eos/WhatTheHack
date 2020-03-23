@@ -18,7 +18,7 @@ class UsersTableSeeder extends Seeder
             [
                 'username' => 'Teacher',
                 'email' => 'teacher@whatthehack.htl',
-                'password' => Hash::make('teacher'),
+                'password' => Hash::make(env('PW_TEACHER')),
                 'email_verified_at' => now()->timestamp,
                 'userrole' => 'teacher',
                 'active' => true
@@ -30,7 +30,7 @@ class UsersTableSeeder extends Seeder
             [
                 'username' => 'Student',
                 'email' => 'student@whatthehack.htl',
-                'password' => Hash::make('student'),
+                'password' => Hash::make(env('PW_STUDENT')),
                 'email_verified_at' => now()->timestamp,
                 'userrole' => 'student',
                 'active' => true
@@ -41,7 +41,7 @@ class UsersTableSeeder extends Seeder
             [
                 'username' => 'TaTü',
                 'email' => 'tatü@whatthehack.htl',
-                'password' => Hash::make('tatü2020'),
+                'password' => Hash::make(env('PW_USER_1')),
                 'email_verified_at' => now()->timestamp,
                 'userrole' => 'student',
                 'active' => true
@@ -52,7 +52,7 @@ class UsersTableSeeder extends Seeder
             [
                 'username' => 'DaWoschbar',
                 'email' => 'woschbar@whatthehack.htl',
-                'password' => Hash::make('dawoschbar'),
+                'password' => Hash::make(env('PW_USER_2')),
                 'email_verified_at' => now()->timestamp,
                 'userrole' => 'student',
                 'active' => true
@@ -63,7 +63,7 @@ class UsersTableSeeder extends Seeder
             [
                 'username' => 'Chronoros',
                 'email' => 'chronoros@whatthehack.htl',
-                'password' => Hash::make('P@ssw0rd'),
+                'password' => Hash::make(env('PW_USER_3')),
                 'email_verified_at' => now()->timestamp,
                 'userrole' => 'student',
                 'active' => true
@@ -74,7 +74,7 @@ class UsersTableSeeder extends Seeder
             [
                 'username' => 'Buschuschnig',
                 'email' => 'buschuschnig@whatthehack.htl',
-                'password' => Hash::make('buschuschnig'),
+                'password' => Hash::make(env('PW_USER_4')),
                 'email_verified_at' => now()->timestamp,
                 'userrole' => 'student',
                 'active' => true
@@ -85,7 +85,7 @@ class UsersTableSeeder extends Seeder
             [
                 'username' => 'Rüschhacker',
                 'email' => 'rhacker@whatthehack.htl',
-                'password' => Hash::make('rhacker'),
+                'password' => Hash::make(env('PW_USER_5')),
                 'email_verified_at' => now()->timestamp,
                 'userrole' => 'student',
                 'active' => true
@@ -96,7 +96,7 @@ class UsersTableSeeder extends Seeder
             [
                 'username' => 'sandmann',
                 'email' => 'sandmann@whatthehack.htl',
-                'password' => Hash::make('sandmann'),
+                'password' => Hash::make(env('PW_USER_6')),
                 'email_verified_at' => now()->timestamp,
                 'userrole' => 'student',
                 'active' => true
@@ -107,7 +107,7 @@ class UsersTableSeeder extends Seeder
             [
                 'username' => 'Oschta',
                 'email' => 'oschta@whatthehack.htl',
-                'password' => Hash::make('oschta'),
+                'password' => Hash::make(env('PW_USER_7')),
                 'email_verified_at' => now()->timestamp,
                 'userrole' => 'student',
                 'active' => true
@@ -118,7 +118,7 @@ class UsersTableSeeder extends Seeder
             [
                 'username' => 'Hehn',
                 'email' => 'hehn@whatthehack.htl',
-                'password' => Hash::make('hehn'),
+                'password' => Hash::make(env('PW_USER_8')),
                 'email_verified_at' => now()->timestamp,
                 'userrole' => 'student',
                 'active' => true
@@ -129,7 +129,7 @@ class UsersTableSeeder extends Seeder
             [
                 'username' => 'Prast',
                 'email' => 'prast@whatthehack.htl',
-                'password' => Hash::make('prast'),
+                'password' => Hash::make(env('PW_USER_9')),
                 'email_verified_at' => now()->timestamp,
                 'userrole' => 'student',
                 'active' => true
