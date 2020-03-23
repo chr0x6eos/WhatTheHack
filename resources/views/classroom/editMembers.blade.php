@@ -21,7 +21,8 @@
                                 </thead>
                                 <tbody>
                                 @foreach(\App\User::all() as $u)
-                                    @if($u->hasRole("student") && !$classroom->getMembers($u->id) && $u->active)
+                                    @if($u->hasRole("student") || $u->hasRole("teacher"))
+                                        @if(!$classroom->getMembers($u->id) && $u->active)
                                         <tr>
                                             <td>{{ $u->id }}</td>
                                             <td>{{ $u->username }}</td>
@@ -30,6 +31,7 @@
                                                 <input type="checkbox" class="col-12" name="addmember[]" value="{{ $u->id }}">
                                             </td>
                                         </tr>
+                                            @endif
                                     @endif
                                 @endforeach
                                 </tbody>
