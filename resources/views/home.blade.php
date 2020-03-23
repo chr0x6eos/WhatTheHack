@@ -2,6 +2,7 @@
 @section('content')
     <div id="landing" class="py-5">
 <div class="container">
+
     @if(Auth::user()->hasRole("admin"))
     <div class="row justify-content-center">
         <div class="row mt-5" style="width: 100%">
@@ -10,7 +11,7 @@
                     <div class="card-body">
                         <h2 class="card-title">Users</h2>
                         <p class="card-text">
-                            <img src="{{URL::asset('/images/icons/username.png')}}" width="30px"> Total: {{App\User::count()}}
+                            <img src="{{URL::asset('/images/icons/username.svg')}}" width="30px"> Total: {{App\User::count()}}
                         </p>
                         <p class="card-text">
                             <img src="{{URL::asset('/images/icons/active.jpg')}}" width="30px"> Active: {{App\User::countActiveUsers()}}
@@ -81,7 +82,13 @@
                                 @foreach(\App\Http\Controllers\RankingController::getTopFive()->ranked as $key => $value)
                                     <tr>
                                         <td>{{ $key }}</td>
-                                        <td>{{ $value->username }}</td>
+                                        <td>
+                                            <form method="POST" action="{{ route('profile.search') }}">
+                                                @csrf
+                                                <input type="hidden" value="{{ $value->username }}" name="username">
+                                                <button type="submit" class="btn btn-link">{{ $value->username }}</button>
+                                            </form>
+                                        </td>
                                         <td>{{ $value->points }}</td>
                                     </tr>
                                 @endforeach
@@ -104,10 +111,10 @@
                         <div class="card h-100">
                             <div class="card-body">
                                 <h2 class="card-title">Profile</h2>
-                                <p class="card-text"><img src="{{URL::asset('/images/icons/username.png')}}" width="30px"> {{ Auth::user()->username }}</p>
-                                <p class="card-text"><img src="{{URL::asset('/images/icons/xp.png')}}" width="30px"> Level {{ App\User::calculateLevel(Auth::user()->points) }}</p>
-                                <p class="card-text"><img src="{{URL::asset('/images/icons/level.png')}}" width="30px"> {{ App\User::calculateProgress1(Auth::user()->points) }}/{{ App\User::calculateProgress2(Auth::user()->points) }} Points</p>
-                                <p class="card-text"><img src="{{URL::asset('/images/icons/rank.png')}}" width="30px"> {{ App\User::calculateRank(Auth::user()->points) }}</p>
+                                <p class="card-text"><img src="{{URL::asset('/images/icons/username.svg')}}" width="30px"> {{ Auth::user()->username }}</p>
+                                <p class="card-text"><img src="{{URL::asset('/images/icons/level.svg')}}" width="30px"> Level {{ App\User::calculateLevel(Auth::user()->points) }}</p>
+                                <p class="card-text"><img src="{{URL::asset('/images/icons/xp.svg')}}" width="30px"> {{ App\User::calculateProgress1(Auth::user()->points) }}/{{ App\User::calculateProgress2(Auth::user()->points) }} Points</p>
+                                <p class="card-text"><img src="{{URL::asset('/images/icons/rank.svg')}}" width="30px"> {{ App\User::calculateRank(Auth::user()->points) }}</p>
 
                             </div>
                             <div class="card-footer">
@@ -156,19 +163,25 @@
                             <div class="card-body">
                                 <h2 class="card-title">Top 5</h2>
                                 <div class="card-body">
-                                    <table id="rankingTable" class="table table-bordered" cellspacing="0" width="100%">
+                                    <table id="rankingTable" class="table table-bordered" cellspacing="0" width="100%" cellpadding="0">
                                         <thead>
                                         <tr>
                                             <th>Rank</th>
-                                            <th class="th-sm">Username</th>
-                                            <th class="th-sm">Overall Points</th>
+                                            <th>Username</th>
+                                            <th>Overall Points</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         @foreach(\App\Http\Controllers\RankingController::getTopFive()->ranked as $key => $value)
                                                 <tr>
                                                     <td>{{ $key }}</td>
-                                                    <td>{{ $value->username }}</td>
+                                                    <td>
+                                                        <form method="POST" action="{{ route('profile.search') }}">
+                                                            @csrf
+                                                            <input type="hidden" value="{{ $value->username }}" name="username">
+                                                            <button type="submit" class="btn btn-link py-0">{{ $value->username }}</button>
+                                                        </form>
+                                                    </td>
                                                     <td>{{ $value->points }}</td>
                                                 </tr>
                                         @endforeach

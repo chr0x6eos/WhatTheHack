@@ -8877,6 +8877,8 @@ table.table a.btn.btn-black {
 .navbar {
   font-weight: 300;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
 }
 
 .navbar form .md-form input {
@@ -17546,3 +17548,8 @@ readers do not read off random characters that represent icons */
   font-weight: 900;
 }
 
+#logo_v4 {
+  color: #01c851;
+  font-size: 1.5em;
+  margin: 0;
+}

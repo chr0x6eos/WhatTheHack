@@ -7,7 +7,7 @@
                     <div data-test="card" class="card text-dark" style="overflow: auto;" >
                         <div data-test="card" class="card-body">
                             <h2>My Classrooms</h2>
-                                @if(sizeof($classrooms) > 0)
+                                @if($classrooms != null && sizeof($classrooms) > 0)
                                     <table id="classroom" class="table table-striped table-bordered">
                                         <thead>
                                         <th>Id</th>

@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
     <div id="landing" class="py-5">
     <div class="container">
@@ -11,7 +10,6 @@
                     <div class="card-body">
                         <form method="POST" action="{{ route('email.change') }}">
                             @csrf
-
                             <div class="form-group row">
                                 <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Current E-Mail Address:') }}</label>
 

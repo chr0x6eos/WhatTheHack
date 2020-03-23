@@ -100,6 +100,7 @@
                             </div>
                         </div>
                         <p>
+                        {{--
                         <div class="form-group row">
                             <label for="imageID" class="col-sm-4 col-form-label text-md-right">
                                 {{ __('Docker Image ID (optional):') }}
@@ -108,11 +109,12 @@
                                 <input id="imageID" type="text" class="form-control" name="imageID" required autofocus value="{{ $challenge->imageID }}">
                             </div>
                         </div>
+                        --}}
 
                         <div class="form-group row">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-info">Submit</button>
-                                <a href="{{ route('challenges.index') }} " class="btn btn-outline-danger">Cancel</a>
+                                <a href="{{ route('challenges.show', $challenge->id) }} " class="btn btn-outline-danger">Cancel</a>
                             </div>
                         </div>
                     </form>

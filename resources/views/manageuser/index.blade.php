@@ -33,7 +33,12 @@
                                 </thead>
                                 <tbody>
                                 @foreach($users as $user)
+                                    
+                                    @if(!$user->active)
+                                    <tr class="disabled-style">
+                                    @else
                                     <tr>
+                                    @endif
                                         <th scope="row">{{ $user->id }}</td>
                                         <td>{{ $user->username }}</td>
                                         <td>
@@ -42,34 +47,34 @@
                                             @method('patch')
 
                                             <!-- This disallows administrators to revoke the admin rank from other administrators
-                    if($user->userrole == "admin") -->
+                                            if($user->userrole == "admin") -->
 
                                                 @if($user == Auth::user())
-                                                    <select name="userrole" id="userrole" class="form-control" disabled>
-                                                        @else
-                                                            <select name="userrole" id="userrole" class="form-control" onchange="this.form.submit()">
-                                                                @endif
-                                                                @if($user->userrole == "student")
-                                                                    <option value="student" selected>Student</option>
-                                                                @else
-                                                                    <option value="student">Student</option>
-                                                                @endif
+                                                <select name="userrole" id="userrole" class="form-control" disabled>
+                                                @else
+                                                <select name="userrole" id="userrole" class="form-control" onchange="this.form.submit()">
+                                                @endif
+                                                    @if($user->userrole == "student")
+                                                    <option value="student" selected>Student</option>
+                                                    @else
+                                                    <option value="student">Student</option>
+                                                    @endif
 
-                                                                @if($user->userrole == "teacher")
-                                                                    <option value="teacher" selected>Teacher</option>
-                                                                @else
-                                                                    <option value="teacher">Teacher</option>
-                                                                @endif
+                                                    @if($user->userrole == "teacher")
+                                                    <option value="teacher" selected>Teacher</option>
+                                                    @else
+                                                    <option value="teacher">Teacher</option>
+                                                    @endif
 
-                                                                @if($user->userrole == "admin")
-                                                                    <option value="admin" selected>Administrator</option>
-                                                                @else
-                                                                    <option value="admin">Administrator</option>
-                                                                @endif
-                                                            </select>
+                                                    @if($user->userrole == "admin")
+                                                    <option value="admin" selected>Administrator</option>
+                                                    @else
+                                                    <option value="admin">Administrator</option>
+                                                    @endif
+                                                </select>
 
-                                                            <input type="hidden" name="type" value="userrole_change">
-                                                    </select>
+                                                        <input type="hidden" name="type" value="userrole_change">
+                                                </select>
                                             </form>
                                         </td>
                                         <td>{{ $user->email }}</td>
@@ -79,14 +84,14 @@
                                                 @method('patch')
                                                 @if($user->active)
                                                     @if($user == Auth::user())
-                                                        <button class="btn btn-info" data-toggle="tooltip" data-placement="right" title="Deactivate Account" disabled>&#10005;</button>
-                                                            @else
-                                                        <button type="submit" class="btn btn-info" data-toggle="tooltip" data-placement="right" title="Deactivate Account">&#10005;</button>
-                                                                    @endif
-                                                                    @else
-                                                    <button type="submit" class="btn btn-danger" data-toggle="tooltip" data-placement="right" title="Activate Account">&#10005;</button>
-                                                                            @endif
-                                                                            <input type="hidden" name="type" value="active_status">
+                                                    <button class="btn btn-info" data-toggle="tooltip" data-placement="right" title="Deactivate Account" disabled>&#10005;</button>
+                                                    @else
+                                                    <button type="submit" class="btn btn-info" data-toggle="tooltip" data-placement="right" title="Deactivate Account">&#10005;</button>
+                                                    @endif
+                                                @else
+                                                <button type="submit" class="btn btn-danger" data-toggle="tooltip" data-placement="right" title="Activate Account">&#10005;</button>
+                                                @endif
+                                                <input type="hidden" name="type" value="active_status">
                                             </form>
                                         </td>
                                         <!-- <td>

@@ -8,22 +8,25 @@ class Activity extends Model
 {
     protected $table = 'challenge_user';
 
+    //relation between challenge and user
     public function challenge()
     {
         return $this->belongsTo(Challenge::class);
     }
 
+    //relation between challenge and user
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
+    //get the last solved challenges, return a list of activities
     static function latest($limit = null)
     {
         $activities = array();
         $result = null;
 
-        if($limit== null)
+        if($limit == null)
         {
             $result = Activity::orderby('created_at', 'desc')
                 ->get();
@@ -44,4 +47,6 @@ class Activity extends Model
         }
         return $activities;
     }
+
+
 }

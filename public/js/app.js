@@ -49494,8 +49494,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\simon\Documents\git\whatthehack\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\simon\Documents\git\whatthehack\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Darius Haslauer\Desktop\whatthehack-new\whatthehack\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Darius Haslauer\Desktop\whatthehack-new\whatthehack\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
