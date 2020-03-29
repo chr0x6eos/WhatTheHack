@@ -48,10 +48,12 @@ class ChangeEmail extends Notification implements ShouldQueue
         $url = url('/profile/email/change/' . $this->user_id . '/' . $this->token);
 
         return (new MailMessage)
+                    ->from('email.whatthehack@gmail.com', 'WTH Team')
                     ->line('You are receiving this email because we received an email change request for your account.')
                     ->subject('Change E-Mail Request')
                     ->action('Change E-Mail', url($url))
-                    ->line('If you did not request an email change, no further action is required!');
+                    ->line('If you did not request an email change, no further action is required!')
+                    ->line('This change request will be expired in 30min!');
     }
 
     /**
