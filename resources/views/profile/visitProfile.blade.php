@@ -6,14 +6,13 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('My Profile') }}</div>
-                <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+
 
                     <div class="card-header">
                         {{ __('User Profile of ') }}
                         <strong>{{ $user->username }}</strong>
                     </div>
-
+                    <div id="chartContainer" style="height: 370px; width: 100%;"></div>
                     <div class="card-body">
                         <div class="form-group row">
                             <label class="col-md-4 col-form-label text-md-right font-weight-bold">
@@ -58,16 +57,14 @@
 
             var chart = new CanvasJS.Chart("chartContainer", {
                 animationEnabled: true,
-                title:{
-                    text: "Your points over time"
-                },
+
                 /*subtitles: [{
                     text: "GBP & EUR to INR",
                     fontSize: 18
                 }],*/
                 axisY: {
                     includeZero: true,
-                    prefix: "points"
+                    title: "Points",
                 },
                 legend:{
                     cursor: "pointer",
