@@ -120,9 +120,6 @@
                     </form>
                     <div class="form-group">
                         @if(Auth::user()->hasRole("admin") || Auth::user()->isAuthor($challenge->author))
-                            <div class="col-md-4">
-                                <a href="{{ route('challenges.files', $challenge->id) }}" class="btn btn-secondary">Files</a>
-                            </div>
                             @if(!$challenge->active)
                                 <form method="POST" action="{{ route('challenges.destroy',$challenge->id) }}">
                                     @csrf

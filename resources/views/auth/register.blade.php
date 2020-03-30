@@ -24,7 +24,7 @@
                                     @endif
                                 </div>
                                 <div class="md-form form-lg md-outline">
-                                    <input id="email" data-test="input" name="email" type="email" class="form-control form-control-lg @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                                    <input id="email" data-test="input" name="email" type="email" class="form-control form-control-lg @error('email') is-invalid @enderror" name="email"  required autocomplete="email">
                                     <label class="label-form" data-error="" data-success="" id="">Email</label>
 
                                     @error('email')

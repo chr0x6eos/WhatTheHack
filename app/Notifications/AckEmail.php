@@ -43,6 +43,7 @@ class AckEmail extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
+                    ->from('email.whatthehack@gmail.com', 'WTH Team')
                     ->greeting('Support Request processed successfully!')
                     ->line('Your request/report: ' . $this->message)
                     ->subject('Support request to challenge ' . $this->id)

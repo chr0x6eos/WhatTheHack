@@ -55,12 +55,23 @@
                     @if($challenge->files)
                         <tr>
                             <td class="table_01">Resource:</td>
-                            <td class="table_02"><a href="{{route('challenges.download', $challenge->id)}}">Download</a></td>
+                            <td class="table_02"><a href="{{route('challenges.download', $challenge->id)}}" class="btn btn-outline-light-green">Download</a></td>
                         </tr>
                     @endif
                     </tbody>
                     <!--Table body-->
                 </table>
+                    @if(Auth::user()->hasRole("admin") || Auth::user()->isAuthor($challenge->author))
+                        <a href="{{ route('challenges.edit', $challenge->id) }}" class="btn btn-outline-light-blue">Edit</a>
+                        <a href="{{ route('challenges.files', $challenge->id) }}" class="btn btn-outline-blue-grey">Files</a>
+                        @if(!$challenge->active)
+                            <form method="POST" action="{{ route('challenges.destroy',$challenge->id) }}">
+                                @csrf
+                                @method('delete')
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        @endif
+                    @endif
                 </div>
                 <div class="form-group row">
                             <form method="POST" action="{{ route('challenges.flag', $challenge->id) }}" class="text-center p-5">
@@ -77,7 +88,6 @@
                         @endif
                     </div>
                 </div>
-                {{-- //TODO: FIX THIS PFUSCH!--}}
                 <a href="{{ route('support.create', $challenge->id) }}" class="btn btn-outline-dark">Report a problem</a>
             </div>
             </div>
