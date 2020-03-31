@@ -83,16 +83,14 @@
 
             var chart = new CanvasJS.Chart("chartContainer", {
                 animationEnabled: true,
-                title:{
-                    text: "Your points over time"
-                },
                 /*subtitles: [{
                     text: "GBP & EUR to INR",
                     fontSize: 18
                 }],*/
                 axisY: {
                     includeZero: true,
-                    prefix: "points"
+                    title: "Points",
+
                 },
                 legend:{
                     cursor: "pointer",
